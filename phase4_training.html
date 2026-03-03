@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 4 · 심화교육 | 부성티케이 신입사원 교육</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --surface2: #1a2332;
+  --border: #1e2d3d;
+  --accent: #a78bfa;
+  --accent2: #c4b5fd;
+  --danger: #ef4444;
+  --success: #10b981;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-bright: #f8fafc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167,139,250,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(196,181,253,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 60%, rgba(167,139,250,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.30);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 0.82rem;
+  color: var(--accent2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeInDown 0.7s ease both;
+}
+
+.hero-badge span { font-size: 1rem; }
+
+.hero-title {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-weight: 800;
+  color: var(--text-bright);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  animation: fadeInDown 0.7s 0.1s ease both;
+}
+
+.hero-title .accent { color: var(--accent); }
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--accent2);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+  animation: fadeInDown 0.7s 0.2s ease both;
+}
+
+.hero-desc {
+  max-width: 640px;
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: var(--text-dim);
+  margin-bottom: 56px;
+  animation: fadeInDown 0.7s 0.3s ease both;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+  animation: fadeInUp 0.7s 0.4s ease both;
+}
+
+.stat-item {
+  padding: 24px 40px;
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+
+.stat-item + .stat-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; height: 60%;
+  width: 1px;
+  background: var(--border);
+}
+
+.stat-value {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  animation: fadeIn 1.2s 1s ease both;
+}
+
+.scroll-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1.6s infinite;
+}
+
+/* ===== STICKY NAV ===== */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,14,23,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.section-btns {
+  display: flex;
+  gap: 4px;
+  padding: 10px 0;
+  flex: 1;
+}
+
+.nav-btn {
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background: rgba(167,139,250,0.14);
+  color: var(--accent2);
+}
+
+.nav-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+
+.phase-nav {
+  display: flex;
+  gap: 4px;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+
+.phase-link {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: all 0.2s;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.phase-link:hover {
+  color: var(--text);
+  background: var(--surface2);
+  border-color: var(--border);
+}
+
+.phase-link.current {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  border-color: var(--accent);
+}
+
+.progress-bar-wrap {
+  height: 3px;
+  background: var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+/* ===== SECTION ===== */
+.content-section {
+  padding-top: 80px;
+}
+
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(167,139,250,0.1);
+  border: 1px solid rgba(167,139,250,0.25);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-size: 0.75rem;
+  color: var(--accent2);
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-bright);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.section-line {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+  margin-top: 16px;
+}
+
+/* ===== INSTRUCTOR MESSAGE ===== */
+.instructor-msg {
+  background: var(--surface2);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.instructor-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.instructor-icon {
+  font-size: 1.4rem;
+}
+
+.instructor-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.instructor-text {
+  color: var(--text);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  font-style: italic;
+}
+
+/* ===== TOPIC CARDS ===== */
+.topics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.topic-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.topic-card:hover {
+  border-color: rgba(167,139,250,0.3);
+}
+
+.topic-card.open {
+  border-color: rgba(167,139,250,0.4);
+}
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.topic-header:hover {
+  background: rgba(167,139,250,0.04);
+}
+
+.topic-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(167,139,250,0.1);
+  border-radius: 10px;
+}
+
+.topic-meta {
+  flex: 1;
+}
+
+.topic-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.topic-duration {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.topic-arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.topic-card.open .topic-arrow {
+  transform: rotate(180deg);
+}
+
+.topic-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.topic-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.topic-card.open .topic-body {
+  max-height: 2000px;
+}
+
+.topic-content {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(167,139,250,0.15);
+  border: 1.5px solid rgba(167,139,250,0.4);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a78bfa'%3E%3Cpath d='M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z'/%3E%3C/svg%3E");
+  background-size: 11px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checklist li strong {
+  color: var(--accent2);
+}
+
+/* ===== CALLOUTS ===== */
+.callout {
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.callout-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.callout-text { flex: 1; }
+
+.callout.tip {
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.25);
+  color: #6ee7b7;
+}
+
+.callout.warn {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  color: #fcd34d;
+}
+
+.callout.danger {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #fca5a5;
+}
+
+/* ===== QUIZ ===== */
+.quiz-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin-top: 32px;
+}
+
+.quiz-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.quiz-question {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+
+.quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-opt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 18px;
+  text-align: left;
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.quiz-opt:hover:not(:disabled) {
+  border-color: rgba(167,139,250,0.4);
+  background: rgba(167,139,250,0.06);
+  color: var(--text-bright);
+}
+
+.quiz-opt.correct {
+  border-color: var(--success);
+  background: rgba(16,185,129,0.1);
+  color: #6ee7b7;
+}
+
+.quiz-opt.wrong {
+  border-color: var(--danger);
+  background: rgba(239,68,68,0.1);
+  color: #fca5a5;
+}
+
+.quiz-result {
+  display: none;
+  margin-top: 16px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.quiz-result.show { display: block; }
+
+.quiz-result.pass {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
+  color: #6ee7b7;
+}
+
+.quiz-result.fail {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #fca5a5;
+}
+
+/* ===== EVALUATION TABLE ===== */
+.eval-section {
+  margin-top: 28px;
+}
+
+.eval-table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.eval-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.eval-table thead tr {
+  background: rgba(167,139,250,0.12);
+}
+
+.eval-table th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.eval-table td {
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.eval-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.eval-table tbody tr:hover td {
+  background: rgba(167,139,250,0.04);
+}
+
+.eval-weight {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.eval-name {
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.pass-threshold {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(167,139,250,0.12), rgba(196,181,253,0.08));
+  border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+
+.pass-threshold p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.pass-threshold .threshold-value {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: var(--text-bright);
+  line-height: 1.1;
+}
+
+.pass-threshold .threshold-value span {
+  color: var(--accent);
+}
+
+/* ===== CAREER PATH ===== */
+.career-section {
+  margin-top: 40px;
+}
+
+.career-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.career-path {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.career-path::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 28px;
+  bottom: 28px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), rgba(167,139,250,0.1));
+}
+
+.career-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 16px 0;
+  position: relative;
+}
+
+.career-dot {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+
+.career-step:first-child .career-dot {
+  border-color: var(--accent);
+  background: rgba(167,139,250,0.15);
+  box-shadow: 0 0 20px rgba(167,139,250,0.25);
+}
+
+.career-info {
+  padding: 14px 0;
+}
+
+.career-level {
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.career-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.career-period {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* ===== SECTION DIVIDER ===== */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 60px 0 0;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 24px;
+  text-align: center;
+  background: var(--surface);
+}
+
+.footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  transition: all 0.2s;
+  background: var(--surface2);
+}
+
+.footer-nav a:hover {
+  border-color: rgba(167,139,250,0.4);
+  color: var(--text-bright);
+  background: rgba(167,139,250,0.08);
+}
+
+.footer-nav a svg {
+  width: 16px;
+  height: 16px;
+}
+
+.completion-box {
+  background: linear-gradient(135deg, rgba(167,139,250,0.12), rgba(196,181,253,0.06));
+  border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 20px;
+  padding: 40px 32px;
+  margin-bottom: 36px;
+}
+
+.completion-emoji {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.completion-title {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 800;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.completion-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .hero-stats {
+    flex-direction: column;
+    border-radius: 14px;
+  }
+
+  .stat-item + .stat-item::before {
+    top: 0; left: 10%;
+    width: 80%; height: 1px;
+  }
+
+  .stat-item { padding: 18px 32px; }
+
+  .topic-header { padding: 16px 18px; }
+  .topic-content { padding: 16px 18px 18px; }
+  .quiz-block { padding: 22px 18px; }
+
+  .eval-table th,
+  .eval-table td { padding: 12px 14px; }
+
+  .career-path::before { left: 24px; }
+  .career-dot { width: 48px; height: 48px; font-size: 1rem; }
+
+  .footer-nav { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-badge"><span>🎓</span> 12주 신입사원 교육 프로그램</div>
+  <h1 class="hero-title">Phase <span class="accent">4</span> · 심화교육</h1>
+  <p class="hero-subtitle">전문성 강화 / 독립 수행</p>
+  <p class="hero-desc">4주간 고급 기술과 프로젝트 관리 역량을 갖추고, 종합 평가를 통해 현장지원팀의 정식 멤버가 됩니다.</p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-value">4주</span>
+      <span class="stat-label">과정 기간</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">160h</span>
+      <span class="stat-label">총 교육 시간</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">종합평가</span>
+      <span class="stat-label">수료 기준</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>스크롤</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ===== STICKY NAV ===== -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <div class="section-btns">
+      <button class="nav-btn" onclick="scrollToSection('section1')">9-10주차</button>
+      <button class="nav-btn" onclick="scrollToSection('section2')">11주차</button>
+      <button class="nav-btn" onclick="scrollToSection('section3')">12주차</button>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="phase-nav">
+      <a class="phase-link" href="phase1_training.html">Phase 1</a>
+      <a class="phase-link" href="phase2_training.html">Phase 2</a>
+      <a class="phase-link" href="phase3_training.html">Phase 3</a>
+      <a class="phase-link current">Phase 4</a>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- ===== SECTION 1: 9~10주차 ===== -->
+  <section class="content-section fade-in" id="section1">
+    <div class="section-header">
+      <div class="section-tag">Week 9-10</div>
+      <h2 class="section-title">고급 냉동시스템</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="instructor-msg fade-in">
+      <div class="instructor-head">
+        <span class="instructor-icon">🎓</span>
+        <span class="instructor-label">교육 담당자</span>
+      </div>
+      <p class="instructor-text">"여기서부터는 '기술자'에서 '전문가'로 넘어가는 단계입니다. 시스템 전체를 보는 눈을 키워야 합니다. 개별 기기가 아니라 전체 시스템의 효율을 생각하세요."</p>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Topic 1 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">❄️</div>
+          <div class="topic-meta">
+            <div class="topic-title">멀티 냉동시스템</div>
+            <div class="topic-duration">16시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>다수 냉장/냉동고를 하나의 응축기로 연결하는 시스템 구조</li>
+              <li>각 실별 온도 개별 제어 (<strong>전자팽창밸브, EEV</strong>)</li>
+              <li>병렬 압축기 운전 (부분 부하 대응)</li>
+              <li>대형 물류센터/중앙급식소 적용 사례</li>
+              <li><strong>장점</strong>: 설치비 절감, 에너지 효율, 통합 관리</li>
+              <li><strong>단점</strong>: 한 대 고장 시 전체 영향, 복잡한 제어</li>
+              <li>오일 관리 시스템 (오일 세퍼레이터, 오일 회수)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">⚡</div>
+          <div class="topic-meta">
+            <div class="topic-title">에너지 효율 최적화</div>
+            <div class="topic-duration">16시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>냉동기 용량 산정법 (열부하 계산 기초)
+                — 외기 부하, 제품 부하, 침입 부하, 기타 부하</li>
+              <li>인버터 압축기의 원리와 에너지 절감 효과 (<strong>30~50% 절감</strong>)</li>
+              <li>적정 냉매 충전량과 과충전/부족 시 효율 저하</li>
+              <li>응축기/증발기 청소 주기와 효율 관계
+                — 응축기 오염 시 고압 상승 → 전기료 15~20% 증가</li>
+              <li>고효율 설비 선정 기준 (<strong>COP, EER 수치</strong> 이해)</li>
+              <li>냉동기 성능 곡선 읽기</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">🏭</div>
+          <div class="topic-meta">
+            <div class="topic-title">중앙집중식 냉각 시스템</div>
+            <div class="topic-duration">8시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>칠러/쿨링타워 시스템 개요</li>
+              <li>2차 냉매(브라인) 시스템</li>
+              <li>대형 프로젝트 냉동 설계 참여 시 이해해야 할 개념</li>
+              <li>에너지 모니터링 시스템 (<strong>BMS 연동</strong>)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout tip fade-in">
+      <span class="callout-icon">💡</span>
+      <span class="callout-text">고객에게 '이 설비를 선택하면 연간 전기료를 얼마 절감할 수 있다'고 설명할 수 있으면, 여러분은 단순 기술자가 아니라 컨설턴트가 됩니다.</span>
+    </div>
+
+    <div class="callout warn fade-in">
+      <span class="callout-icon">⚠️</span>
+      <span class="callout-text">멀티 냉동시스템은 하나의 냉매 회로에 여러 증발기가 연결되어 있어, 냉매 충전량 관리가 매우 중요합니다. 과충전/부족 모두 효율 저하의 원인입니다.</span>
+    </div>
+
+    <!-- Quiz 1 -->
+    <div class="quiz-block fade-in" id="quiz1">
+      <div class="quiz-label">확인 퀴즈</div>
+      <p class="quiz-question">멀티 냉동시스템의 가장 큰 장점은?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz1')">① 설치가 간단하다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz1')">② 다수 냉장/냉동고를 하나의 응축기로 통합 관리할 수 있다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz1')">③ 냉매가 필요 없다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz1')">④ 전기 배선이 불필요하다</button>
+      </div>
+      <div id="quiz1-pass" class="quiz-result pass">정답! 통합 관리로 설치비 절감과 에너지 효율 향상을 동시에 달성할 수 있습니다.</div>
+      <div id="quiz1-fail" class="quiz-result fail">오답입니다. 멀티 냉동시스템의 핵심 장점은 다수의 냉장/냉동고를 하나의 응축기로 통합 관리할 수 있다는 점입니다.</div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== SECTION 2: 11주차 ===== -->
+  <section class="content-section fade-in" id="section2">
+    <div class="section-header">
+      <div class="section-tag">Week 11</div>
+      <h2 class="section-title">프로젝트 관리</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="instructor-msg fade-in">
+      <div class="instructor-head">
+        <span class="instructor-icon">🎓</span>
+        <span class="instructor-label">교육 담당자</span>
+      </div>
+      <p class="instructor-text">"기술만 좋다고 좋은 기술자가 아닙니다. 스케줄 관리, 자재 관리, 협력업체 소통까지 할 줄 알아야 현장을 '이끌' 수 있습니다."</p>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Topic 1 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">📊</div>
+          <div class="topic-meta">
+            <div class="topic-title">시공 스케줄 및 자재 관리</div>
+            <div class="topic-duration">20시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>공정표 작성법 (준비 → 1차시공 → 2차시공 → 시운전 → 인수인계)</li>
+              <li>간트 차트 기초 (작업별 소요일수, 선후행 관계)</li>
+              <li>자재 발주 리드타임 관리
+                — <strong>냉동기</strong>: 2~4주 / <strong>후드</strong>: 1~2주 / <strong>배관·전선</strong>: 2~3일 / <strong>소모품</strong>: 당일~1일</li>
+              <li>재고관리 및 긴급 자재 조달 방법</li>
+              <li>협력업체 (전기, 가스, 소방, 인테리어) 조율</li>
+              <li>공정 회의 참여 및 진행 방법</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">📋</div>
+          <div class="topic-meta">
+            <div class="topic-title">안전관리 계획서 작성</div>
+            <div class="topic-duration">20시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>현장 위험성 평가서 작성 (위험요소 식별 → 위험도 산정 → 대책 수립)</li>
+              <li>안전관리 계획서 구성 요소
+                — 현장 개요, 조직도, 위험성 평가, 안전 수칙, 비상 연락망</li>
+              <li>일일 안전점검표 활용 (체크리스트 기반)</li>
+              <li>사고 발생 시 보고 체계 및 서류 작성
+                — <strong>사고 보고서, 재해 조사서, 재발 방지 대책서</strong></li>
+              <li>안전 교육 실시 기록 관리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout warn fade-in">
+      <span class="callout-icon">⚠️</span>
+      <span class="callout-text">자재 발주 타이밍이 시공 일정을 결정합니다. 현장 착공일에 자재가 없으면 모든 일정이 밀립니다. 여유를 두고 발주하세요.</span>
+    </div>
+
+    <div class="callout tip fade-in">
+      <span class="callout-icon">💡</span>
+      <span class="callout-text">공정표를 잘 관리하면 고객 신뢰가 올라갑니다. '언제 끝나요?'라는 질문에 정확하게 답할 수 있는 기술자가 되세요.</span>
+    </div>
+
+    <!-- Quiz 2 -->
+    <div class="quiz-block fade-in" id="quiz2">
+      <div class="quiz-label">확인 퀴즈</div>
+      <p class="quiz-question">자재 발주에서 가장 중요한 것은?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">① 가장 저렴한 곳에서 구매</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz2')">② 리드타임을 고려한 사전 발주</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">③ 한 번에 대량 구매</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">④ 현장 착공일에 발주</button>
+      </div>
+      <div id="quiz2-pass" class="quiz-result pass">정답! 자재가 제때 도착해야 공정이 밀리지 않습니다. 냉동기는 2~4주 리드타임을 고려하세요.</div>
+      <div id="quiz2-fail" class="quiz-result fail">오답입니다. 자재 발주에서 핵심은 리드타임을 고려한 사전 발주입니다. 착공일에 발주하면 공사가 멈춥니다!</div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== SECTION 3: 12주차 ===== -->
+  <section class="content-section fade-in" id="section3">
+    <div class="section-header">
+      <div class="section-tag">Week 12</div>
+      <h2 class="section-title">평가 및 수료</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="instructor-msg fade-in">
+      <div class="instructor-head">
+        <span class="instructor-icon">🎓</span>
+        <span class="instructor-label">교육 담당자</span>
+      </div>
+      <p class="instructor-text">"12주 동안 고생 많았습니다. 오늘은 여러분이 얼마나 성장했는지 확인하는 날입니다. 긴장하지 마세요. 그동안 성실히 했다면 충분히 통과할 수 있습니다."</p>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Topic 1 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">✍️</div>
+          <div class="topic-meta">
+            <div class="topic-title">이론 평가 - 필기</div>
+            <div class="topic-duration">8시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li><strong>안전관리</strong>: 산업안전보건법, PPE, 위험성 평가, 작업중지권</li>
+              <li><strong>냉동이론</strong>: 냉동 사이클, 냉매 종류/특성, 4대 부품 역할</li>
+              <li><strong>설비 규격</strong>: 주방설비 종류, HACCP 기준, 전기/가스/배수 규격</li>
+              <li><strong>트러블슈팅</strong>: 5단계 진단법, 주요 고장 유형별 원인과 대응</li>
+              <li><strong>프로젝트 관리</strong>: 공정표, 자재 관리, 안전계획서</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">🔧</div>
+          <div class="topic-meta">
+            <div class="topic-title">실기 평가</div>
+            <div class="topic-duration">16시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>냉동기 설치 (패널 조립 → 배관 → 진공 → 충전 → 시운전)</li>
+              <li>전기 결선 및 접지 시공 (분전반 → 설비 결선)</li>
+              <li>매니폴드 게이지 읽기 및 냉매 충전 (적정량 판단)</li>
+              <li>배관 가공 (플레어, 브레이징)</li>
+              <li>트러블슈팅: 모의 고장 상황 진단 및 조치</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-card fade-in">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">🏗️</div>
+          <div class="topic-meta">
+            <div class="topic-title">현장 평가</div>
+            <div class="topic-duration">8시간</div>
+          </div>
+          <div class="topic-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-content">
+            <ul class="checklist">
+              <li>독립 시공 수행 능력 (실제 현장 기반)</li>
+              <li>고객 응대 및 커뮤니케이션 (역할극 포함)</li>
+              <li>보고서 작성 품질 (견적서, 완료보고서, 업무일지)</li>
+              <li>안전수칙 준수 상태 (PPE, 작업 절차, 정리정돈)</li>
+              <li>팀워크 및 협업 능력</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Evaluation Table -->
+    <div class="eval-section fade-in">
+      <div class="eval-table-wrap">
+        <table class="eval-table">
+          <thead>
+            <tr>
+              <th>평가 항목</th>
+              <th>비중</th>
+              <th>평가 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="eval-name">안전의식</span></td>
+              <td><span class="eval-weight">20%</span></td>
+              <td>안전수칙 준수, PPE 착용, 위험 인지 능력</td>
+            </tr>
+            <tr>
+              <td><span class="eval-name">기술역량</span></td>
+              <td><span class="eval-weight">30%</span></td>
+              <td>설비 설치/점검/수리, 도면 해독, 공구 사용</td>
+            </tr>
+            <tr>
+              <td><span class="eval-name">문제해결력</span></td>
+              <td><span class="eval-weight">20%</span></td>
+              <td>고장 진단 능력, 상황 대응, 트러블슈팅</td>
+            </tr>
+            <tr>
+              <td><span class="eval-name">고객 응대</span></td>
+              <td><span class="eval-weight">15%</span></td>
+              <td>커뮤니케이션, 보고서 작성, 현장 매너</td>
+            </tr>
+            <tr>
+              <td><span class="eval-name">성장 잠재력</span></td>
+              <td><span class="eval-weight">15%</span></td>
+              <td>학습 태도, 팀워크, 자기개발 의지</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pass-threshold fade-in">
+        <p>수료 기준</p>
+        <div class="threshold-value">종합 <span>70점</span> 이상 수료</div>
+      </div>
+
+      <!-- Career Path -->
+      <div class="career-section fade-in">
+        <div class="career-title">
+          <span>🚀</span>
+          수료 후 경력 개발 경로
+        </div>
+        <div class="career-path">
+          <div class="career-step">
+            <div class="career-dot">🌱</div>
+            <div class="career-info">
+              <div class="career-level">Level 1</div>
+              <div class="career-name">기술원</div>
+              <div class="career-period">수료 직후 — 현장 동행, 기초 작업 수행</div>
+            </div>
+          </div>
+          <div class="career-step">
+            <div class="career-dot">🔧</div>
+            <div class="career-info">
+              <div class="career-level">Level 2</div>
+              <div class="career-name">기술원</div>
+              <div class="career-period">1~2년차 — 독립 시공, 중소형 현장 담당</div>
+            </div>
+          </div>
+          <div class="career-step">
+            <div class="career-dot">⭐</div>
+            <div class="career-info">
+              <div class="career-level">Senior</div>
+              <div class="career-name">선임 기술원</div>
+              <div class="career-period">3~5년차 — 복잡 현장 주도, 후배 지도</div>
+            </div>
+          </div>
+          <div class="career-step">
+            <div class="career-dot">👑</div>
+            <div class="career-info">
+              <div class="career-level">Lead</div>
+              <div class="career-name">기술 팀장</div>
+              <div class="career-period">5년차 이상 — 팀 운영, 대형 프로젝트 총괄</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip fade-in">
+      <span class="callout-icon">💡</span>
+      <span class="callout-text">수료는 끝이 아니라 시작입니다. Level 1 기술원으로서 본격적인 경력개발이 시작됩니다. 함께 성장합시다!</span>
+    </div>
+
+    <div class="callout warn fade-in">
+      <span class="callout-icon">⚠️</span>
+      <span class="callout-text">평가에서 70점 미만이면 보충 교육 후 재평가합니다. 한 번에 못 통과해도 괜찮습니다. 중요한 건 포기하지 않는 것입니다.</span>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="phase3_training.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        이전: Phase 3
+      </a>
+    </div>
+
+    <div class="completion-box">
+      <span class="completion-emoji">🎉</span>
+      <div class="completion-title">12주 교육과정을 완료하셨습니다!</div>
+      <p class="completion-desc">현장지원팀의 정식 멤버로서 새로운 시작을 축하합니다. 지금까지 쌓아온 지식과 경험을 바탕으로 현장에서 최고의 기술자가 되시길 응원합니다.</p>
+    </div>
+
+    <p class="footer-copy">부성티케이 현장지원팀 · 12주 신입사원 교육 프로그램 Phase 4</p>
+  </div>
+</footer>
+
+<script>
+// ===== TOGGLE CARD =====
+function toggleCard(el) {
+  el.closest('.topic-card').classList.toggle('open');
+}
+
+// ===== SCROLL TO SECTION =====
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navH = document.querySelector('.sticky-nav').offsetHeight;
+  const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// ===== QUIZ =====
+function checkQuiz(btn, correct, qid) {
+  const box = document.getElementById(qid);
+  box.querySelectorAll('.quiz-opt').forEach(o => {
+    o.disabled = true;
+    o.style.pointerEvents = 'none';
+  });
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  const passEl = document.getElementById(qid + '-pass');
+  const failEl = document.getElementById(qid + '-fail');
+  if (correct) {
+    passEl.classList.add('show');
+  } else {
+    failEl.classList.add('show');
+  }
+}
+
+// ===== PROGRESS BAR =====
+function updateProgress() {
+  const el = document.getElementById('progressBar');
+  if (!el) return;
+  const scrollTop = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.min(100, (scrollTop / docH) * 100) : 0;
+  el.style.width = pct + '%';
+}
+
+// ===== ACTIVE NAV BTN =====
+const sections = ['section1', 'section2', 'section3'];
+const navBtns = document.querySelectorAll('.nav-btn');
+
+function updateActiveNav() {
+  const navH = document.querySelector('.sticky-nav').offsetHeight;
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top - navH - 40 <= 0) {
+      current = id;
+    }
+  });
+  navBtns.forEach((btn, i) => {
+    btn.classList.toggle('active', sections[i] === current);
+  });
+}
+
+// ===== INTERSECTION OBSERVER (fade-in) =====
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+fadeEls.forEach(el => observer.observe(el));
+
+// ===== SCROLL EVENTS =====
+window.addEventListener('scroll', () => {
+  updateProgress();
+  updateActiveNav();
+}, { passive: true });
+
+// Initial calls
+updateProgress();
+updateActiveNav();
+</script>
+</body>
+</html>

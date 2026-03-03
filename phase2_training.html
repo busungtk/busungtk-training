@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 2 · 기본기술교육 | 부성티케이 신입사원 교육</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2332;
+    --border: #1e2d3d;
+    --accent: #10b981;
+    --accent2: #34d399;
+    --danger: #ef4444;
+    --success: #10b981;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-bright: #f8fafc;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ───── HERO ───── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 24px 120px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg), var(--surface2));
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .hero-orb-1 {
+    width: 500px; height: 500px;
+    background: var(--accent);
+    top: -120px; left: -120px;
+  }
+  .hero-orb-2 {
+    width: 400px; height: 400px;
+    background: var(--accent2);
+    bottom: -80px; right: -80px;
+  }
+  .hero-orb-3 {
+    width: 300px; height: 300px;
+    background: #0ea5e9;
+    top: 40%; left: 60%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--accent2);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 6px 16px;
+    border-radius: 99px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    color: var(--text-bright);
+    line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title span {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--accent2);
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: var(--text-dim);
+    max-width: 580px;
+    margin: 0 auto 60px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 32px;
+    min-width: 150px;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .hero-stat:hover {
+    border-color: rgba(16,185,129,0.4);
+    transform: translateY(-3px);
+  }
+
+  .hero-stat-val {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-stat-label {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    font-size: 12px;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll svg {
+    width: 20px; height: 20px;
+    stroke: var(--accent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ───── STICKY NAV ───── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,14,23,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    min-height: 56px;
+  }
+
+  .nav-sections {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .nav-btn:hover,
+  .nav-btn.active {
+    background: rgba(16,185,129,0.15);
+    color: var(--accent2);
+  }
+
+  .phase-nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .phase-link {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-dim);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .phase-link:hover {
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .phase-link.current {
+    background: rgba(16,185,129,0.2);
+    color: var(--accent2);
+    border-color: rgba(16,185,129,0.4);
+  }
+
+  .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ───── MAIN CONTENT ───── */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 20px 80px;
+  }
+
+  /* ───── SECTION ───── */
+  .section {
+    margin-bottom: 80px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    color: var(--text-bright);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-desc {
+    font-size: 0.97rem;
+    color: var(--text-dim);
+    max-width: 600px;
+  }
+
+  /* ───── INSTRUCTOR MESSAGE ───── */
+  .instructor-msg {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .instructor-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .instructor-label .icon {
+    font-size: 18px;
+  }
+
+  .instructor-text {
+    font-size: 0.97rem;
+    color: var(--text);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* ───── TOPIC CARDS (Accordion) ───── */
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .topic-card:hover {
+    border-color: rgba(16,185,129,0.3);
+  }
+
+  .topic-card.open {
+    border-color: rgba(16,185,129,0.45);
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .topic-header:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .topic-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .topic-info {
+    flex: 1;
+  }
+
+  .topic-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 2px;
+  }
+
+  .topic-badge {
+    display: inline-block;
+    background: rgba(16,185,129,0.12);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 1px solid rgba(16,185,129,0.2);
+  }
+
+  .topic-chevron {
+    width: 20px; height: 20px;
+    stroke: var(--text-dim);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, stroke 0.2s;
+  }
+
+  .topic-card.open .topic-chevron {
+    transform: rotate(180deg);
+    stroke: var(--accent);
+  }
+
+  .topic-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .topic-card.open .topic-body {
+    max-height: 2000px;
+  }
+
+  .topic-content {
+    padding: 0 22px 24px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.93rem;
+    color: var(--text);
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .checklist li::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    margin-top: 2px;
+    position: relative;
+    flex-shrink: 0;
+    background: rgba(16,185,129,0.1);
+  }
+
+  /* ───── CALLOUT BOXES ───── */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .callout-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .callout-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .callout-tip {
+    background: rgba(16,185,129,0.07);
+    border: 1px solid rgba(16,185,129,0.25);
+    border-left: 3px solid var(--accent);
+  }
+  .callout-tip .callout-label { color: var(--accent); }
+  .callout-tip .callout-icon { color: var(--accent); }
+
+  .callout-warn {
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-left: 3px solid #f59e0b;
+  }
+  .callout-warn .callout-label { color: #f59e0b; }
+  .callout-warn .callout-icon { color: #f59e0b; }
+
+  .callout-danger {
+    background: rgba(239,68,68,0.07);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-left: 3px solid var(--danger);
+  }
+  .callout-danger .callout-label { color: var(--danger); }
+  .callout-danger .callout-icon { color: var(--danger); }
+
+  /* ───── QUIZ ───── */
+  .quiz-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 40px;
+  }
+
+  .quiz-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .quiz-question {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quiz-opt {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.93rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .quiz-opt:hover:not(:disabled) {
+    background: rgba(16,185,129,0.08);
+    border-color: rgba(16,185,129,0.3);
+    color: var(--text-bright);
+  }
+
+  .quiz-opt.correct {
+    background: rgba(16,185,129,0.15);
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  .quiz-opt.wrong {
+    background: rgba(239,68,68,0.12);
+    border-color: var(--danger);
+    color: #fca5a5;
+  }
+
+  .quiz-opt:disabled { cursor: default; }
+
+  .quiz-feedback {
+    display: none;
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .quiz-feedback.show { display: block; }
+
+  .quiz-feedback.pass {
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--accent2);
+  }
+
+  .quiz-feedback.fail {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: #fca5a5;
+  }
+
+  /* ───── SECTION DIVIDER ───── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 60px 0;
+  }
+
+  /* ───── FOOTER ───── */
+  .footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .footer-phase-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.25s;
+  }
+
+  .footer-phase-link:hover {
+    border-color: rgba(16,185,129,0.4);
+    color: var(--accent2);
+    transform: translateY(-2px);
+  }
+
+  .footer-phase-link.prev { flex-direction: row; }
+  .footer-phase-link.next { flex-direction: row-reverse; }
+
+  .footer-arrow { font-size: 1.2rem; }
+
+  .footer-copy {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 640px) {
+    .hero { padding: 60px 16px 100px; }
+    .hero-stat { padding: 18px 20px; min-width: 120px; }
+    .hero-stat-val { font-size: 1.5rem; }
+    .nav-inner { gap: 8px; padding: 0 12px; }
+    .nav-btn { font-size: 0.72rem; padding: 5px 9px; }
+    .phase-link { font-size: 0.7rem; padding: 4px 8px; }
+    .main { padding: 40px 14px 60px; }
+    .topic-header { padding: 14px 16px; gap: 10px; }
+    .topic-content { padding: 0 16px 18px; padding-top: 16px; }
+    .quiz-box { padding: 20px 16px; }
+    .instructor-msg { padding: 18px 20px; }
+    .footer-nav { gap: 12px; }
+    .footer-phase-link { padding: 12px 18px; }
+  }
+
+  /* ───── SCROLL ANIMATIONS ───── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <div class="hero-badge">
+    <span>🔧</span>
+    신입사원 교육 프로그램
+  </div>
+
+  <h1 class="hero-title">Phase 2 · <span>기본기술교육</span></h1>
+  <p class="hero-subtitle">핵심기술 / 실습훈련</p>
+  <p class="hero-desc">
+    2~3주차 동안 현장에서 필요한 핵심 기술들을 집중적으로 배웁니다.
+    냉동기부터 트러블슈팅까지, 기술자의 기본기를 완성합니다.
+  </p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-val">2주</div>
+      <div class="hero-stat-label">과정 기간</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">80h</div>
+      <div class="hero-stat-label">총 학습시간</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">2개</div>
+      <div class="hero-stat-label">퀴즈</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+    스크롤하여 시작
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     STICKY NAV
+══════════════════════════════════════════ -->
+<nav class="sticky-nav" id="sticky-nav">
+  <div class="nav-inner">
+    <div class="nav-sections">
+      <button class="nav-btn" onclick="scrollToSection('sec1')">❄️ 냉동기</button>
+      <button class="nav-btn" onclick="scrollToSection('sec2')">💨 후드</button>
+      <button class="nav-btn" onclick="scrollToSection('sec3')">⚡ 전기</button>
+      <button class="nav-btn" onclick="scrollToSection('sec4')">💧 급배수</button>
+      <button class="nav-btn" onclick="scrollToSection('sec5')">🔥 가스</button>
+      <button class="nav-btn" onclick="scrollToSection('sec6')">🔍 트러블슈팅</button>
+    </div>
+    <div class="phase-nav">
+      <a class="phase-link" href="phase1_training.html">Phase 1</a>
+      <a class="phase-link current">Phase 2</a>
+      <a class="phase-link" href="phase3_training.html">Phase 3</a>
+      <a class="phase-link" href="phase4_training.html">Phase 4</a>
+    </div>
+  </div>
+  <div class="progress-bar" id="progress-bar"></div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════ -->
+<main class="main">
+
+  <!-- ─── SECTION 1: 냉동기 설치 실습 ─── -->
+  <section class="section fade-up" id="sec1">
+    <div class="section-header">
+      <div class="section-tag">❄️ Section 01</div>
+      <h2 class="section-title">냉동기 설치 실습</h2>
+      <p class="section-desc">워크인 냉장·냉동고 패널 조립부터 냉매 충전까지, 냉동기 설치의 전 과정을 습득합니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "냉동기는 우리 업무의 꽃입니다. 패널 조립부터 시운전까지 전 과정을 제대로 배워두면, 어떤 현장에 가도 자신감이 생깁니다. 천천히, 하지만 정확하게 가봅시다."
+      </p>
+    </div>
+
+    <!-- Card 1-1 -->
+    <div class="topic-card" id="card-1-1">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🏗️</span>
+        <div class="topic-info">
+          <div class="topic-title">워크인 냉동/냉장고 패널 조립</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>바닥 패널 수평 맞추기 — 수평계를 사용해 정밀하게 확인</li>
+            <li>벽 패널 조립 순서 — 뒷면 → 좌우 → 전면 순서 준수</li>
+            <li>패널 록킹캠 체결법 — 규정 토크로 견고하게 체결</li>
+            <li>천정 패널 설치 및 실리콘 밀봉 — 기밀성 확보 필수</li>
+            <li>문짝 설치 및 힌지 조정 — 자동 복귀, 기밀 확인</li>
+            <li>바닥 히터선 설치 — 결로 방지를 위한 히터 배선</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">현장 꿀팁</div>
+              패널 조립 순서를 반드시 지키세요. 순서가 틀리면 나중에 다 뜯어내야 합니다. 뒷면 → 좌우 → 전면, 이 순서를 체득할 때까지 반복 연습합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 1-2 -->
+    <div class="topic-card" id="card-1-2">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🔧</span>
+        <div class="topic-info">
+          <div class="topic-title">냉동기 배관 작업</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>동배관 사이즈 선정 — 인치별 용도 및 선정 기준</li>
+            <li>플레어 가공법 — 플레어 너트 체결, 토크 관리</li>
+            <li>은납 브레이징 — 토치 사용법 및 질소 퍼지 필수</li>
+            <li>배관 보온 — 보온재 선택 기준 및 마감 방법</li>
+            <li>배관 지지대 설치 간격 — 처짐 방지 기준 준수</li>
+          </ul>
+          <div class="callout callout-danger">
+            <span class="callout-icon">🚨</span>
+            <div>
+              <div class="callout-label">안전 경고</div>
+              브레이징 시 반드시 질소 퍼지를 하세요. 안 하면 배관 내부에 산화막이 생겨 막힘 원인이 됩니다. 이건 나중에 못 고칩니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 1-3 -->
+    <div class="topic-card" id="card-1-3">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🌡️</span>
+        <div class="topic-info">
+          <div class="topic-title">진공 및 냉매 충전</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>진공 펌프 연결 및 운전 — 정확한 연결 방법</li>
+            <li>진공도 확인 — 500미크론 이하 도달 확인</li>
+            <li>진공 유지 시간 — 최소 30분 이상 유지 후 누설 여부 확인</li>
+            <li>냉매 충전 방법 — 전자저울을 이용한 정량 충전</li>
+            <li>적정 충전량 확인 — 과냉각도 및 과열도 측정</li>
+            <li>누설 검사 — 비눗물 및 전자식 리크디텍터 사용</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">현장 꿀팁</div>
+              진공도가 500미크론 아래로 안 내려가면 어딘가 누설입니다. 연결부를 하나씩 점검하세요. 대부분 플레어 가공 불량입니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz 1 -->
+    <div class="quiz-box" id="quiz1">
+      <div class="quiz-label">📝 퀴즈 1</div>
+      <p class="quiz-question">냉동기 배관 브레이징 시 반드시 해야 하는 것은?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz1')">① 배관을 뜨겁게 예열</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz1')">② 질소 퍼지</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz1')">③ 배관에 물을 채움</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz1')">④ 실리콘 도포</button>
+      </div>
+      <div class="quiz-feedback pass" id="quiz1-pass">
+        ✅ 정답! 질소 퍼지를 하지 않으면 산화막이 생겨 배관 막힘의 원인이 됩니다. 브레이징 작업 전후 반드시 질소를 흘려주세요.
+      </div>
+      <div class="quiz-feedback fail" id="quiz1-fail">
+        ❌ 틀렸습니다. 브레이징 시 핵심은 "질소 퍼지"입니다. 산소가 있는 상태에서 가열하면 배관 내부에 산화막이 형성됩니다.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 2: 후드 및 환기 시스템 ─── -->
+  <section class="section fade-up" id="sec2">
+    <div class="section-header">
+      <div class="section-tag">💨 Section 02</div>
+      <h2 class="section-title">후드 및 환기 시스템</h2>
+      <p class="section-desc">주방 후드 종류와 설치 기준, 덕트 시공 방법과 풍량 계산까지 환기 시스템의 전반을 학습합니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "후드는 단순해 보이지만, 풍량 계산이 틀리면 주방이 연기 가득 차고, 과하면 에너지 낭비입니다. 기본 원리를 제대로 이해합시다."
+      </p>
+    </div>
+
+    <!-- Card 2-1 -->
+    <div class="topic-card" id="card-2-1">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🍳</span>
+        <div class="topic-info">
+          <div class="topic-title">주방 후드 종류 및 설치</div>
+          <span class="topic-badge">⏱ 3시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>후드 종류 — 벽부형, 천정형, 아일랜드형 특성 및 적용 기준</li>
+            <li>후드 사이즈 선정 — 조리기기 면적 기준으로 산정</li>
+            <li>설치 높이 기준 — 가스레인지 상부 기준 1.5m 유지</li>
+            <li>그리스 필터 종류 — 재질별 특성 및 교체 주기 관리</li>
+            <li>후드 전등 및 소방 시스템 연결 방법</li>
+          </ul>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <div class="callout-label">주의사항</div>
+              후드 설치 높이를 임의로 낮추지 마세요. 화재안전기준 및 소방법에 규정된 높이가 있습니다. 시공 전 도면을 반드시 확인하세요.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2-2 -->
+    <div class="topic-card" id="card-2-2">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🌀</span>
+        <div class="topic-info">
+          <div class="topic-title">덕트 시공 및 풍량 계산</div>
+          <span class="topic-badge">⏱ 3시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>아연도금 덕트 vs 스파이럴 덕트 — 용도 및 선택 기준</li>
+            <li>덕트 사이즈 산출 — 풍량 기준 계산법</li>
+            <li>풍량 계산 기초 — 후드 면적 × 흡인 속도 공식 적용</li>
+            <li>덕트 연결 및 기밀 테이핑 — 누설 방지</li>
+            <li>배기팬 선정 — 정압 및 풍량 매칭 방법</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">현장 꿀팁</div>
+              후드 풍량은 <strong>'조리기기 면적(m²) × 3,600 × 흡인속도(0.3~0.5m/s)'</strong>로 계산합니다. 이 공식 하나면 현장에서 바로 적용 가능합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 3: 전기 배선 실습 ─── -->
+  <section class="section fade-up" id="sec3">
+    <div class="section-header">
+      <div class="section-tag">⚡ Section 03</div>
+      <h2 class="section-title">전기 배선 실습</h2>
+      <p class="section-desc">전선 선정부터 차단기 결선까지, 안전하고 정확한 전기 배선 기술을 실습합니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "전기는 눈에 안 보이지만 잘못 다루면 화재, 감전으로 이어집니다. 정확한 배선은 안전의 시작입니다. 꼼꼼하게 배우세요."
+      </p>
+    </div>
+
+    <!-- Card 3-1 -->
+    <div class="topic-card" id="card-3-1">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🔌</span>
+        <div class="topic-info">
+          <div class="topic-title">전기 배선 기초 실습</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>전선 종류 — HIV, CV, VCTF 등 종류별 특성과 용도</li>
+            <li>전선 굵기 선정 — 부하 전류 기준 단면적 계산</li>
+            <li>전선 피복 벗기기 및 연결 — 압착 및 납땜 방법</li>
+            <li>배선 정리 — 타이밴드 및 배선 덕트 활용법</li>
+            <li>접지 배선 시공 — 접지선 규격 및 시공 방법</li>
+          </ul>
+          <div class="callout callout-danger">
+            <span class="callout-icon">🚨</span>
+            <div>
+              <div class="callout-label">안전 경고</div>
+              통전 상태에서 배선 작업 절대 금지! 차단기 OFF + '작업 중' 표시 + 검전기 확인, 이 3단계를 반드시 거치세요.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3-2 -->
+    <div class="topic-card" id="card-3-2">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🗂️</span>
+        <div class="topic-info">
+          <div class="topic-title">차단기·제어반 결선</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>차단기 종류 — MCCB(배선용), ELB(누전차단기) 선정 기준</li>
+            <li>분전반 내 배선 요령 — 정돈된 배선 습관</li>
+            <li>MC(전자접촉기), 타이머, 릴레이 결선 방법</li>
+            <li>온도 컨트롤러 결선 — 센서 입력 및 출력 배선</li>
+            <li>배선 완료 후 절연저항 측정 — 메거(Megger) 사용법</li>
+          </ul>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <div class="callout-label">주의사항</div>
+              접지선(녹황색)은 절대 다른 용도로 쓰지 마세요. 접지 불량은 감전 사고의 직접 원인이 됩니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 4: 급배수 설비 ─── -->
+  <section class="section fade-up" id="sec4">
+    <div class="section-header">
+      <div class="section-tag">💧 Section 04</div>
+      <h2 class="section-title">급배수 설비</h2>
+      <p class="section-desc">급배수 배관 시공법과 누수 방지 기술을 학습합니다. 구배 관리부터 보온까지 빈틈없이 배웁니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "물 작업은 단순해 보이지만, 누수가 나면 큰 피해로 이어집니다. 배관 연결 하나하나를 확실하게 하는 습관을 들이세요."
+      </p>
+    </div>
+
+    <!-- Card 4-1 -->
+    <div class="topic-card" id="card-4-1">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🚰</span>
+        <div class="topic-info">
+          <div class="topic-title">급배수 배관 시공</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>급수 배관 종류 — PVC, 스테인리스, PEX 특성 비교</li>
+            <li>배관 연결 방법 — 나사식, 융착식, 압착식 선택 기준</li>
+            <li>배수 배관 시공 — 구배 확인: 1/100 이상 확보 필수</li>
+            <li>트랩 설치 — U트랩, S트랩 설치 목적과 시공 방법</li>
+            <li>그리스트랩 설치 — 음식물 기름 차단을 위한 필수 설비</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">현장 꿀팁</div>
+              배수관 구배는 1/100 이상! 레벨기로 확인하세요. 구배가 부족하면 나중에 역류해서 큰 문제가 됩니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4-2 -->
+    <div class="topic-card" id="card-4-2">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🛡️</span>
+        <div class="topic-info">
+          <div class="topic-title">누수 방지 및 보온</div>
+          <span class="topic-badge">⏱ 2시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>배관 연결부 누수 테스트 — 수압 시험 절차</li>
+            <li>배관 보온재 시공 — 결로 및 동파 방지 방법</li>
+            <li>급수 필터 설치 위치 및 교체 주기 관리</li>
+            <li>동파 방지 히터 설치 요령 — 온도 감응 타입 선정</li>
+          </ul>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <div class="callout-label">주의사항</div>
+              수압 시험은 규정 압력(일반 급수 1.5배 이상)으로 실시하고, 30분 이상 유지해 누설 여부를 확인합니다. 압력이 떨어지면 반드시 원인을 찾아야 합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 5: 가스 설비 ─── -->
+  <section class="section fade-up" id="sec5">
+    <div class="section-header">
+      <div class="section-tag">🔥 Section 05</div>
+      <h2 class="section-title">가스 설비</h2>
+      <p class="section-desc">가스 배관 원리, 안전장치, 기기 연결 방법을 배웁니다. 자격과 협업 체계를 이해합니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "가스는 편리하지만 위험합니다. 가스 작업은 자격이 필요하고, 현장에서는 가스기사와 협업하는 경우가 많습니다. 기본 원리를 알아야 소통이 됩니다."
+      </p>
+    </div>
+
+    <!-- Card 5-1 -->
+    <div class="topic-card" id="card-5-1">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🔩</span>
+        <div class="topic-info">
+          <div class="topic-title">가스 배관 및 안전장치</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>LPG vs 도시가스(LNG) — 성분, 압력, 배관 색상 차이</li>
+            <li>가스 배관 자재 — 강관 및 플렉시블 호스 선정 기준</li>
+            <li>가스 차단 밸브 및 퓨즈콕 설치 방법</li>
+            <li>가스 누설 감지기 설치 위치 — LPG(바닥), LNG(천정) 구분</li>
+            <li>가스 압력 조정기(레귤레이터) — 종류 및 작동 원리</li>
+          </ul>
+          <div class="callout callout-danger">
+            <span class="callout-icon">🚨</span>
+            <div>
+              <div class="callout-label">안전 경고</div>
+              가스 작업은 유자격자만 할 수 있습니다. 자격 없이 가스 배관을 건드리면 법적 책임을 집니다. 반드시 가스 기사와 협업하세요.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5-2 -->
+    <div class="topic-card" id="card-5-2">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🔎</span>
+        <div class="topic-info">
+          <div class="topic-title">가스 기기 연결 및 점검</div>
+          <span class="topic-badge">⏱ 2시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>가스레인지 연결 — 호스 및 클램프 체결 방법</li>
+            <li>가스 누설 검사 — 비눗물 테스트 절차</li>
+            <li>가스 사용 안전 수칙 — 환기, 점화, 소화 순서</li>
+            <li>환기 시설 확인 — 가스 사용 공간 환기 기준</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">현장 꿀팁</div>
+              비눗물 테스트는 모든 연결부에 꼼꼼히 발라야 합니다. 거품이 올라오는 곳이 누설 지점입니다. 전자식 가스 감지기도 병용하면 더 안전합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 6: 트러블슈팅 기초 ─── -->
+  <section class="section fade-up" id="sec6">
+    <div class="section-header">
+      <div class="section-tag">🔍 Section 06</div>
+      <h2 class="section-title">트러블슈팅 기초</h2>
+      <p class="section-desc">5단계 진단법과 주요 고장 사례를 통해 현장에서 바로 적용 가능한 문제해결 능력을 기릅니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "고장 진단은 경험이 쌓여야 하지만, 기본 프레임워크만 알면 훨씬 빨리 늘 수 있습니다. '5단계 진단법'을 몸에 익히세요. 현장에서 바로 쓸 수 있습니다."
+      </p>
+    </div>
+
+    <!-- Card 6-1 -->
+    <div class="topic-card" id="card-6-1">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">📋</span>
+        <div class="topic-info">
+          <div class="topic-title">5단계 진단법</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>1단계: 고객 진술 청취 — 증상, 발생 시점, 빈도를 정확히 파악</li>
+            <li>2단계: 외관 점검 — 이상 소음, 냄새, 변형, 누수 육안 확인</li>
+            <li>3단계: 기본 측정 — 전압, 전류, 온도, 압력 계측 장비 활용</li>
+            <li>4단계: 부품별 점검 — 의심 부품 개별 테스트 및 기능 확인</li>
+            <li>5단계: 수리 및 확인 — 교체/수리 후 시운전 및 정상 확인</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">현장 꿀팁</div>
+              고장 진단의 80%는 1~3단계에서 끝납니다. 고객 말씀을 잘 듣고, 눈으로 확인하고, 기본 수치만 재면 대부분 원인을 좁힐 수 있습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6-2 -->
+    <div class="topic-card" id="card-6-2">
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">⚙️</span>
+        <div class="topic-info">
+          <div class="topic-title">주요 고장 사례</div>
+          <span class="topic-badge">⏱ 4시간</span>
+        </div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li>냉동기 안 차가움 — 냉매 부족, 팽창밸브 불량, 팬 모터 고장</li>
+            <li>이상 소음 — 압축기 베어링, 팬 블레이드 접촉, 배관 진동</li>
+            <li>누수 — 배수관 막힘, 드레인팬 파손, 배관 연결부 불량</li>
+            <li>전원 안 들어옴 — 차단기 트립, 퓨즈 단선, 컨트롤러 고장</li>
+            <li>온도 편차 — 도어 패킹 불량, 과적재, 제상 불량</li>
+          </ul>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <div class="callout-label">주의사항</div>
+              고장 사례를 외울 때 증상만 외우지 말고, 원인과 확인 방법, 해결책을 세트로 기억하세요. 현장에서 같은 증상이라도 원인은 다를 수 있습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz 2 -->
+    <div class="quiz-box" id="quiz2">
+      <div class="quiz-label">📝 퀴즈 2</div>
+      <p class="quiz-question">5단계 진단법에서 3단계에 해당하는 것은?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">① 고객 진술 청취</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">② 외관 점검</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz2')">③ 기본 측정 (전압, 전류, 온도, 압력)</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">④ 부품 교체</button>
+      </div>
+      <div class="quiz-feedback pass" id="quiz2-pass">
+        ✅ 정답! 3단계는 계측 장비를 이용한 정량적 진단입니다. 전압계, 전류계, 온도계, 압력계를 활용해 수치로 상태를 파악합니다.
+      </div>
+      <div class="quiz-feedback fail" id="quiz2-fail">
+        ❌ 틀렸습니다. 5단계 순서는 ①고객 진술 → ②외관 점검 → ③기본 측정 → ④부품별 점검 → ⑤수리 및 확인입니다.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-nav">
+    <a class="footer-phase-link prev" href="phase1_training.html">
+      <span class="footer-arrow">←</span>
+      <div>
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:2px;">이전 단계</div>
+        <div>Phase 1 · 오리엔테이션</div>
+      </div>
+    </a>
+    <a class="footer-phase-link next" href="phase3_training.html">
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:2px;">다음 단계</div>
+        <div>Phase 3 · 현장실무</div>
+      </div>
+      <span class="footer-arrow">→</span>
+    </a>
+  </div>
+  <p class="footer-copy">© 2025 부성티케이 · 신입사원 교육 프로그램 Phase 2 / 4</p>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+  // ── Accordion ──
+  function toggleCard(el) {
+    el.closest('.topic-card').classList.toggle('open');
+  }
+
+  // ── Smooth scroll to section ──
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = document.getElementById('sticky-nav').offsetHeight + 12;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  // ── Quiz ──
+  function checkQuiz(btn, correct, qid) {
+    const box = document.getElementById(qid);
+    box.querySelectorAll('.quiz-opt').forEach(o => {
+      o.disabled = true;
+      o.style.pointerEvents = 'none';
+    });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    const pass = document.getElementById(qid + '-pass');
+    const fail = document.getElementById(qid + '-fail');
+    if (correct) {
+      pass.classList.add('show', 'pass');
+    } else {
+      fail.classList.add('show', 'fail');
+    }
+  }
+
+  // ── Progress bar ──
+  function updateProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }
+
+  // ── Nav section highlighting (IntersectionObserver) ──
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const sections = ['sec1','sec2','sec3','sec4','sec5','sec6'];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target.id);
+        if (idx === -1) return;
+        navBtns.forEach((b, i) => b.classList.toggle('active', i === idx));
+      }
+    });
+  }, {
+    rootMargin: '-40% 0px -55% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // ── Fade-up animations ──
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  // ── Scroll events ──
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+</body>
+</html>

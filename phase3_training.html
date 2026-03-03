@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 3 · 현장 OJT | 부성티케이 신입사원 교육</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2332;
+    --border: #1e2d3d;
+    --accent: #f59e0b;
+    --accent2: #fbbf24;
+    --danger: #ef4444;
+    --success: #10b981;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-bright: #f8fafc;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ─── Hero ─────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245,158,11,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251,191,36,0.08) 0%, transparent 60%),
+      var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 35%, rgba(245,158,11,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 75% 65%, rgba(16,185,129,0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-phase-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+  }
+
+  .hero-title span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--text-dim);
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-desc {
+    max-width: 600px;
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat-box {
+    background: rgba(30,45,61,0.6);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 32px;
+    min-width: 160px;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .stat-box:hover {
+    border-color: rgba(245,158,11,0.4);
+    transform: translateY(-2px);
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  /* ─── Sticky Nav ────────────────────────────────────── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,14,23,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .section-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 0 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .section-nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover { background: rgba(245,158,11,0.1); color: var(--text); }
+  .nav-btn.active { background: rgba(245,158,11,0.15); color: var(--accent); font-weight: 600; }
+
+  .phase-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-top: 1px solid rgba(30,45,61,0.5);
+    margin-top: 4px;
+  }
+
+  .phase-nav-row::-webkit-scrollbar { display: none; }
+
+  .phase-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .phase-link {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: all 0.2s;
+  }
+
+  .phase-link:hover { border-color: rgba(245,158,11,0.4); color: var(--accent); }
+
+  .phase-link.current {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  .progress-bar-wrap {
+    height: 2px;
+    background: var(--border);
+    width: 100%;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  /* ─── Content Layout ────────────────────────────────── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ─── Section ───────────────────────────────────────── */
+  .section {
+    padding-top: 80px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .tag-badge {
+    display: inline-block;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.35);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--text-bright);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 640px;
+    line-height: 1.8;
+  }
+
+  /* ─── Instructor Message ─────────────────────────────── */
+  .instructor-msg {
+    background: var(--surface2);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .instructor-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .instructor-content {}
+
+  .instructor-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .instructor-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* ─── Topic Cards ────────────────────────────────────── */
+  .topic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .topic-card:hover { border-color: rgba(245,158,11,0.3); }
+  .topic-card.open { border-color: rgba(245,158,11,0.5); }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .topic-header:hover { background: rgba(245,158,11,0.04); }
+
+  .topic-emoji {
+    font-size: 22px;
+    flex-shrink: 0;
+    width: 32px;
+    text-align: center;
+  }
+
+  .topic-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-bright);
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .duration-badge {
+    flex-shrink: 0;
+    background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.2);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .topic-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--text-dim);
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .topic-card.open .topic-chevron { transform: rotate(180deg); }
+  .topic-card.open .topic-chevron svg { color: var(--accent); }
+
+  .topic-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .topic-card.open .topic-body { max-height: 800px; }
+
+  .topic-body-inner {
+    padding: 4px 22px 22px 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 16px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .checklist li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(245,158,11,0.4);
+    border-radius: 4px;
+    margin-top: 2px;
+    background: rgba(245,158,11,0.06);
+    position: relative;
+  }
+
+  /* ─── Callouts ───────────────────────────────────────── */
+  .callout {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .callout.tip {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: #6ee7b7;
+  }
+
+  .callout.warn {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.25);
+    color: #fcd34d;
+  }
+
+  .callout.danger {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: #fca5a5;
+  }
+
+  /* ─── Milestone Checklist ────────────────────────────── */
+  .milestone-card {
+    background: var(--surface);
+    border: 1px solid rgba(245,158,11,0.35);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .milestone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .milestone-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .milestone-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+
+  .milestone-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .milestone-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--text);
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .milestone-item:hover { border-color: rgba(245,158,11,0.3); }
+
+  .milestone-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(245,158,11,0.5);
+    border-radius: 5px;
+    flex-shrink: 0;
+    background: rgba(245,158,11,0.06);
+    position: relative;
+  }
+
+  .milestone-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ─── Quiz ───────────────────────────────────────────── */
+  .quiz-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 56px;
+  }
+
+  .quiz-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .quiz-question {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .quiz-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s;
+    line-height: 1.5;
+  }
+
+  .quiz-opt:hover:not(:disabled) {
+    border-color: rgba(245,158,11,0.5);
+    background: rgba(245,158,11,0.05);
+  }
+
+  .quiz-opt.correct {
+    border-color: var(--success) !important;
+    background: rgba(16,185,129,0.1) !important;
+    color: #6ee7b7;
+  }
+
+  .quiz-opt.wrong {
+    border-color: var(--danger) !important;
+    background: rgba(239,68,68,0.1) !important;
+    color: #fca5a5;
+  }
+
+  .opt-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dim);
+    margin-top: 1px;
+  }
+
+  .quiz-result {
+    display: none;
+    margin-top: 16px;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .quiz-result.show { display: flex; gap: 10px; align-items: flex-start; }
+
+  .quiz-result.pass {
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: #6ee7b7;
+  }
+
+  .quiz-result.fail {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: #fca5a5;
+  }
+
+  .result-icon { font-size: 20px; flex-shrink: 0; }
+
+  /* ─── Footer ─────────────────────────────────────────── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--text);
+  }
+
+  .footer-nav-link:hover {
+    border-color: rgba(245,158,11,0.4);
+    background: rgba(245,158,11,0.05);
+    color: var(--accent);
+  }
+
+  .footer-nav-dir {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .footer-nav-label {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .footer-center {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* ─── Divider ────────────────────────────────────────── */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  /* ─── Responsive ─────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .hero-stats { gap: 12px; }
+    .stat-box { min-width: 130px; padding: 18px 20px; }
+    .stat-value { font-size: 22px; }
+    .instructor-msg { flex-direction: column; gap: 10px; }
+    .footer { flex-direction: column; align-items: stretch; }
+    .footer-nav-link { justify-content: center; }
+    .footer-center { order: -1; }
+  }
+
+  /* ─── Scroll animation ───────────────────────────────── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-phase-badge">Phase 3 of 4</div>
+  <h1 class="hero-title">Phase 3 · <span>현장 OJT</span></h1>
+  <p class="hero-subtitle">현장실습 / 실전경험</p>
+  <p class="hero-desc">4~8주차 동안 실제 현장에서 선배와 함께 시공 경험을 쌓고,<br>점진적으로 독립 수행 능력을 키워갑니다.</p>
+  <div class="hero-stats">
+    <div class="stat-box">
+      <div class="stat-value">5주</div>
+      <div class="stat-label">과정 기간</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">200시간</div>
+      <div class="stat-label">총 실습 시간</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">퀴즈 1개</div>
+      <div class="stat-label">평가</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     STICKY NAV
+═══════════════════════════════════════════════════ -->
+<nav class="sticky-nav" id="sticky-nav">
+  <div class="nav-inner">
+    <div class="section-nav" id="section-nav">
+      <button class="nav-btn" onclick="scrollToSection('sec1')">4주차 현장실습</button>
+      <button class="nav-btn" onclick="scrollToSection('sec2')">5~6주차 보조시공</button>
+      <button class="nav-btn" onclick="scrollToSection('sec3')">7~8주차 독립시공</button>
+      <button class="nav-btn" onclick="scrollToSection('quiz-section')">퀴즈</button>
+    </div>
+    <div class="phase-nav-row">
+      <span class="phase-label">단계</span>
+      <a class="phase-link" href="phase1_training.html">Phase 1</a>
+      <a class="phase-link" href="phase2_training.html">Phase 2</a>
+      <a class="phase-link current">Phase 3</a>
+      <a class="phase-link" href="phase4_training.html">Phase 4</a>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-bar"></div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     CONTENT
+═══════════════════════════════════════════════════ -->
+<div class="content">
+
+  <!-- ─── Section 1 ──────────────────────────────────── -->
+  <section class="section fade-in" id="sec1">
+    <div class="section-header">
+      <span class="tag-badge">Week 4</span>
+      <h2 class="section-title">4주차 — 선배 동행 현장실습</h2>
+      <p class="section-desc">이론을 넘어 실제 현장에 첫발을 내딛는 주간입니다. 선배의 작업 과정을 옆에서 관찰하며 현장의 리듬과 문화를 익힙니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-icon">🎓</div>
+      <div class="instructor-content">
+        <div class="instructor-label">교육 담당자</div>
+        <div class="instructor-text">"드디어 현장입니다. 처음엔 선배 옆에서 보고 배우는 겁니다. 질문을 많이 하세요. '왜 이렇게 하는지' 물어보는 게 가장 빠른 학습법입니다. 25년 동안 제가 가르친 사람들 중에 질문 많이 한 사람이 결국 다 잘 됐어요."</div>
+      </div>
+    </div>
+
+    <div class="topic-list">
+
+      <!-- Card 1 -->
+      <div class="topic-card" id="card-1-1">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">🦺</span>
+          <span class="topic-title">현장 안전 점검</span>
+          <span class="duration-badge">4시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>현장 도착 시 안전 점검 절차 — 위험요소 식별 및 제거</li>
+              <li>작업 전 TBM(Tool Box Meeting) 참여 및 안전 사항 숙지</li>
+              <li>PPE 착용 상태 확인 — 안전모, 안전화, 보안경, 장갑</li>
+              <li>비상구, 소화기 위치 파악 및 대피 경로 확인</li>
+              <li>작업장 정리정돈 상태 확인 — 통로 확보, 자재 정리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="topic-card" id="card-1-2">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">🏗️</span>
+          <span class="topic-title">선배 동행 시공 참관</span>
+          <span class="duration-badge">8시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>냉동기 설치 현장 참관 — 전체 프로세스 관찰 및 기록</li>
+              <li>후드/덕트 시공 현장 참관 — 설치 순서와 측정법</li>
+              <li>배관 작업 참관 — 급수, 배수, 냉매 라인 구분 이해</li>
+              <li>전기 결선 참관 — 단상/3상 구분, 안전 거리 확인</li>
+              <li>시운전 과정 참관 및 체크포인트 기록</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="topic-card" id="card-1-3">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">🏢</span>
+          <span class="topic-title">대형 프로젝트 참관</span>
+          <span class="duration-badge">8시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>대형 급식소/식당 신규 설치 현장 방문 및 전체 규모 파악</li>
+              <li>공정별 작업 순서 이해 — 기초→설비→배관→전기→마감</li>
+              <li>협력업체 간 조율 과정 관찰 — 소통 방식, 의사결정 구조</li>
+              <li>현장 도면과 실제 시공 비교 — 변경 사항 및 현장 대응 파악</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="topic-card" id="card-1-4">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">🤝</span>
+          <span class="topic-title">현장 매너 및 고객 응대</span>
+          <span class="duration-badge">4시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>고객사 방문 예절 — 인사 방법, 복장 기준, 신발 정돈</li>
+              <li>작업 전후 현장 정리 — 자재, 포장재, 공구 정리 습관</li>
+              <li>고객에게 작업 내용 설명하는 법 — 쉬운 언어로 핵심만</li>
+              <li>불만 접수 시 초기 대응 — 경청, 공감, 에스컬레이션</li>
+              <li>작업 완료 후 고객 서명 수령 및 서류 정리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="topic-card" id="card-1-5">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">📐</span>
+          <span class="topic-title">현장 도면 읽기 실습</span>
+          <span class="duration-badge">4시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>건축 도면 기본 기호 이해 — 축척, 방위, 범례 읽기</li>
+              <li>설비 배치도 읽기 — 장비 위치, 이격 거리, 동선 파악</li>
+              <li>전기 단선도/복선도 기초 — 회로 구성 원리 이해</li>
+              <li>배관 도면 기호 — 급수, 배수, 냉매, 가스 라인 구분</li>
+              <li>실제 현장과 도면 비교 실습 — 오차 발견 및 해석</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /topic-list -->
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <span>선배가 작업하는 걸 볼 때, 손만 보지 말고 <strong>'순서'</strong>를 보세요. 왜 이것을 먼저 하는지, 왜 이 공구를 쓰는지. 순서를 이해하면 혼자서도 할 수 있게 됩니다.</span>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <span>현장에서는 고객사 직원들이 보고 있습니다. 작업 태도가 곧 회사 이미지입니다. 사소한 행동(쓰레기 정리, 인사, 신발 정돈)이 신뢰를 만듭니다.</span>
+    </div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── Section 2 ──────────────────────────────────── -->
+  <section class="section fade-in" id="sec2">
+    <div class="section-header">
+      <span class="tag-badge">Week 5-6</span>
+      <h2 class="section-title">5~6주차 — 보조 시공 참여</h2>
+      <p class="section-desc">선배의 감독 하에 직접 손을 대기 시작합니다. 안전 규칙 안에서 최대한 많이 경험하고, 업무 기록 습관을 형성합니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-icon">🎓</div>
+      <div class="instructor-content">
+        <div class="instructor-label">교육 담당자</div>
+        <div class="instructor-text">"이제 직접 손을 대기 시작합니다. 선배가 옆에서 지켜보고 있으니 실수해도 됩니다. 다만 안전은 실수가 허용 안 됩니다. 기술 실수는 배움이 되지만, 안전 사고는 돌이킬 수 없습니다. 이 차이를 명심하세요."</div>
+      </div>
+    </div>
+
+    <div class="topic-list">
+
+      <!-- Card 1 -->
+      <div class="topic-card" id="card-2-1">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">🔧</span>
+          <span class="topic-title">설비 설치 보조 업무</span>
+          <span class="duration-badge">16시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>지도하에 배관 연결 작업 참여 — 급수/배수/냉매 라인</li>
+              <li>냉동기 설치 보조 — 패널 조립, 배관 연결, 진공 작업</li>
+              <li>후드/덕트 설치 보조 — 부자재 준비, 고정 볼트, 실링 처리</li>
+              <li>전기 결선 보조 — 반드시 선임 감독하, 임의 조작 금지</li>
+              <li>가스 기기 연결 보조 — 자격자 감독하, 누설 검사 보조</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="topic-card" id="card-2-2">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">📋</span>
+          <span class="topic-title">시운전 및 문서 작성</span>
+          <span class="duration-badge">8시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>시운전 보조 — 체크리스트 직접 작성, 온도/전류 수치 기록</li>
+              <li>일일 업무일지 작성 및 멘토 피드백 받기</li>
+              <li>사진 기록 습관 형성 — 시공 전/중/후 3단계 촬영</li>
+              <li>자재 수불 기록 — 투입량, 사용량, 잔량 정확히 관리</li>
+              <li>A/S 접수 내용 기록 연습 — 증상, 상황, 조치 사항</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /topic-list -->
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <span>업무일지를 대충 쓰면 나중에 자기 성장이 안 보입니다. 오늘 뭘 했고, 뭘 배웠고, 뭐가 어려웠는지 솔직하게 쓰세요. 3개월 후 그 일지가 여러분의 자산이 됩니다.</span>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <span>보조 작업이라고 긴장을 풀지 마세요. 특히 <strong>전기/가스 작업 보조 시 선임의 지시를 반드시 따르세요.</strong> 임의 판단 금지입니다. 모르면 반드시 묻고, 확인 후에 행동하세요.</span>
+    </div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ─── Section 3 ──────────────────────────────────── -->
+  <section class="section fade-in" id="sec3">
+    <div class="section-header">
+      <span class="tag-badge">Week 7-8</span>
+      <h2 class="section-title">7~8주차 — 독립 시공 시작</h2>
+      <p class="section-desc">소규모 현장이지만 처음부터 끝까지 스스로 책임집니다. 8주간의 학습이 하나로 모이는 순간입니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-icon">🎓</div>
+      <div class="instructor-content">
+        <div class="instructor-label">교육 담당자</div>
+        <div class="instructor-text">"이제 여러분이 주인공입니다. 소규모 현장이지만 처음부터 끝까지 여러분이 책임집니다. 물론 뒤에서 감독은 하고 있습니다. 자신감을 가지세요. 25년 경력도 모두 첫 번째 독립 시공에서 시작됐습니다."</div>
+      </div>
+    </div>
+
+    <div class="topic-list">
+
+      <!-- Card 1 -->
+      <div class="topic-card" id="card-3-1">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">🎯</span>
+          <span class="topic-title">소규모 현장 단독 투입</span>
+          <span class="duration-badge">20시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>감독하 독립 시공 수행 — 소형 냉동기 설치, A/S 출동</li>
+              <li>현장 도착 → 안전점검 → 시공 → 시운전 → 정리 전 과정 수행</li>
+              <li>고객 응대 — 상황 설명, 작업 내용 보고, 주의사항 안내</li>
+              <li>예상치 못한 상황 대응 — 부품 미비, 현장 조건 변경 시 판단</li>
+              <li>작업 완료 후 자체 품질 점검 및 확인서 수령</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="topic-card" id="card-3-2">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <span class="topic-emoji">📝</span>
+          <span class="topic-title">견적·보고서 작성</span>
+          <span class="duration-badge">8시간</span>
+          <span class="topic-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li>견적서 작성 보조 — 자재비 + 인건비 + 경비 항목 산출</li>
+              <li>A/S 접수 처리 및 출동 기록 — 시스템 입력까지</li>
+              <li>시공 완료보고서 작성 — 사진 첨부, 자재 내역 정리</li>
+              <li>주문관리 시스템에 진행상황 업데이트</li>
+              <li>고객 서명 수령 및 서류 최종 정리·보관</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /topic-list -->
+
+    <!-- Milestone Checklist -->
+    <div class="milestone-card fade-in">
+      <div class="milestone-title">
+        <span>🏆</span>
+        Phase 3 마일스톤 체크리스트
+      </div>
+      <div class="milestone-sub">7~8주차 종료 전 아래 항목을 모두 달성해야 Phase 4로 진행할 수 있습니다.</div>
+      <ul class="milestone-list">
+        <li class="milestone-item">
+          <span class="milestone-num">1</span>
+          <span class="milestone-box"></span>
+          <span>독립 시공 1건 완료</span>
+        </li>
+        <li class="milestone-item">
+          <span class="milestone-num">2</span>
+          <span class="milestone-box"></span>
+          <span>독립 시공 2건 완료</span>
+        </li>
+        <li class="milestone-item">
+          <span class="milestone-num">3</span>
+          <span class="milestone-box"></span>
+          <span>독립 시공 3건 완료</span>
+        </li>
+        <li class="milestone-item">
+          <span class="milestone-num">4</span>
+          <span class="milestone-box"></span>
+          <span>A/S 출동 대응 완료</span>
+        </li>
+        <li class="milestone-item">
+          <span class="milestone-num">5</span>
+          <span class="milestone-box"></span>
+          <span>견적서 독립 작성 완료</span>
+        </li>
+        <li class="milestone-item">
+          <span class="milestone-num">6</span>
+          <span class="milestone-box"></span>
+          <span>완료보고서 독립 작성 완료</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="callout danger">
+      <span class="callout-icon">🚨</span>
+      <span>독립 시공이라도 <strong>확신이 없는 작업은 반드시 선임에게 확인하세요.</strong> 모르는 걸 모른다고 하는 것이 진짜 프로입니다. 혼자 해결하려다 실수하면 고객과 회사 모두에게 피해가 됩니다.</span>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <span>첫 독립 시공은 긴장되지만, 그동안 배운 순서대로만 하면 됩니다. <strong>안전점검 → 현장파악 → 시공 → 시운전 → 정리.</strong> 이 순서가 몸에 배면 어떤 현장이든 할 수 있습니다.</span>
+    </div>
+
+  </section>
+
+  <!-- ─── Quiz ───────────────────────────────────────── -->
+  <section class="section fade-in" id="quiz-section">
+    <div class="quiz-box">
+      <div class="quiz-label">📝 Phase 3 퀴즈</div>
+      <div class="quiz-question">
+        고객사에서 냉동기 A/S 출동 시 가장 먼저 할 일은?
+      </div>
+
+      <div class="quiz-opts" id="q1">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'q1')">
+          <span class="opt-num">①</span>
+          <span>바로 분해 시작</span>
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'q1')">
+          <span class="opt-num">②</span>
+          <span>고객에게 증상 확인 및 기본 점검(전원, 설정)</span>
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'q1')">
+          <span class="opt-num">③</span>
+          <span>부품 주문</span>
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'q1')">
+          <span class="opt-num">④</span>
+          <span>사진 촬영</span>
+        </button>
+      </div>
+
+      <div class="quiz-result pass" id="q1-pass">
+        <span class="result-icon">✅</span>
+        <span><strong>정답!</strong> 5단계 진단법의 첫 단계! 고객 진술 청취 + 기본 점검(전원 상태, 온도 설정, 필터 상태)이 먼저입니다. 무작정 분해하면 오히려 원인을 찾기 어려워집니다.</span>
+      </div>
+
+      <div class="quiz-result fail" id="q1-fail">
+        <span class="result-icon">❌</span>
+        <span>
+          <span id="q1-fail-1" style="display:none"><strong>아쉬워요.</strong> 성급한 분해는 오히려 문제를 키울 수 있습니다. 먼저 상황 파악이 우선! 정답은 <strong>② 고객에게 증상 확인 및 기본 점검</strong>입니다.</span>
+          <span id="q1-fail-3" style="display:none"><strong>아쉬워요.</strong> 원인도 모르는데 부품부터 주문하면 안 됩니다. 정답은 <strong>② 고객에게 증상 확인 및 기본 점검</strong>입니다.</span>
+          <span id="q1-fail-4" style="display:none"><strong>아쉬워요.</strong> 사진 기록도 중요하지만, 고객 소통과 기본 점검이 먼저입니다. 정답은 <strong>② 고객에게 증상 확인 및 기본 점검</strong>입니다.</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /content -->
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer">
+    <a class="footer-nav-link" href="phase2_training.html">
+      <span style="font-size:20px">←</span>
+      <div>
+        <span class="footer-nav-dir">이전 단계</span>
+        <span class="footer-nav-label">Phase 2 · 기초 기술 교육</span>
+      </div>
+    </a>
+
+    <div class="footer-center">
+      <div style="color: var(--accent); font-weight: 700; font-size: 14px; margin-bottom: 4px;">부성티케이 신입사원 교육</div>
+      <div style="font-size: 12px; color: var(--text-dim);">12주 과정 · Phase 3/4</div>
+    </div>
+
+    <a class="footer-nav-link" href="phase4_training.html">
+      <div>
+        <span class="footer-nav-dir">다음 단계</span>
+        <span class="footer-nav-label">Phase 4 · 심화 및 평가</span>
+      </div>
+      <span style="font-size:20px">→</span>
+    </a>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════ -->
+<script>
+  // ── Toggle accordion card
+  function toggleCard(el) {
+    el.closest('.topic-card').classList.toggle('open');
+  }
+
+  // ── Scroll to section
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navH = document.getElementById('sticky-nav').offsetHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  // ── Quiz handler
+  function checkQuiz(btn, correct, qid) {
+    const box = document.getElementById(qid);
+    box.querySelectorAll('.quiz-opt').forEach(function(o) {
+      o.disabled = true;
+      o.style.pointerEvents = 'none';
+    });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+
+    if (correct) {
+      document.getElementById(qid + '-pass').classList.add('show');
+    } else {
+      document.getElementById(qid + '-fail').classList.add('show');
+      // Show the right sub-message
+      var optText = btn.querySelector('span:last-child').textContent.trim();
+      if (optText.includes('분해')) {
+        var el = document.getElementById(qid + '-fail-1');
+        if (el) el.style.display = 'inline';
+      } else if (optText.includes('부품')) {
+        var el = document.getElementById(qid + '-fail-3');
+        if (el) el.style.display = 'inline';
+      } else if (optText.includes('사진')) {
+        var el = document.getElementById(qid + '-fail-4');
+        if (el) el.style.display = 'inline';
+      }
+    }
+  }
+
+  // ── IntersectionObserver: active nav + fade-in
+  var sections = [
+    { id: 'sec1', btn: 0 },
+    { id: 'sec2', btn: 1 },
+    { id: 'sec3', btn: 2 },
+    { id: 'quiz-section', btn: 3 }
+  ];
+
+  var navBtns = document.querySelectorAll('.nav-btn');
+
+  var sectionObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var matched = sections.find(function(s) { return s.id === entry.target.id; });
+        if (matched !== undefined) {
+          navBtns.forEach(function(b) { b.classList.remove('active'); });
+          navBtns[matched.btn].classList.add('active');
+        }
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  // ── Fade-in observer
+  var fadeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    fadeObserver.observe(el);
+  });
+
+  // ── Progress bar
+  function updateProgress() {
+    var scrollTop = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+</body>
+</html>

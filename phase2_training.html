@@ -694,9 +694,25 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  .back-to-main {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(17,24,39,0.85); backdrop-filter: blur(8px);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 8px 16px; color: var(--text-dim); text-decoration: none;
+    font-size: 0.82rem; font-weight: 600; transition: all 0.2s;
+  }
+  .back-to-main:hover { color: #10b981; border-color: rgba(16,185,129,0.4); }
+  .back-to-main svg { width: 16px; height: 16px; }
 </style>
 </head>
 <body>
+
+<a class="back-to-main" href="index.html">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  메인으로
+</a>
 
 <!-- ══════════════════════════════════════════
      HERO
@@ -921,13 +937,15 @@
 
     <!-- Card 2a-1 -->
     <div class="topic-card" id="card-2a-1">
-      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
-        <div class="topic-icon">🔥</div>
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🔥</span>
         <div class="topic-info">
           <div class="topic-title">가스 조리기구 — 면렌지·가스레인지 구조와 안전장치</div>
-          <div class="topic-subtitle">점화 원리 · 화력 조절 · 소화안전장치 · 과열방지 · 일상 점검</div>
+          <span class="topic-badge">⏱ 4시간</span>
         </div>
-        <div class="topic-chevron">▼</div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
       </div>
       <div class="topic-body">
         <div class="topic-content">
@@ -952,13 +970,15 @@
 
     <!-- Card 2a-2 -->
     <div class="topic-card" id="card-2a-2">
-      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
-        <div class="topic-icon">⚡</div>
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">⚡</span>
         <div class="topic-info">
           <div class="topic-title">전기 조리기구 & 오븐 — 인덕션·오븐·튀김기·스팀기</div>
-          <div class="topic-subtitle">온도제어 · 수위센서 · 서모스탯 · 안전센서</div>
+          <span class="topic-badge">⏱ 4시간</span>
         </div>
-        <div class="topic-chevron">▼</div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
       </div>
       <div class="topic-body">
         <div class="topic-content">
@@ -1019,13 +1039,15 @@
 
     <!-- Card 2b-1 -->
     <div class="topic-card" id="card-2b-1">
-      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
-        <div class="topic-icon">🔪</div>
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🔪</span>
         <div class="topic-info">
           <div class="topic-title">전처리 장비 — 절단기·세절기·믹서·반죽기</div>
-          <div class="topic-subtitle">날 교환 · 안전 절차 · 모터 부하 관리</div>
+          <span class="topic-badge">⏱ 3시간</span>
         </div>
-        <div class="topic-chevron">▼</div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
       </div>
       <div class="topic-body">
         <div class="topic-content">
@@ -1049,13 +1071,15 @@
 
     <!-- Card 2b-2 -->
     <div class="topic-card" id="card-2b-2">
-      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
-        <div class="topic-icon">🫧</div>
+      <div class="topic-header" onclick="toggleCard(this)">
+        <span class="topic-icon">🫧</span>
         <div class="topic-info">
           <div class="topic-title">세척·위생설비 — 식기세척기·소독기·살균소독고</div>
-          <div class="topic-subtitle">수온·세제·린스 관리 · UV램프 · 식품 위생과의 관계</div>
+          <span class="topic-badge">⏱ 3시간</span>
         </div>
-        <div class="topic-chevron">▼</div>
+        <svg class="topic-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
       </div>
       <div class="topic-body">
         <div class="topic-content">
@@ -1489,20 +1513,20 @@
       </div>
     </div>
 
-    <!-- Quiz 2 -->
-    <div class="quiz-box" id="quiz2">
-      <div class="quiz-label">📝 퀴즈 2</div>
+    <!-- Quiz 3 -->
+    <div class="quiz-box" id="quiz3">
+      <div class="quiz-label">📝 퀴즈 3</div>
       <p class="quiz-question">고객이 "냉장고가 안 차가워요"라고 했을 때, 현장에서 가장 먼저 확인할 것은?</p>
       <div class="quiz-options">
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">① 압축기를 바로 분해한다</button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">② 냉매를 즉시 충전한다</button>
-        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz2')">③ 응축기(뒷면 금속 핀)에 먼지가 쌓였는지 확인한다</button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">④ 고객에게 새 냉장고를 추천한다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">① 압축기를 바로 분해한다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">② 냉매를 즉시 충전한다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz3')">③ 응축기(뒷면 금속 핀)에 먼지가 쌓였는지 확인한다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">④ 고객에게 새 냉장고를 추천한다</button>
       </div>
-      <div class="quiz-feedback pass" id="quiz2-pass">
+      <div class="quiz-feedback pass" id="quiz3-pass">
         ✅ 정답입니다! 가장 흔한 원인이 응축기 먼지 과다입니다. 먼지를 치우기만 해도 해결되는 경우가 많습니다. 비용도 안 들고 빠릅니다. 항상 가장 단순한 원인부터 확인하세요.
       </div>
-      <div class="quiz-feedback fail" id="quiz2-fail">
+      <div class="quiz-feedback fail" id="quiz3-fail">
         ❌ 아닙니다. 분해나 냉매 충전은 정밀 진단 이후에 판단합니다. 가장 먼저 할 일은 응축기(냉동기 뒷면 금속 핀) 먼지 확인입니다. 청소만으로 해결되는 경우가 현장에서 가장 많습니다. 항상 쉬운 것부터 확인하세요.
       </div>
     </div>

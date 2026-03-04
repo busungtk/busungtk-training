@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부성티케이 · 신입사원 교육 프로그램</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2332;
+    --border: #1e2d3d;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-bright: #f8fafc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .container {
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 99px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #38bdf8;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+
+  .phases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    transition: opacity 0.3s;
+  }
+
+  .phase-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .phase-card.p1::before { background: linear-gradient(90deg, #38bdf8, #818cf8); }
+  .phase-card.p2::before { background: linear-gradient(90deg, #10b981, #34d399); }
+  .phase-card.p3::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .phase-card.p4::before { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
+
+  .phase-card:hover.p1 { border-color: rgba(56,189,248,0.4); }
+  .phase-card:hover.p2 { border-color: rgba(16,185,129,0.4); }
+  .phase-card:hover.p3 { border-color: rgba(245,158,11,0.4); }
+  .phase-card:hover.p4 { border-color: rgba(167,139,250,0.4); }
+
+  .phase-num {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .p1 .phase-num { color: #38bdf8; }
+  .p2 .phase-num { color: #10b981; }
+  .p3 .phase-num { color: #f59e0b; }
+  .p4 .phase-num { color: #a78bfa; }
+
+  .phase-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .phase-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .phase-meta {
+    margin-top: 12px;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .footer-text {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 520px) {
+    .phases { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="badge">부성티케이 · 현장지원팀</div>
+  <h1>신입사원 교육 프로그램</h1>
+  <p class="subtitle">12주간의 체계적인 교육을 통해 비전공자도<br>현장 전문가로 성장할 수 있습니다.</p>
+
+  <div class="phases">
+    <a class="phase-card p1" href="phase1_training.html">
+      <div class="phase-num">Phase 1</div>
+      <div class="phase-title">입문교육</div>
+      <div class="phase-desc">회사 소개, 안전교육, 장비 6종, HVAC 기초, 공구</div>
+      <div class="phase-meta">
+        <span>1주차</span>
+        <span>5일</span>
+        <span>퀴즈 3개</span>
+      </div>
+    </a>
+
+    <a class="phase-card p2" href="phase2_training.html">
+      <div class="phase-num">Phase 2</div>
+      <div class="phase-title">기본기술교육</div>
+      <div class="phase-desc">냉동설비, 후드, 전기, 배수, 가스, 고장진단</div>
+      <div class="phase-meta">
+        <span>2~3주차</span>
+        <span>2주</span>
+        <span>퀴즈 2개</span>
+      </div>
+    </a>
+
+    <a class="phase-card p3" href="phase3_training.html">
+      <div class="phase-num">Phase 3</div>
+      <div class="phase-title">현장 OJT</div>
+      <div class="phase-desc">선배 동행 → 보조 시공 → 독립 시공</div>
+      <div class="phase-meta">
+        <span>4~8주차</span>
+        <span>5주</span>
+        <span>퀴즈 1개</span>
+      </div>
+    </a>
+
+    <a class="phase-card p4" href="phase4_training.html">
+      <div class="phase-num">Phase 4</div>
+      <div class="phase-title">심화 + 수료</div>
+      <div class="phase-desc">압축기 심화, 프로젝트 관리, 종합평가</div>
+      <div class="phase-meta">
+        <span>9~12주차</span>
+        <span>4주</span>
+        <span>퀴즈 2개</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer-text">부성티케이 현장지원팀 · 12주 교육과정 · 비전공자 맞춤</div>
+</div>
+
+</body>
+</html>

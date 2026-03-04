@@ -714,7 +714,7 @@
   <h1 class="hero-title">Phase 2 · <span>기본기술교육</span></h1>
   <p class="hero-subtitle">2~3주차 · 기본기술교육</p>
   <p class="hero-desc">
-    실제로 손을 움직여봅니다. 배관, 전기, 후드, 가스 — 처음이라 어색하지만, 이 2주가 끝나면 현장이 눈에 들어오기 시작합니다.
+    조리·가열설비부터 냉동설비, 전처리·세척까지 — 실제로 손을 움직여봅니다. 이 2주가 끝나면 주방설비 전체가 눈에 들어오기 시작합니다.
   </p>
 
   <div class="hero-stats">
@@ -723,11 +723,11 @@
       <div class="hero-stat-label">과정 기간</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-val">6개</div>
+      <div class="hero-stat-val">8개</div>
       <div class="hero-stat-label">핵심 섹션</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-val">2개</div>
+      <div class="hero-stat-val">3개</div>
       <div class="hero-stat-label">퀴즈</div>
     </div>
   </div>
@@ -747,11 +747,13 @@
   <div class="nav-inner">
     <div class="nav-sections">
       <button class="nav-btn" onclick="scrollToSection('sec1')">❄️ 냉동설비</button>
-      <button class="nav-btn" onclick="scrollToSection('sec2')">💨 후드/환기</button>
-      <button class="nav-btn" onclick="scrollToSection('sec3')">⚡ 전기실습</button>
-      <button class="nav-btn" onclick="scrollToSection('sec4')">💧 급배수</button>
-      <button class="nav-btn" onclick="scrollToSection('sec5')">🔥 가스안전</button>
-      <button class="nav-btn" onclick="scrollToSection('sec6')">🔍 고장진단</button>
+      <button class="nav-btn" onclick="scrollToSection('sec2')">🍳 조리/가열</button>
+      <button class="nav-btn" onclick="scrollToSection('sec3')">🧼 전처리/세척</button>
+      <button class="nav-btn" onclick="scrollToSection('sec4')">💨 후드/환기</button>
+      <button class="nav-btn" onclick="scrollToSection('sec5')">⚡ 전기실습</button>
+      <button class="nav-btn" onclick="scrollToSection('sec6')">💧 급배수</button>
+      <button class="nav-btn" onclick="scrollToSection('sec7')">🔥 가스안전</button>
+      <button class="nav-btn" onclick="scrollToSection('sec8')">🔍 고장진단</button>
     </div>
     <div class="phase-nav">
       <a class="phase-link" href="phase1_training.html">Phase 1</a>
@@ -773,7 +775,7 @@
     <div class="section-header">
       <div class="section-tag">❄️ Section 01</div>
       <h2 class="section-title">냉동설비 설치 기초</h2>
-      <p class="section-desc">식당 뒤쪽 큰 냉장 창고(워크인 냉동·냉장고)를 설치하는 과정 전체를 배웁니다. 뭔지, 왜 하는지, 현장에서 어떻게 쓰는지를 함께 익힙니다.</p>
+      <p class="section-desc">주방설비 중 가장 난이도가 높고 A/S 빈도가 높은 설비입니다. 식당 뒤쪽 큰 냉장 창고(워크인 냉동·냉장고)를 설치하는 과정 전체를 배웁니다. 뭔지, 왜 하는지, 현장에서 어떻게 쓰는지를 함께 익힙니다.</p>
     </div>
 
     <div class="instructor-msg">
@@ -902,10 +904,186 @@
 
   <div class="divider"></div>
 
-  <!-- ─── SECTION 2: 후드와 환기 ─── -->
+  <!-- ─── SECTION 2: 조리/가열설비 ─── -->
   <section class="section fade-up" id="sec2">
     <div class="section-header">
-      <div class="section-tag">💨 Section 02</div>
+      <div class="section-tag">🍳 Section 02</div>
+      <h2 class="section-title">조리/가열설비 기초</h2>
+      <p class="section-desc">주방의 심장인 조리·가열설비를 배웁니다. 가스 조리기구부터 전기 오븐, 튀김기, 스팀기까지 — 구조와 안전장치를 알면 고장 원인이 보입니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "조리설비는 고객이 매일 쓰는 장비라 고장이 나면 즉시 영업에 지장을 줍니다. 가스 점화가 안 된다, 온도가 안 올라간다 — 이 두 가지 패턴을 이해하면 현장에서 당황하지 않습니다. 안전장치가 왜 있는지를 먼저 이해하세요."
+      </p>
+    </div>
+
+    <!-- Card 2a-1 -->
+    <div class="topic-card" id="card-2a-1">
+      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
+        <div class="topic-icon">🔥</div>
+        <div class="topic-info">
+          <div class="topic-title">가스 조리기구 — 면렌지·가스레인지 구조와 안전장치</div>
+          <div class="topic-subtitle">점화 원리 · 화력 조절 · 소화안전장치 · 과열방지 · 일상 점검</div>
+        </div>
+        <div class="topic-chevron">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li><strong>가스레인지·면렌지 구조</strong> — 가스노브(화력 조절) → 가스밸브 → 버너 헤드(불꽃 분산) → 점화플러그 순서로 연결됩니다. 버너 헤드의 구멍이 막히면 불꽃이 고르지 않거나 꺼집니다.</li>
+            <li><strong>점화 원리</strong> — 압전 점화(버튼을 누르면 스파크 발생) 또는 파일럿 점화(항상 켜둔 작은 불꽃으로 점화)입니다. 스파크가 튀는데 불이 안 붙으면 버너 헤드 위치 확인, 가스 공급 확인 순서로 점검합니다.</li>
+            <li><strong>화력 조절 원리</strong> — 노브를 돌리면 가스 유량 밸브 개도가 변합니다. 최소에서 최대까지 단계적으로 가스가 더 나옵니다. 불꽃이 파랗고 안정적이면 정상, 노랗고 흔들리면 가스·공기 비율 불량입니다.</li>
+            <li><strong>소화안전장치(열전대 / Thermocouple)</strong> — 불꽃이 꺼지면 자동으로 가스를 차단합니다. 버너 옆에 붙은 금속 막대가 열전대입니다. 불꽃 열로 전압을 만들어 밸브를 열어두고, 불이 꺼지면 전압이 0이 되어 밸브가 닫힙니다.</li>
+            <li><strong>과열방지장치</strong> — 설비 본체 온도가 일정 이상 올라가면 가스를 차단하는 온도 퓨즈 또는 바이메탈 스위치입니다. 한 번 작동하면 원인(통풍 불량, 이물질)을 제거하고 리셋해야 합니다.</li>
+            <li><strong>일상 점검 포인트</strong> — 버너 헤드 구멍 이물질 막힘 확인 / 열전대 오염(그을음) 청소 / 가스 연결 호스 균열 또는 노화 확인 / 점화 스파크 발생 여부 / 불꽃 색깔(파란색 = 정상, 주황·노랑 = 공기 부족).</li>
+          </ul>
+          <div class="callout callout-danger">
+            <span class="callout-icon">🚨</span>
+            <div>
+              <div class="callout-label">점화 순서를 반드시 지키세요</div>
+              점화 버튼(스파크) 먼저 → 그다음 가스노브 열기. 가스를 먼저 틀고 점화하면 가스가 고여서 "펑" 하는 폭발 점화가 됩니다. 얼굴에 화상을 입는 사고의 대부분이 이 순서 역전에서 발생합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2a-2 -->
+    <div class="topic-card" id="card-2a-2">
+      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
+        <div class="topic-icon">⚡</div>
+        <div class="topic-info">
+          <div class="topic-title">전기 조리기구 & 오븐 — 인덕션·오븐·튀김기·스팀기</div>
+          <div class="topic-subtitle">온도제어 · 수위센서 · 서모스탯 · 안전센서</div>
+        </div>
+        <div class="topic-chevron">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li><strong>인덕션(전자 유도 가열)</strong> — 코일에 고주파 전류를 흘려 자기장을 만들고, 철제 냄비 바닥에서 열이 납니다. 냄비 자체가 발열하므로 상판은 뜨겁지 않습니다. 비철 냄비(알루미늄, 구리)는 작동 안 됩니다.</li>
+            <li><strong>하이라이트(전열 히터)</strong> — 코일 히터가 달아올라 복사열로 조리합니다. 인덕션보다 느리지만 모든 냄비에 사용 가능합니다. 상판이 뜨거우니 화상 주의.</li>
+            <li><strong>오븐·컨벡션 온도제어</strong> — 서모스탯(온도 감지 스위치)이 설정 온도를 유지합니다. 히터가 켜지고 꺼지기를 반복합니다. 컨벡션 오븐은 팬이 돌아 열을 순환시켜 균일하게 익힙니다. 온도 이상 시 서모스탯 또는 온도 퓨즈를 먼저 확인합니다.</li>
+            <li><strong>튀김기 온도센서</strong> — 기름 온도를 서미스터(온도 감지 저항)로 측정합니다. 설정 온도 도달 시 히터 OFF, 떨어지면 히터 ON. 온도 과열 방지를 위한 하이 리밋(과열 차단기)이 별도로 달려 있습니다. 기름 없이 히터를 켜면 과열로 화재 위험.</li>
+            <li><strong>스팀기 수위센서</strong> — 수위 전극(프로브) 또는 플로트 스위치로 물 수위를 감지합니다. 물이 부족하면 히터가 꺼집니다(공열 방지). 스케일(석회질)이 쌓이면 센서가 오작동하므로 주기적 탈스케일이 필요합니다.</li>
+            <li><strong>그릴·철판 서모스탯</strong> — 히터 또는 가스 버너 위에 철판을 올려 가열하는 방식입니다. 서모스탯이 표면 온도를 조절합니다. 철판 균열, 코팅 박리 확인이 일상 점검 포인트입니다.</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">전기 조리기구 공통 점검 순서</div>
+              전원 공급 확인 → 설정 온도 도달 여부 확인 → 서모스탯 동작 여부 → 히터 단선 여부(멀티미터 저항 측정) → 온도 퓨즈 단선 여부. 대부분의 온도 이상은 서모스탯 또는 히터 단선입니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz 조리설비 -->
+    <div class="quiz-box" id="quiz-cooking">
+      <div class="quiz-label">📝 퀴즈 2</div>
+      <p class="quiz-question">가스레인지에서 불꽃이 꺼졌는데도 가스가 계속 나오는 것을 막아주는 안전장치는 무엇인가요?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-cooking')">① 온도 퓨즈</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-cooking')">② 열전대(소화안전장치)</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-cooking')">③ 서모스탯</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-cooking')">④ 누전차단기(ELB)</button>
+      </div>
+      <div class="quiz-feedback pass" id="quiz-cooking-pass">
+        ✅ 정답입니다! 열전대(thermocouple)는 불꽃의 열로 전압을 만들어 가스밸브를 열어둡니다. 불꽃이 꺼지면 전압이 0이 되어 밸브가 자동으로 닫힙니다. 이 장치 덕분에 불이 꺼져도 가스가 계속 새는 사고를 막을 수 있습니다.
+      </div>
+      <div class="quiz-feedback fail" id="quiz-cooking-fail">
+        ❌ 아닙니다. 정답은 "열전대(소화안전장치)"입니다. 열전대는 불꽃 열로 전압을 만들어 가스밸브를 유지합니다. 불이 꺼지는 순간 전압이 사라지고 가스밸브가 닫혀서 가스 누출을 막습니다.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 3: 전처리·세척설비 ─── -->
+  <section class="section fade-up" id="sec3">
+    <div class="section-header">
+      <div class="section-tag">🧼 Section 03</div>
+      <h2 class="section-title">전처리·세척설비</h2>
+      <p class="section-desc">식재료 손질부터 식기 세척·위생 관리까지 — 주방 위생의 핵심 설비를 배웁니다. 안전한 날 교환과 위생설비의 올바른 운용이 식품 안전의 기초입니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label"><span class="icon">🎓</span> 교육 담당자</div>
+      <p class="instructor-text">
+        "전처리·세척 설비는 식품 안전과 직결됩니다. 식기세척기 수온이 낮으면 세균이 살아남고, 소독기 UV램프가 끊어지면 소독 효과가 없습니다. 장비가 작동 중이어도 제대로 작동하는지 확인하는 습관이 중요합니다."
+      </p>
+    </div>
+
+    <!-- Card 2b-1 -->
+    <div class="topic-card" id="card-2b-1">
+      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
+        <div class="topic-icon">🔪</div>
+        <div class="topic-info">
+          <div class="topic-title">전처리 장비 — 절단기·세절기·믹서·반죽기</div>
+          <div class="topic-subtitle">날 교환 · 안전 절차 · 모터 부하 관리</div>
+        </div>
+        <div class="topic-chevron">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li><strong>야채절단기(슬라이서) 구조</strong> — 모터 → 회전 날(블레이드) → 두께 조절 다이얼로 구성됩니다. 날은 교체 주기를 지켜야 하고, 둔해진 날은 오히려 더 큰 힘이 필요해 모터에 과부하가 걸립니다.</li>
+            <li><strong>날 교환 안전 절차</strong> — 전원 OFF → 플러그 뽑기(반드시!) → 내열 장갑 착용 → 날 분리(손 방향 주의, 날 앞쪽에서 작업 금지) → 새 날 장착 → 조임 확인 → 전원 ON. 날이 장착된 상태에서 절대 전원에 손대지 않습니다.</li>
+            <li><strong>식품세절기(푸드프로세서)</strong> — 각종 날을 교체해 다지기, 채썰기, 갈기 등 다양한 작업을 합니다. 뚜껑 안전 스위치(뚜껑이 열리면 작동 안 됨)가 있습니다. 이 스위치가 고장나면 뚜껑을 열어도 돌아가는 위험한 상태가 됩니다.</li>
+            <li><strong>믹서·블렌더 관리</strong> — 날 부분(조인트)의 고무 패킹이 닳으면 아래로 내용물이 샙니다. 패킹 교체 주기를 지킵니다. 과부하(너무 딱딱한 재료)는 모터 소손의 원인입니다. 모터에서 타는 냄새가 나면 즉시 중단합니다.</li>
+            <li><strong>반죽기(믹서기) 모터 부하 관리</strong> — 반죽량이 과다하거나 반죽이 너무 뻑뻑하면 모터에 과전류가 흐릅니다. 과전류 보호 릴레이(THR)가 작동하면 리셋하기 전에 반드시 원인(과부하 여부)을 확인합니다. 리셋만 반복하면 모터 권선이 타버립니다.</li>
+          </ul>
+          <div class="callout callout-danger">
+            <span class="callout-icon">🚨</span>
+            <div>
+              <div class="callout-label">날 작업의 절대 원칙</div>
+              날이 달린 모든 전처리 장비는 전원을 완전히 차단하고(플러그까지 뽑고) 날 작업을 합니다. "전원 OFF만 했는데 갑자기 돌아가서" 발생하는 사고가 매년 발생합니다. 플러그를 뽑는 것이 유일한 확실한 안전장치입니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2b-2 -->
+    <div class="topic-card" id="card-2b-2">
+      <div class="topic-header" onclick="this.closest('.topic-card').classList.toggle('open')">
+        <div class="topic-icon">🫧</div>
+        <div class="topic-info">
+          <div class="topic-title">세척·위생설비 — 식기세척기·소독기·살균소독고</div>
+          <div class="topic-subtitle">수온·세제·린스 관리 · UV램프 · 식품 위생과의 관계</div>
+        </div>
+        <div class="topic-chevron">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="topic-content">
+          <ul class="checklist">
+            <li><strong>식기세척기 핵심 3요소</strong> — 수온(세척수 60°C 이상, 헹굼수 80°C 이상) / 세제 농도(너무 적으면 세척 불량, 너무 많으면 잔류) / 린스(건조 보조제 — 물방울이 남지 않고 고르게 흘러내리도록 함). 이 세 가지 중 하나라도 틀어지면 세척력이 급감합니다.</li>
+            <li><strong>식기세척기 수온 확인</strong> — 세척 온도계 또는 제어판 온도 표시로 확인합니다. 온수 공급이 부족하거나 히터가 고장나면 수온이 낮아집니다. 저온에서는 세균(특히 식중독균)이 살아남습니다.</li>
+            <li><strong>수저소독기 UV램프</strong> — 자외선(UV-C, 254nm)으로 세균의 DNA를 파괴합니다. UV램프는 사용 시간이 쌓이면 점점 출력이 약해지다 꺼집니다. 램프가 켜진 것처럼 보여도 자외선 출력이 없을 수 있으니 교체 주기(보통 1년)를 반드시 지킵니다.</li>
+            <li><strong>살균소독고 관리</strong> — 열풍 건조 + 자외선으로 식기를 보관합니다. 물기가 남은 상태로 넣으면 세균이 오히려 증식합니다. 넣기 전에 식기를 충분히 건조하는 것이 전제 조건입니다.</li>
+            <li><strong>식품 안전과 위생설비의 관계</strong> — 식품위생법상 집단급식소·식당은 소독 설비 운용 기록을 남겨야 합니다. 위생설비가 고장났을 때 방치하면 영업 정지 처분이 될 수 있습니다. 고장을 발견하면 즉시 보고하는 것이 신입사원의 역할입니다.</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <div class="callout-label">식기세척기 이상 증상 체크리스트</div>
+              식기에 얼룩·물방울이 남는다 → 린스 농도 확인 / 세척 후에도 냄새가 난다 → 수온 또는 세제 농도 확인 / 세척 시간이 너무 짧다 → 타이머 또는 센서 점검 / 기계 안이 뿌옇다 → 스케일 쌓임(탈스케일 필요).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── SECTION 4: 후드와 환기 ─── -->
+  <section class="section fade-up" id="sec4">
+    <div class="section-header">
+      <div class="section-tag">💨 Section 04</div>
       <h2 class="section-title">후드와 환기</h2>
       <p class="section-desc">주방 후드가 뭔지, 왜 필요한지부터 시작합니다. 덕트(배기관) 연결과 풍량의 개념까지, 비전공자도 이해할 수 있게 풀어봅니다.</p>
     </div>
@@ -984,10 +1162,10 @@
 
   <div class="divider"></div>
 
-  <!-- ─── SECTION 3: 전기 배선 실습 ─── -->
-  <section class="section fade-up" id="sec3">
+  <!-- ─── SECTION 5: 전기 배선 실습 ─── -->
+  <section class="section fade-up" id="sec5">
     <div class="section-header">
-      <div class="section-tag">⚡ Section 03</div>
+      <div class="section-tag">⚡ Section 05</div>
       <h2 class="section-title">전기 배선 실습</h2>
       <p class="section-desc">Phase 1에서 배운 전기 기초를 이제 실제로 해봅니다. 전선 종류부터 제어 부품까지, "이게 뭔지·왜 쓰는지"를 중심으로 배웁니다. 기본 원리만 알면 무섭지 않습니다.</p>
     </div>
@@ -1066,10 +1244,10 @@
 
   <div class="divider"></div>
 
-  <!-- ─── SECTION 4: 급수/배수 기초 ─── -->
-  <section class="section fade-up" id="sec4">
+  <!-- ─── SECTION 6: 급수/배수 기초 ─── -->
+  <section class="section fade-up" id="sec6">
     <div class="section-header">
-      <div class="section-tag">💧 Section 04</div>
+      <div class="section-tag">💧 Section 06</div>
       <h2 class="section-title">급수·배수 기초</h2>
       <p class="section-desc">주방에서 물 관련 작업이 왜 필요한지부터, 배수 기울기(구배)가 왜 중요한지까지 실무 중심으로 배웁니다. 배수가 안 되면 주방 전체가 물바다가 됩니다.</p>
     </div>
@@ -1146,10 +1324,10 @@
 
   <div class="divider"></div>
 
-  <!-- ─── SECTION 5: 가스 작업 안전 ─── -->
-  <section class="section fade-up" id="sec5">
+  <!-- ─── SECTION 7: 가스 작업 안전 ─── -->
+  <section class="section fade-up" id="sec7">
     <div class="section-header">
-      <div class="section-tag">🔥 Section 05</div>
+      <div class="section-tag">🔥 Section 07</div>
       <h2 class="section-title">가스 작업 안전</h2>
       <p class="section-desc">가스 작업은 자격증(가스기능사)이 있어야 합니다. 우리는 기본 원리와 안전수칙만 알면 됩니다. 무섭다고 피하는 것보다, 정확히 알고 대처하는 게 더 안전합니다.</p>
     </div>
@@ -1227,12 +1405,12 @@
 
   <div class="divider"></div>
 
-  <!-- ─── SECTION 6: 고장진단 첫걸음 ─── -->
-  <section class="section fade-up" id="sec6">
+  <!-- ─── SECTION 8: 고장진단 첫걸음 ─── -->
+  <section class="section fade-up" id="sec8">
     <div class="section-header">
-      <div class="section-tag">🔍 Section 06</div>
+      <div class="section-tag">🔍 Section 08</div>
       <h2 class="section-title">고장진단 첫걸음</h2>
-      <p class="section-desc">고장 진단은 의사의 진찰과 같습니다. 경험이 쌓여야 하지만, 기본 순서만 지키면 처음부터 길을 잃지 않습니다. 이 섹션에서 그 순서를 배웁니다.</p>
+      <p class="section-desc">고장 진단은 의사의 진찰과 같습니다. 냉동설비, 조리설비, 세척설비 — 설비가 달라도 기본 순서는 같습니다. 경험이 쌓여야 하지만, 기본 순서만 지키면 처음부터 길을 잃지 않습니다.</p>
     </div>
 
     <div class="instructor-msg">
@@ -1289,10 +1467,15 @@
       <div class="topic-body">
         <div class="topic-content">
           <ul class="checklist">
-            <li><strong>"안 차가워요"</strong> → 먼저 응축기(뒷면 금속 핀) 먼지 확인. 쌓이면 열이 못 빠져나가서 냉각 능력이 떨어집니다. 청소만 해도 해결되는 경우가 많습니다. 그래도 안 되면 냉매 부족 또는 팬 고장을 의심합니다.</li>
-            <li><strong>"소리가 이상해요"</strong> → 어떤 소리인지 물어봅니다. "윙~" 하는 소리는 압축기 베어링, "달달달"은 팬 모터, "쿵쿵"은 배관 진동입니다.</li>
-            <li><strong>"물이 새요"</strong> → 드레인(배수) 호스가 막혔거나 꺾인 경우가 대부분입니다. 드레인팬(물받이)이 넘쳤거나, 냉동고면 성에가 과하게 쌓인 것도 원인입니다.</li>
-            <li><strong>"차단기가 내려가요"</strong> → 누전 또는 과전류입니다. 기기를 하나씩 끄고 어떤 기기에서 차단기가 내려가는지 확인합니다. 물기가 닿은 전기 부품이 원인인 경우가 많습니다.</li>
+            <li><strong>[냉동설비] "안 차가워요"</strong> → 먼저 응축기(뒷면 금속 핀) 먼지 확인. 쌓이면 열이 못 빠져나가서 냉각 능력이 떨어집니다. 청소만 해도 해결되는 경우가 많습니다. 그래도 안 되면 냉매 부족 또는 팬 고장을 의심합니다.</li>
+            <li><strong>[냉동설비] "소리가 이상해요"</strong> → 어떤 소리인지 물어봅니다. "윙~" 하는 소리는 압축기 베어링, "달달달"은 팬 모터, "쿵쿵"은 배관 진동입니다.</li>
+            <li><strong>[냉동설비] "물이 새요"</strong> → 드레인(배수) 호스가 막혔거나 꺾인 경우가 대부분입니다. 드레인팬(물받이)이 넘쳤거나, 냉동고면 성에가 과하게 쌓인 것도 원인입니다.</li>
+            <li><strong>[공통] "차단기가 내려가요"</strong> → 누전 또는 과전류입니다. 기기를 하나씩 끄고 어떤 기기에서 차단기가 내려가는지 확인합니다. 물기가 닿은 전기 부품이 원인인 경우가 많습니다.</li>
+            <li><strong>[조리설비] "점화가 안 돼요"</strong> → 가스 밸브 열림 여부 먼저 확인 → 버너 헤드 이물질 막힘 확인 → 열전대 오염(그을음) 확인 → 점화 플러그 스파크 발생 여부 확인 순서로 좁혀나갑니다. 열전대 청소만으로 해결되는 경우가 많습니다.</li>
+            <li><strong>[조리설비] "온도가 안 올라가요 / 너무 올라가요"</strong> → 서모스탯 설정값 확인 → 서모스탯 불량(고장 시 온도 고정) → 히터 단선(멀티미터 저항 측정) → 온도 퓨즈 단선 순서로 점검합니다. 오븐·튀김기에서 가장 흔한 고장입니다.</li>
+            <li><strong>[조리설비] "타이머가 멈춰요"</strong> → 전기 타이머(기계식 또는 디지털) 불량입니다. 타이머 모듈 교체로 해결됩니다. 임시 조치로 수동 모드로 전환할 수 있는지 확인합니다.</li>
+            <li><strong>[세척설비] "식기세척기 세척이 불량해요"</strong> → 수온 확인(60°C 미만이면 히터 점검) → 세제·린스 잔량 확인 → 노즐 막힘(이물질 제거) → 필터 청소 순서로 점검합니다.</li>
+            <li><strong>[세척설비] "소독기 UV램프가 안 켜져요"</strong> → 램프 수명 확인(교체 주기 초과 여부) → 램프 접촉부 산화 확인 → 안전 도어 스위치 동작 여부 확인. 램프가 켜진 것처럼 보여도 UV 출력이 없을 수 있으니 교체 주기를 반드시 지킵니다.</li>
             <li><strong>실제 공임 단가 참고</strong> — 정밀점검 25,000원 / 스위치·센서 교체(단순) 30,000원 / 컴프레서·모터 교체(복잡) 50,000원 / 수리작업 40,000원 / 세척·청소 20,000원 / 출장비: 10km 이내 20,000원 ~ 50km 초과 80,000원.</li>
           </ul>
           <div class="callout callout-tip">
@@ -1395,7 +1578,7 @@
 
   // ── Nav section highlighting (IntersectionObserver) ──
   const navBtns = document.querySelectorAll('.nav-btn');
-  const sections = ['sec1','sec2','sec3','sec4','sec5','sec6'];
+  const sections = ['sec1','sec2','sec3','sec4','sec5','sec6','sec7','sec8'];
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

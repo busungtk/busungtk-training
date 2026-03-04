@@ -713,8 +713,8 @@
     <div class="section-nav" id="section-nav">
       <button class="nav-btn" onclick="scrollToSection('day1')">Day 1 · 우리 회사 알아보기</button>
       <button class="nav-btn" onclick="scrollToSection('day2')">Day 2 · 안전이 제일</button>
-      <button class="nav-btn" onclick="scrollToSection('day3')">Day 3 · 우리가 다루는 장비 6종</button>
-      <button class="nav-btn" onclick="scrollToSection('day4')">Day 4 · 냉장고는 왜 차가울까</button>
+      <button class="nav-btn" onclick="scrollToSection('day3')">Day 3 · 주방설비 한눈에 보기</button>
+      <button class="nav-btn" onclick="scrollToSection('day4')">Day 4 · 주방설비는 어떻게 작동할까</button>
       <button class="nav-btn" onclick="scrollToSection('day5')">Day 5 · 공구 사용법</button>
     </div>
     <div class="phase-nav">
@@ -981,12 +981,12 @@
 
   <div class="section-divider"></div>
 
-  <!-- ── DAY 3: 우리가 다루는 장비 6종 ── -->
+  <!-- ── DAY 3: 주방설비 한눈에 보기 ── -->
   <section class="section" id="day3">
     <div class="section-header">
       <div class="section-tag">DAY 3</div>
-      <h2 class="section-title">우리가 다루는 장비 6종</h2>
-      <p class="section-desc">매일 현장에서 만나게 될 장비들입니다. 이름과 용도, 자주 고장나는 부품만 오늘 잡아두세요.</p>
+      <h2 class="section-title">주방설비 한눈에 보기</h2>
+      <p class="section-desc">우리가 다루는 주방설비는 조리/가열부터 냉동/냉장, 전처리, 세척까지 다양합니다. 오늘은 전체 그림을 잡아두세요.</p>
     </div>
 
     <div class="instructor-msg">
@@ -995,8 +995,8 @@
         <span>교육 담당자</span>
       </div>
       <p class="instructor-text">
-        "처음 보는 장비들이지만 걱정 마세요. 이름과 '이게 어디에 쓰는 물건인지'만 알면 됩니다.
-        자세한 수리 방법은 Phase 2~3에서 천천히 배웁니다. 오늘은 '이런 장비가 있구나' 수준으로 눈에 익혀두세요."
+        "주방에는 불을 다루는 조리설비부터 영하 18도를 유지하는 냉동설비까지 정말 다양한 장비가 있습니다.
+        오늘은 '이런 장비가 있구나' 수준으로 전체를 훑어봅니다. 자세한 수리 방법은 Phase 2~3에서 천천히 배웁니다."
       </p>
     </div>
 
@@ -1005,24 +1005,28 @@
       <!-- Topic 3-1 -->
       <div class="topic-card" id="card-3-1">
         <div class="topic-header" onclick="toggleCard(this)">
-          <div class="topic-icon">🍳</div>
+          <div class="topic-icon">🔥</div>
           <div class="topic-title-wrap">
-            <div class="topic-title">우리가 매일 만나는 장비 6종</div>
-            <div class="topic-subtitle">Supabase A/S 진단 데이터 기반 — 실제 출동 빈도 높은 장비들</div>
+            <div class="topic-title">조리/가열 설비</div>
+            <div class="topic-subtitle">주방의 핵심 — 불과 열을 다루는 설비, 가스식 vs 전기식</div>
           </div>
-          <span class="topic-badge">4시간</span>
+          <span class="topic-badge">2시간</span>
           <span class="topic-chevron">▾</span>
         </div>
         <div class="topic-body">
           <div class="topic-body-inner">
             <ul class="checklist">
-              <li><span class="check-icon">✓</span><span><strong>보온배식대</strong> — 음식을 따뜻하게 유지하는 장비 (급식소·뷔페 필수). 핵심 부품: 히터(열 발생), 서모스탯(온도 자동조절기), 수위센서. 자주 고장: 히터 단선, 누전</span></li>
-              <li><span class="check-icon">✓</span><span><strong>테이블 냉장고</strong> — 주방 작업대 아래 붙어있는 냉장고. 작업하면서 바로 꺼낼 수 있어서 편리합니다. 핵심 부품: 컴프레서(심장 역할, 냉매를 돌림), 증발기팬(찬바람 내보냄), 도어가스켓(문 고무패킹). 자주 고장: 냉각 불량, 배수 막힘</span></li>
-              <li><span class="check-icon">✓</span><span><strong>테이블 냉동고</strong> — 냉장고와 모양은 비슷하지만 더 차갑게(-18°C 이하) 유지합니다. 핵심 부품: 제상히터(성에를 주기적으로 녹여주는 장치), 온도컨트롤러. 자주 고장: 성에 과다 발생, 온도가 안 내려감</span></li>
-              <li><span class="check-icon">✓</span><span><strong>자외선소독고</strong> — UV(자외선) 빛으로 식기를 살균하는 장비. 식당에서 컵·수저 넣어두는 그 기계입니다. 핵심 부품: UV램프, 안전스위치(문 열면 UV 자동 꺼짐). 자주 고장: 램프 수명 다함, 안전스위치 오작동</span></li>
               <li><span class="check-icon">✓</span><span><strong>면렌지</strong> — 국수·라면을 삶는 전용 기구. 국수집·라멘집 필수 장비. 핵심 부품: 가스콕밸브(가스 차단), 점화코일(불 켜는 장치), 열전대(불꽃이 꺼졌는지 감지). 자주 고장: 점화가 안 됨, 가스 냄새</span></li>
-              <li><span class="check-icon">✓</span><span><strong>온장고</strong> — 조리된 음식을 따뜻하게 보관하는 캐비넷. 배식 전까지 음식 온도를 유지합니다. 핵심 부품: 히터, 대류팬모터(따뜻한 공기를 순환), 도어가스켓. 자주 고장: 온도가 안 올라감</span></li>
+              <li><span class="check-icon">✓</span><span><strong>가스레인지 / 인덕션</strong> — 가장 기본적인 조리 열원. 가스식은 불꽃으로 직접 가열, 전기식 인덕션은 전자기 유도 방식으로 가열. 핵심 부품(가스식): 버너, 점화플러그, 화염감지 열전대. 자주 고장: 점화 불량, 열전대 오작동</span></li>
+              <li><span class="check-icon">✓</span><span><strong>튀김기(프라이어)</strong> — 기름을 160~180°C로 가열하여 튀김 조리. 가스식·전기식 모두 있음. 핵심 부품: 서모스탯(온도 제어), 안전 리미트 스위치(과열 방지), 히터(전기식). 자주 고장: 온도 오버, 히터 단선</span></li>
+              <li><span class="check-icon">✓</span><span><strong>오븐 / 컨벡션 오븐</strong> — 뜨거운 공기로 식품을 굽는 장비. 컨벡션은 팬으로 열풍을 순환시켜 더 고르게 익힘. 핵심 부품: 히터, 대류팬모터, 온도 컨트롤러. 자주 고장: 온도 불균일, 팬모터 고장</span></li>
+              <li><span class="check-icon">✓</span><span><strong>스팀기(스티머)</strong> — 수증기로 식품을 찌는 장비. 핵심 부품: 보일러(증기 생성), 전자밸브, 수위센서. 자주 고장: 스케일(물때) 퇴적으로 인한 히터 과열</span></li>
+              <li><span class="check-icon">✓</span><span><strong>그릴 / 철판구이</strong> — 직화 또는 복사열로 식품 표면을 굽는 장비. 가스식이 주류. 자주 고장: 버너 막힘, 점화 불량</span></li>
             </ul>
+            <div class="callout callout-tip">
+              <div class="callout-header">💡 가스식 vs 전기식 핵심 차이</div>
+              가스식은 화력이 강하고 초기 비용이 낮지만 가스 안전 관리가 필요합니다. 전기식(인덕션)은 초기 비용은 높지만 온도 정밀 제어가 쉽고 청소가 간편합니다. A/S 진단 시 열원 종류에 따라 점검 포인트가 달라집니다.
+            </div>
           </div>
         </div>
       </div>
@@ -1030,22 +1034,27 @@
       <!-- Topic 3-2 -->
       <div class="topic-card" id="card-3-2">
         <div class="topic-header" onclick="toggleCard(this)">
-          <div class="topic-icon">🏥</div>
+          <div class="topic-icon">❄️</div>
           <div class="topic-title-wrap">
-            <div class="topic-title">HACCP이 뭔가요</div>
-            <div class="topic-subtitle">식품 위생 관리 시스템 — 우리 장비가 이 기준을 맞춰야 하는 이유</div>
+            <div class="topic-title">냉동/냉장 & 보관 설비</div>
+            <div class="topic-subtitle">온도 관리가 식품 안전의 핵심 — A/S 빈도 높고 난이도 높은 장비들</div>
           </div>
-          <span class="topic-badge">2시간</span>
+          <span class="topic-badge">3시간</span>
           <span class="topic-chevron">▾</span>
         </div>
         <div class="topic-body">
           <div class="topic-body-inner">
             <ul class="checklist">
-              <li><span class="check-icon">✓</span><span><strong>HACCP(해썹)이란</strong> — "식품이 만들어지는 과정에서 위험한 것이 생기지 않도록 미리 관리하는 시스템"입니다. 식약처 인증 기준이라고 보면 됩니다.</span></li>
-              <li><span class="check-icon">✓</span><span><strong>우리와의 관계</strong> — 우리가 설치하는 장비가 이 HACCP 기준을 맞춰야 합니다. 온도, 배치, 위생 기준이 모두 HACCP 규정에 맞아야 고객이 인증을 유지할 수 있습니다.</span></li>
-              <li><span class="check-icon">✓</span><span><strong>꼭 기억할 온도 3가지</strong> — 냉장: 0~10°C, 냉동: -18°C 이하, 배식(따뜻한 음식): 60°C 이상. 이 범위를 벗어나면 식품 안전에 문제가 생깁니다.</span></li>
-              <li><span class="check-icon">✓</span><span>주방 동선 원칙 — 더러운 구역(식재료 반입·세척)과 깨끗한 구역(조리·배식)을 완전히 분리합니다</span></li>
+              <li><span class="check-icon">✓</span><span><strong>업소용 냉장고 / 냉동고</strong> — 테이블형(작업대 겸용)과 스탠드형이 있음. 냉장: 0~10°C, 냉동: -18°C 이하 유지. 핵심 부품: 컴프레서(심장), 증발기팬, 도어가스켓. 자주 고장: 냉각 불량, 배수 막힘, 성에 과다</span></li>
+              <li><span class="check-icon">✓</span><span><strong>워크인 냉장고 / 냉동고</strong> — 사람이 들어갈 수 있는 대형 냉장·냉동 창고. 대형 급식소·마트에 필수. 핵심 부품: 유닛쿨러(실내기), 응축기(실외기), 팽창밸브, 제상히터. A/S 난이도 높음 — Phase 2에서 심화 학습</span></li>
+              <li><span class="check-icon">✓</span><span><strong>쇼케이스</strong> — 식품을 진열하면서 동시에 냉장 보관하는 장비. 편의점·베이커리·델리카운터에서 많이 봤을 겁니다. 투명 유리창 내부 결로 여부가 성능 지표</span></li>
+              <li><span class="check-icon">✓</span><span><strong>온장고 / 보온배식대</strong> — 조리된 음식을 60°C 이상으로 따뜻하게 보관. 핵심 부품: 히터, 대류팬모터, 서모스탯. 자주 고장: 히터 단선, 온도가 안 올라감, 누전</span></li>
+              <li><span class="check-icon">✓</span><span><strong>보온고 / 식품보관대</strong> — 배식 대기 중 음식 온도를 유지하는 장비. 급식소·뷔페 필수. 수위센서, 워터히터 방식도 있음</span></li>
             </ul>
+            <div class="callout callout-warn">
+              <div class="callout-header">⚠️ 꼭 기억할 온도 기준 (HACCP)</div>
+              냉장: 0~10°C / 냉동: -18°C 이하 / 배식(따뜻한 음식): 60°C 이상. 이 범위를 벗어나면 식품 안전에 문제가 생깁니다. 냉동/냉장 설비는 A/S 빈도도 높고 원리가 복잡해 가장 많이 공부해야 할 분야입니다.
+            </div>
           </div>
         </div>
       </div>
@@ -1053,25 +1062,27 @@
       <!-- Topic 3-3 -->
       <div class="topic-card" id="card-3-3">
         <div class="topic-header" onclick="toggleCard(this)">
-          <div class="topic-icon">🔖</div>
+          <div class="topic-icon">🧹</div>
           <div class="topic-title-wrap">
-            <div class="topic-title">설비 명판 읽기</div>
-            <div class="topic-subtitle">설비의 주민등록증 — A/S 출동 시 제일 먼저 찍는 사진</div>
+            <div class="topic-title">전처리·세척·기타 설비</div>
+            <div class="topic-subtitle">야채절단기·식기세척기·제빙기 등 — 주방 운영을 뒷받침하는 장비들</div>
           </div>
-          <span class="topic-badge">2시간</span>
+          <span class="topic-badge">3시간</span>
           <span class="topic-chevron">▾</span>
         </div>
         <div class="topic-body">
           <div class="topic-body-inner">
             <ul class="checklist">
-              <li><span class="check-icon">✓</span><span>모델명, 제조번호 확인법 — 부품 주문, 매뉴얼 검색, 부품 호환성 확인의 출발점</span></li>
-              <li><span class="check-icon">✓</span><span>전기 사양 읽기 — 입력전압(V), 전류(A), 소비전력(W/kW), 주파수(Hz), 상(단상/삼상) 파악</span></li>
-              <li><span class="check-icon">✓</span><span>냉매 종류 및 충전량 확인 — 냉매 규격(R-134a 등)과 충전량(g)은 보충·교체 작업의 기준</span></li>
-              <li><span class="check-icon">✓</span><span>설비 도면 기본 기호 — 전기 도면 기호, 배관 기호, 냉동 사이클 기호 읽기 기초</span></li>
+              <li><span class="check-icon">✓</span><span><strong>야채절단기 / 식품세절기</strong> — 채소·식재료를 일정한 크기로 자르는 자동화 장비. 칼날(블레이드) 교체·점검이 핵심 정비 포인트. 자주 고장: 모터 과부하, 칼날 마모</span></li>
+              <li><span class="check-icon">✓</span><span><strong>믹서 / 블렌더 / 반죽기</strong> — 식재료를 갈거나 반죽하는 장비. 제과·제빵·급식소에서 필수. 핵심 부품: 모터, 감속기어, 안전 인터락(덮개 열리면 동작 멈춤). 자주 고장: 모터 과열, 기어 마모</span></li>
+              <li><span class="check-icon">✓</span><span><strong>식기세척기</strong> — 고온 스팀(80°C 이상)으로 식기를 세척·소독하는 장비. 도어형·컨베이어형이 있음. 핵심 부품: 세척 펌프, 히터, 노즐. 자주 고장: 노즐 막힘, 스케일 퇴적, 히터 단선</span></li>
+              <li><span class="check-icon">✓</span><span><strong>수저소독기 / 자외선살균소독고</strong> — UV(자외선) 빛으로 식기·수저를 살균. 핵심 부품: UV램프, 안전스위치(문 열면 UV 자동 꺼짐). 자주 고장: 램프 수명 다함, 안전스위치 오작동</span></li>
+              <li><span class="check-icon">✓</span><span><strong>정수기</strong> — 필터(세디먼트·카본·RO막)로 물을 정화. 핵심 정비: 필터 정기 교체, 살균 세척. 냉온수 기능 있는 모델은 냉각·가열 계통도 점검</span></li>
+              <li><span class="check-icon">✓</span><span><strong>제빙기</strong> — 물을 얼려 얼음을 만드는 장비. 냉동 사이클이 들어가 있어 A/S 난이도 중간. 핵심 부품: 컴프레서, 제빙 히터, 수위센서. 자주 고장: 얼음 생산량 감소, 얼음이 잘 떨어지지 않음, 스케일 퇴적</span></li>
             </ul>
             <div class="callout callout-tip">
-              <div class="callout-header">💡 꼭 기억하세요</div>
-              명판은 설비의 주민등록증입니다. A/S 갈 때 제일 먼저 찍는 사진이에요. 모델명과 제조번호만 알면 부품 주문이 가능합니다.
+              <div class="callout-header">💡 A/S 갈 때 기억하세요</div>
+              어떤 설비든 현장 도착 시 제일 먼저 명판(모델명·제조번호)을 사진으로 찍으세요. 부품 주문과 매뉴얼 검색의 출발점이 됩니다.
             </div>
           </div>
         </div>
@@ -1084,28 +1095,28 @@
       <div class="quiz-header">
         <span class="quiz-badge">QUIZ 2</span>
       </div>
-      <div class="quiz-question">고객이 "냉장고가 안 차가워요"라고 전화했습니다. 현장에 도착해서 가장 먼저 확인할 것은?</div>
+      <div class="quiz-question">다음 주방설비 중 냉동 사이클(컴프레서·응축기·팽창밸브·증발기)을 사용하는 장비가 아닌 것은?</div>
       <div class="quiz-options">
         <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
-          <span class="quiz-num">①</span>컴프레서를 교체한다
+          <span class="quiz-num">①</span>업소용 냉장고
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+          <span class="quiz-num">②</span>제빙기
         </button>
         <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz2')">
-          <span class="quiz-num">②</span>온도 설정값과 실제 내부 온도를 비교한다
+          <span class="quiz-num">③</span>식기세척기
         </button>
         <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
-          <span class="quiz-num">③</span>냉매를 바로 충전한다
-        </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
-          <span class="quiz-num">④</span>전원 플러그를 뽑고 다시 꽂는다
+          <span class="quiz-num">④</span>워크인 냉동고
         </button>
       </div>
       <div class="quiz-feedback quiz-feedback-pass" id="quiz2-pass">
         <span>✅</span>
-        <span><strong>정답!</strong> 진단은 항상 단순한 것부터 시작합니다. 온도 설정이 잘못돼 있거나, 실제 온도가 설정값보다 높은지 확인하는 게 첫 단계입니다. 비싼 부품을 교체하기 전에 원인부터 찾아야 합니다.</span>
+        <span><strong>정답!</strong> 식기세척기는 냉동 사이클이 아닌 히터(전열)로 고온 스팀을 만들어 세척·소독합니다. 냉장고, 제빙기, 워크인 냉동고는 모두 컴프레서를 이용한 냉동 사이클로 작동합니다.</span>
       </div>
       <div class="quiz-feedback quiz-feedback-fail" id="quiz2-fail">
         <span>❌</span>
-        <span>원인도 모르고 부품을 교체하거나 냉매를 충전하면 안 됩니다. <strong>정답은 ②번</strong>입니다. 온도 설정값과 실제 온도를 먼저 비교해서 문제의 범위를 좁혀야 합니다.</span>
+        <span>식기세척기는 히터로 고온 스팀을 만드는 장비입니다. <strong>정답은 ③번</strong>입니다. 냉장고·제빙기·워크인 냉동고는 모두 냉동 사이클(컴프레서)로 냉기를 만들지만, 식기세척기는 열로 세척합니다.</span>
       </div>
     </div>
 
@@ -1113,12 +1124,12 @@
 
   <div class="section-divider"></div>
 
-  <!-- ── DAY 4: 냉장고는 왜 차가울까 ── -->
+  <!-- ── DAY 4: 주방설비는 어떻게 작동할까 ── -->
   <section class="section" id="day4">
     <div class="section-header">
       <div class="section-tag">DAY 4</div>
-      <h2 class="section-title">냉장고는 왜 차가울까</h2>
-      <p class="section-desc">냉동 사이클 원리와 전기 기초를 생활 비유로 이해합니다. 고장 진단 능력의 핵심 기반이 됩니다.</p>
+      <h2 class="section-title">주방설비는 어떻게 작동할까</h2>
+      <p class="section-desc">조리설비부터 냉동설비까지 모든 장비의 기반이 되는 두 가지 원리 — 냉동 사이클과 전기 기초를 생활 비유로 이해합니다.</p>
     </div>
 
     <div class="instructor-msg">
@@ -1127,8 +1138,8 @@
         <span>교육 담당자</span>
       </div>
       <p class="instructor-text">
-        "에어컨 실외기에서 뜨거운 바람이 나오는 거 경험해봤죠? 냉장고도 똑같은 원리입니다.
-        안의 열을 밖으로 버리는 거예요. 오늘은 '왜 냉장고 뒷면이 뜨거운지'를 이해하는 날입니다."
+        "주방설비가 아무리 다양해도 결국 두 가지만 알면 됩니다 — 열을 어떻게 다루는지(냉동 사이클), 전기가 어떻게 흐르는지(전기 기초).
+        이 두 가지는 면렌지부터 워크인 냉동고까지 모든 장비 진단의 기반입니다."
       </p>
     </div>
 
@@ -1139,8 +1150,8 @@
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">❄️</div>
           <div class="topic-title-wrap">
-            <div class="topic-title">에어컨 생각하면 쉽습니다</div>
-            <div class="topic-subtitle">냉동 사이클 4단계 — 생활 비유로 이해하기</div>
+            <div class="topic-title">냉동 사이클 — 주방설비 중 가장 복잡한 원리</div>
+            <div class="topic-subtitle">냉장고·냉동고·제빙기·워크인까지 모두 이 원리로 작동합니다</div>
           </div>
           <span class="topic-badge">4시간</span>
           <span class="topic-chevron">▾</span>
@@ -1148,7 +1159,7 @@
         <div class="topic-body">
           <div class="topic-body-inner">
             <ul class="checklist">
-              <li><span class="check-icon">✓</span><span><strong>핵심 원리</strong> — 에어컨이 실내를 시원하게 하고 실외기에서 뜨거운 바람이 나오는 것, 경험해봤죠? 냉장고도 똑같습니다. 안쪽의 열을 빼내서 바깥으로 버리는 것입니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>핵심 원리</strong> — 냉장고, 냉동고, 워크인 냉동창고, 제빙기까지 — 주방에서 차갑게 유지하는 모든 설비는 같은 원리로 작동합니다. 에어컨 실외기에서 뜨거운 바람이 나오는 것처럼, 안쪽의 열을 빼내서 바깥으로 버립니다.</span></li>
               <li><span class="check-icon">✓</span><span><strong>① 압축기(심장)</strong> — 냉매(열을 나르는 가스)를 세게 눌러서 뜨겁게 만듭니다. 냉장고에서 '위잉' 소리 나는 부분.</span></li>
               <li><span class="check-icon">✓</span><span><strong>② 응축기(뒷면 뜨거운 부분)</strong> — 뜨거운 냉매가 열을 바깥으로 내보냅니다. 그래서 냉장고 뒷면이 뜨거운 거예요. 이건 정상입니다.</span></li>
               <li><span class="check-icon">✓</span><span><strong>③ 팽창밸브(좁은 통로)</strong> — 높은 압력을 확 낮춥니다. 스프레이 뿌릴 때 차가워지는 것과 같은 원리예요. 온도도 확 떨어집니다.</span></li>
@@ -1168,8 +1179,8 @@
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">⚡</div>
           <div class="topic-title-wrap">
-            <div class="topic-title">전기 기초 — 감전 안 당하려면</div>
-            <div class="topic-subtitle">물과 전기는 비슷합니다 — 실용 중심으로</div>
+            <div class="topic-title">전기 기초 — 조리설비부터 냉동설비까지 모든 장비의 기본</div>
+            <div class="topic-subtitle">면렌지도, 냉장고도, 식기세척기도 전기로 작동합니다 — 실용 중심으로</div>
           </div>
           <span class="topic-badge">4시간</span>
           <span class="topic-chevron">▾</span>

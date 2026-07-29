@@ -398,7 +398,7 @@
     transition: max-height 0.4s ease;
   }
 
-  .topic-card.open .topic-body { max-height: 2000px; }
+  .topic-card.open .topic-body { max-height: 4000px; }
 
   .topic-body-inner {
     padding: 0 22px 24px;
@@ -469,6 +469,99 @@
     color: var(--text);
   }
   .callout-danger .callout-header { color: var(--danger); }
+
+  /* ── 주방 6구역 동선 다이어그램 ── */
+  .zone-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .zone-step {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .zone-step.dirty { border-color: rgba(245,158,11,0.45); }
+  .zone-step.clean { border-color: rgba(16,185,129,0.45); }
+
+  .zone-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .zone-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .zone-note {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    display: block;
+  }
+
+  .zone-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 14px;
+    font-size: 0.84rem;
+    color: var(--text-dim);
+  }
+
+  .zone-legend span::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .zone-legend .lg-dirty::before { background: #f59e0b; }
+  .zone-legend .lg-clean::before { background: var(--success); }
+
+  /* ── 기준 표 ── */
+  .table-wrap { overflow-x: auto; margin-top: 20px; }
+
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 460px;
+  }
+
+  .spec-table th,
+  .spec-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spec-table th {
+    background: var(--surface2);
+    color: var(--text-bright);
+    font-weight: 700;
+    font-size: 0.84rem;
+    letter-spacing: 0.03em;
+  }
+
+  .spec-table td strong { color: var(--text-bright); }
+  .spec-table tr:last-child td { border-bottom: none; }
 
   /* ── QUIZ ── */
   .quiz-box {
@@ -704,11 +797,11 @@
     <h1>Phase 1 · <span>입문교육</span></h1>
     <div class="hero-subtitle">1주차 · 입문교육</div>
     <p class="hero-desc">
-      전공과 관계없이 처음부터 차근차근. 우리 회사가 뭘 하는 곳인지, 내가 뭘 하게 되는지, 장비는 어떻게 돌아가는지 — 하나씩 알아갑니다.
+      전공과 관계없이 처음부터 차근차근. 우리 회사가 뭘 하는 곳인지, 내가 뭘 하게 되는지, 주방이라는 공간은 어떻게 짜여 있고 장비는 어떻게 돌아가는지 — 하나씩 알아갑니다.
     </p>
     <div class="hero-stats">
       <div class="stat-box">
-        <span class="stat-value">5일</span>
+        <span class="stat-value">6일</span>
         <div class="stat-label">교육 일수</div>
       </div>
       <div class="stat-box">
@@ -716,7 +809,7 @@
         <div class="stat-label">일일 교육 시간</div>
       </div>
       <div class="stat-box">
-        <span class="stat-value">3개</span>
+        <span class="stat-value">4개</span>
         <div class="stat-label">퀴즈</div>
       </div>
     </div>
@@ -729,9 +822,10 @@
     <div class="section-nav" id="section-nav">
       <button class="nav-btn" onclick="scrollToSection('day1')">Day 1 · 우리 회사 알아보기</button>
       <button class="nav-btn" onclick="scrollToSection('day2')">Day 2 · 안전이 제일</button>
-      <button class="nav-btn" onclick="scrollToSection('day3')">Day 3 · 주방설비 한눈에 보기</button>
-      <button class="nav-btn" onclick="scrollToSection('day4')">Day 4 · 주방설비는 어떻게 작동할까</button>
-      <button class="nav-btn" onclick="scrollToSection('day5')">Day 5 · 공구 사용법</button>
+      <button class="nav-btn" onclick="scrollToSection('day3')">Day 3 · 주방이라는 공간</button>
+      <button class="nav-btn" onclick="scrollToSection('day4')">Day 4 · 주방설비 한눈에 보기</button>
+      <button class="nav-btn" onclick="scrollToSection('day5')">Day 5 · 주방설비는 어떻게 작동할까</button>
+      <button class="nav-btn" onclick="scrollToSection('day6')">Day 6 · 공구 사용법</button>
     </div>
     <div class="phase-nav">
       <span class="phase-nav-label">전체 과정</span>
@@ -997,10 +1091,258 @@
 
   <div class="section-divider"></div>
 
-  <!-- ── DAY 3: 주방설비 한눈에 보기 ── -->
+  <!-- ── DAY 3: 주방이라는 공간 ── -->
   <section class="section" id="day3">
     <div class="section-header">
       <div class="section-tag">DAY 3</div>
+      <h2 class="section-title">주방이라는 공간</h2>
+      <p class="section-desc">장비 하나하나를 배우기 전에, 그 장비들이 놓이는 주방부터 봅니다. 구역이 어떻게 나뉘고, 왜 그 자리에 그 설비가 있고, 주방에는 설비 말고 또 무엇이 있는지 — 고객의 주방을 고객의 언어로 읽는 날입니다.</p>
+    </div>
+
+    <div class="instructor-msg">
+      <div class="instructor-label">
+        <span class="instructor-icon">🎓</span>
+        <span>교육 담당자</span>
+      </div>
+      <p class="instructor-text">
+        "우리는 냉장고를 고치러 가는 게 아니라, 주방을 돌아가게 하려고 갑니다.
+        고객이 '전처리실 쪽 싱크 옆에 있는 거요'라고 말할 때 어디인지 바로 떠올라야 대화가 됩니다.
+        오늘 배우는 건 시험 문제가 아니라 현장에서 쓰는 지도입니다."
+      </p>
+    </div>
+
+    <div class="topic-cards">
+
+      <!-- Topic 3-1 -->
+      <div class="topic-card" id="card-3-1">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">🧭</div>
+          <div class="topic-title-wrap">
+            <div class="topic-title">주방은 한 방향으로 흐른다 — 6구역 동선</div>
+            <div class="topic-subtitle">검수부터 세척까지, 역행하면 안 되는 이유</div>
+          </div>
+          <span class="topic-badge">2시간</span>
+          <span class="topic-chevron">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li><span class="check-icon">✓</span><span><strong>주방의 기본 흐름은 6구역 일방향입니다</strong> — 검수 → 저장 → 전처리 → 제조 → 배식 → 세척. 식재료가 들어와서 음식이 되어 나가고, 그릇이 돌아와 씻기는 순서입니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>역행 금지가 제1원칙</strong> — 흙 묻은 채소나 씻기 전 그릇이 조리 구역을 거꾸로 지나가면 교차오염이 생깁니다. 그래서 주방 설계는 "동선이 겹치지 않게, 되돌아가지 않게"를 최우선으로 잡습니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>오염구역과 청결구역</strong> — 검수·전처리·세척은 오염구역, 제조·배식은 청결구역. 이 둘 사이는 사람도 물건도 한 방향으로만 넘어갑니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>설비는 구역을 따라 배치됩니다</strong> — 냉장·냉동고는 저장구역, 야채절단기·싱크는 전처리, 레인지·오븐·튀김기는 제조, 보온고·배식대는 배식, 식기세척기·소독고는 세척. 어떤 설비가 어디 있는지 몰라도 구역만 알면 찾을 수 있습니다.</span></li>
+            </ul>
+
+            <div class="zone-flow">
+              <div class="zone-step dirty">
+                <span class="zone-num">① 오염</span>
+                <span class="zone-name">검수</span>
+                <span class="zone-note">납품 확인·계량<br>검수대·저울</span>
+              </div>
+              <div class="zone-step dirty">
+                <span class="zone-num">② 오염</span>
+                <span class="zone-name">저장</span>
+                <span class="zone-note">냉장·냉동·건창고<br>워크인·선반</span>
+              </div>
+              <div class="zone-step dirty">
+                <span class="zone-num">③ 오염</span>
+                <span class="zone-name">전처리</span>
+                <span class="zone-note">세척·절단·손질<br>싱크·절단기</span>
+              </div>
+              <div class="zone-step clean">
+                <span class="zone-num">④ 청결</span>
+                <span class="zone-name">제조</span>
+                <span class="zone-note">가열 조리<br>레인지·오븐·후드</span>
+              </div>
+              <div class="zone-step clean">
+                <span class="zone-num">⑤ 청결</span>
+                <span class="zone-name">배식</span>
+                <span class="zone-note">담기·보온·서빙<br>보온고·배식대</span>
+              </div>
+              <div class="zone-step dirty">
+                <span class="zone-num">⑥ 오염</span>
+                <span class="zone-name">세척</span>
+                <span class="zone-note">퇴식·세척·소독<br>세척기·소독고</span>
+              </div>
+            </div>
+            <div class="zone-legend">
+              <span class="lg-dirty">오염구역 — 흙·잔반·세균이 들어오는 구간</span>
+              <span class="lg-clean">청결구역 — 완성된 음식이 지나는 구간</span>
+            </div>
+
+            <div class="callout callout-tip">
+              <div class="callout-header">💡 현장에서 이렇게 쓰입니다</div>
+              고객이 "여기 자리가 좁으니 냉장고를 조리대 옆으로 옮겨 달라"고 하는 경우가 있습니다. 옮기면 저장구역이 청결구역 한가운데로 들어와 동선이 꼬입니다. 무조건 안 된다고 하지 말고 <strong>"동선상 이 위치라 이렇게 놓인 겁니다"</strong>라고 설명한 뒤, 실측하고 회사에 보고하세요. 판단은 혼자 하지 않습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3-2 -->
+      <div class="topic-card" id="card-3-2">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">📐</div>
+          <div class="topic-title-wrap">
+            <div class="topic-title">배치 형태와 치수 — 왜 그 자리에 그 설비가 있나</div>
+            <div class="topic-subtitle">직선형·L형·U형·아일랜드형, 그리고 현장에서 재는 숫자들</div>
+          </div>
+          <span class="topic-badge">2시간</span>
+          <span class="topic-chevron">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li><span class="check-icon">✓</span><span><strong>직선형</strong> — 벽 한쪽에 설비를 일렬로 붙이는 방식. 좁고 긴 소규모 매장에 씁니다. 가장 단순하고 시공도 쉽습니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>L형</strong> — 코너를 활용해 두 면에 배치. 소·중규모 매장에서 가장 흔합니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>U형</strong> — 세 면을 둘러싸는 배치. 한 사람이 제자리에서 여러 설비를 쓸 수 있어 이동이 가장 적습니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>아일랜드형</strong> — 조리 설비를 주방 가운데에 섬처럼 두고 사방에서 접근. 여러 명이 동시에 일하는 대형 주방·급식소에 씁니다. 후드도 가운데 천장에 매답니다.</span></li>
+            </ul>
+
+            <div class="table-wrap">
+              <table class="spec-table">
+                <thead>
+                  <tr><th>기준 항목</th><th>수치</th><th>현장에서 왜 중요한가</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>작업 동선 폭</strong></td><td>최소 90cm</td><td>사람이 지나가며 일하는 최소 폭. 설비를 놓고 나서 이보다 좁아지면 안 됩니다</td></tr>
+                  <tr><td><strong>통로 폭</strong></td><td>50~60cm</td><td>사람만 지나는 보조 통로 기준</td></tr>
+                  <tr><td><strong>대면 작업대 간격</strong></td><td>30cm 이상</td><td>마주 보는 작업대 사이 최소 여유</td></tr>
+                  <tr><td><strong>주방 면적</strong></td><td>전체 영업면적의 25~35%</td><td>설비를 더 넣어달라는 요청이 물리적으로 가능한지 판단하는 출발점</td></tr>
+                  <tr><td><strong>바닥 배수 구배</strong></td><td>1/100 ~ 1/50</td><td>물이 배수구로 흐르게 하는 기울기. 물 고임 민원의 원인이 여기 있습니다</td></tr>
+                  <tr><td><strong>벽 마감</strong></td><td>바닥~180cm 스테인리스 또는 타일</td><td>물·기름이 튀는 높이까지는 닦이는 재질이어야 합니다</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-tip">
+              <div class="callout-header">💡 시공 나가기 전에 반드시 재는 것</div>
+              설비 치수만 맞다고 들어가는 게 아닙니다. <strong>반입 동선</strong>(출입문 폭·엘리베이터·계단 꺾임), <strong>설치 후 남는 통로 폭</strong>, <strong>기존 배관·전원 위치</strong> 세 가지를 같이 재세요. 이 셋 중 하나만 빠져도 현장에서 설비를 못 넣고 돌아옵니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3-3 -->
+      <div class="topic-card" id="card-3-3">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">🍴</div>
+          <div class="topic-title-wrap">
+            <div class="topic-title">기본 기구·기물 — 설비 말고 '나머지 전부'</div>
+            <div class="topic-subtitle">작업대·싱크·선반·칼·도마 — 고객이 매일 손에 쥐는 것들</div>
+          </div>
+          <span class="topic-badge">2시간</span>
+          <span class="topic-chevron">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li><span class="check-icon">✓</span><span><strong>스테인리스 작업대</strong> — 주방의 기본 단위. 상판·하단 선반·다리로 구성되고, 밑에 냉장 기능을 넣은 것이 테이블형 냉장고입니다. 재질은 스테인리스가 표준(녹·세척·위생 때문).</span></li>
+              <li><span class="check-icon">✓</span><span><strong>싱크</strong> — 1조·2조·3조로 나뉩니다. 세척 4단계(세척 → 헹굼 → 소독 → 건조)를 지키려면 조가 여러 개 필요합니다. 손 씻는 전용 세면대는 조리용 싱크와 반드시 별도입니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>선반·랙</strong> — 식재료는 <strong>바닥에 직접 놓지 않습니다</strong>. 선반 간격은 15cm 이상 띄워 통풍과 청소가 되게 합니다. 창고 설비를 시공할 때 이 간격을 무시하면 위생 점검에서 지적됩니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>칼과 도마</strong> — 칼은 용도별로 나뉩니다(조리용·뼈 발라내는 것·생선용·빵칼·과도). 도마는 <strong>색으로 구분</strong>해 육류·어류·채소를 섞지 않습니다. 교차오염 방지의 기본입니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>칼 소독고(자외선 살균)</strong> — 칼·도마를 자외선으로 살균 보관하는 장비. 우리가 납품·A/S하는 품목입니다. 램프 수명과 문 열림 안전스위치가 주요 점검 포인트.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>계량·측정 도구</strong> — 저울, 계량컵, 타이머, 중심온도계. 고객이 쓰는 중심온도계와 우리가 진단에 쓰는 온도계는 목적이 다릅니다(고객은 음식 온도, 우리는 설비 온도).</span></li>
+            </ul>
+
+            <div class="callout callout-tip">
+              <div class="callout-header">💡 기물 취급 4원칙 — 고객도 우리도 지키는 것</div>
+              ① 물기를 완전히 제거하고 보관 ② 부드러운 수세미로 세척(스크래치가 곧 세균 자리) ③ 금 가거나 깨지면 즉시 폐기(파편 이물질 사고) ④ 급격한 온도 변화 금지. 파손 원인의 대부분은 <strong>겹쳐 쌓기·과한 힘·온도 급변·잘못된 세제</strong> 네 가지입니다.
+            </div>
+
+            <div class="callout callout-warn">
+              <div class="callout-header">⚠️ 주방에서 누구를 만나게 되나</div>
+              주방 조직은 총주방장 → 부주방장 → 파트별 조리장 → 조리사 순으로 이어지고, 기물과 세척·청결을 총괄하는 <strong>스튜어드(기물 담당)</strong>가 따로 있습니다. A/S로 갔을 때 실제로 우리를 안내하고 증상을 설명해 주는 사람은 조리장이나 스튜어드인 경우가 많습니다. 이름과 역할을 기억해 두면 다음 방문이 훨씬 빨라집니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3-4 -->
+      <div class="topic-card" id="card-3-4">
+        <div class="topic-header" onclick="toggleCard(this)">
+          <div class="topic-icon">🌡️</div>
+          <div class="topic-title-wrap">
+            <div class="topic-title">온도와 위생 기준 — 숫자로 답하는 법</div>
+            <div class="topic-subtitle">"이 정도면 괜찮나요?"라는 질문에 감이 아니라 기준으로 답합니다</div>
+          </div>
+          <span class="topic-badge">2시간</span>
+          <span class="topic-chevron">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="topic-body-inner">
+            <ul class="checklist">
+              <li><span class="check-icon">✓</span><span><strong>위험온도구간은 5~60°C입니다</strong> — 이 구간에서 세균이 가장 빠르게 늘어납니다. 냉장은 이 아래로, 가열·보온은 이 위로 확실히 벗어나 있어야 합니다. (실무 자료에 따라 5~57°C로 쓰기도 합니다.)</span></li>
+              <li><span class="check-icon">✓</span><span><strong>설비 온도가 곧 식품 안전입니다</strong> — 우리가 냉장고 온도를 정상으로 돌려놓는 일은 단순 수리가 아니라 고객의 식재료 전부를 지키는 일입니다. 온도가 안 맞는 채로 "돌아가긴 합니다"라고 넘기면 안 되는 이유가 여기 있습니다.</span></li>
+              <li><span class="check-icon">✓</span><span><strong>고객 냉장고 관리 4원칙</strong> — 적정량만 보관(꽉 채우면 찬 공기가 안 돕니다) · 청결 유지 · 온도 확인 · 정기 점검. A/S 갔을 때 냉각 불량 원인이 설비가 아니라 <strong>과적재·도어가스켓 오염</strong>인 경우가 꽤 많습니다.</span></li>
+            </ul>
+
+            <div class="table-wrap">
+              <table class="spec-table">
+                <thead>
+                  <tr><th>구분</th><th>기준 온도</th><th>메모</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>냉장</strong></td><td>0~5°C</td><td>식재료별로 육류 0~2°C, 어류 0~4°C, 유제품 0~5°C</td></tr>
+                  <tr><td><strong>냉동</strong></td><td>-18°C 이하</td><td>급속냉동기는 -35~-40°C</td></tr>
+                  <tr><td><strong>온장·배식</strong></td><td>60°C 이상</td><td>보온고·배식대가 이 온도를 못 만들면 고장 판단</td></tr>
+                  <tr><td><strong>위험온도구간</strong></td><td>5~60°C</td><td>세균 급증 구간 — 여기 머무르면 안 됨</td></tr>
+                  <tr><td><strong>가열 중심온도</strong></td><td>75°C · 1분 이상</td><td>식품 중심부 기준(고객 조리 기준)</td></tr>
+                  <tr><td><strong>식기세척기 헹굼수</strong></td><td>82°C 이상</td><td>A/S 점검 시 실제로 재는 숫자</td></tr>
+                  <tr><td><strong>급속냉각</strong></td><td>90°C → 3°C · 90분 이내</td><td>블라스트 칠러 성능 기준</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-warn">
+              <div class="callout-header">⚠️ 우리가 답하는 범위와 답하지 않는 범위</div>
+              우리는 <strong>설비·시공·A/S</strong>로 답하는 회사입니다. 온도·위생 기준은 "이 설비가 기준을 만족하는가"까지 우리가 책임집니다.
+              반대로 <strong>메뉴 구성, HACCP 인증 컨설팅, 주방 인력 교육, 원가·마진 자문</strong>은 우리 영역이 아닙니다. 현장에서 그런 질문을 받으면 아는 척하지 말고
+              "그 부분은 제가 답드릴 수 있는 범위가 아니라, 회사에 전달드리겠습니다"라고 하세요. 모르는 걸 모른다고 하는 게 신뢰를 지키는 방법입니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quiz 2 -->
+    <div class="quiz-box" id="quiz2">
+      <div class="quiz-header">
+        <span class="quiz-badge">QUIZ 2</span>
+      </div>
+      <div class="quiz-question">주방 6구역 동선의 올바른 순서는?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+          <span class="quiz-num">①</span>저장 → 검수 → 제조 → 전처리 → 세척 → 배식
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz2')">
+          <span class="quiz-num">②</span>검수 → 저장 → 전처리 → 제조 → 배식 → 세척
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+          <span class="quiz-num">③</span>검수 → 전처리 → 저장 → 배식 → 제조 → 세척
+        </button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+          <span class="quiz-num">④</span>전처리 → 검수 → 저장 → 제조 → 세척 → 배식
+        </button>
+      </div>
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz2-pass">
+        <span>✅</span>
+        <span><strong>정답!</strong> 검수 → 저장 → 전처리 → 제조 → 배식 → 세척. 식재료가 들어와서 음식이 되어 나가는 한 방향 흐름입니다. 이 순서가 거꾸로 되는 지점이 생기면 교차오염 위험 구간이 됩니다.</span>
+      </div>
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz2-fail">
+        <span>❌</span>
+        <span><strong>정답은 ②번</strong>입니다. 검수 → 저장 → 전처리 → 제조 → 배식 → 세척 순서로, 식재료가 들어와 음식이 되어 나가는 한 방향 흐름입니다. 순서를 외우기보다 "들어와서 → 보관하고 → 다듬고 → 익히고 → 내보내고 → 씻는다"로 기억하세요.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ── DAY 4: 주방설비 한눈에 보기 ── -->
+  <section class="section" id="day4">
+    <div class="section-header">
+      <div class="section-tag">DAY 4</div>
       <h2 class="section-title">주방설비 한눈에 보기</h2>
       <p class="section-desc">우리가 다루는 주방설비는 조리/가열부터 냉동/냉장, 전처리, 세척까지 다양합니다. 오늘은 전체 그림을 잡아두세요.</p>
     </div>
@@ -1018,8 +1360,8 @@
 
     <div class="topic-cards">
 
-      <!-- Topic 3-1 -->
-      <div class="topic-card" id="card-3-1">
+      <!-- Topic 4-1 -->
+      <div class="topic-card" id="card-4-1">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">🔥</div>
           <div class="topic-title-wrap">
@@ -1047,8 +1389,8 @@
         </div>
       </div>
 
-      <!-- Topic 3-2 -->
-      <div class="topic-card" id="card-3-2">
+      <!-- Topic 4-2 -->
+      <div class="topic-card" id="card-4-2">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">❄️</div>
           <div class="topic-title-wrap">
@@ -1075,8 +1417,8 @@
         </div>
       </div>
 
-      <!-- Topic 3-3 -->
-      <div class="topic-card" id="card-3-3">
+      <!-- Topic 4-3 -->
+      <div class="topic-card" id="card-4-3">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">🧹</div>
           <div class="topic-title-wrap">
@@ -1106,31 +1448,31 @@
 
     </div>
 
-    <!-- Quiz 2 -->
-    <div class="quiz-box" id="quiz2">
+    <!-- Quiz 3 -->
+    <div class="quiz-box" id="quiz3">
       <div class="quiz-header">
-        <span class="quiz-badge">QUIZ 2</span>
+        <span class="quiz-badge">QUIZ 3</span>
       </div>
       <div class="quiz-question">다음 주방설비 중 냉동 사이클(컴프레서·응축기·팽창밸브·증발기)을 사용하는 장비가 아닌 것은?</div>
       <div class="quiz-options">
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">
           <span class="quiz-num">①</span>업소용 냉장고
         </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">
           <span class="quiz-num">②</span>제빙기
         </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz2')">
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz3')">
           <span class="quiz-num">③</span>식기세척기
         </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz2')">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">
           <span class="quiz-num">④</span>워크인 냉동고
         </button>
       </div>
-      <div class="quiz-feedback quiz-feedback-pass" id="quiz2-pass">
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz3-pass">
         <span>✅</span>
         <span><strong>정답!</strong> 식기세척기는 냉동 사이클이 아닌 히터(전열)로 고온 스팀을 만들어 세척·소독합니다. 냉장고, 제빙기, 워크인 냉동고는 모두 컴프레서를 이용한 냉동 사이클로 작동합니다.</span>
       </div>
-      <div class="quiz-feedback quiz-feedback-fail" id="quiz2-fail">
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz3-fail">
         <span>❌</span>
         <span>식기세척기는 히터로 고온 스팀을 만드는 장비입니다. <strong>정답은 ③번</strong>입니다. 냉장고·제빙기·워크인 냉동고는 모두 냉동 사이클(컴프레서)로 냉기를 만들지만, 식기세척기는 열로 세척합니다.</span>
       </div>
@@ -1140,10 +1482,10 @@
 
   <div class="section-divider"></div>
 
-  <!-- ── DAY 4: 주방설비는 어떻게 작동할까 ── -->
-  <section class="section" id="day4">
+  <!-- ── DAY 5: 주방설비는 어떻게 작동할까 ── -->
+  <section class="section" id="day5">
     <div class="section-header">
-      <div class="section-tag">DAY 4</div>
+      <div class="section-tag">DAY 5</div>
       <h2 class="section-title">주방설비는 어떻게 작동할까</h2>
       <p class="section-desc">조리설비부터 냉동설비까지 모든 장비의 기반이 되는 두 가지 원리 — 냉동 사이클과 전기 기초를 생활 비유로 이해합니다.</p>
     </div>
@@ -1161,8 +1503,8 @@
 
     <div class="topic-cards">
 
-      <!-- Topic 4-1 -->
-      <div class="topic-card" id="card-4-1">
+      <!-- Topic 5-1 -->
+      <div class="topic-card" id="card-5-1">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">❄️</div>
           <div class="topic-title-wrap">
@@ -1190,8 +1532,8 @@
         </div>
       </div>
 
-      <!-- Topic 4-2 -->
-      <div class="topic-card" id="card-4-2">
+      <!-- Topic 5-2 -->
+      <div class="topic-card" id="card-5-2">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">⚡</div>
           <div class="topic-title-wrap">
@@ -1224,10 +1566,10 @@
 
   <div class="section-divider"></div>
 
-  <!-- ── DAY 5: 공구 사용법 ── -->
-  <section class="section" id="day5">
+  <!-- ── DAY 6: 공구 사용법 ── -->
+  <section class="section" id="day6">
     <div class="section-header">
-      <div class="section-tag">DAY 5</div>
+      <div class="section-tag">DAY 6</div>
       <h2 class="section-title">공구 사용법</h2>
       <p class="section-desc">현장에서 매일 사용할 공구와 측정 장비의 올바른 사용법을 익힙니다. 공구를 알면 작업 속도가 달라집니다.</p>
     </div>
@@ -1245,8 +1587,8 @@
 
     <div class="topic-cards">
 
-      <!-- Topic 5-1 -->
-      <div class="topic-card" id="card-5-1">
+      <!-- Topic 6-1 -->
+      <div class="topic-card" id="card-6-1">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">🔧</div>
           <div class="topic-title-wrap">
@@ -1269,8 +1611,8 @@
         </div>
       </div>
 
-      <!-- Topic 5-2 -->
-      <div class="topic-card" id="card-5-2">
+      <!-- Topic 6-2 -->
+      <div class="topic-card" id="card-6-2">
         <div class="topic-header" onclick="toggleCard(this)">
           <div class="topic-icon">📊</div>
           <div class="topic-title-wrap">
@@ -1303,31 +1645,31 @@
 
     </div>
 
-    <!-- Quiz 3 -->
-    <div class="quiz-box" id="quiz3">
+    <!-- Quiz 4 -->
+    <div class="quiz-box" id="quiz4">
       <div class="quiz-header">
-        <span class="quiz-badge">QUIZ 3</span>
+        <span class="quiz-badge">QUIZ 4</span>
       </div>
       <div class="quiz-question">냉매 시스템의 압력을 측정하는 장비는?</div>
       <div class="quiz-options">
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz4')">
           <span class="quiz-num">①</span>멀티미터
         </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz3')">
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz4')">
           <span class="quiz-num">②</span>매니폴드 게이지
         </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz4')">
           <span class="quiz-num">③</span>클램프 미터
         </button>
-        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz3')">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz4')">
           <span class="quiz-num">④</span>적외선 온도계
         </button>
       </div>
-      <div class="quiz-feedback quiz-feedback-pass" id="quiz3-pass">
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz4-pass">
         <span>✅</span>
         <span><strong>정답!</strong> 매니폴드 게이지는 냉매 시스템의 고압·저압을 동시에 측정하는 필수 장비입니다. 냉장고·에어컨 고장 진단의 시작점입니다. 현장에서 매일 쓰게 됩니다.</span>
       </div>
-      <div class="quiz-feedback quiz-feedback-fail" id="quiz3-fail">
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz4-fail">
         <span>❌</span>
         <span>멀티미터는 전기, 클램프 미터는 전류, 적외선 온도계는 표면 온도를 측정합니다. <strong>정답은 ②번 매니폴드 게이지</strong>입니다. 냉매 압력을 측정해서 냉동 사이클 상태를 진단하는 장비입니다.</span>
       </div>

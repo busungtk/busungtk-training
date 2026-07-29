@@ -102,6 +102,32 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
 
+  .track-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 16px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .track-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .track-label:not(:first-of-type) { margin-top: 40px; }
+
+  .phase-card.p0a::before { background: linear-gradient(90deg, #f472b6, #fb7185); }
+  .phase-card.p0b::before { background: linear-gradient(90deg, #34d399, #10b981); }
+  .phase-card:hover.p0a { border-color: rgba(244,114,182,0.4); }
+  .phase-card:hover.p0b { border-color: rgba(52,211,153,0.4); }
+  .p0a .phase-num { color: #f472b6; }
+  .p0b .phase-num { color: #34d399; }
+
   .phase-card.p1::before { background: linear-gradient(90deg, #38bdf8, #818cf8); }
   .phase-card.p2::before { background: linear-gradient(90deg, #10b981, #34d399); }
   .phase-card.p3::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
@@ -162,8 +188,32 @@
 <div class="container">
   <div class="badge">부성티케이 · 현장지원팀</div>
   <h1>신입사원 교육 프로그램</h1>
-  <p class="subtitle">12주간의 체계적인 교육을 통해 비전공자도<br>현장 전문가로 성장할 수 있습니다.</p>
+  <p class="subtitle">지원부터 첫 주 세팅, 그리고 12주 교육까지<br>비전공자도 현장 전문가로 성장할 수 있습니다.</p>
 
+  <div class="track-label">입사 전 · 첫 주</div>
+  <div class="phases">
+    <a class="phase-card p0a" href="recruiting.html">
+      <div class="phase-num">Recruiting</div>
+      <div class="phase-title">리쿠르팅 A-Z</div>
+      <div class="phase-desc">회사 성과, 일하는 방식, 계약·복지·사내문화 조건을 먼저 밝힙니다</div>
+      <div class="phase-meta">
+        <span>지원자용</span>
+        <span>입사 전</span>
+      </div>
+    </a>
+
+    <a class="phase-card p0b" href="onboarding.html">
+      <div class="phase-num">Onboarding</div>
+      <div class="phase-title">신규 입사자 온보딩 A-Z</div>
+      <div class="phase-desc">첫 주 체크리스트, 계정·툴 세팅, 파일명·이메일·경영지원 규칙</div>
+      <div class="phase-meta">
+        <span>입사자용</span>
+        <span>첫 주</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="track-label">12주 기술 교육</div>
   <div class="phases">
     <a class="phase-card p1" href="phase1_training.html">
       <div class="phase-num">Phase 1</div>

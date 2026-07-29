@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+<title>신규 입사자 온보딩 A-Z | 부성티케이</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2332;
+    --border: #1e2d3d;
+    --accent: #34d399;
+    --accent2: #10b981;
+    --danger: #ef4444;
+    --success: #10b981;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-bright: #f8fafc;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .back-to-main {
+    position: fixed;
+    top: 18px; left: 18px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(17,24,39,0.9);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 8px 16px 8px 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.84rem;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s;
+  }
+  .back-to-main:hover { color: var(--text-bright); border-color: rgba(255,255,255,0.2); }
+  .back-to-main svg { width: 15px; height: 15px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 120px 24px 64px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(52,211,153,0.12), transparent 70%),
+      var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(52,211,153,0.1);
+    border: 1px solid rgba(52,211,153,0.3);
+    border-radius: 99px;
+    padding: 6px 18px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+
+  .hero-desc { max-width: 640px; margin: 0 auto; color: var(--text-dim); font-size: 1rem; }
+
+  .mission {
+    max-width: 720px;
+    margin: 36px auto 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .mission-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .mission-text { font-size: 0.94rem; color: var(--text); }
+
+  /* ── NAV ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: rgba(10,14,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 7px 15px;
+    color: var(--text-dim);
+    font-size: 0.84rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--text-bright); border-color: rgba(52,211,153,0.4); }
+
+  /* ── LAYOUT ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; }
+  .section { margin-bottom: 64px; scroll-margin-top: 76px; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    font-weight: 800;
+    color: var(--text-bright);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .section-desc { color: var(--text-dim); font-size: 0.94rem; margin-bottom: 28px; }
+
+  /* ── CHECKLIST ── */
+  .check-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+  }
+
+  .check-head {
+    font-weight: 700;
+    color: var(--text-bright);
+    font-size: 1.02rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.93rem;
+  }
+
+  .check-list li::before {
+    content: '☐';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .plain-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .plain-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.93rem; }
+  .plain-list li::before { content: '·'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+  .plain-list strong { color: var(--text-bright); }
+
+  /* ── ACCORDION ── */
+  .acc-group { display: flex; flex-direction: column; gap: 10px; }
+
+  .acc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .acc-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .acc-head:hover { background: rgba(255,255,255,0.02); }
+
+  .acc-title { flex: 1; font-weight: 700; color: var(--text-bright); font-size: 0.98rem; }
+  .acc-sub { display: block; font-weight: 400; color: var(--text-dim); font-size: 0.84rem; margin-top: 2px; }
+
+  .acc-chevron { color: var(--text-dim); font-size: 0.8rem; transition: transform 0.25s; }
+  .acc.open .acc-chevron { transform: rotate(180deg); }
+
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .acc.open .acc-body { max-height: 2400px; }
+
+  .acc-inner {
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    font-size: 0.92rem;
+  }
+
+  .acc-inner p { margin-bottom: 10px; }
+  .acc-inner p:last-child { margin-bottom: 0; }
+  .acc-inner strong { color: var(--text-bright); }
+  .acc-inner ul { margin: 10px 0 0 18px; }
+  .acc-inner li { margin-bottom: 5px; }
+  .acc-inner h4 { color: var(--text-bright); font-size: 0.94rem; margin: 16px 0 8px; }
+
+  code {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-size: 0.88em;
+    font-family: 'Consolas', 'Menlo', monospace;
+    color: var(--accent);
+  }
+
+  .code-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-family: 'Consolas', 'Menlo', monospace;
+    font-size: 0.86rem;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--text);
+  }
+
+  .note {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    border-left: 4px solid;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+  .note-head { font-weight: 700; font-size: 0.82rem; margin-bottom: 5px; }
+
+  .note-tip { background: rgba(16,185,129,0.08); border-color: var(--success); }
+  .note-tip .note-head { color: var(--success); }
+
+  .note-warn { background: rgba(245,158,11,0.08); border-color: #f59e0b; }
+  .note-warn .note-head { color: #f59e0b; }
+
+  .note-danger { background: rgba(239,68,68,0.08); border-color: var(--danger); }
+  .note-danger .note-head { color: var(--danger); }
+
+  .ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(52,211,153,0.35);
+  }
+  .ext-link:hover { color: var(--text-bright); border-color: var(--text-bright); }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 24px 64px;
+    text-align: center;
+    background: var(--surface);
+  }
+  .footer-title { font-size: 1.1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+  .footer-desc { color: var(--text-dim); font-size: 0.9rem; max-width: 520px; margin: 0 auto 22px; }
+
+  .footer-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #0a0e17;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 99px;
+    padding: 12px 28px;
+    font-size: 0.94rem;
+  }
+
+  .footer-copy { margin-top: 28px; font-size: 0.78rem; color: var(--text-dim); }
+
+  @media (max-width: 560px) {
+    .hero { padding: 100px 20px 48px; }
+    .main { padding: 40px 20px 64px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="back-to-main" href="index.html">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  메인으로
+</a>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="top">
+  <div class="hero-badge">입사 첫 주 · 전 직군 공통</div>
+  <h1>신규 입사자 온보딩 A-Z</h1>
+  <p class="hero-desc">
+    첫 주에 세팅할 것, 우리 회사가 쓰는 문서 규칙, 업무 도구 — 기술 교육(Phase 1~4)에 들어가기 전에
+    회사 사람으로서 갖춰야 할 기본을 정리했습니다.
+  </p>
+
+  <div class="mission">
+    <div>
+      <div class="mission-label">MISSION</div>
+      <div class="mission-text">파트너가 쉽게 일할 수 있게, 업에만 집중할 수 있도록.</div>
+    </div>
+    <div>
+      <div class="mission-label">VISION</div>
+      <div class="mission-text">데이터를 투명하고 편리하게 제공하여 최선의 선택을 돕습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <button class="nav-btn" onclick="go('week1')">✅ 첫 주 체크리스트</button>
+    <button class="nav-btn" onclick="go('company')">🏢 회사 알기</button>
+    <button class="nav-btn" onclick="go('docs')">📄 문서 규칙</button>
+    <button class="nav-btn" onclick="go('process')">🧾 경영지원 프로세스</button>
+    <button class="nav-btn" onclick="go('method')">🧠 일하는 방법</button>
+    <button class="nav-btn" onclick="go('notion')">🔗 노션에서 확인</button>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- ── 첫 주 체크리스트 ── -->
+  <section class="section" id="week1">
+    <div class="section-tag">STEP 1</div>
+    <h2 class="section-title">첫 주에 이것부터 하세요</h2>
+    <p class="section-desc">순서대로 하나씩 처리하면 됩니다. 막히면 바로 물어보세요 — 그게 정상입니다.</p>
+
+    <div class="check-card">
+      <div class="check-head">🖥️ 업무에 필요한 사무용품 확인하기</div>
+      <p style="font-size:0.9rem;color:var(--text-dim);margin-bottom:12px;">입사 시 구성품의 상태를 직접 확인해 주세요.</p>
+      <ul class="check-list">
+        <li>데스크탑 1대 · 마우스 1개 · 키보드 1개 · 듀얼모니터 1개</li>
+        <li>의자 1개 · 사무실 열쇠 1개</li>
+        <li>자리의 프린터 연결 상태 확인</li>
+      </ul>
+      <div class="note note-tip">
+        <div class="note-head">💡 안내</div>
+        기타 불편한 사항은 <strong>신진용 매니저</strong>에게 말해 주세요.
+      </div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-head">🔑 업무에 필요한 각종 계정 만들기</div>
+      <ul class="check-list">
+        <li>노션 가입하고 초대 받기</li>
+        <li>구글 회사 계정 로그인하기</li>
+        <li>경리나라 가입 요청하기</li>
+        <li>미리캔버스 확인 요청하기 (사용자의 경우)</li>
+        <li>전자 출입사이트 가입하기 (출입자의 경우)</li>
+        <li>스마트스토어 · 아임웹 · 채널톡 · 카카오톡 플친 · 네이버 톡톡 로그인 (사용자의 경우)</li>
+      </ul>
+      <div class="note note-warn">
+        <div class="note-head">⚠️ 공용 계정 주의</div>
+        함께 사용하는 계정의 자료를 수정할 때는 꼭 <strong>"변경 시 문제가 없는지"</strong> 확인 후 작업해 주세요.
+      </div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-head">📝 업무일지 양식 확인하기</div>
+      <ul class="check-list">
+        <li>카카오톡 업무일지 방에 매일 업무 내역을 전체 양식에 맞춰 공유</li>
+        <li>전체 일정은 노션 오버롤 하단 캘린더에 기재</li>
+      </ul>
+    </div>
+
+    <div class="check-card">
+      <div class="check-head">🗂️ 노션 업무페이지 DIY하기</div>
+      <ul class="check-list">
+        <li>노션 작업관리 카테고리에 자신의 페이지 개설하기</li>
+        <li>기존 멤버들의 양식을 복제해서 써도 되고, 더 나은 방법이 있다면 직접 만들어도 괜찮습니다</li>
+      </ul>
+      <div class="note note-tip">
+        <div class="note-head">💡 왜 하나요</div>
+        본인의 업무를 놓치지 않기 위해 작업관리 카테고리를 최대한 활용합니다.
+      </div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-head">🧰 업무 관련 툴 확인하기</div>
+      <ul class="plain-list">
+        <li><strong>현장 지원</strong> — 경리나라, 노션, <strong>채널톡</strong>, 카카오톡</li>
+        <li><strong>디자인</strong> — 미리캔버스, 영상변환툴, 스크랩툴, 누끼</li>
+        <li><strong>마케팅 / 경영지원</strong> — 판다랭크(블로그·스마트스토어), 채널톡, 카카오톡 플러스친구, 네이버 톡톡, 가비아, 아임웹</li>
+      </ul>
+      <div class="note note-tip">
+        <div class="note-head">💬 고객 소통 창구는 채널톡이 기본입니다</div>
+        문의 접수부터 작업 완료보고까지 <strong>채널톡</strong>으로 오갑니다. 기록이 남아야 나중에 찾을 수 있으니 되도록 채널톡 안에서 주고받으세요.<br>
+        다만 <strong>고객사에 따라 카카오톡으로 소통하는 곳도 있습니다.</strong> 담당 현장이 어느 쪽인지 선배에게 먼저 확인하고, 카톡으로 받은 내용은 채널톡이나 업무일지에 옮겨 기록을 남기세요.
+      </div>
+      <div class="note note-tip">
+        <div class="note-head">💡 안내</div>
+        모르겠는 사항은 <strong>신진용 매니저</strong>에게 말해 주세요.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 회사 알기 ── -->
+  <section class="section" id="company">
+    <div class="section-tag">STEP 2</div>
+    <h2 class="section-title">부성티케이는 어떤 회사인가</h2>
+    <p class="section-desc">우리가 무엇으로 돈을 버는지 알아야, 내 일이 어디에 붙는지 보입니다.</p>
+
+    <div class="check-card">
+      <div class="check-head">🏢 회사 주요 업무 및 역량</div>
+      <ul class="plain-list">
+        <li><strong>대형 식당 설계 및 시공</strong> — 대기업과 관공서를 주요 거래처로, 소형부터 수천 식에 이르는 대형 식당의 설계와 시공이 핵심 역량입니다.</li>
+        <li><strong>냉장·냉동설비 시공 및 유지보수</strong> — 주방설비 분야에서도 고급 기술로 평가받는 냉장냉동설비 기술을 자체 보유하여 설비팀을 운영합니다.</li>
+        <li><strong>디지털 기반 유지보수 서비스 '왓픽스' 운영</strong> — 오프라인 기반의 전통 산업이지만 디지털화를 통해 혁신하고자 합니다. 왓픽스는 매장 전반의 상황을 파악하는 데 도움을 주는 대표 서비스입니다.</li>
+      </ul>
+      <div class="note note-tip">
+        <div class="note-head">💡 다음 단계</div>
+        회사 연혁 · 팀 구성 · A/S 업무 흐름은 <a class="ext-link" href="phase1_training.html">Phase 1 Day 1</a>에서 더 자세히 다룹니다.
+      </div>
+    </div>
+
+    <div class="check-card">
+      <div class="check-head">📋 계약 · 복지 · 사내문화 조건</div>
+      <p style="font-size:0.93rem;">
+        수습기간, 포괄임금제와 수당 기준, 보상·인센티브, 연봉협상 시기, 복지 6종, 사내문화 5종은
+        <strong>리쿠르팅 A-Z 문서에 전부 정리</strong>돼 있습니다. 입사 후에도 기준은 동일합니다.
+      </p>
+      <div class="note note-tip">
+        <div class="note-head">💡 한 곳에서만 관리합니다</div>
+        같은 내용을 두 군데 적으면 한쪽이 낡습니다. HR 조건은 리쿠르팅 문서를 정본으로 봅니다.
+        <br><a class="ext-link" href="recruiting.html">리쿠르팅 A-Z에서 HR 조건 보기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 문서 규칙 ── -->
+  <section class="section" id="docs">
+    <div class="section-tag">STEP 3</div>
+    <h2 class="section-title">문서 규칙 — 이건 첫날부터 지킵니다</h2>
+    <p class="section-desc">파일명과 이메일은 회사의 얼굴입니다. 규칙이 있으면 나중에 찾을 수 있습니다.</p>
+
+    <div class="acc-group">
+      <div class="acc open">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">📁 파일명 제작 가이드
+            <span class="acc-sub">내·외부 공유자료 공통 — 이 순서를 지킵니다</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="code-block">부성_사업장_날짜_내용명_파일형식</div>
+          <p>예시)</p>
+          <div class="code-block">부성_A현장_240214_쇼케이스 냉동고_견적서
+부성_B현장_240214_후드교체_작업확인서</div>
+
+          <h4>파일 유형별 예시</h4>
+          <ul>
+            <li><strong>견적서</strong> — 부성_A현장_240214_쇼케이스 냉동고_견적서</li>
+            <li><strong>거래명세표</strong> — 부성_C현장_201222_오븐납품_거래명세표</li>
+            <li><strong>기기리스트</strong> — 부성_협력사업_231205_주방기기 투자_기기리스트</li>
+            <li><strong>도면</strong> — 부성_D현장_230125_메인주방_도면</li>
+            <li><strong>제품 이미지</strong> — 부성_제조사명_식판 디스펜서 2열_이미지</li>
+            <li><strong>소견서</strong> — 부성_E현장_230518_워크인 고장수리_소견서</li>
+            <li><strong>작업완료 확인서</strong> — 부성_D현장_210322_오븐 납품_작업 완료 확인서</li>
+          </ul>
+
+          <div class="note note-danger">
+            <div class="note-head">🚨 사업장 표기 주의</div>
+            실제 파일명에는 회사 내부에서 쓰는 사업장 코드를 그대로 넣습니다.
+            다만 <strong>보안구역 고객사의 사업장 코드·현장명은 외부로 나가는 자료(메일 제목, 공개 자료, SNS)에 노출하지 않습니다.</strong>
+            어디까지 써도 되는지 헷갈리면 반드시 먼저 물어보세요.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">✉️ 이메일 작성 가이드
+            <span class="acc-sub">고객사·파트너사로 나가는 외부 메일 기준</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <h4>제목 — 발신자 정보 + 목적을 함께</h4>
+          <ul>
+            <li><strong>잘못된 예</strong> — "안녕하세요. ○○팀 ○○○입니다."</li>
+            <li><strong>올바른 예</strong> — [부성티케이/A현장] 스팀솥 수리 관련 견적서 및 소견서</li>
+            <li><strong>요청 건</strong>일 경우 "~ 요청 건"으로 표기하면 명확합니다.</li>
+          </ul>
+
+          <h4>본문 — 짧고 명확하게</h4>
+          <ul>
+            <li>상단에 인사 + 받는 사람 + 보내는 사람 표기 ("안녕하세요 ○○○ 프로님, 부성티케이 ○○○입니다.")</li>
+            <li>전달할 내용이 많으면 인사말 뒤에 <strong>중요 사항을 먼저 요약</strong></li>
+            <li>강조 효과는 <strong>한 메일에 최대 2가지까지</strong>. 많으면 오히려 중요한 게 안 보입니다.</li>
+            <li>글자색은 파란색·보라색·초록색 위주. <strong>빨간색은 이슈·오류 보고에만</strong> 씁니다.</li>
+            <li>글머리 기호·번호 매기기·표를 활용해 읽기 쉽게</li>
+          </ul>
+
+          <h4>연속성 — 하나의 건은 하나의 스레드로</h4>
+          <ul>
+            <li>같은 주제는 <strong>답장(Re)</strong> 또는 <strong>전달(FW)</strong>로 이어갑니다. 새 메일을 새로 쓰지 않습니다.</li>
+            <li>상대 메일에 문의가 여러 건이면 <strong>인라인 회신</strong>이 편합니다. 내 답변은 형광펜 배경이나 컬러 텍스트로 구분하고, 본문에 "하기 메일에 인라인으로 회신 드리오니 확인 요청 드립니다"를 적습니다.</li>
+          </ul>
+
+          <h4>일정 — 날짜는 정확하게</h4>
+          <ul>
+            <li>전달 가능한 일정은 요일까지 명시 ("10월 12일 목요일까지 전달 드리겠습니다")</li>
+            <li>받아야 하는 일정은 <strong>이유와 함께 데드라인</strong>을 제시 ("영상 편집 싱크 작업이 있어 10월 6일까지는 필요할 것 같습니다")</li>
+          </ul>
+
+          <h4>마무리 · 발송 전 확인</h4>
+          <ul>
+            <li>마무리는 <strong>"감사합니다. ○○○ 드림"</strong> 고정. 서명에 넣어 두는 것을 권장합니다.</li>
+            <li><strong>받는 사람</strong>은 직접 처리·보고받을 담당자, <strong>참조</strong>는 담당자는 아니지만 알아야 할 사람</li>
+            <li>발송 전 오탈자·맞춤법 반드시 확인</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 경영지원 프로세스 ── -->
+  <section class="section" id="process">
+    <div class="section-tag">STEP 4</div>
+    <h2 class="section-title">경영지원 프로세스</h2>
+    <p class="section-desc">돈이 오가는 문서는 실수하면 바로 티가 납니다. 확인 항목을 그대로 따라 하세요.</p>
+
+    <div class="acc-group">
+      <div class="acc">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">🧾 계산서 발행 (스마트빌)
+            <span class="acc-sub">발행 전에 3가지를 반드시 확인합니다</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <ul>
+            <li><strong>공급가액이 맞는지</strong> — 총액과 공급가액을 비교해서 확인</li>
+            <li><strong>날짜</strong> — 발행하는 날짜에 맞추거나, 요청받은 발행일로 변경</li>
+            <li><strong>담당자 이름</strong>이 맞는지 확인</li>
+          </ul>
+          <p style="margin-top:12px;">발행 경로: [복사하여 작성] → [현재 거래처 담당자에게 복사하여 작성] → 기존 내역에서 복사한 것이므로 위 3가지 외에는 수정할 내용이 없습니다.</p>
+          <div class="note note-warn">
+            <div class="note-head">⚠️ 총액과 공급가액을 헷갈리지 마세요</div>
+            공급가액은 부가세 <strong>별도</strong> 금액, 총액은 부가세 <strong>포함</strong> 금액입니다.
+            이 둘을 바꿔 쓰면 10% 차이로 잘못 청구됩니다.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">📑 거래명세표 발급 (경리나라)
+            <span class="acc-sub">견적서·거래명세표 발급 전용</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <p>경로: [거래처] → [판매관리] → 항목 선택</p>
+          <ul>
+            <li><strong>이메일 발송</strong> — 담당자에게 전송. 간혹 회사 대표 이메일로 설정된 경우가 있으니 <strong>수신 주소를 꼭 확인</strong>하세요.</li>
+            <li><strong>메일이 안 나갈 때</strong> — 담당자 이메일이 설정돼 있지 않거나 발송 실패 시, PDF로 저장해서 직접 전송합니다.</li>
+          </ul>
+          <div class="note note-danger">
+            <div class="note-head">🚨 계정 정보는 여기 적지 않습니다</div>
+            로그인 계정·비밀번호는 이 문서에 적지 않습니다. 필요하면 담당자에게 직접 요청하세요.
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 일하는 방법 ── -->
+  <section class="section" id="method">
+    <div class="section-tag">STEP 5</div>
+    <h2 class="section-title">일하는 방법 (기획 직군)</h2>
+    <p class="section-desc">마케팅·디자인·기획 업무를 맡는 분들이 먼저 읽는 부분입니다. 현장지원팀은 참고만 하셔도 됩니다.</p>
+
+    <div class="acc-group">
+      <div class="acc">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">🧠 기획은 이렇게 합니다
+            <span class="acc-sub">기획의 본질은 문제를 '규정'하는 것</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <ul>
+            <li>기획의 본질은 <strong>문제를 해결하는 것</strong>입니다.</li>
+            <li>문제는 주어지는 것이 아니라 <strong>규정하는 것</strong>입니다.</li>
+            <li>문제 규정이 가장 창의력이 필요한, 기획의 핵심 과정입니다.</li>
+          </ul>
+          <div class="note note-tip">
+            <div class="note-head">💡 기억할 문장</div>
+            문제는 '나쁜 것'이 아닙니다. <strong>'해결해야 하는 것'</strong>입니다.
+          </div>
+
+          <h4>본질을 밝히려면 파고들어야 합니다 — "왜 그런거지?"</h4>
+          <p>두 번이고 세 번이고 "왜?"를 던져 봅니다. 보이지 않는 문제점을 찾는 가장 단순한 방법입니다.</p>
+
+          <h4>사실 · 현상 · 본질을 구분합니다</h4>
+          <div class="code-block">가뭄이 들어 농작물이 말라 죽었다
+  농작물이 말라 죽었다   →  현상
+  말라 죽는 원인         →  문제
+  비가 오지 않았다       →  사실
+  물이 부족하다          →  문제의 본질 ✅</div>
+          <p>객관적 '사실'을 문제로 규정하는 오류를 주의하세요. 또한 <strong>해결할 수 없는 원인은 진짜 문제가 아닙니다.</strong></p>
+
+          <h4>본질을 밝히려면 높이 올라가야 합니다 — "왜 해야하지?"</h4>
+          <p>고객의 모호한 요청이나 과제는 재해석이 필요합니다. 과제의 목적을 생각하다 보면 문제의 본질이 보입니다.</p>
+          <p>조사(Research)는 <strong>도구</strong>입니다. 목적에 따라 얼마든지 변형할 수 있습니다. 통찰로 가설을 만들고, 그 가설을 검증할 최적의 도구를 찾거나 만드세요.</p>
+        </div></div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">🔍 자료 조사는 이렇게 합니다
+            <span class="acc-sub">시작 전 확인 → 양식 확인 → 찾기</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <h4>1. 목적과 용도 확인</h4>
+          <ul>
+            <li><strong>왜</strong> 찾아야 하는지</li>
+            <li><strong>무엇을</strong> 찾아야 하는지</li>
+            <li>이 자료가 <strong>어디에</strong> 쓰이는지</li>
+          </ul>
+
+          <h4>2. 양식과 수준 확인</h4>
+          <ul>
+            <li>정리 양식 확인 (엑셀? PPT? 워드?)</li>
+            <li>기존에 진행했던 유사 사례가 있는지 문의</li>
+          </ul>
+
+          <h4>3. 찾기</h4>
+          <div class="note note-tip">
+            <div class="note-head">💡 두 가지 원칙</div>
+            ① <strong>출처가 명확한 자료만</strong> 활용합니다.<br>
+            ② <strong>벌어진 현상(사실)과 필자의 의견을 구분</strong>합니다.
+          </div>
+          <ul>
+            <li>기본은 구글링 — 네이버보다 구글, 키워드는 구체적으로(내용·연도)</li>
+            <li>검색 연산자 — <code>"검색어"</code> 정확히 일치 / <code>검색어1 -검색어2</code> 제외(하이픈 앞 띄어쓰기) / <code>기간1..기간2</code> 기간 지정 / <code>검색어 pdf</code> 파일 형식 지정</li>
+            <li>글로벌 자료는 영어로 검색</li>
+            <li>모르는 주제일수록 이미지 검색으로 정리된 PPT·PDF부터 확인</li>
+            <li>뉴스 기사에 언급된 자료는 <strong>출처 원문</strong>을 찾아 확인</li>
+            <li>검색 결과는 3페이지 이상 살펴보기</li>
+          </ul>
+
+          <h4>데이터 소스</h4>
+          <ul>
+            <li>구글 트렌드 · 네이버 검색어트렌드 · 통계청 · 대한민국 정책브리핑</li>
+            <li>KOTRA 해외시장뉴스 · IT FIND 지식포털 · 한국콘텐츠진흥원</li>
+            <li>광고정보센터 · DBR · DMC 리포트</li>
+          </ul>
+
+          <h4>커뮤니티 · 뉴스레터</h4>
+          <p>커뮤니티는 <strong>특정 타깃의 반응·동향 파악 정도로만</strong> 활용합니다(사실 근거로 쓰지 않습니다).
+          뉴스레터는 뉴닉·미라클레터·어피티·어거스트·콘텐타·오픈애즈·디지털인사이트·캐릿·고구마팜 등을 참고합니다.</p>
+        </div></div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-head" onclick="toggle(this)">
+          <span class="acc-title">📐 구성안은 이렇게 작성합니다
+            <span class="acc-sub">디자인 작업 리소스를 줄이는 사전 합의 문서</span>
+          </span>
+          <span class="acc-chevron">▾</span>
+        </div>
+        <div class="acc-body"><div class="acc-inner">
+          <p>클라이언트와 <strong>제작물의 방향성과 기대치를 미리 확인</strong>해서 디자인 작업 리소스를 줄이기 위해 구성안을 씁니다. 양식은 제작물과 상황에 따라 다를 수 있으나, 아래 두 가지는 반드시 포함합니다.</p>
+          <h4>구성 배경 (Why)</h4>
+          <ul>
+            <li>클라이언트의 기대나 요청을 명시하고, 이를 어떤 방향으로 풀었는지 목적과 의도를 분명히 전달합니다.</li>
+            <li>여러 안을 제시할 경우 <strong>각 안의 방향성과 목적이 서로 달라야</strong> 합니다.</li>
+          </ul>
+          <h4>디자인 예시 (How to)</h4>
+          <ul>
+            <li>실제 시안으로 제작될 이미지와 최대한 비슷한 레이아웃을 보여주고, 필요한 정보를 상세히 기재합니다.</li>
+            <li>참고 예시는 이미지를 직접 첨부하거나 <strong>확인 가능한 출처</strong>를 함께 표기합니다(URL, 스톡 일련번호 등).</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 노션에서 확인 ── -->
+  <section class="section" id="notion">
+    <div class="section-tag">STEP 6</div>
+    <h2 class="section-title">이건 노션에서 확인하세요</h2>
+    <p class="section-desc">아래 자료는 회사 기밀이거나 개인정보가 포함돼 있어 이 사이트에 옮기지 않았습니다.</p>
+
+    <div class="check-card">
+      <ul class="plain-list">
+        <li><strong>신규 입사자 필요서류</strong> — 제출 서류 목록. 담당자 안내에 따라 준비하세요.</li>
+        <li><strong>매장 및 담당자 현황</strong> — 거래처와 담당자 연락처 DB. 노션 권한을 받은 뒤 확인합니다.</li>
+        <li><strong>사업자등록증 · 통장 사본 · 구성원 명함</strong> — 대외 제출용 자료. 필요할 때 담당자에게 요청하세요.</li>
+        <li><strong>시장 분석 및 목표</strong> — 내부 전략 문서.</li>
+        <li><strong>업계 채널 · 기술 공부 채널</strong> — 경쟁사·판매채널 리서치 링크 모음.</li>
+      </ul>
+      <div class="note note-danger">
+        <div class="note-head">🚨 절대 하지 말아야 할 것</div>
+        위 자료(특히 <strong>통장 사본 · 사업자등록증 · 거래처 담당자 연락처</strong>)를
+        외부 메신저, 개인 계정, 공개 문서에 옮기지 마세요. 회사 밖으로 나가는 순간 되돌릴 수 없습니다.
+        필요하면 <strong>먼저 물어보고</strong> 진행하세요.
+      </div>
+      <div class="note note-tip">
+        <div class="note-head">💡 노션 접근</div>
+        노션 계정 초대는 첫 주 체크리스트의 '계정 만들기'에서 처리합니다.
+        <br><a class="ext-link" href="https://busungtk.notion.site/A-Z-c1d972deedc64c30b1e145e99ca174b0" target="_blank" rel="noopener">노션 온보딩 원본 열기 →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-title">기본 세팅이 끝났다면</div>
+  <div class="footer-desc">
+    이제 12주 기술 교육을 시작합니다. 전공과 관계없이 처음부터 차근차근 진행합니다.
+  </div>
+  <a class="footer-btn" href="phase1_training.html">Phase 1 · 입문교육 시작하기 →</a>
+  <div class="footer-copy">부성티케이 · 신규 입사자 온보딩 A-Z</div>
+</footer>
+
+<script>
+  function toggle(el) { el.closest('.acc').classList.toggle('open'); }
+  function go(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navH = document.querySelector('.sticky-nav').offsetHeight;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH - 12, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

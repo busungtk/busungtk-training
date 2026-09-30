@@ -22,6 +22,7 @@
     --warn: #fbbf24;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     background: var(--bg);
@@ -199,6 +200,53 @@
   input.txt { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--text-bright); font-size: 1rem; font-family: inherit; }
   input.txt:focus { outline: none; border-color: var(--accent); }
 
+  /* ── 주차 ── */
+  .startbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .startbar label { font-size: 0.85rem; color: var(--text-dim); }
+  input.date { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; color: var(--text-bright); font-family: inherit; font-size: 0.9rem; color-scheme: dark; }
+  .phase-h { display: flex; align-items: baseline; gap: 8px; margin: 22px 0 8px; flex-wrap: wrap; }
+  .phase-h b { color: var(--text-bright); font-size: 0.95rem; }
+  .phase-h span { color: var(--text-dim); font-size: 0.8rem; }
+  .wk { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--text); }
+  .wk + .wk { margin-top: 8px; }
+  .wk:hover { border-color: rgba(56,189,248,0.45); }
+  .wk.now { border-color: var(--accent); background: rgba(56,189,248,0.06); }
+  .wk .num { flex: none; width: 40px; text-align: center; }
+  .wk .num b { display: block; font-size: 1.15rem; color: var(--text-bright); line-height: 1.1; }
+  .wk .num small { font-size: 0.68rem; color: var(--text-dim); }
+  .wk.done .num b { color: var(--good); }
+  .wk .body { flex: 1; min-width: 0; }
+  .wk .g { color: var(--text-bright); font-size: 0.92rem; font-weight: 600; line-height: 1.45; }
+  .wk .meter { margin-top: 7px; }
+  .pill.ci { background: rgba(129,140,248,0.16); color: #a5b4fc; }
+  .pill.now { background: rgba(56,189,248,0.16); color: var(--accent); }
+  .pill.q { background: rgba(251,191,36,0.14); color: var(--warn); }
+  .wsec { margin-top: 22px; }
+  .wsec h3 { font-size: 0.95rem; color: var(--text-bright); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .wsec h3 .cnt { font-size: 0.76rem; color: var(--text-dim); font-weight: 400; }
+  .items { display: flex; flex-direction: column; gap: 6px; }
+  .it { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 0.9rem; }
+  .it .tx { flex: 1; min-width: 0; }
+  .it.ok { border-color: rgba(52,211,153,0.35); }
+  .it .st { font-size: 0.78rem; color: var(--text-dim); white-space: nowrap; }
+  .it .st.ok { color: var(--good); }
+  .it .btn { min-height: 34px; padding: 5px 10px; font-size: 0.8rem; }
+  .ck { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-dim); cursor: pointer; white-space: nowrap; user-select: none; }
+  .ck input { width: 18px; height: 18px; accent-color: var(--good); cursor: pointer; }
+  .ck.sv input { accent-color: #a5b4fc; }
+  .learn { margin: 0 0 0 20px; font-size: 0.9rem; }
+  .learn li { margin: 3px 0; }
+  .asks { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 10px; }
+  .qa { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .qa + .qa { margin-top: 8px; }
+  .qa .qq { color: var(--text-bright); font-weight: 600; }
+  .qa .meta { font-size: 0.74rem; color: var(--text-dim); margin-top: 2px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .qa .ans { margin-top: 8px; padding: 8px 10px; border-left: 3px solid var(--good); background: rgba(52,211,153,0.06); border-radius: 0 8px 8px 0; font-size: 0.88rem; white-space: pre-wrap; }
+  textarea.txt { width: 100%; min-height: 70px; resize: vertical; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; color: var(--text-bright); font-size: 0.92rem; font-family: inherit; line-height: 1.5; }
+  textarea.txt:focus, input.date:focus { outline: none; border-color: var(--accent); }
+  .linkbtn { background: none; border: none; color: var(--text-dim); font-size: 0.74rem; cursor: pointer; padding: 0; text-decoration: underline; font-family: inherit; }
+  .talk { background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.3); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .talk b { color: #c7d2fe; }
   .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--surface2); border: 1px solid var(--border); color: var(--text-bright); padding: 10px 16px; border-radius: 10px; font-size: 0.86rem; opacity: 0; pointer-events: none; transition: all .25s; z-index: 50; max-width: calc(100% - 32px); }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .empty { text-align: center; color: var(--text-dim); padding: 30px 10px; }
@@ -222,6 +270,7 @@
   </div>
   <nav class="tabs" id="tabs">
     <a class="tab" data-t="home" href="#/">홈</a>
+    <a class="tab" data-t="weeks" href="#/weeks">주차<span class="n" id="qN" hidden style="background:rgba(251,191,36,0.16);color:var(--warn)"></span></a>
     <a class="tab" data-t="book" href="#/book">교재</a>
     <a class="tab" data-t="review" href="#/review">오답노트<span class="n" id="wrongN" hidden></span></a>
     <a class="tab" data-t="records" href="#/records">기록</a>
@@ -254,7 +303,7 @@ try { sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE
 // ─────────────────────────────────────────────
 // 저장소 — 로컬(항상) + Supabase(학습자 선택 시)
 // ─────────────────────────────────────────────
-function blank() { return { v: 1, updatedAt: null, read: {}, att: [], q: {}, wrong: {} }; }
+function blank() { return { v: 1, updatedAt: null, read: {}, att: [], q: {}, wrong: {}, start: null, wk: {} }; }
 let who = null;          // 학습자 이름, GUEST 면 이 기기에만
 let S = blank();
 let pushTimer = null;
@@ -268,7 +317,7 @@ const LKEY = n => 'bt_tech:' + n;
 function normalize(x) {
   const b = blank();
   if (!x || typeof x !== 'object') return b;
-  return { v: 1, updatedAt: x.updatedAt || null, read: x.read || {}, att: Array.isArray(x.att) ? x.att : [], q: x.q || {}, wrong: x.wrong || {} };
+  return { v: 1, updatedAt: x.updatedAt || null, read: x.read || {}, att: Array.isArray(x.att) ? x.att : [], q: x.q || {}, wrong: x.wrong || {}, start: x.start || null, wk: x.wk || {} };
 }
 function newer(a, b) { return (a && a.updatedAt ? Date.parse(a.updatedAt) : 0) > (b && b.updatedAt ? Date.parse(b.updatedAt) : 0); }
 
@@ -345,6 +394,47 @@ function totals() {
   return { read: CH.filter(c => S.read[c.id]).length, seen: Object.keys(S.q).filter(id => QMAP[id]).length, acc: tries ? Math.round(right / tries * 100) : null, open: wrongOpen().length };
 }
 
+// ── 주차 계산
+const WK = window.TECH_WEEKS || [];
+const PH = window.TECH_PHASES || [];
+const wkOf = w => WK.find(x => x.w === w);
+const phOf = w => PH.find(p => p.weeks.includes(w));
+function wget(w) { return S.wk[w] || { todo: {}, self: {}, conf: {}, qs: [], memo: '' }; }
+function wmut(w) { const x = S.wk[w] = S.wk[w] || {}; x.todo = x.todo || {}; x.self = x.self || {}; x.conf = x.conf || {}; x.qs = x.qs || []; x.memo = x.memo || ''; return x; }
+function pctOf(a) { return Math.round(a.ok / a.n * 100); }
+function quizMet(r) {
+  if (r.k === 'review') return wrongOpen().length === 0 && S.att.length > 0;
+  const atts = r.k === 'exam' ? S.att.filter(a => a.mode === 'exam' && a.n >= EXAM_SIZE) : S.att.filter(a => a.mode === 'ch' && a.ch === r.ch && a.n >= qsOf(r.ch).length);
+  return atts.some(a => pctOf(a) >= (r.min || 0));
+}
+function quizLabel(r) {
+  if (r.k === 'review') return '오답노트 0개 만들기';
+  if (r.k === 'exam') return '모의고사 ' + EXAM_SIZE + '문제' + (r.min ? ' — ' + r.min + '점 이상' : ' 한 번 풀기');
+  return chLabel(r.ch) + ' 문제' + (r.min ? ' — ' + r.min + '점 이상' : ' 끝까지 풀기');
+}
+function quizHref(r) { return r.k === 'review' ? '#/review' : r.k === 'exam' ? '#/quiz/exam' : '#/quiz/' + r.ch; }
+function weekProg(w) {
+  const d = wkOf(w), x = wget(w);
+  const parts = [
+    ...d.read.map(c => !!S.read[c]),
+    ...d.quiz.map(quizMet),
+    ...d.todo.map((_, i) => !!x.todo[i]),
+    ...d.check.map((_, i) => !!x.self[i]),
+  ];
+  const done = parts.filter(Boolean).length;
+  const conf = d.check.filter((_, i) => x.conf[i]).length;
+  const open = (x.qs || []).filter(q => !q.a).length;
+  return { done, total: parts.length, pct: parts.length ? Math.round(done / parts.length * 100) : 0, conf, confTotal: d.check.length, open, qs: (x.qs || []).length };
+}
+function todayWeek() {
+  if (!S.start) return null;
+  const days = Math.floor((Date.now() - Date.parse(S.start + 'T00:00:00')) / 864e5);
+  if (days < 0) return 0;
+  return Math.min(12, Math.floor(days / 7) + 1);
+}
+function curWeek() { const t = todayWeek(); if (t) return t; const f = WK.find(d => weekProg(d.w).pct < 100); return f ? f.w : 12; }
+const openQsAll = () => WK.reduce((n, d) => n + weekProg(d.w).open, 0);
+
 // ─────────────────────────────────────────────
 // 화면 유틸
 // ─────────────────────────────────────────────
@@ -360,6 +450,8 @@ function pctColor(p) { return p == null ? 'var(--text-dim)' : p >= 80 ? 'var(--g
 function setTab(t) {
   document.querySelectorAll('.tab').forEach(a => a.classList.toggle('on', a.dataset.t === t));
   const n = wrongOpen().length, el = document.getElementById('wrongN');
+  const qn = WK.length && who ? openQsAll() : 0, qe = document.getElementById('qN');
+  if (qe) { qe.hidden = !qn; qe.textContent = qn; }
   el.hidden = !n; el.textContent = n;
   document.getElementById('whoName').textContent = who ? (who === GUEST ? '이 기기(이름 없음)' : who) : '학습자 선택';
 }
@@ -461,7 +553,7 @@ async function viewWho() {
     const t = normalize((r.progress || {}).tech);
     const read = CH.filter(c => t.read[c.id]).length;
     const open = Object.keys(t.wrong).filter(id => QMAP[id] && !t.wrong[id].solved).length;
-    return `<button class="person" data-i="${i}"><span><span class="nm">${esc(r.trainee_name)}</span><br><span class="muted small">읽은 장 ${read}/${CH.length} · 푼 문제 ${Object.keys(t.q).filter(id => QMAP[id]).length}/${QS.length} · 오답 ${open}</span></span><span class="muted">›</span></button>`;
+    return `<button class="person" data-i="${i}"><span><span class="nm">${esc(r.trainee_name)}</span><br><span class="muted small">${(() => { const q = WK.reduce((n, d) => n + ((t.wk[d.w] || {}).qs || []).filter(x => !x.a).length, 0); return q ? '<span style="color:var(--warn)">답변 대기 ' + q + '</span> · ' : ''; })()}읽은 장 ${read}/${CH.length} · 푼 문제 ${Object.keys(t.q).filter(id => QMAP[id]).length}/${QS.length} · 오답 ${open}</span></span><span class="muted">›</span></button>`;
   }).join('');
   box.querySelectorAll('.person').forEach(b => b.onclick = async () => { await loadWho(data[+b.dataset.i].trainee_name); go('#/'); });
 }
@@ -479,25 +571,43 @@ function chRow(id) {
     <div class="acts"><a class="btn" href="#/ch/${id}">읽기</a><a class="btn" href="#/quiz/${id}">문제 ${s.total}</a></div>
   </div>`;
 }
+function weekCard() {
+  if (!WK.length) return '';
+  const w = curWeek(), d = wkOf(w), p = weekProg(w), ph = phOf(w), tw = todayWeek();
+  const firstTodo = [
+    ...d.read.filter(c => !S.read[c]).map(c => '교재 읽기 — ' + chLabel(c)),
+    ...d.quiz.filter(r => !quizMet(r)).map(quizLabel),
+    ...d.todo.filter((_, i) => !wget(w).todo[i]),
+    ...d.check.filter((_, i) => !wget(w).self[i]).map(t => '금요일 확인 — ' + t),
+  ][0];
+  return `<div class="card next" style="margin-top:14px">
+    <div class="kicker">${tw === 0 ? '시작 전' : '이번 주'} · ${w}주차 · ${esc(ph ? ph.name : '')}${d.checkin ? ' · 체크인 주' : ''}</div>
+    <div class="t">${esc(d.goal)}</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="meter" style="flex:1"><i style="width:${p.pct}%;background:var(--accent)"></i></div><span class="small muted">${p.done}/${p.total}</span></div>
+    ${firstTodo ? `<div class="small muted" style="margin-bottom:10px">다음: ${esc(firstTodo)}</div>` : '<div class="small" style="color:var(--good);margin-bottom:10px">이번 주 할 일을 다 했습니다.</div>'}
+    <div class="row"><a class="btn primary" href="#/week/${w}">${w}주차 계획 보기</a>${!S.start ? '<a class="btn" href="#/weeks">시작일 정하기</a>' : ''}</div>
+  </div>`;
+}
 function viewHome() {
   setTab('home');
   const T = totals();
   const nextId = ORDER.find(id => !S.read[id]);
   const nextQuiz = ORDER.find(id => S.read[id] && chStat(id).best == null);
   let next;
-  if (nextQuiz != null) next = `<div class="kicker">다음 할 일</div><div class="t">${esc(chLabel(nextQuiz))} — 읽었으니 문제로 확인해 보세요</div><a class="btn primary" href="#/quiz/${nextQuiz}">문제 풀기</a>`;
-  else if (nextId != null) next = `<div class="kicker">다음 할 일</div><div class="t">${esc(chLabel(nextId))} 읽기 <span class="muted small">(${esc(chOf(nextId).weeks)})</span></div><a class="btn primary" href="#/ch/${nextId}">읽기 시작</a>`;
-  else next = `<div class="kicker">모든 장을 읽었습니다</div><div class="t">모의고사로 전체를 점검해 보세요 (${EXAM_SIZE}문제, ${PASS_PCT}점 합격)</div><a class="btn primary" href="#/quiz/exam">모의고사</a>`;
+  if (nextQuiz != null) next = `<div class="kicker">교재 순서로 보면</div><div class="t">${esc(chLabel(nextQuiz))} — 읽었으니 문제로 확인해 보세요</div><a class="btn" href="#/quiz/${nextQuiz}">문제 풀기</a>`;
+  else if (nextId != null) next = `<div class="kicker">교재 순서로 보면</div><div class="t">${esc(chLabel(nextId))} 읽기 <span class="muted small">(${esc(chOf(nextId).weeks)})</span></div><a class="btn" href="#/ch/${nextId}">읽기 시작</a>`;
+  else next = `<div class="kicker">모든 장을 읽었습니다</div><div class="t">모의고사로 전체를 점검해 보세요 (${EXAM_SIZE}문제, ${PASS_PCT}점 합격)</div><a class="btn" href="#/quiz/exam">모의고사</a>`;
   $app.innerHTML = `
     <h1>${who === GUEST ? '' : esc(who) + '님, '}오늘도 한 장씩</h1>
-    <p class="lead">회사가 실제로 한 일(견적 2,963건 · 사례 451건)에서 뽑은 교재입니다. 읽고 → 문제로 확인하고 → 틀린 건 오답노트에서 다시.</p>
+    <p class="lead">12주 동안 주차별 목표를 따라갑니다. 교재를 읽고, 문제로 확인하고, 현장에서 해 보고, 모르는 건 그 주 화면에 질문으로 남기세요.</p>
     <div class="grid4">
       <div class="tile"><div class="v">${T.read}<span class="muted small">/${CH.length}</span></div><div class="k">읽은 장</div></div>
       <div class="tile"><div class="v">${T.seen}<span class="muted small">/${QS.length}</span></div><div class="k">풀어 본 문제</div></div>
       <div class="tile"><div class="v" style="color:${pctColor(T.acc)}">${T.acc == null ? '-' : T.acc + '%'}</div><div class="k">정답률</div></div>
       <div class="tile"><div class="v" style="color:${T.open ? 'var(--bad)' : 'var(--text-bright)'}">${T.open}</div><div class="k">남은 오답</div></div>
     </div>
-    <div class="card next" style="margin-top:14px">${next}</div>
+    ${weekCard()}
+    <div class="card" style="margin-top:10px">${next}</div>
     <div class="row" style="margin-top:10px">
       <a class="btn" href="#/quiz/review" ${T.open ? '' : 'aria-disabled="true" onclick="toast(\'오답노트가 비어 있습니다\');return false"'}>오답 다시 풀기 (${T.open})</a>
       <a class="btn" href="#/quiz/exam">모의고사 ${EXAM_SIZE}문제</a>
@@ -509,6 +619,84 @@ function viewBook() {
   setTab('book');
   $app.innerHTML = `<h1>교재</h1><p class="lead">12주 일정 순서로 놓았습니다. 선배는 그 주 시작 전에 해당 장을 신입과 같이 읽고, 금요일에 문제로 확인합니다.</p>
     <div class="chlist">${ORDER.map(chRow).join('')}</div>`;
+}
+
+// ─────────────────────────────────────────────
+// 화면: 주차 (12주 계획)
+// ─────────────────────────────────────────────
+function viewWeeks() {
+  setTab('weeks');
+  const cw = curWeek(), tw = todayWeek();
+  const row = w => {
+    const d = wkOf(w), p = weekProg(w);
+    return `<a class="wk ${w === cw ? 'now' : ''} ${p.pct === 100 ? 'done' : ''}" href="#/week/${w}">
+      <div class="num"><b>${p.pct === 100 ? '✓' : w}</b><small>${w}주차</small></div>
+      <div class="body"><div class="g">${esc(d.goal)}</div>
+        <div class="small muted" style="margin-top:3px">${w === cw ? '<span class="pill now" style="margin-left:0">이번 주</span>' : ''}${d.checkin ? '<span class="pill ci">체크인</span>' : ''}${p.open ? `<span class="pill q">답변 대기 ${p.open}</span>` : ''}${p.confTotal ? `<span class="pill ${p.conf === p.confTotal ? 'good' : ''}">선배 확인 ${p.conf}/${p.confTotal}</span>` : ''}</div>
+        <div class="meter"><i style="width:${p.pct}%;background:${p.pct === 100 ? 'var(--good)' : 'var(--accent)'}"></i></div></div>
+    </a>`;
+  };
+  $app.innerHTML = `<h1>12주 학습 계획</h1>
+    <p class="lead">주차마다 목표, 읽을 교재, 풀 문제, 현장에서 해볼 것, 금요일 확인 항목이 있습니다. 모르는 건 그 주 화면에 질문으로 남기면 선배가 답을 달아 줍니다.</p>
+    <div class="card"><div class="startbar"><label for="startDate">시작일(입사일)</label><input class="date" type="date" id="startDate" value="${S.start || ''}"><span class="small" style="color:var(--accent)">${tw == null ? '시작일을 넣으면 이번 주를 자동으로 잡습니다' : tw === 0 ? '아직 시작 전입니다' : '오늘은 ' + tw + '주차'}</span></div></div>
+    ${PH.map(ph => `<div class="phase-h"><b>${ph.n}단계 · ${esc(ph.name)}</b><span>${ph.weeks[0]}~${ph.weeks[ph.weeks.length - 1]}주 · ${esc(ph.line)}</span></div>${ph.weeks.map(row).join('')}`).join('')}`;
+  document.getElementById('startDate').onchange = e => { S.start = e.target.value || null; save(); viewWeeks(); };
+}
+
+function viewWeek(w) {
+  const d = wkOf(w); if (!d) return go('#/weeks');
+  setTab('weeks');
+  const x = wget(w), p = weekProg(w), ph = phOf(w);
+  const readRows = d.read.map(c => `<div class="it ${S.read[c] ? 'ok' : ''}"><div class="tx">${esc(chLabel(c))}</div><span class="st ${S.read[c] ? 'ok' : ''}">${S.read[c] ? '✓ 읽음' : '안 읽음'}</span><a class="btn" href="#/ch/${c}">읽기</a></div>`).join('');
+  const quizRows = d.quiz.map(r => { const ok = quizMet(r); return `<div class="it ${ok ? 'ok' : ''}"><div class="tx">${esc(quizLabel(r))}</div><span class="st ${ok ? 'ok' : ''}">${ok ? '✓ 달성' : r.k === 'review' ? '오답 ' + wrongOpen().length + '개' : '아직'}</span><a class="btn" href="${quizHref(r)}">${r.k === 'review' ? '오답노트' : '풀기'}</a></div>`; }).join('');
+  const todoRows = d.todo.map((t, i) => `<div class="it ${x.todo[i] ? 'ok' : ''}"><div class="tx">${esc(t)}${x.todo[i] ? `<div class="small muted">${fmtDate(x.todo[i])}</div>` : ''}</div><label class="ck"><input type="checkbox" data-todo="${i}" ${x.todo[i] ? 'checked' : ''}>해봄</label></div>`).join('');
+  const checkRows = d.check.map((t, i) => `<div class="it ${x.self[i] && x.conf[i] ? 'ok' : ''}"><div class="tx">${esc(t)}</div><label class="ck"><input type="checkbox" data-self="${i}" ${x.self[i] ? 'checked' : ''}>본인</label><label class="ck sv"><input type="checkbox" data-conf="${i}" ${x.conf[i] ? 'checked' : ''}>선배 확인</label></div>`).join('');
+  const qs = (x.qs || []).slice().sort((a, b) => (!!a.a - !!b.a) || (Date.parse(b.t) - Date.parse(a.t)));
+  const qRows = qs.map(q => `<div class="qa"><div class="qq">${esc(q.q)}</div>
+    <div class="meta">${fmtDate(q.t)} · ${q.a ? '<span style="color:var(--good)">답변함 ' + fmtDate(q.at) + '</span>' : '<span style="color:var(--warn)">답변 대기</span>'}<button class="linkbtn" data-delq="${q.id}">지우기</button></div>
+    ${q.a ? `<div class="ans">${esc(q.a)}</div><button class="linkbtn" data-editq="${q.id}" style="margin-top:6px">답변 고치기</button>` : ''}
+    <div ${q.a ? 'hidden' : ''} data-ansbox="${q.id}" style="margin-top:8px"><textarea class="txt" id="ans-${q.id}" placeholder="선배 답변 — 선배가 여기에 적어 주세요" style="min-height:56px">${esc(q.a || '')}</textarea><div class="row" style="margin-top:6px"><button class="btn" data-saveq="${q.id}">답변 저장</button></div></div>
+  </div>`).join('');
+  const asked = new Set((x.qs || []).map(q => q.q));
+  $app.innerHTML = `<div class="muted small"><a href="#/weeks" style="text-decoration:none">← 12주 계획</a> · ${ph ? ph.n + '단계 ' + esc(ph.name) : ''}</div>
+    <h1>${w}주차 ${d.checkin ? '<span class="pill ci" style="vertical-align:middle">체크인 주</span>' : ''}</h1>
+    <p class="lead" style="color:var(--text-bright);font-size:1rem;margin-bottom:10px">${esc(d.goal)}</p>
+    <div style="display:flex;align-items:center;gap:10px"><div class="meter" style="flex:1;height:10px"><i style="width:${p.pct}%;background:${p.pct === 100 ? 'var(--good)' : 'var(--accent)'}"></i></div><span class="small muted">${p.done}/${p.total} · 선배 확인 ${p.conf}/${p.confTotal}</span></div>
+
+    <div class="wsec"><h3>선배가 보여 주는 것</h3><ul class="learn">${d.learn.map(t => '<li>' + esc(t) + '</li>').join('')}</ul></div>
+    ${d.read.length ? `<div class="wsec"><h3>교재 읽기 <span class="cnt">${d.read.filter(c => S.read[c]).length}/${d.read.length}</span></h3><div class="items">${readRows}</div></div>` : ''}
+    <div class="wsec"><h3>문제로 확인 <span class="cnt">${d.quiz.filter(quizMet).length}/${d.quiz.length}</span></h3><div class="items">${quizRows}</div></div>
+    <div class="wsec"><h3>현장에서 해볼 것 <span class="cnt">${d.todo.filter((_, i) => x.todo[i]).length}/${d.todo.length}</span></h3><div class="items">${todoRows}</div></div>
+    <div class="wsec"><h3>금요일에 확인할 것 <span class="cnt">본인 ${d.check.filter((_, i) => x.self[i]).length} · 선배 ${p.conf} / ${d.check.length}</span></h3><div class="items">${checkRows}</div>
+      <p class="small muted" style="margin-top:6px">못 했으면 다음 주로 넘기지 말고 한 주 더 합니다. '선배 확인'은 선배가 보고 체크합니다.</p></div>
+    ${d.talk ? `<div class="wsec"><h3>체크인 대화 (30분)</h3><div class="talk"><b>평가가 아니라 대화입니다.</b> 이런 이야기를 나눕니다:<ul class="learn" style="margin-top:6px">${d.talk.map(t => '<li>' + esc(t) + '</li>').join('')}</ul></div></div>` : ''}
+
+    <div class="wsec"><h3>선배에게 물어볼 것 <span class="cnt">${p.open ? '답변 대기 ' + p.open : p.qs ? '모두 답변됨' : ''}</span></h3>
+      <div class="small muted">이번 주 내용으로 물어보기 좋은 질문 — 누르면 내 질문에 추가됩니다</div>
+      <div class="asks">${d.ask.map((a, i) => `<button class="chip ${asked.has(a) ? 'on' : ''}" data-ask="${i}" ${asked.has(a) ? 'disabled' : ''}>${esc(a)}</button>`).join('')}</div>
+      <div class="row"><input class="txt" id="newQ" placeholder="내 질문 직접 쓰기" style="flex:3 1 200px"><button class="btn primary" id="addQ" style="flex:1 1 90px">질문 남기기</button></div>
+      <div style="margin-top:10px">${qRows || '<div class="small muted">아직 남긴 질문이 없습니다.</div>'}</div>
+    </div>
+
+    <div class="wsec"><h3>이번 주 메모</h3><textarea class="txt" id="memo" placeholder="배운 것, 어려웠던 것, 다음 주에 하고 싶은 것">${esc(x.memo || '')}</textarea><div class="small muted" id="memoSt" style="margin-top:4px">&nbsp;</div></div>
+
+    <div class="pager">${w > 1 ? `<a href="#/week/${w - 1}">← ${w - 1}주차</a>` : '<span></span>'}${w < 12 ? `<a href="#/week/${w + 1}">${w + 1}주차 →</a>` : '<span></span>'}</div>`;
+
+  const stamp = (obj, i, on) => { if (on) obj[i] = new Date().toISOString(); else delete obj[i]; };
+  $app.querySelectorAll('[data-todo]').forEach(el => el.onchange = () => { stamp(wmut(w).todo, el.dataset.todo, el.checked); save(); viewWeek(w); });
+  $app.querySelectorAll('[data-self]').forEach(el => el.onchange = () => { stamp(wmut(w).self, el.dataset.self, el.checked); save(); viewWeek(w); });
+  $app.querySelectorAll('[data-conf]').forEach(el => el.onchange = () => { stamp(wmut(w).conf, el.dataset.conf, el.checked); save(); viewWeek(w); });
+  const addQ = text => { text = (text || '').trim(); if (!text) return; wmut(w).qs.push({ id: Date.now().toString(36), q: text, t: new Date().toISOString(), a: '', at: null }); save(); viewWeek(w); toast('질문을 남겼습니다'); };
+  $app.querySelectorAll('[data-ask]').forEach(el => el.onclick = () => addQ(d.ask[+el.dataset.ask]));
+  document.getElementById('addQ').onclick = () => addQ(document.getElementById('newQ').value);
+  document.getElementById('newQ').addEventListener('keydown', e => { if (e.key === 'Enter') addQ(e.target.value); });
+  const findQ = id => wmut(w).qs.find(q => q.id === id);
+  $app.querySelectorAll('[data-saveq]').forEach(el => el.onclick = () => { const q = findQ(el.dataset.saveq); const v = document.getElementById('ans-' + q.id).value.trim(); q.a = v; q.at = v ? new Date().toISOString() : null; save(); viewWeek(w); toast(v ? '답변을 저장했습니다' : '답변을 지웠습니다'); });
+  $app.querySelectorAll('[data-editq]').forEach(el => el.onclick = () => { $app.querySelector(`[data-ansbox="${el.dataset.editq}"]`).hidden = false; el.hidden = true; });
+  $app.querySelectorAll('[data-delq]').forEach(el => el.onclick = () => { if (!confirm('이 질문을 지울까요?')) return; const m = wmut(w); m.qs = m.qs.filter(q => q.id !== el.dataset.delq); save(); viewWeek(w); });
+  let mt = null;
+  document.getElementById('memo').addEventListener('input', e => { clearTimeout(mt); document.getElementById('memoSt').textContent = '입력 중…'; mt = setTimeout(() => { wmut(w).memo = e.target.value; save(); document.getElementById('memoSt').textContent = '저장했습니다'; }, 600); });
+  window.scrollTo(0, 0);
 }
 
 // ─────────────────────────────────────────────
@@ -690,6 +878,8 @@ function viewRecords() {
       <div class="tile"><div class="v" style="color:${pctColor(T.acc)}">${T.acc == null ? '-' : T.acc + '%'}</div><div class="k">전체 정답률</div></div>
       <div class="tile"><div class="v" style="color:${pctColor(bestExam)}">${bestExam == null ? '-' : bestExam}</div><div class="k">모의고사 최고점</div></div>
     </div>
+    ${WK.length ? `<h2 class="sec">주차별</h2>
+    <div class="card" style="padding:6px 12px;overflow-x:auto"><table class="rtable"><thead><tr><th>주차</th><th>진행</th><th class="num">선배 확인</th><th class="num">질문</th></tr></thead><tbody>${WK.map(d => { const p = weekProg(d.w); return `<tr><td><a href="#/week/${d.w}" style="text-decoration:none">${d.w}주차</a>${d.checkin ? ' <span class="pill ci">체크인</span>' : ''}</td><td><div style="display:flex;align-items:center;gap:8px"><div class="meter" style="flex:1"><i style="width:${p.pct}%;background:${p.pct === 100 ? 'var(--good)' : 'var(--accent)'}"></i></div><span class="small" style="width:40px;text-align:right">${p.done}/${p.total}</span></div></td><td class="num">${p.conf}/${p.confTotal}</td><td class="num" style="color:${p.open ? 'var(--warn)' : 'inherit'}">${p.qs ? (p.open ? '대기 ' + p.open : p.qs + '개') : '-'}</td></tr>`; }).join('')}</tbody></table></div>` : ''}
     <h2 class="sec">장별</h2>
     <div class="card" style="padding:6px 12px;overflow-x:auto"><table class="rtable"><thead><tr><th>장</th><th class="num">풀어 봄</th><th>정답률</th><th class="num">최고</th><th class="num">오답</th></tr></thead><tbody>${rows}</tbody></table></div>
     <h2 class="sec">풀이 이력 <span class="muted small">(최근 40회)</span></h2>
@@ -714,6 +904,8 @@ function route() {
   switch (m[1]) {
     case 'who': return viewWho();
     case 'book': return viewBook();
+    case 'weeks': return viewWeeks();
+    case 'week': return viewWeek(+m[2]);
     case 'ch': return viewChapter(+m[2]);
     case 'quiz': return startQuiz(decodeURIComponent(m[2] || ''));
     case 'review': return viewReview();

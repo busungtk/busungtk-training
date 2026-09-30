@@ -127,6 +127,9 @@
   .phase-card:hover.p0b { border-color: rgba(52,211,153,0.4); }
   .p0a .phase-num { color: #f472b6; }
   .p0b .phase-num { color: #34d399; }
+  .phase-card.p0c::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+  .phase-card:hover.p0c { border-color: rgba(251,191,36,0.4); }
+  .p0c .phase-num { color: #fbbf24; }
 
   .phase-card.p1::before { background: linear-gradient(90deg, #38bdf8, #818cf8); }
   .phase-card.p2::before { background: linear-gradient(90deg, #10b981, #34d399); }
@@ -212,6 +215,15 @@
       <div class="phase-meta">
         <span>입사자용</span>
         <span>첫 주</span>
+      </div>
+    </a>
+    <a class="phase-card p0c" href="applicant.html" style="grid-column: 1 / -1;">
+      <div class="phase-num">Interview</div>
+      <div class="phase-title">지원자 체크리스트 — 면접관용</div>
+      <div class="phase-desc">면접 날 지원자가 먼저 체크하고 면접관이 서류·확인 질문으로 확인. 확인 점수는 연봉 검토 보조 지표</div>
+      <div class="phase-meta">
+        <span>면접 당일</span>
+        <span>자격·경력·작업·공구</span>
       </div>
     </a>
   </div>

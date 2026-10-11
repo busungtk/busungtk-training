@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko" data-bt-lib>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>역량 목표 | 부성티케이 신입사원 교육</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 120px; }
+  .b-mast .ctrl { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-top: 18px; }
+  .b-mast label.f { display: block; font-size: .75rem; font-weight: 700; color: #a8a29e; margin-bottom: 4px; }
+  .b-mast select { font: inherit; font-size: .92rem; padding: 7px 10px; border-radius: 4px; border: 1px solid #44403c; background: #fff; color: var(--ink); min-width: 160px; }
+  .seg { display: inline-flex; border: 1px solid #44403c; border-radius: 4px; overflow: hidden; }
+  .seg button { font: inherit; font-size: .85rem; font-weight: 700; padding: 7px 12px; background: transparent; color: #d6d3d1; border: 0; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+  .msg { color: var(--muted); margin: 18px 0; }
+  .msg.bad { color: var(--bad); }
+  .sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 8px; }
+  .sum div { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; background: #fff; }
+  .sum b { display: block; font-size: 1.35rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .sum small { color: var(--muted); font-size: .8rem; }
+  .sum .late b { color: var(--warn); }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .82rem; color: var(--muted); margin: 6px 0 4px; }
+  .senior { margin: 18px 0 6px; }
+  .senior ul { margin: 6px 0 0 18px; font-size: .9rem; } .senior li { margin: 2px 0; }
+  h2.area { font-size: 1.15rem; font-weight: 800; margin: 34px 0 10px; letter-spacing: -0.01em; }
+  .goal { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 14px 16px; margin: 10px 0; }
+  .goal.late { border-left: 3px solid var(--warn); }
+  .goal.ok { border-left: 3px solid var(--ok); }
+  .g-top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; }
+  .g-top h3 { font-size: 1.02rem; font-weight: 800; flex: 1 1 320px; }
+  .chip { font-size: .74rem; font-weight: 700; border-radius: 3px; padding: 2px 7px; border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+  .chip.late { color: var(--warn); border-color: #fcd34d; background: var(--warn-tint); }
+  .chip.ok { color: var(--ok); border-color: #86efac; background: var(--ok-tint); }
+  .g-check { font-size: .9rem; color: var(--ink-2); margin: 8px 0 2px; }
+  .g-check b { color: var(--ink); }
+  .g-why { font-size: .86rem; color: var(--muted); }
+  .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
+  .steps .lab { font-size: .76rem; font-weight: 700; color: var(--muted); margin-right: 2px; }
+  .steps button { font: inherit; font-size: .8rem; font-weight: 700; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--line); background: #fff; color: var(--ink-2); cursor: pointer; }
+  .steps button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); background: var(--accent-tint); }
+  .steps button.tgt { box-shadow: inset 0 -2px 0 var(--accent); }
+  .mentor { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; font-size: .84rem; }
+  .mentor .mb { font-weight: 700; color: var(--ok); }
+  .mentor .none { color: var(--muted); }
+  .mentor button { font: inherit; font-size: .78rem; font-weight: 700; padding: 4px 9px; border-radius: 4px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
+  .mentor button:hover, .steps button:hover { border-color: var(--accent); }
+  .mform { display: none; margin-top: 8px; padding: 10px 12px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 6px; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .mform.open { display: flex; }
+  .mform select, .mform input { font: inherit; font-size: .85rem; padding: 6px 8px; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+  .mform input.note { flex: 1 1 200px; }
+  .mform .save { background: var(--accent); color: #fff; border: 1px solid var(--accent); font-weight: 700; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+  .g-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: .8rem; }
+  .g-links a { color: var(--accent-text); text-decoration: none; }
+  .g-links a:hover { text-decoration: underline; }
+  .g-links .lbl { color: var(--muted); font-weight: 700; }
+  .hidden { display: none !important; }
+  @media print { .steps button:not([aria-pressed="true"]), .mentor button, .b-mast .ctrl { display: none !important; } }
+</style>
+</head>
+<body>
+<header class="b-mast"><div class="b-in">
+  <a class="b-back" href="index.html">← 교육 홈</a>
+  <div class="b-eyebrow">현장지원팀 신입 교육</div>
+  <h1>역량 목표 — 12주 안에 할 수 있게 되는 것</h1>
+  <p>책을 다 읽는 것이 목표가 아니라, 현장에서 이 일을 해낼 수 있는 것이 목표입니다. 목표마다 언제까지 어느 단계까지 가는지와, 사수가 무엇을 보고 확인하는지가 적혀 있습니다.</p>
+  <div class="ctrl">
+    <div><label class="f" for="who">학습자</label><select id="who"></select></div>
+    <div><span class="f" style="display:block;font-size:.75rem;font-weight:700;color:#a8a29e;margin-bottom:4px">직군</span>
+      <div class="seg" role="group" aria-label="직군"><button type="button" data-r="tech" aria-pressed="true">현장 기술직</button><button type="button" data-r="office" aria-pressed="false">사무직</button></div></div>
+  </div>
+</div></header>
+
+<div class="wrap">
+  <p class="msg" id="msg">불러오는 중…</p>
+  <div id="body">
+    <div class="sum" id="sum"></div>
+    <div class="legend"><span>단계: 1 설명할 수 있다 · 2 선배 앞에서 한다 · 3 혼자 한다</span><span>밑줄 있는 단계 = 목표 단계</span><span>「사수 확인」이 있어야 달성으로 셉니다</span></div>
+    <div class="b-callout senior" id="senior"></div>
+    <div id="list"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="curriculum.js"></script>
+<script src="cases-data.js"></script>
+<script src="tech-data.js"></script>
+<script src="tracker.js"></script>
+<script>
+(function () {
+  var C = window.CURRICULUM, BT = window.BTTrack, CASES = window.CASES || [];
+  var $ = function (id) { return document.getElementById(id); };
+  var L = C.LEVELS;
+  var cur = null, curName = null, role = 'tech', reqSeq = 0;
+
+  function el(tag, props, kids) {
+    var e = document.createElement(tag);
+    Object.keys(props || {}).forEach(function (k) {
+      if (k === 'text') e.textContent = props[k];
+      else if (k === 'class') e.className = props[k];
+      else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), props[k]);
+      else e.setAttribute(k, props[k]);
+    });
+    (kids || []).forEach(function (c) { if (c != null) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return e;
+  }
+  function casesFor(g) {
+    if (!g.kw || !g.kw.length) return [];
+    return CASES.filter(function (c) { return g.kw.some(function (k) { return c.ti.indexOf(k) >= 0; }); });
+  }
+  function nowWeek() { return cur ? BT.weekNo(cur, BT.today()) : 1; }
+
+  function render() {
+    var goals = C.GOALS.filter(function (g) { return g.roles.indexOf(role) >= 0; });
+    var wk = nowWeek();
+    var G = (cur && cur.goals) || {};
+    var reached = 0, late = 0, solo = 0;
+    goals.forEach(function (g) {
+      var m = (G[g.id] && G[g.id].mLevel) || 0;
+      if (m >= g.target) reached++; else if (cur && wk > g.week) late++;
+      if (m >= 3) solo++;
+    });
+    $('sum').innerHTML = '';
+    [[goals.length + '개', '이 직군의 목표'], [reached + '개', '사수 확인으로 달성'], [solo + '개', '혼자 할 수 있다고 확인됨'], [late + '개', '기한이 지났는데 아직', 'late'], [cur ? wk + '주차' : '—', '지금']].forEach(function (x) {
+      $('sum').appendChild(el('div', { class: x[2] || '' }, [el('b', { text: x[0] }), el('small', { text: x[1] })]));
+    });
+    $('senior').innerHTML = '';
+    if (role === 'tech') {
+      $('senior').appendChild(el('b', { text: '12주 안에 신입이 손대지 않는 것 — 선배 몫' }));
+      $('senior').appendChild(el('ul', {}, C.SENIOR_ONLY.map(function (s) { return el('li', { text: s }); })));
+      $('senior').classList.remove('hidden');
+    } else $('senior').classList.add('hidden');
+
+    var list = $('list'); list.textContent = '';
+    var areas = [];
+    goals.forEach(function (g) { if (areas.indexOf(g.area) < 0) areas.push(g.area); });
+    areas.forEach(function (a) {
+      list.appendChild(el('h2', { class: 'area', text: a }));
+      goals.filter(function (g) { return g.area === a; }).forEach(function (g) { list.appendChild(goalCard(g, G[g.id] || {}, wk)); });
+    });
+  }
+
+  function goalCard(g, st, wk) {
+    var m = st.mLevel || 0, self = st.self || 0;
+    var isOk = m >= g.target, isLate = !isOk && cur && wk > g.week;
+    var card = el('article', { class: 'goal' + (isOk ? ' ok' : (isLate ? ' late' : '')), id: g.id.replace(':', '-') });
+    card.appendChild(el('div', { class: 'g-top' }, [
+      el('h3', { text: g.title }),
+      el('span', { class: 'chip', text: g.week + '주차까지 · ' + L[g.target] }),
+      isOk ? el('span', { class: 'chip ok', text: '✓ 달성' }) : (isLate ? el('span', { class: 'chip late', text: '! 기한 지남' }) : null)
+    ]));
+    card.appendChild(el('p', { class: 'g-check' }, [el('b', { text: '사수가 확인하는 것 · ' }), g.check]));
+    card.appendChild(el('p', { class: 'g-why', text: '왜: ' + g.why }));
+
+    // 학습자가 스스로 매기는 단계
+    var steps = el('div', { class: 'steps' }, [el('span', { class: 'lab', text: '내 생각' })]);
+    [1, 2, 3].forEach(function (lv) {
+      steps.appendChild(el('button', { type: 'button', class: lv === g.target ? 'tgt' : '', 'aria-pressed': self === lv ? 'true' : 'false', title: lv === g.target ? '목표 단계' : '',
+        text: lv + ' ' + L[lv], onclick: function () { saveGoal(g.id, { self: self === lv ? 0 : lv, selfAt: new Date().toISOString() }); } }));
+    });
+    card.appendChild(steps);
+
+    // 사수 확인
+    var form = el('div', { class: 'mform' });
+    var sel = el('select', { 'aria-label': '확인한 단계' }, [0, 1, 2, 3].map(function (lv) { var o = el('option', { value: String(lv), text: lv ? lv + ' ' + L[lv] : '확인 취소' }); if (lv === (m || g.target)) o.selected = true; return o; }));
+    var by = el('input', { type: 'text', placeholder: '확인한 사람', maxlength: '20', value: st.mBy || '' });
+    var note = el('input', { type: 'text', class: 'note', placeholder: '메모 (어느 현장에서 봤는지 등)', maxlength: '120', value: st.mNote || '' });
+    form.appendChild(sel); form.appendChild(by); form.appendChild(note);
+    form.appendChild(el('button', { type: 'button', class: 'save', text: '확인 저장', onclick: function () {
+      var lv = +sel.value;
+      if (lv && !by.value.trim()) { by.focus(); by.placeholder = '이름을 적어 주세요'; return; }
+      saveGoal(g.id, { mLevel: lv, mBy: lv ? by.value.trim() : '', mNote: lv ? note.value.trim() : '', mAt: new Date().toISOString() });
+    } }));
+    card.appendChild(el('div', { class: 'mentor' }, [
+      m ? el('span', { class: 'mb', text: '사수 확인: ' + L[m] + (st.mBy ? ' · ' + st.mBy : '') + (st.mAt ? ' · ' + st.mAt.slice(0, 10) : '') }) : el('span', { class: 'none', text: '사수 확인 전' }),
+      st.mNote ? el('span', { class: 'none', text: '— ' + st.mNote }) : null,
+      el('button', { type: 'button', text: m ? '확인 고치기' : '사수 확인', onclick: function () { form.classList.toggle('open'); } })
+    ]));
+    card.appendChild(form);
+
+    // 관련 교재·사례
+    var links = el('div', { class: 'g-links' }, [el('span', { class: 'lbl', text: '배우는 곳' })]);
+    g.units.forEach(function (id) {
+      var u = C.byId[id]; if (!u) return;
+      links.appendChild(el('a', { href: u.page + (u.anchor ? (u.anchor.charAt(0) === '#' ? u.anchor : '#' + u.anchor) : ''), text: u.title }));
+    });
+    var cs = casesFor(g);
+    if (cs.length) {
+      links.appendChild(el('span', { class: 'lbl', text: '실제 사례 ' + cs.length + '건' }));
+      cs.slice(0, 2).forEach(function (c) { links.appendChild(el('a', { href: c.u, target: '_blank', rel: 'noopener', text: c.ti })); });
+    }
+    card.appendChild(links);
+    return card;
+  }
+
+  async function saveGoal(id, patch) {
+    if (!curName) { $('msg').className = 'msg bad'; $('msg').textContent = '학습자를 먼저 고르세요.'; window.scrollTo(0, 0); return; }
+    var name = curName;
+    var r = await BT.update(name, function (l) {
+      l.goals = l.goals || {};
+      l.goals[id] = Object.assign({}, l.goals[id] || {}, patch);
+    });
+    if (curName !== name) return;
+    cur = BT.norm(r.learn);
+    $('msg').className = 'msg' + (r.ok ? '' : ' bad');
+    $('msg').textContent = r.ok ? '' : '서버에 저장하지 못해 이 기기에만 저장했습니다.';
+    render();
+    var c = document.getElementById(id.replace(':', '-'));
+    if (c && c.scrollIntoView) c.scrollIntoView({ block: 'nearest' });
+  }
+
+  async function onWho() {
+    var seq = ++reqSeq, v = $('who').value;
+    cur = null; curName = v || null;
+    if (!v) { $('msg').className = 'msg'; $('msg').textContent = '학습자를 고르면 내 단계와 사수 확인이 저장됩니다. 목표 목록은 그대로 볼 수 있습니다.'; render(); return; }
+    $('msg').textContent = '불러오는 중…';
+    BT.setWho(v);
+    var r = await BT.fetchLearn(v);
+    if (seq !== reqSeq || $('who').value !== v) return;
+    cur = BT.norm(r.learn);
+    if (cur.role) setRole(cur.role, true);
+    $('msg').className = 'msg' + (r.server ? '' : ' bad');
+    $('msg').textContent = r.server ? '' : '서버에 연결하지 못해 이 기기 기록만 보입니다.';
+    render();
+  }
+  function setRole(r, silent) {
+    role = r;
+    document.querySelectorAll('.seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.r === r ? 'true' : 'false'); });
+    if (!silent) render();
+  }
+  document.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { setRole(b.dataset.r); }); });
+
+  async function init() {
+    var r = await BT.listTrainees();
+    var sel = $('who'), w = BT.getWho();
+    var names = (r.rows || []).map(function (x) { return x.name; });
+    if (w && names.indexOf(w) < 0) names.unshift(w);
+    sel.appendChild(el('option', { value: '', text: '학습자 선택' }));
+    names.forEach(function (n) { sel.appendChild(el('option', { value: n, text: n })); });
+    sel.value = w && names.indexOf(w) >= 0 ? w : '';
+    sel.addEventListener('change', onWho);
+    onWho();
+  }
+  init();
+})();
+</script>
+</body>
+</html>

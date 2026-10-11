@@ -181,6 +181,83 @@
     ],
   };
 
+  // ── 역량 목표 — 「12주 안에 무엇을 할 수 있게 되나」 (2026-10-11)
+  // 근거: 기술 교재 각 장의 「신입 몫」·주차 목표(tech-data.js) + 홈페이지 A/S 사례 318건 중 교체 206건의 대상 빈도.
+  // level: 1 설명할 수 있다 · 2 선배 앞에서 한다 · 3 혼자 한다. target = 그 주차까지 도달할 단계.
+  // kw = 홈페이지 사례 제목에서 찾을 낱말(관련 사례 수·예시 표시용). units = 관련 학습 단위.
+  const LEVELS = ['아직', '설명할 수 있다', '선배 앞에서 한다', '혼자 한다'];
+  const GOALS = [
+    // 안전·기본
+    { id: 'g:power', area: '안전·기본', week: 1, target: 3, roles: ['tech'], title: '작업 전에 전원을 내리고 가스 밸브를 잠글 수 있다',
+      check: '현장에서 그 장비의 차단기와 가스 볼밸브를 스스로 찾아 내리고 잠근 뒤 사진으로 남긴다',
+      why: '모든 수리의 첫 순서다. 전원이 살아 있는 장비를 만지면 다치는 것은 나다.', units: ['p1:day2', 'p2:sec7', 'p2:sec5', 'tech:c8'], kw: [] },
+    { id: 'g:report', area: '안전·기본', week: 1, target: 3, roles: ['tech'], title: '작업 전·중·완료 사진과 완료보고를 올릴 수 있다',
+      check: '동행한 작업마다 양식 네 줄과 전·중·완료 사진을 채널톡에 올리고, 사진 구분이 맞다',
+      why: '완료보고가 그대로 홈페이지 사례가 되고, 다음 사람의 기록이 된다.', units: ['app:report', 'app:daily'], kw: [] },
+    { id: 'g:nameplate', area: '안전·기본', week: 2, target: 3, roles: ['tech'], title: '명판을 찍어 부품 사양(전압·단상/3상)을 읽을 수 있다',
+      check: '장비 세 대의 명판을 찍고 모델명·전압·상을 사수에게 말한다',
+      why: '부품은 같은 사양으로만 바꾼다. 명판 사진이 없으면 부품을 잘못 주문한다.', units: ['tech:c8', 'tech:c0'], kw: [] },
+    { id: 'g:ask', area: '안전·기본', week: 3, target: 3, roles: ['tech'], title: '고객 증상을 듣고 먼저 볼 곳 세 군데를 말할 수 있다',
+      check: '실제 접수 건 하나로, 묻는 순서대로 묻고 먼저 볼 곳 세 군데를 적는다',
+      why: '「안 돼요」만 듣고 가면 헛걸음한다. 묻는 순서가 진단의 절반이다.', units: ['p2:sec8', 'tech:c0', 'tech:c1'], kw: [] },
+    // 냉장·냉동 — A/S 최다 주제
+    { id: 'g:fridge-check', area: '냉장·냉동', week: 4, target: 3, roles: ['tech'], title: '냉장·냉동고 기본 점검을 혼자 할 수 있다',
+      check: '표시 온도·성에·배수·패킹·힌지·팬 회전, 응축기 통풍·먼지, 코드선, 과적재까지 체크표대로 보고 결과를 남긴다',
+      why: '압축기가 죽는 이유(통풍 불량·먼지·과적재·코드선)는 대부분 신입이 미리 볼 수 있는 것이다.', units: ['p2:sec1', 'tech:c1', 'ref:basic', 'ref:tc'], kw: ['냉장', '냉동', '쇼케이스', '워크인'] },
+    { id: 'g:gasket', area: '냉장·냉동', week: 5, target: 3, roles: ['tech'], title: '냉장고 도어 패킹을 교체할 수 있다',
+      check: '도어 패킹 한 건을 혼자 교체하고, 문을 닫아 틈이 없는지 확인한 사진을 남긴다',
+      why: '패킹이 상하면 찬 공기가 새 성에가 끼고 압축기가 쉬지 못한다. 도어·패킹은 A/S 교체에서 자주 나온다.', units: ['tech:c1'], kw: ['패킹', '가스켓'] },
+    { id: 'g:defrost', area: '냉장·냉동', week: 6, target: 2, roles: ['tech'], title: '과착상 해빙과 응축기 청소를 선배 앞에서 할 수 있다',
+      check: '선배가 보는 앞에서 성에를 녹이고 응축기 먼지를 청소한 뒤 온도가 내려가는지 확인한다',
+      why: '열을 버리는 곳(응축기)과 받는 곳(증발기)이 막히면 냉장고는 멀쩡해도 안 시원하다.', units: ['tech:c1', 'ref:basic'], kw: ['성에', '착상', '청소'] },
+    { id: 'g:icefilter', area: '냉장·냉동', week: 6, target: 3, roles: ['tech'], title: '제빙기 필터를 교체할 수 있다',
+      check: '제빙기 필터 한 건을 교체하고 급수가 정상인지 확인한다', why: '교재가 정한 신입 몫이다. 정기 방문 때 자주 맡는 일이다.', units: ['tech:c1'], kw: ['제빙'] },
+    // 급수·배수
+    { id: 'g:faucet', area: '급수·배수', week: 3, target: 3, roles: ['tech'], title: '수전을 교체할 수 있다 (아래 급수 호스까지)',
+      check: '급수 밸브를 잠그고 수전과 아래 호스를 교체한 뒤, 연결부를 마른 휴지로 훔쳐 새지 않음을 확인한다',
+      why: '수전이 새면 아래 배관까지 같이 봐야 다시 안 샌다. 교재가 정한 3주차 혼자 하는 일이다.', units: ['p2:sec6', 'tech:c2'], kw: ['수전'] },
+    { id: 'g:drain', area: '급수·배수', week: 4, target: 1, roles: ['tech'], title: '물이 고이거나 배수가 느릴 때 원인 자리를 찾을 수 있다',
+      check: '급수 이음쇠·배수호스 꺾임·눌림 중 어디가 원인인지 짚고 사진으로 보고한다',
+      why: '장비 밑 물의 원인은 기계보다 급수 이음쇠나 꺾인 배수호스인 경우가 많다.', units: ['p2:sec6', 'tech:c2'], kw: ['배수', '호스', '누수'] },
+    // 세척
+    { id: 'g:washer', area: '세척', week: 6, target: 3, roles: ['tech'], title: '식기세척기 일곱 가지를 점검할 수 있다',
+      check: '세제 투입·물 온도 표시·노즐 막힘·배수·컨베이어 소음·호스 물기·비상스위치를 차례로 확인한다',
+      why: '세척 라인이 멈추면 식기가 쌓여 배식이 멈춘다. 교재가 정한 6주차 목표다.', units: ['p2:sec3', 'tech:c3'], kw: ['세척', '식세기', '컨베이어'] },
+    // 온장·보온·소독
+    { id: 'g:lamp', area: '온장·소독', week: 4, target: 3, roles: ['tech'], title: '램프(소독고·조명)를 교체하고 점등을 확인할 수 있다',
+      check: '전원을 내리고 램프를 교체한 뒤 점등을 확인한다. 안정기 문제로 보이면 선배에게 알린다',
+      why: '소독고 램프·안정기 교체는 A/S에서 자주 나온다. 전원 차단을 지키며 할 수 있는 신입 몫이다.', units: ['tech:c8', 'tech:c4'], kw: ['램프', '안정기', '소독'] },
+    { id: 'g:heater', area: '온장·소독', week: 10, target: 2, roles: ['tech'], title: '배식대·온장고 히터 교체를 선배 앞에서 할 수 있다',
+      check: '차단기를 내리고, 같은 모양·규격 히터로 교체하고, 물을 채워 설정 온도까지 오르는지 확인한다',
+      why: '히터는 A/S 교체 대상에서 자주 나온다. 누전이 의심되는 장비라 순서가 생명이다.', units: ['tech:c4', 'p2:sec2'], kw: ['히터'] },
+    // 가열·가스
+    { id: 'g:burner', area: '가열·가스', week: 8, target: 3, roles: ['tech'], title: '버너 청소·석쇠 교체와 수평 맞추기를 할 수 있다',
+      check: '막힌 버너를 청소하고 석쇠를 교체한 뒤 불꽃이 고르게 올라오는지 확인하고 사진을 남긴다',
+      why: '솥·렌지는 A/S에서 가장 많이 나오는 장비다. 가스 배관은 손대지 않되 이 일은 신입 몫이다.', units: ['p2:sec7', 'p2:sec2', 'tech:c5'], kw: ['렌지', '버너', '석쇠', '솥'] },
+    // 기물
+    { id: 'g:caster', area: '기물', week: 2, target: 3, roles: ['tech'], title: '바퀴·조정발·경첩·손잡이를 교체할 수 있다',
+      check: '한 대의 바퀴를 모두 교체하거나 조정발로 수평을 맞추고, 흔들림이 없는지 확인한다',
+      why: '급식실 바닥은 늘 젖어 있어 바퀴가 제일 먼저 상한다. 교재가 정한 「바로 할 수 있는 일」이다.', units: ['p1:day6', 'tech:c6'], kw: ['바퀴', '캐스터', '조정발', '손잡이', '경첩'] },
+    { id: 'g:weld', area: '기물', week: 12, target: 2, roles: ['tech'], title: '하중이 작은 곳의 간단한 용접 수선을 선배 앞에서 할 수 있다',
+      check: '보기 → 자투리 연습 → 마감(그라인더) → 떨어진 받침 같은 간단한 수선을 선배 앞에서 한다',
+      why: '용접 보수는 A/S에서 자주 나온다. 현장 본작업은 12주 이후다.', units: ['tech:c6', 'p3:sec2'], kw: ['용접'] },
+    // 시공
+    { id: 'g:install', area: '시공·납품', week: 12, target: 3, roles: ['tech'], title: '시공 현장에서 한 파트(급배수 또는 세척기)를 맡고 고객에게 인계할 수 있다',
+      check: '맡은 파트를 끝까지 하고, 물·불 확인을 거쳐 고객에게 사용·청소 방법을 설명한다',
+      why: '교재가 정한 11~12주 목표다. 설치는 관계의 시작이라 인계 설명까지가 일이다.', units: ['tech:c7', 'p3:sec3'], kw: ['시공', '설치'] },
+    // 사무직
+    { id: 'g:office-flow', area: '업무 흐름', week: 1, target: 1, roles: ['office'], title: 'A/S·시공 한 건이 어떤 앱을 거쳐 가는지 설명할 수 있다',
+      check: '접수부터 계산서까지 앱 순서를 말로 설명한다', why: '앞 칸을 비우면 뒤 칸이 막힌다. 흐름을 알아야 빠진 칸이 보인다.', units: ['app:portal', 'app:asms'], kw: [] },
+    { id: 'g:office-crm', area: '업무 흐름', week: 2, target: 3, roles: ['office'], title: '문의를 CRM에 등록하고 영업일 1일 안에 첫 연락을 기록할 수 있다',
+      check: '실제 문의 한 건을 등록하고 기한 안에 연락 결과를 남긴다', why: '문의 하나를 놓치면 그 고객의 다음 매장까지 놓친다.', units: ['app:crm'], kw: [] },
+    { id: 'g:office-asms', area: '업무 흐름', week: 3, target: 3, roles: ['office'], title: 'ASMS에서 접수와 견적을 연결하고 계산서 요청까지 처리할 수 있다',
+      check: '한 건을 접수 → 견적 연결 → 작업완료(현장 담당자 지정) → 계산서 요청까지 처리한다', why: '연결이 빠지면 계산서가 0건이 되는 사고가 났었다.', units: ['app:asms'], kw: [] },
+    { id: 'g:office-order', area: '업무 흐름', week: 3, target: 3, roles: ['office'], title: '발주를 등록하고 납품 완료(받은 사람)까지 처리할 수 있다',
+      check: '발주 한 건을 확정하고 납품받은 사람과 날짜를 넣어 완료한다', why: '받은 사람이 없으면 물건이 어디 있는지 아무도 모른다.', units: ['app:order'], kw: [] },
+  ];
+  // 12주 안에 신입이 손대지 않는 것 — 기술 교재 1·5·8장 「선배 몫」
+  const SENIOR_ONLY = ['냉매 계통 작업(누설 탐지·용접·진공·충전)', '압축기·팽창밸브 교체', '제어반 결선(릴레이·마그네트·타이머)', '절연 측정·전류·전압 계측', '380V·3상 작업과 배선 공사', '가스 배관 연결·변경·누설 수리, 밸브 분해, 스팀 배관'];
+
   // studyMin 이 있으면(슬라이드 PDF·엑셀처럼 글자 수로 못 재는 자료) 쪽마다 보고 정한 추정값을 쓴다
   function theoryMin(u) {
     if (u.studyMin) return Math.round(u.studyMin + u.q * (RULE.perQuiz + RULE.reviewPerQuiz));
@@ -188,5 +265,5 @@
   }
   function totalMin(u) { return theoryMin(u) + Math.round(u.practiceH * 60); }
 
-  window.CURRICULUM = { RULE, UNITS: U, WEEKS, theoryMin, totalMin, byId: Object.fromEntries(U.map(u => [u.id, u])) };
+  window.CURRICULUM = { RULE, UNITS: U, WEEKS, GOALS, LEVELS, SENIOR_ONLY, theoryMin, totalMin, byId: Object.fromEntries(U.map(u => [u.id, u])) };
 })();

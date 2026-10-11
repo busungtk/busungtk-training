@@ -65,7 +65,7 @@
   }
 
   // ───────── learn 모양과 병합 ─────────
-  function blank() { return { v: 1, start: null, startSetAt: null, role: null, units: {}, quiz: {}, days: {}, daysDev: {}, notes: [], weekly: {}, plan: null }; }
+  function blank() { return { v: 1, start: null, startSetAt: null, role: null, units: {}, quiz: {}, days: {}, daysDev: {}, notes: [], weekly: {}, goals: {}, plan: null }; }
   function norm(x) {
     var b = blank();
     if (!isObj(x)) return b;
@@ -78,6 +78,7 @@
     b.daysDev = isObj(x.daysDev) ? x.daysDev : {};
     b.notes = Array.isArray(x.notes) ? x.notes.filter(function (n) { return n && n.id; }) : [];
     b.weekly = isObj(x.weekly) ? x.weekly : {};
+    b.goals = isObj(x.goals) ? x.goals : {};
     b.plan = isObj(x.plan) ? x.plan : null;
     if (x.updatedAt) b.updatedAt = x.updatedAt;
     return b;
@@ -124,6 +125,15 @@
     if (u) o.updatedAt = u;
     return o;
   }
+  // 역량 목표: 학습자가 매긴 단계(self·selfAt)와 사수가 확인한 단계(mLevel·mBy·mNote·mAt)를 따로, 각각 늦게 저장된 쪽
+  function laterGoal(x, y) {
+    if (!x) return y;
+    if (!y) return x;
+    var s = (y.selfAt || '') > (x.selfAt || '') ? y : x, m = (y.mAt || '') > (x.mAt || '') ? y : x, o = {};
+    if (s.self != null) { o.self = s.self; o.selfAt = s.selfAt; }
+    if (m.mLevel != null) { o.mLevel = m.mLevel; o.mBy = m.mBy; o.mNote = m.mNote; o.mAt = m.mAt; }
+    return o;
+  }
   function merge(a, b) {
     a = norm(a); b = norm(b);
     var o = blank(), k;
@@ -157,6 +167,8 @@
       .sort(function (x, y) { return (x.at || '') < (y.at || '') ? -1 : 1; });
     for (k in a.weekly) o.weekly[k] = laterWeekly(a.weekly[k], b.weekly[k]);
     for (k in b.weekly) if (!(k in a.weekly)) o.weekly[k] = b.weekly[k];
+    for (k in a.goals) o.goals[k] = laterGoal(a.goals[k], b.goals[k]);
+    for (k in b.goals) if (!(k in a.goals)) o.goals[k] = b.goals[k];
     var u = maxStr(a.updatedAt, b.updatedAt);
     if (u) o.updatedAt = u;
     return o;

@@ -453,7 +453,7 @@
       '.bt-btn.small{padding:3px 10px;font-size:.78rem;min-height:28px;font-weight:500}',
       '.bt-btn:focus-visible,.bt-fab:focus-visible,.bt-chip:focus-visible,.bt-x:focus-visible,.bt-in:focus-visible,.bt-radio input:focus-visible+span,.bt-cases a:focus-visible,.bt-sheet a:focus-visible{outline:3px solid var(--bt-accent);outline-offset:2px}',
       '.bt-redo-wrap{margin:6px 0 14px;text-align:right}',
-      '.bt-top{position:fixed;left:16px;bottom:84px;z-index:9000;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 150px);background:var(--bt-topbg);border:1px solid var(--bt-border);border-radius:99px;padding:5px 6px 5px 12px;color:var(--bt-dim);font-size:.8rem;backdrop-filter:blur(8px)}',
+      '.bt-top{position:fixed;top:12px;right:16px;z-index:9000;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 150px);background:var(--bt-topbg);border:1px solid var(--bt-border);border-radius:99px;padding:5px 6px 5px 12px;color:var(--bt-dim);font-size:.8rem;backdrop-filter:blur(8px)}',
       '.bt-top.need{border-color:var(--bt-accent)}',
       '.bt-chip{appearance:none;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--bt-bright);background:transparent;border:0;padding:2px 6px;border-radius:99px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
       '.bt-top.need .bt-chip{background:var(--bt-accent);color:var(--bt-on);padding:5px 12px}',
@@ -462,6 +462,7 @@
       '.bt-today{white-space:nowrap;padding-right:6px}',
       '.bt-plan{white-space:nowrap;font-size:.78rem;font-weight:700;color:var(--accent-text,var(--bt-accent));text-decoration:none;border-left:1px solid var(--bt-border);padding:0 4px 0 8px}.bt-plan:hover{text-decoration:underline}.bt-plan:focus-visible{outline:2px solid var(--bt-accent);outline-offset:2px}',
       '.bt-need-msg{white-space:nowrap}',
+      '.bt-lbl{font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--bt-dim);padding-left:4px}',
       '.bt-fab{position:fixed;right:16px;bottom:84px;z-index:8999;appearance:none;font:inherit;font-size:.86rem;font-weight:700;cursor:pointer;color:var(--bt-on);background:var(--bt-accent);border:0;border-radius:99px;padding:10px 16px;box-shadow:0 6px 20px rgba(0,0,0,.4)}',
       '.bt-fab:hover{filter:brightness(1.1)}',
       '.bt-over{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9500;background:rgba(2,6,15,.6);display:none}',
@@ -522,6 +523,7 @@
       return;
     }
     t.className = 'bt-top';
+    t.appendChild(h('span', { class: 'bt-lbl', text: '학습자' }));
     t.appendChild(h('button', { class: 'bt-chip', type: 'button', title: '학습자 바꾸기', 'aria-label': '학습자 ' + who + ' (눌러서 바꾸기)', text: who, onclick: openPicker }));
     t.appendChild(h('span', { class: 'bt-dot ' + status, role: 'img', 'aria-label': STATUS_TITLE[status] || '', title: STATUS_TITLE[status] || '' }));
     t.appendChild(h('span', { class: 'bt-today', text: '오늘 ' + todayMin() + '분' }));
@@ -895,6 +897,7 @@
     els.toast = h('div', { class: 'bt-toast', 'data-bt': 'toast', role: 'status', 'aria-live': 'polite' });
     [els.top, els.fab, els.over, els.sheet, els.modal, els.toast].forEach(function (e) { document.body.appendChild(e); });
     renderTop();
+    if (!getWho()) { var asked = null; try { asked = sessionStorage.getItem('bt_pick_asked'); } catch (e) {} if (!asked) { try { sessionStorage.setItem('bt_pick_asked', '1'); } catch (e) {} setTimeout(function () { if (!who) openPicker(); }, 700); } }
     if (CUR) buildUnits();
     addRedo();
     setTimeout(addRedo, 800);   // 나중에 만들어지는 문제 상자도 잡는다

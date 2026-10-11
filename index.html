@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-bt-lib>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,6 +157,32 @@
   @media (max-width: 520px) {
     .phases { grid-template-columns: 1fr; }
   }
+
+  /* 학습자 고르기 · 페이지별 다 봄 표시 (2026-10-11) */
+  .mast .in { position: relative; }
+  .who-panel { margin: 22px auto 0; max-width: 560px; }
+  .who-pick { background: #fff; color: var(--ink); border-radius: 6px; padding: 18px; text-align: left; }
+  .who-pick h2 { font-size: 1.05rem; font-weight: 800; margin: 0 0 4px; color: var(--ink); }
+  .who-pick p { color: var(--muted); font-size: .88rem; margin: 0 0 12px; }
+  .who-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .who-list button, .who-new button { font: inherit; font-size: .9rem; font-weight: 700; border-radius: 4px; padding: 8px 14px; cursor: pointer; }
+  .who-list button { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+  .who-list button:hover { border-color: var(--accent); color: var(--accent-text); }
+  .who-new { display: flex; gap: 6px; }
+  .who-new input { flex: 1; min-width: 0; font: inherit; font-size: .95rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; }
+  .who-new button { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+  .who-guest { display: inline-block; margin-top: 10px; background: none; border: 0; color: var(--muted); font: inherit; font-weight: 600; text-decoration: underline; padding: 0; font-size: .82rem; cursor: pointer; }
+  .who-msg { font-size: .82rem; color: var(--bad); min-height: 1.2em; margin-top: 6px; }
+  .who-now { position: absolute; top: 16px; right: 24px; display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--dark-muted); }
+  .who-now b { color: #fff; font-weight: 800; }
+  .who-now button, .who-now a { font: inherit; font-size: .8rem; font-weight: 700; color: #fb923c; background: none; border: 1px solid rgba(251,146,60,.5); border-radius: 4px; padding: 3px 9px; cursor: pointer; text-decoration: none; }
+  @media (max-width: 640px) { .who-now { position: static; justify-content: center; margin-top: 16px; flex-wrap: wrap; } }
+  .container.locked .phase-card { opacity: .35; pointer-events: none; }
+  .done-line { margin-top: 10px; font-size: .8rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .done-line .bar { display: block; height: 4px; border-radius: 99px; background: var(--line-2); margin: 6px auto 0; max-width: 220px; overflow: hidden; }
+  .done-line .bar i { display: block; height: 100%; background: var(--accent); }
+  .phase-card.all-done .done-line { color: var(--ok); }
+  .phase-card.all-done .done-line .bar i { background: var(--ok); }
 </style>
 </head>
 <body>
@@ -166,6 +192,7 @@
   <div class="badge">부성티케이 · 현장지원팀</div>
   <h1>신입사원 교육 프로그램</h1>
   <p class="subtitle">지원부터 첫 주 세팅, 그리고 12주 교육까지<br>비전공자도 현장 전문가로 성장할 수 있습니다.</p>
+  <div class="who-panel" id="whoPanel" aria-live="polite"></div>
 </div>
 </header>
 
@@ -298,5 +325,112 @@
   <div class="footer-text">부성티케이 현장지원팀 · 12주 교육과정 · 비전공자 맞춤</div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="curriculum.js"></script>
+<script src="tech-data.js"></script>
+<script src="tracker.js"></script>
+<script>
+// 교육 홈: 처음에 학습자를 고르고 들어간다. 고른 학습자가 페이지별로 몇 단원을 다 봤는지 카드에 보여 준다.
+(function () {
+  var BT = window.BTTrack, C = window.CURRICULUM;
+  var panel = document.getElementById('whoPanel');
+  var box = document.querySelector('.container');
+  var GUEST_KEY = 'bt_home_guest';
+  function el(tag, props, kids) {
+    var e = document.createElement(tag);
+    Object.keys(props || {}).forEach(function (k) {
+      if (k === 'text') e.textContent = props[k];
+      else if (k === 'class') e.className = props[k];
+      else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), props[k]);
+      else e.setAttribute(k, props[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) e.appendChild(c); });
+    return e;
+  }
+  function guest() { try { return sessionStorage.getItem(GUEST_KEY) === '1'; } catch (e) { return false; } }
+  function clearNow() { var o = document.querySelector('.mast .who-now'); if (o) o.remove(); }
+
+  async function showPicker() {
+    clearNow();
+    box.classList.toggle('locked', !guest());
+    panel.textContent = '';
+    var list = el('div', { class: 'who-list' }, [el('span', { class: 'who-msg', text: '명단을 불러오는 중…' })]);
+    var input = el('input', { type: 'text', maxlength: '30', placeholder: '처음이면 이름을 적고 시작', 'aria-label': '새 학습자 이름' });
+    var msg = el('div', { class: 'who-msg' });
+    async function start() {
+      var n = input.value.trim();
+      if (!n) { msg.textContent = '이름을 적어 주세요.'; input.focus(); return; }
+      msg.textContent = '';
+      var r = await BT.createTrainee(n);
+      if (!r.ok) { msg.textContent = '서버에 등록하지 못했습니다. 인터넷 연결을 확인해 주세요.'; return; }
+      if (r.existed && !confirm('이미 있는 학습자입니다. 그 기록에 이어서 할까요?')) return;
+      choose(n);
+    }
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') start(); });
+    var guestBtn = guest() ? null : el('button', { class: 'who-guest', type: 'button', text: '이름 없이 둘러보기', onclick: function () {
+      try { sessionStorage.setItem(GUEST_KEY, '1'); } catch (e) {}
+      box.classList.remove('locked'); this.remove();
+    } });
+    panel.appendChild(el('div', { class: 'who-pick' }, [
+      el('h2', { text: '누구로 학습하나요?' }),
+      el('p', { text: '이름을 고르면 읽은 단원·푼 문제·공부 시간이 그 이름으로 쌓입니다.' }),
+      list,
+      el('div', { class: 'who-new' }, [input, el('button', { type: 'button', text: '시작', onclick: start })]),
+      msg,
+      guestBtn
+    ]));
+    var r = await BT.listTrainees();
+    list.textContent = '';
+    if (!r.ok) list.appendChild(el('span', { class: 'who-msg', text: '명단을 불러오지 못했습니다. 새 이름으로 시작할 수 있습니다.' }));
+    (r.rows || []).forEach(function (x) { list.appendChild(el('button', { type: 'button', text: x.name, onclick: function () { choose(x.name); } })); });
+  }
+
+  function choose(name) {
+    BT.setWho(name);
+    try { sessionStorage.removeItem(GUEST_KEY); } catch (e) {}
+    render();
+  }
+  function forget() {
+    try { localStorage.removeItem('bt_learner'); localStorage.removeItem('bt_tech:who'); } catch (e) {}
+    showPicker();
+    paintCards(null, null);
+  }
+
+  async function render() {
+    var who = BT.getWho();
+    if (!who) { showPicker(); paintCards(null, null); return; }
+    box.classList.remove('locked');
+    panel.textContent = '';
+    clearNow();
+    document.querySelector('.mast .in').appendChild(el('div', { class: 'who-now' }, [
+      el('span', { text: '학습자' }), el('b', { text: who }),
+      el('a', { href: 'my.html', text: '내 학습 계획' }),
+      el('button', { type: 'button', text: '바꾸기', onclick: forget })
+    ]));
+    var r = await BT.fetchLearn(who);
+    if (BT.getWho() !== who) return;
+    paintCards(BT.norm(r.learn), r.tech);
+  }
+
+  // 카드마다: 그 페이지 단원 중 다 본 수
+  function paintCards(learn, tech) {
+    document.querySelectorAll('a.phase-card').forEach(function (a) {
+      var page = (a.getAttribute('href') || '').split('#')[0];
+      var units = C.UNITS.filter(function (u) { return u.page === page; });
+      var old = a.querySelector('.done-line'); if (old) old.remove();
+      a.classList.remove('all-done');
+      if (!learn || !units.length) return;
+      var done = units.filter(function (u) { return BT.isDone(learn, tech, u.id); }).length;
+      var pct = Math.round(done / units.length * 100);
+      a.appendChild(el('div', { class: 'done-line' }, [
+        document.createTextNode((done === units.length ? '✓ 다 봄 · ' : '') + '단원 ' + done + ' / ' + units.length),
+        el('span', { class: 'bar' }, [el('i', { style: 'width:' + pct + '%' })])
+      ]));
+      if (done === units.length) a.classList.add('all-done');
+    });
+  }
+  render();
+})();
+</script>
 </body>
 </html>

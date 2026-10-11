@@ -95,3 +95,6 @@ a { color: var(--accent-text); }
 /* 고정 「메인으로」 버튼(왼쪽 위)과 위에 붙는 목차가 겹치지 않게 목차 왼쪽을 비운다 */
 .sticky-nav .nav-inner { padding-left: 128px !important; }
 @media (max-width: 720px) { .sticky-nav .nav-inner { padding-left: 112px !important; } }
+
+/* 넓은 화면: 학습자 표시(오른쪽 위)와 위에 붙는 목차가 겹치지 않게 오른쪽도 비운다. 좁은 화면은 학습자 표시가 왼쪽 아래로 간다 */
+@media (min-width: 521px) { .sticky-nav .nav-inner { padding-right: 320px !important; } }

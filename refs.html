@@ -6,276 +6,765 @@
 <meta name="robots" content="noindex, nofollow">
 <title>냉동 참고 자료 | 부성티케이 신입사원 교육</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
+  /* 부성TK 디자인 시스템(DESIGN.md) — 정돈된 작업대: 밝은 바탕, 1px 경계, 강조는 로고 주황 */
   :root {
-    --bg: #0a0e17; --surface: #111827; --surface2: #1a2332; --border: #1e2d3d;
-    --accent: #38bdf8; --accent2: #818cf8; --danger: #ef4444; --success: #10b981; --warn: #fbbf24;
-    --text: #e2e8f0; --text-dim: #94a3b8; --text-bright: #f8fafc;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --line: #e5e5e5;
+    --line-2: #f0f0f0;
+    --ink: #1a1a1a;
+    --ink-2: #4b5563;
+    --muted: #6b7280;
+    --accent: #EA5E18;
+    --accent-text: #c2500f;
+    --accent-tint: rgba(234, 94, 24, .08);
+    --dark: #1C1917;
+    --hot: #EA5E18;
+    --warm: #f59e0b;
+    --cold: #385768;
+    --cold-2: #6f97ad;
+    --ok: #15803d;
+    --bad: #b91c1c;
+    /* 기록 장치(tracker.js)가 읽는 변수 */
+    --surface: #ffffff; --surface2: #fafafa; --border: #e5e5e5;
+    --text: #1a1a1a; --text-dim: #6b7280; --text-bright: #111111;
+    --on-accent: #ffffff; --top-bg: rgba(255,255,255,.96); --input-bg: #ffffff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', sans-serif; line-height: 1.75; }
-  a { color: var(--accent); }
-  .wrap { max-width: 820px; margin: 0 auto; padding: 0 16px 120px; }
-  header.top { padding: 40px 0 24px; border-bottom: 1px solid var(--border); }
-  .back { color: var(--text-dim); text-decoration: none; font-size: .85rem; }
-  h1 { font-size: 1.7rem; color: var(--text-bright); margin: 12px 0 8px; text-wrap: balance; }
-  .lead { color: var(--text-dim); max-width: 64ch; }
-  nav.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 8px; }
-  nav.toc a { font-size: .8rem; text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 99px; padding: 4px 12px; }
-  nav.toc a:hover, nav.toc a:focus-visible { border-color: var(--accent); outline: none; }
-  section.section { padding: 36px 0 8px; border-bottom: 1px solid var(--border); scroll-margin-top: 16px; }
-  h2 { font-size: 1.3rem; color: var(--text-bright); margin-bottom: 6px; text-wrap: balance; }
-  h3 { font-size: 1rem; color: var(--text-bright); margin: 20px 0 6px; }
-  p { margin: 8px 0; max-width: 68ch; }
-  ul, ol { margin: 8px 0 8px 22px; } li { margin: 4px 0; max-width: 66ch; }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: .78rem; color: var(--text-dim); margin: 6px 0 12px; }
-  .meta span { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; }
-  .file { font-size: .82rem; color: var(--text-dim); }
-  .file code { background: var(--surface2); border-radius: 4px; padding: 1px 6px; color: var(--text); }
-  .rule { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--warn); border-radius: 8px; padding: 12px 16px; margin: 14px 0; }
-  .rule b { color: var(--warn); }
-  .rule p { margin: 4px 0; }
-  .how { color: var(--text-dim); font-size: .9rem; }
-  .tbl { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: .86rem; margin: 10px 0; font-variant-numeric: tabular-nums; }
-  th, td { border-bottom: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
-  th { color: var(--text-dim); font-size: .78rem; white-space: nowrap; }
-  .quiz-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin: 18px 0; }
-  .quiz-badge { font-size: .72rem; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
-  .quiz-question { color: var(--text-bright); font-weight: 600; margin: 8px 0 10px; }
-  .quiz-options { display: grid; gap: 8px; }
-  .quiz-opt { text-align: left; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font: inherit; cursor: pointer; }
-  .quiz-opt:hover:not(:disabled), .quiz-opt:focus-visible { border-color: var(--accent); outline: none; }
-  .quiz-opt.correct { border-color: var(--success); background: rgba(16,185,129,.12); }
-  .quiz-opt.wrong { border-color: var(--danger); background: rgba(239,68,68,.12); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body { background: var(--bg); color: var(--ink); font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; line-height: 1.65; word-break: keep-all; }
+  a { color: var(--accent-text); }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  /* 머리 — 짙은 띠 하나 */
+  .mast { background: var(--dark); color: #f0f0f0; }
+  .mast .in { max-width: 1120px; margin: 0 auto; padding: 28px 24px 36px; }
+  .mast .back { color: #a8a29e; text-decoration: none; font-size: .85rem; }
+  .mast .back:hover { color: #fff; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--accent); }
+  .mast .eyebrow { margin-top: 22px; color: #fb923c; }
+  .mast h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin: 6px 0 12px; text-wrap: balance; }
+  .mast p { color: #d6d3d1; max-width: 62ch; }
+  .mast .warn { margin-top: 22px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .mast .warn div { border-left: 3px solid #fb923c; padding: 4px 0 4px 14px; font-size: .92rem; color: #e7e5e4; }
+  .mast .warn b { color: #fff; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .toc { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+  .toc .in { max-width: 1120px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+  .toc a { flex: none; font-size: .82rem; font-weight: 600; color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; background: #fff; }
+  .toc a:hover { border-color: var(--accent); color: var(--accent-text); }
+  .toc a .n { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 4px; }
+
+  section.section { padding: clamp(36px, 5vw, 60px) 0; border-bottom: 1px solid var(--line); scroll-margin-top: 64px; }
+  section.section:nth-of-type(even) { background: var(--bg-alt); }
+  .sec-head { display: grid; gap: 4px; margin-bottom: 18px; max-width: 760px; }
+  .sec-head .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sec-head .meta .prio { font-weight: 700; }
+  .prio.req { color: var(--accent-text); } .prio.rec { color: var(--cold); } .prio.adv { color: #6d28d9; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; text-wrap: balance; }
+  .sec-head .gain { font-size: clamp(1rem, 1.6vw, 1.1rem); color: var(--ink-2); }
+  h3 { font-size: 1.05rem; font-weight: 700; margin: 22px 0 8px; }
+  p { max-width: 68ch; margin: 8px 0; }
+  ul.pts { margin: 8px 0 8px 20px; } ul.pts li { margin: 4px 0; max-width: 66ch; }
+
+  .grid2 { display: grid; gap: 24px; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start; }
+  @media (max-width: 880px) { .grid2 { grid-template-columns: 1fr; } }
+
+  figure.fig { border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 14px; }
+  figure.fig svg { display: block; width: 100%; height: auto; }
+  figure.fig:has(svg.wide) { overflow-x: auto; }
+  @media (max-width: 760px) { figure.fig svg.wide { min-width: 820px; } }
+  figure.fig:has(svg.cyc), figure.fig:has(svg.mid) { overflow-x: auto; }
+  @media (max-width: 600px) { figure.fig svg.cyc, figure.fig svg.mid { min-width: 520px; } }
+  figure.fig figcaption { font-size: .82rem; color: var(--muted); margin-top: 8px; }
+  svg text { font-family: inherit; }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--accent-tint); border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 14px 0; font-size: .93rem; max-width: 72ch; }
+  .callout b { color: var(--accent-text); }
+  .file { font-size: .82rem; color: var(--muted); margin-top: 14px; }
+  .file code { font-family: inherit; background: var(--line-2); border-radius: 3px; padding: 1px 6px; color: var(--ink-2); }
+
+  /* 4대 부품 탭 */
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .seg button { font: inherit; font-size: .88rem; font-weight: 700; padding: 7px 12px; border-radius: 4px; border: 1px solid var(--line); background: #fff; color: var(--ink-2); cursor: pointer; }
+  .seg button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-text); background: var(--accent-tint); }
+  .detail { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 14px 16px; }
+  .detail h4 { font-size: 1.05rem; font-weight: 800; }
+  .detail dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin-top: 10px; font-size: .92rem; }
+  .detail dt { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .cyc .part rect { transition: stroke .2s, stroke-width .2s; }
+  .cyc .part.on rect { stroke: var(--accent); stroke-width: 3; }
+
+  /* 표 */
+  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: var(--bg-alt); font-weight: 700; color: var(--ink-2); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* 과열도 판단 칸 */
+  .mtx { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  @media (max-width: 640px) { .mtx { grid-template-columns: 1fr; } }
+  .cell { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 12px 14px; }
+  .cell .tag { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .pill { font-size: .74rem; font-weight: 700; border-radius: 3px; padding: 1px 7px; border: 1px solid; }
+  .pill.up { color: var(--accent-text); border-color: #fdba74; background: #fff7f2; }
+  .pill.dn { color: var(--cold); border-color: #b6cddb; background: #f3f7fa; }
+  .cell ol { margin: 4px 0 0 18px; font-size: .88rem; } .cell li { margin: 2px 0; }
+  .cell.none { background: var(--bg-alt); color: var(--muted); }
+
+  /* 단계 흐름 */
+  ol.steps { list-style: none; counter-reset: s; display: grid; gap: 0; margin: 6px 0; }
+  ol.steps li { counter-increment: s; position: relative; padding: 0 0 14px 34px; border-left: 2px solid var(--line); margin-left: 11px; }
+  ol.steps li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  ol.steps li::before { content: counter(s); position: absolute; left: -12px; top: 0; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid var(--accent); color: var(--accent-text); font-size: .75rem; font-weight: 800; display: grid; place-items: center; }
+  ol.steps b { display: block; }
+  ol.steps span { color: var(--ink-2); font-size: .92rem; }
+
+  /* 문제 — 기존 페이지와 같은 구조 */
+  .quiz-box { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 16px; margin: 20px 0 4px; max-width: 760px; }
+  .quiz-badge { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--accent-text); }
+  .quiz-question { font-weight: 700; margin: 6px 0 10px; }
+  .quiz-options { display: grid; gap: 6px; }
+  .quiz-opt { text-align: left; font: inherit; font-size: .94rem; background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 9px 12px; cursor: pointer; }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--accent); }
+  .quiz-opt.correct { border-color: var(--ok); background: #f0fdf4; }
+  .quiz-opt.wrong { border-color: var(--bad); background: #fef2f2; }
   .quiz-opt:disabled { cursor: default; }
-  .quiz-num { color: var(--text-dim); margin-right: 6px; }
-  .quiz-feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: .9rem; }
+  .quiz-num { color: var(--muted); margin-right: 6px; }
+  .quiz-feedback { display: none; margin-top: 10px; padding: 9px 12px; border-radius: 4px; font-size: .9rem; }
   .quiz-feedback.show { display: block; }
-  .quiz-feedback-pass { background: rgba(16,185,129,.1); color: #a7f3d0; }
-  .quiz-feedback-fail { background: rgba(239,68,68,.1); color: #fecaca; }
-  .src { font-size: .78rem; color: var(--text-dim); margin-top: 18px; }
+  .quiz-feedback-pass { background: #f0fdf4; color: #14532d; }
+  .quiz-feedback-fail { background: #fef2f2; color: #7f1d1d; }
+
+  .foot { padding: 32px 0 120px; color: var(--muted); font-size: .85rem; }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header class="top">
-  <a class="back" href="index.html">← 교육 홈</a>
-  <h1>냉동 참고 자료</h1>
-  <p class="lead">회사가 모아 둔 냉동 교육 자료 13개를 배우는 순서대로 묶었습니다. 홈페이지 사례에서 가장 많은 주제가 냉장·냉동이라, 교재보다 한 걸음 더 들어가는 자료를 따로 둡니다.</p>
-  <div class="rule">
-    <b>읽기 전에 꼭 알아 둘 두 가지</b>
-    <p>① <b>숫자는 R-22 냉매 기준</b>입니다. R-22는 점점 쓰지 못하게 되는 냉매라 지금 새 설비는 다른 냉매를 씁니다. 원리는 그대로 쓰되, 압력·온도 숫자를 현장 장비에 그대로 대지 않습니다.</p>
-    <p>② 고장진단·압축기 자료는 <b>대형마트 기계실의 큰 냉동기</b>를 기준으로 쓴 자료입니다. 우리가 자주 만나는 주방 냉장 테이블·워크인보다 크고 형식이 다릅니다. 「왜 그렇게 하는지」를 배우는 자료로 봅니다.</p>
+<header class="mast">
+  <div class="in">
+    <a class="back" href="index.html">← 교육 홈</a>
+    <div class="eyebrow">현장지원팀 신입 교육 · 냉동</div>
+    <h1>냉동 참고 자료</h1>
+    <p>홈페이지 사례에서 가장 많은 주제가 냉장·냉동입니다. 회사가 모아 둔 냉동 교육 자료 13개의 핵심을 그림으로 먼저 보고, 원본 자료는 사수에게 받아 깊게 읽습니다.</p>
+    <div class="warn">
+      <div><b>숫자는 R-22 냉매 기준입니다.</b> 원리는 지금도 맞지만, 압력·온도 값은 그 장비의 냉매와 제조사 기준으로 다시 확인합니다.</div>
+      <div><b>고장진단·압축기 자료는 대형마트 기계실 기준입니다.</b> 주방의 냉장 테이블·워크인보다 크고 형식이 다릅니다. 「왜 그렇게 하나」를 배우는 자료로 봅니다.</div>
+    </div>
   </div>
-  <p class="file">파일 위치: 회사 원드라이브 <code>부성티케이 › 장준영 › 교육자료</code>. 처음 받을 때 사수에게 요청합니다. 자료에 다른 회사 이름·가격·연락처가 있어 밖으로 옮기지 않습니다.</p>
-  <nav class="toc" aria-label="자료 목록">
-    <a href="#basic">기초 교육</a><a href="#cycle">표준냉동장치</a><a href="#panel">제어반 부품</a><a href="#tc">온도조절기</a><a href="#lps">저압스위치</a><a href="#hps">고압스위치</a>
-    <a href="#diag">고장진단</a><a href="#comp">압축기 교체</a><a href="#maint">교체 주기</a><a href="#drawing">실물 회로도</a><a href="#ctrl">제어 회로 종합</a><a href="#compin">압축기 분해</a><a href="#load">부하계산</a>
-  </nav>
 </header>
 
+<nav class="toc" aria-label="자료 목록">
+  <div class="in">
+    <a href="#basic"><span class="n">01</span>4대 부품</a><a href="#cycle"><span class="n">02</span>부속기기</a><a href="#panel"><span class="n">03</span>제어반</a><a href="#tc"><span class="n">04</span>온도조절기</a>
+    <a href="#lps"><span class="n">05</span>저압스위치</a><a href="#hps"><span class="n">06</span>고압스위치</a><a href="#diag"><span class="n">07</span>과열도 진단</a><a href="#comp"><span class="n">08</span>압축기 교체</a>
+    <a href="#maint"><span class="n">09</span>교체 주기</a><a href="#drawing"><span class="n">10</span>실물 회로도</a><a href="#ctrl"><span class="n">11</span>제어 회로</a><a href="#compin"><span class="n">12</span>압축기 분해</a><a href="#load"><span class="n">13</span>부하계산</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- 01 4대 부품 -->
 <section class="section" id="basic">
-  <h2>냉동 장비 기초 교육</h2>
-  <div class="meta"><span>입문</span><span>14쪽</span><span>약 15분</span><span>2주차 · 냉동설비 설치 기초와 함께</span></div>
-  <p class="file"><code>201310_TNC_냉동 장비 기초 교육.pdf</code> · 국제티엔씨 기술운영팀 교육 자료 (2013)</p>
-  <ul>
-    <li>냉동이란 무엇이고, 냉동기는 어떤 형식으로 나뉘나</li>
-    <li>기본 구성 네 가지: 압축기 · 응축기 · 팽창밸브 · 증발기</li>
-    <li>냉매가 도는 순서(냉매 흐름도)와 압축기 일상점검 기준</li>
-  </ul>
-  <p class="how">읽는 법: 압축기 모델 구분표는 그 회사 설비 한정이라 건너뜁니다. 네 부품의 순서를 종이에 그려 볼 수 있으면 끝입니다.</p>
-  <div class="quiz-box" id="quiz-r1">
-    <span class="quiz-badge">QUIZ</span>
-    <div class="quiz-question">자료에 나온 압력 숫자를 지금 현장 냉장고에 그대로 대면 안 되는 이유는?</div>
-    <div class="quiz-options">
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r1')"><span class="quiz-num">①</span>자료가 오래돼서 원리까지 틀렸기 때문에</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r1')"><span class="quiz-num">②</span>숫자가 R-22 냉매와 대형 설비 기준이라 냉매·장비가 다르면 값이 달라지기 때문에</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r1')"><span class="quiz-num">③</span>압력은 현장에서 잴 필요가 없기 때문에</button>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">01 · 2주차</div>
+      <h2>냉매는 네 부품을 돌며 열을 옮깁니다</h2>
+      <div class="meta"><span class="prio req">필수</span><span>원본 14쪽 · 약 15분</span></div>
+      <p class="gain">냉동기는 차가움을 만드는 기계가 아니라 <b>안쪽 열을 바깥으로 퍼 나르는 기계</b>입니다. 부품을 눌러 냉매가 어떻게 바뀌는지 보세요.</p>
     </div>
-    <div class="quiz-feedback quiz-feedback-pass" id="quiz-r1-pass">맞습니다. 원리는 그대로 쓰고, 숫자는 그 장비의 냉매와 제조사 기준으로 다시 확인합니다.</div>
-    <div class="quiz-feedback quiz-feedback-fail" id="quiz-r1-fail">원리는 지금도 맞습니다. 숫자가 R-22 냉매·대형 설비 기준이라 그대로 쓰면 안 됩니다.</div>
+    <div class="grid2">
+      <figure class="fig">
+        <svg class="cyc" viewBox="0 0 560 380" role="img" aria-labelledby="cycT">
+          <title id="cycT">냉동 사이클: 압축기에서 응축기, 팽창밸브, 증발기를 거쳐 다시 압축기로</title>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1a1a"/></marker>
+          </defs>
+          <!-- 고압/저압 구역 -->
+          <rect x="8" y="8" width="544" height="176" rx="4" fill="#fff7f2"/>
+          <rect x="8" y="196" width="544" height="176" rx="4" fill="#f3f7fa"/>
+          <text x="20" y="30" font-size="13" font-weight="700" fill="#c2500f">고압 쪽 · 뜨겁다</text>
+          <text x="20" y="362" font-size="13" font-weight="700" fill="#385768">저압 쪽 · 차갑다</text>
+          <!-- 배관 -->
+          <path d="M440 236 L440 108 L370 108" fill="none" stroke="#EA5E18" stroke-width="6" marker-end="url(#ah)"/>
+          <path d="M190 108 L120 108 L120 150" fill="none" stroke="#f59e0b" stroke-width="6" marker-end="url(#ah)"/>
+          <path d="M120 230 L120 290 L190 290" fill="none" stroke="#6f97ad" stroke-width="6" marker-end="url(#ah)"/>
+          <path d="M370 290 L440 290 L440 300" fill="none" stroke="#385768" stroke-width="6"/>
+          <!-- 배관 설명 -->
+          <text x="452" y="160" font-size="12" fill="#c2500f">고온·고압 가스</text>
+                    <text x="128" y="95" font-size="12" fill="#b45309">고압 액</text>
+          <text x="20" y="252" font-size="12" fill="#385768">저온·저압</text><text x="20" y="268" font-size="12" fill="#385768">(액+가스)</text>
+          <text x="376" y="318" font-size="12" fill="#385768">저압 가스</text>
+          <!-- 부품 -->
+          <g class="part" data-k="cond" tabindex="0" role="button" aria-label="응축기">
+            <rect x="190" y="80" width="180" height="56" rx="4" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+            <text x="280" y="106" font-size="16" font-weight="800" text-anchor="middle" fill="#1a1a1a">응축기</text>
+            <text x="280" y="124" font-size="11.5" text-anchor="middle" fill="#6b7280">열을 밖으로 버린다</text>
+          </g>
+          <g class="part" data-k="exp" tabindex="0" role="button" aria-label="팽창밸브">
+            <rect x="60" y="152" width="120" height="76" rx="4" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+            <text x="120" y="186" font-size="15" font-weight="800" text-anchor="middle" fill="#1a1a1a">팽창밸브</text>
+            <text x="120" y="206" font-size="11.5" text-anchor="middle" fill="#6b7280">압력을 떨어뜨린다</text>
+          </g>
+          <g class="part" data-k="evap" tabindex="0" role="button" aria-label="증발기">
+            <rect x="190" y="262" width="180" height="56" rx="4" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+            <text x="280" y="288" font-size="16" font-weight="800" text-anchor="middle" fill="#1a1a1a">증발기</text>
+            <text x="280" y="306" font-size="11.5" text-anchor="middle" fill="#6b7280">안쪽 열을 빨아들인다</text>
+          </g>
+          <g class="part" data-k="comp" tabindex="0" role="button" aria-label="압축기">
+            <rect x="380" y="236" width="120" height="64" rx="4" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+            <text x="440" y="264" font-size="16" font-weight="800" text-anchor="middle" fill="#1a1a1a">압축기</text>
+            <text x="440" y="284" font-size="11.5" text-anchor="middle" fill="#6b7280">냉매를 눌러 보낸다</text>
+          </g>
+          <!-- 열 화살표 -->
+          <text x="280" y="62" font-size="12" text-anchor="middle" fill="#c2500f">↑ 열이 바깥으로 나간다</text>
+          <text x="280" y="342" font-size="12" text-anchor="middle" fill="#385768">↓ 고내(냉장고 안) 열이 들어온다</text>
+        </svg>
+        <figcaption>색은 냉매 상태입니다. 주황 = 뜨겁고 압력 높음, 파랑 = 차갑고 압력 낮음. 화살표 방향으로 쉬지 않고 돕니다.</figcaption>
+      </figure>
+      <div>
+        <div class="seg" role="group" aria-label="부품 고르기">
+          <button type="button" data-k="comp" aria-pressed="true">압축기</button>
+          <button type="button" data-k="cond" aria-pressed="false">응축기</button>
+          <button type="button" data-k="exp" aria-pressed="false">팽창밸브</button>
+          <button type="button" data-k="evap" aria-pressed="false">증발기</button>
+        </div>
+        <div class="detail" id="partDetail" aria-live="polite"></div>
+        <div class="callout"><b>현장에서 쓰는 한 줄</b> — 고장은 대부분 「열을 버리는 곳(응축기)이 막혔나」, 「열을 받는 곳(증발기)이 얼었나」, 「냉매가 모자라나」 셋 중 하나에서 시작합니다.</div>
+      </div>
+    </div>
+    <p class="file">원본: <code>201310_TNC_냉동 장비 기초 교육.pdf</code> · 국제티엔씨 기술운영팀 (2013)</p>
+    <div class="quiz-box" id="quiz-r1">
+      <span class="quiz-badge">QUIZ</span>
+      <div class="quiz-question">응축기 핀에 먼지가 꽉 끼면 어떤 일이 먼저 생길까요?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r1')"><span class="quiz-num">①</span>증발기가 더 차가워진다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r1')"><span class="quiz-num">②</span>열을 못 버려 고압이 오르고, 냉장고가 덜 시원해진다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r1')"><span class="quiz-num">③</span>아무 변화 없다</button>
+      </div>
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz-r1-pass">맞습니다. 응축기는 열을 버리는 곳입니다. 막히면 열이 쌓여 고압이 오르고, 심하면 고압스위치가 장비를 멈춥니다(06 참고).</div>
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz-r1-fail">응축기는 열을 바깥으로 버리는 곳입니다. 먼지로 막히면 열을 못 버려 고압이 오르고 냉각이 약해집니다.</div>
+    </div>
   </div>
 </section>
 
+<!-- 02 부속기기 -->
 <section class="section" id="cycle">
-  <h2>표준냉동장치 구성</h2>
-  <div class="meta"><span>기초</span><span>26쪽</span><span>약 40분</span><span>2주차</span></div>
-  <p class="file"><code>10. 표준냉동장치 구성.pdf</code> · 한국폴리텍대학 공조냉동 실습 강의 자료 (2014)</p>
-  <ul>
-    <li>증기압축식 냉동 사이클과 설치·시공 순서</li>
-    <li>부속기기: 수액기 · 액분리기 · 사이트글라스 · 충전니플 · 필터드라이어 · 매니폴드게이지</li>
-    <li>팽창밸브 종류(수동·온도식·정압식·플로트식·모세관)와 온도식 팽창밸브의 구조</li>
-  </ul>
-  <p class="how">읽는 법: 실습용 소형 장치(1/2마력) 기준이라 실제 장비보다 단순합니다. 그래서 처음 보기에 좋습니다. 배관도를 손가락으로 따라가며 부품 이름을 소리 내 읽습니다.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">02 · 2주차</div>
+      <h2>배관을 따라가면 부속기기가 순서대로 나옵니다</h2>
+      <div class="meta"><span class="prio req">필수</span><span>원본 26쪽 · 약 40분</span></div>
+      <p class="gain">응축기에서 나온 액 냉매는 팽창밸브까지 가는 길에 네 가지를 지납니다. 순서를 알면 현장에서 「이게 왜 여기 있나」가 보입니다.</p>
+    </div>
+    <figure class="fig">
+      <svg class="wide" viewBox="0 0 1060 250" role="img" aria-labelledby="accT">
+        <title id="accT">응축기 다음 수액기, 필터드라이어, 사이트글라스, 전자변, 팽창밸브, 증발기, 액분리기, 압축기 순서</title>
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="6" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9ca3af"/></marker></defs>
+        <line x1="40" y1="90" x2="1020" y2="90" stroke="#f59e0b" stroke-width="5"/>
+        <text x="40" y="30" font-size="15.5" font-weight="700" fill="#b45309">고압 액이 지나는 길 (액관)</text>
+        <g font-size="16.5" font-weight="800" text-anchor="middle" fill="#1a1a1a">
+          <rect x="20" y="66" width="110" height="48" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="75" y="95">응축기</text>
+          <rect x="170" y="66" width="110" height="48" rx="4" fill="#fff" stroke="#EA5E18" stroke-width="2"/><text x="225" y="95">수액기</text>
+          <rect x="320" y="66" width="130" height="48" rx="4" fill="#fff" stroke="#EA5E18" stroke-width="2"/><text x="385" y="95">필터드라이어</text>
+          <rect x="490" y="66" width="130" height="48" rx="4" fill="#fff" stroke="#EA5E18" stroke-width="2"/><text x="555" y="95">사이트글라스</text>
+          <rect x="660" y="66" width="110" height="48" rx="4" fill="#fff" stroke="#EA5E18" stroke-width="2"/><text x="715" y="95">전자변</text>
+          <rect x="810" y="66" width="110" height="48" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="865" y="95">팽창밸브</text>
+          <text x="985" y="95" font-size="15.5" fill="#6b7280">→ 증발기</text>
+        </g>
+        <g font-size="14.5" fill="#4b5563" text-anchor="middle">
+          <text x="225" y="136">액 냉매를 모아 둔다</text>
+          <text x="385" y="136">수분·이물질을 거른다</text>
+          <text x="555" y="136">냉매 상태를 눈으로 본다</text>
+          <text x="555" y="152">(거품이 계속 보이면 의심)</text>
+          <text x="715" y="136">냉매 길을 열고 닫는다</text>
+          <text x="865" y="136">압력을 떨어뜨린다</text>
+        </g>
+        <line x1="40" y1="200" x2="1020" y2="200" stroke="#385768" stroke-width="5"/>
+        <text x="40" y="236" font-size="15.5" font-weight="700" fill="#385768">저압 가스가 돌아오는 길 (흡입관)</text>
+        <g font-size="16.5" font-weight="800" text-anchor="middle" fill="#1a1a1a">
+          <rect x="560" y="176" width="110" height="48" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="615" y="205">증발기</text>
+          <rect x="710" y="176" width="130" height="48" rx="4" fill="#fff" stroke="#EA5E18" stroke-width="2"/><text x="775" y="205">액분리기</text>
+          <rect x="880" y="176" width="110" height="48" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="935" y="205">압축기</text>
+        </g>
+        <text x="775" y="246" font-size="14.5" fill="#4b5563" text-anchor="middle">액이 압축기로 못 들어가게 막는다</text>
+      </svg>
+      <figcaption>주황 테두리가 부속기기입니다. 실습용 소형 장치 기준이라 실제 장비는 일부가 없거나 모양이 다를 수 있습니다.</figcaption>
+    </figure>
+    <div class="callout"><b>왜 액분리기가 있나</b> — 압축기는 가스를 누르는 기계입니다. 액이 들어가면 누를 수 없어 부품이 깨집니다(액압축). 그래서 돌아오는 길 끝에서 액을 걸러 냅니다.</div>
+    <p class="file">원본: <code>10. 표준냉동장치 구성.pdf</code> · 한국폴리텍대학 공조냉동 실습 강의 자료 (2014). 팽창밸브 종류(수동·온도식·정압식·플로트식·모세관)와 온도식 팽창밸브 단면은 원본에서 봅니다.</p>
+  </div>
 </section>
 
+<!-- 03 제어반 -->
 <section class="section" id="panel">
-  <h2>제어반 전기부품 — 차단기·릴레이·스위치</h2>
-  <div class="meta"><span>입문</span><span>20쪽</span><span>약 30분</span><span>3주차 · 전기 배선 실습과 함께</span></div>
-  <p class="file"><code>3. 단상 전류 차단기.pdf</code> · 같은 강의 자료 (2017). 제목과 달리 제어반 부품 전반을 다룹니다.</p>
-  <ul>
-    <li>차단기의 역할, 전압계·전류계</li>
-    <li>스위치 종류와 접점 기호, 표시등 색의 뜻(전원·운전·정지·경보)</li>
-    <li>릴레이 원리와 자기유지회로</li>
-  </ul>
-  <p class="how">읽는 법: 마지막의 건물 공조 흐름도 한 장은 우리 일과 관계없어 건너뜁니다. 신입은 전기를 고치는 사람이 아니라 보고 알리는 사람입니다. 부품을 알아보고 기호를 읽는 데까지가 목표입니다.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">03 · 3주차</div>
+      <h2>제어반은 작은 신호가 큰 전기를 켜는 구조입니다</h2>
+      <div class="meta"><span class="prio rec">권장</span><span>원본 20쪽 · 약 30분</span></div>
+      <p class="gain">신입은 전기를 고치는 사람이 아니라 <b>보고 알리는 사람</b>입니다. 무엇이 무엇을 켜는지만 알면 「무엇이 어떻게 됐다」를 정확히 전할 수 있습니다.</p>
+    </div>
+    <div class="grid2">
+      <figure class="fig">
+        <svg class="mid" viewBox="0 0 560 300" role="img" aria-labelledby="pnlT">
+          <title id="pnlT">조작 회로의 온도조절기와 보호 스위치가 전자접촉기 코일을 켜고, 접촉기가 압축기 전원을 연결한다</title>
+          <defs><marker id="ah3" viewBox="0 0 10 10" refX="6" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1a1a"/></marker></defs>
+          <text x="20" y="28" font-size="13" font-weight="700" fill="#385768">조작 회로 — 약한 신호</text>
+          <g font-size="13" font-weight="700" text-anchor="middle">
+            <rect x="20" y="44" width="120" height="44" rx="4" fill="#f3f7fa" stroke="#385768"/><text x="80" y="71">온도조절기</text>
+            <rect x="160" y="44" width="110" height="44" rx="4" fill="#f3f7fa" stroke="#385768"/><text x="215" y="71">고압스위치</text>
+            <rect x="290" y="44" width="110" height="44" rx="4" fill="#f3f7fa" stroke="#385768"/><text x="345" y="71">저압스위치</text>
+            <rect x="420" y="44" width="120" height="44" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="480" y="64">접촉기 코일</text><text x="480" y="80" font-size="11" font-weight="400" fill="#6b7280">(전자석)</text>
+          </g>
+          <line x1="140" y1="66" x2="160" y2="66" stroke="#385768" stroke-width="2"/><line x1="270" y1="66" x2="290" y2="66" stroke="#385768" stroke-width="2"/><line x1="400" y1="66" x2="420" y2="66" stroke="#385768" stroke-width="2"/>
+          <text x="280" y="112" font-size="12" text-anchor="middle" fill="#4b5563">셋이 모두 「괜찮다」일 때만 코일에 전기가 간다 (하나라도 끊기면 정지)</text>
+          <line x1="480" y1="88" x2="480" y2="176" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#ah3)"/>
+          <text x="490" y="140" font-size="12" fill="#1a1a1a">코일이 당기면</text>
+          <text x="20" y="168" font-size="13" font-weight="700" fill="#c2500f">주회로 — 큰 전기</text>
+          <g font-size="13" font-weight="700" text-anchor="middle">
+            <rect x="20" y="184" width="110" height="44" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="75" y="211">차단기</text>
+            <rect x="150" y="184" width="150" height="44" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="225" y="211">열동계전기</text>
+            <rect x="420" y="184" width="120" height="44" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="480" y="204">접촉기 접점</text><text x="480" y="220" font-size="11" font-weight="400" fill="#6b7280">(붙는다)</text>
+          </g>
+          <line x1="130" y1="206" x2="150" y2="206" stroke="#EA5E18" stroke-width="2"/><line x1="300" y1="206" x2="420" y2="206" stroke="#EA5E18" stroke-width="2"/>
+          <line x1="480" y1="228" x2="480" y2="262" stroke="#EA5E18" stroke-width="3" marker-end="url(#ah3)"/>
+          <rect x="400" y="264" width="160" height="32" rx="4" fill="#1C1917"/><text x="480" y="285" font-size="13" font-weight="800" text-anchor="middle" fill="#fff">압축기 모터</text>
+          <text x="225" y="250" font-size="11.5" text-anchor="middle" fill="#4b5563">전류가 너무 많이 흐르면 끊는다</text>
+        </svg>
+        <figcaption>원리를 보여 주려고 줄인 그림입니다. 실제 회로에는 팬·히터 같은 다른 부하도 같은 방식으로 붙습니다.</figcaption>
+      </figure>
+      <div>
+        <h3>표시등이 알려 주는 것</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>표시</th><th>뜻</th></tr></thead>
+          <tbody>
+            <tr><td>전원등 (P.L)</td><td>제어반에 전원이 들어와 있다</td></tr>
+            <tr><td>운전등 (G.L)</td><td>운전 중</td></tr>
+            <tr><td>정지등 (R.L)</td><td>정지 상태</td></tr>
+            <tr><td>경보등 (Y.L)</td><td>이상이 생겼다 — 무엇 때문인지 확인</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout"><b>보고할 때</b> — 「어느 등이 켜져 있고, 차단기·열동계전기가 떨어져 있는지」를 사진과 함께 알립니다. 차단기를 다시 올리거나 계전기를 누르는 것은 원인을 확인한 사람이 합니다.</div>
+      </div>
+    </div>
+    <p class="file">원본: <code>3. 단상 전류 차단기.pdf</code> · 같은 강의 자료 (2017). 제목과 달리 제어반 부품 전반(차단기·스위치 기호·릴레이·자기유지회로)을 다룹니다.</p>
+  </div>
 </section>
 
+<!-- 04 온도조절기 -->
 <section class="section" id="tc">
-  <h2>온도조절기</h2>
-  <div class="meta"><span>기초</span><span>31쪽</span><span>약 45분</span><span>3주차 · 필수</span></div>
-  <p class="file"><code>7. 온도조절기.pdf</code> · 같은 강의 자료 (2017)</p>
-  <ul>
-    <li>단입점(켜지는 온도)과 단절점(꺼지는 온도), 온도편차</li>
-    <li>온도조절기 단자 연결과 릴레이 제어회로</li>
-    <li>디지털 온도조절기 메뉴: 냉각·히터 선택, 지연시간, 편차, 보정, 설정 상·하한, 잠금</li>
-  </ul>
-  <p class="how">읽는 법: 자료 속 온도조절기 두 종은 교육용입니다. 현장 컨트롤러는 제조사마다 메뉴 이름이 다르니, 「어떤 값이 있는지」를 익히고 실제 메뉴는 그 장비 설명서로 확인합니다. 아래 「실물 회로도」와 같이 보면 좋습니다.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">04 · 3주차</div>
+      <h2>온도조절기는 두 온도 사이에서 켜고 끕니다</h2>
+      <div class="meta"><span class="prio req">필수</span><span>원본 31쪽 · 약 45분</span></div>
+      <p class="gain">「안 시원해요」·「너무 얼어요」 신고의 상당수는 고장이 아니라 설정값 문제입니다. 자료 가운데 A/S 현장과 가장 가깝습니다.</p>
+    </div>
+    <div class="grid2">
+      <figure class="fig">
+        <svg class="mid" viewBox="0 0 560 300" role="img" aria-labelledby="tcT">
+          <title id="tcT">고내 온도가 켜지는 온도까지 오르면 압축기가 켜지고, 꺼지는 온도까지 내려가면 꺼지는 톱니 모양 그래프</title>
+          <line x1="60" y1="30" x2="60" y2="210" stroke="#1a1a1a"/><line x1="60" y1="210" x2="540" y2="210" stroke="#1a1a1a"/>
+          <text x="20" y="24" font-size="12" fill="#6b7280">고내 온도</text><text x="540" y="228" font-size="12" text-anchor="end" fill="#6b7280">시간 →</text>
+          <rect x="60" y="70" width="480" height="80" fill="#fff7f2"/>
+          <line x1="60" y1="70" x2="540" y2="70" stroke="#EA5E18" stroke-dasharray="5 4"/>
+          <line x1="60" y1="150" x2="540" y2="150" stroke="#385768" stroke-dasharray="5 4"/>
+          <text x="64" y="64" font-size="12.5" font-weight="700" fill="#c2500f">켜지는 온도 (단입점)</text>
+          <text x="64" y="168" font-size="12.5" font-weight="700" fill="#385768">꺼지는 온도 (단절점)</text>
+          <line x1="530" y1="72" x2="530" y2="148" stroke="#c2500f" stroke-width="1.5"/><text x="524" y="114" font-size="12" font-weight="700" fill="#c2500f" text-anchor="end">편차</text>
+          <polyline points="60,150 120,70 180,150 250,70 310,150 380,70 440,150 500,70 510,82" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+          <text x="60" y="248" font-size="12" fill="#6b7280">압축기</text>
+          <g>
+            <rect x="120" y="236" width="60" height="16" fill="#EA5E18"/><rect x="250" y="236" width="60" height="16" fill="#EA5E18"/><rect x="380" y="236" width="60" height="16" fill="#EA5E18"/>
+          </g>
+          <text x="150" y="276" font-size="12" text-anchor="middle" fill="#c2500f">켜짐</text><text x="215" y="276" font-size="12" text-anchor="middle" fill="#6b7280">꺼짐</text>
+        </svg>
+        <figcaption>온도가 내려가는 동안 압축기가 돌고, 꺼진 동안 온도가 서서히 오릅니다. 두 점 사이 폭이 편차입니다. 편차를 정하는 방식은 제품마다 다르니 그 장비 설명서로 확인합니다.</figcaption>
+      </figure>
+      <div>
+        <h3>현장에서 먼저 볼 설정 네 가지</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>설정</th><th>잘못되면</th></tr></thead>
+          <tbody>
+            <tr><td>설정 온도</td><td>목표 자체가 높거나 낮다</td></tr>
+            <tr><td>편차</td><td>너무 넓으면 온도가 크게 출렁이고, 너무 좁으면 압축기가 자주 켜졌다 꺼진다</td></tr>
+            <tr><td>보정</td><td>표시 온도와 실제 온도가 어긋난다</td></tr>
+            <tr><td>냉각·히터 선택</td><td>반대로 동작한다</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout"><b>순서</b> — 표시 온도와 실제 온도계 값을 먼저 비교합니다. 둘이 다르면 센서·보정을, 같으면 설정값을 봅니다. 설정을 바꿨다면 바꾸기 전 값을 사진으로 남깁니다.</div>
+      </div>
+    </div>
+    <p class="file">원본: <code>7. 온도조절기.pdf</code> · 같은 강의 자료 (2017). 자료 속 온도조절기 두 종은 교육용이라, 현장 컨트롤러 메뉴 이름은 제조사마다 다릅니다.</p>
+  </div>
 </section>
 
+<!-- 05 저압스위치 · 펌프다운 -->
 <section class="section" id="lps">
-  <h2>저압스위치(LPS) 제어</h2>
-  <div class="meta"><span>기초~심화</span><span>24쪽</span><span>약 35분</span><span>3주차</span></div>
-  <p class="file"><code>8. LPS 제어 회로.pdf</code> · 같은 강의 자료 (2017)</p>
-  <ul>
-    <li>저압스위치로 하는 두 가지 제어: 이상이 생기면 멈추기, 펌프다운</li>
-    <li>온도로 멈추는 방식과 펌프다운으로 멈추는 방식 비교</li>
-    <li>저압스위치 구조와 차압, 운전 곡선</li>
-  </ul>
-  <div class="quiz-box" id="quiz-r2">
-    <span class="quiz-badge">QUIZ</span>
-    <div class="quiz-question">펌프다운 방식 냉동기는 온도가 맞은 뒤에도 압축기가 잠시 더 돕니다. 왜 그런가요?</div>
-    <div class="quiz-options">
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r2')"><span class="quiz-num">①</span>온도조절기가 고장 나서</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r2')"><span class="quiz-num">②</span>저압 쪽 냉매를 모아 둔 뒤 저압스위치가 멈추게 하는 방식이라서</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r2')"><span class="quiz-num">③</span>응축기를 식히려고</button>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">05 · 3주차</div>
+      <h2>펌프다운: 온도가 맞아도 압축기가 잠시 더 도는 이유</h2>
+      <div class="meta"><span class="prio rec">권장</span><span>원본 24쪽 · 약 35분</span></div>
+      <p class="gain">정상 동작을 고장으로 오해하지 않으려면 이 순서를 알아야 합니다.</p>
     </div>
-    <div class="quiz-feedback quiz-feedback-pass" id="quiz-r2-pass">맞습니다. 정상 동작입니다. 이걸 모르면 멀쩡한 장비를 고장으로 신고하게 됩니다.</div>
-    <div class="quiz-feedback quiz-feedback-fail" id="quiz-r2-fail">펌프다운은 온도가 맞으면 냉매 길을 닫고, 저압 쪽 냉매를 모은 뒤 저압스위치로 멈추는 방식입니다. 잠시 더 돌아도 정상입니다.</div>
+    <div class="grid2">
+      <figure class="fig">
+        <svg class="mid" viewBox="0 0 560 270" role="img" aria-labelledby="pdT">
+          <title id="pdT">전자변이 닫힌 뒤 저압이 떨어져 단절점에 닿으면 압축기가 멈추는 그래프</title>
+          <line x1="60" y1="20" x2="60" y2="190" stroke="#1a1a1a"/><line x1="60" y1="190" x2="540" y2="190" stroke="#1a1a1a"/>
+          <text x="16" y="16" font-size="12" fill="#6b7280">저압</text>
+          <line x1="60" y1="150" x2="540" y2="150" stroke="#385768" stroke-dasharray="5 4"/><text x="64" y="166" font-size="12" font-weight="700" fill="#385768">저압스위치가 끊는 압력</text>
+          <polyline points="60,70 200,70 290,150 300,150" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+          <polyline points="300,150 390,150 420,70 540,70" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-dasharray="2 0"/>
+          <line x1="200" y1="30" x2="200" y2="190" stroke="#EA5E18" stroke-dasharray="3 3"/><text x="204" y="40" font-size="12" fill="#c2500f">① 전자변 닫힘</text>
+          <line x1="292" y1="30" x2="292" y2="190" stroke="#EA5E18" stroke-dasharray="3 3"/><text x="296" y="56" font-size="12" fill="#c2500f">③ 압축기 정지</text>
+          <line x1="400" y1="30" x2="400" y2="190" stroke="#385768" stroke-dasharray="3 3"/><text x="404" y="40" font-size="12" fill="#385768">④ 전자변 열림 → 재기동</text>
+          <text x="60" y="212" font-size="12" fill="#6b7280">압축기</text>
+          <rect x="60" y="200" width="232" height="16" fill="#EA5E18"/><rect x="418" y="200" width="122" height="16" fill="#EA5E18"/>
+          <text x="245" y="110" font-size="12" fill="#1a1a1a">② 저압 쪽 냉매를 끌어간다</text>
+        </svg>
+        <figcaption>①~③ 사이 압축기가 더 도는 시간이 펌프다운입니다. 저압 쪽에 냉매가 고여 있지 않게 해서 다음 기동 때 액이 압축기로 몰리는 것을 막습니다.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><b>고내 온도가 꺼지는 온도에 닿는다</b><span>온도조절기가 전자변을 닫는다. 압축기는 아직 돈다.</span></li>
+        <li><b>압축기가 저압 쪽 냉매를 끌어간다</b><span>냉매 길이 막혀 있으니 저압이 점점 내려간다.</span></li>
+        <li><b>저압이 설정값까지 내려가면 저압스위치가 압축기를 멈춘다</b><span>이게 「온도는 맞았는데 잠시 더 돈」 이유다.</span></li>
+        <li><b>온도가 다시 오르면 전자변이 열린다</b><span>저압이 올라가 저압스위치가 붙고, 압축기가 다시 돈다.</span></li>
+      </ol>
+    </div>
+    <p class="file">원본: <code>8. LPS 제어 회로.pdf</code> · 같은 강의 자료 (2017). 저압스위치 구조와 차압 계산, 운전 곡선은 원본에서 봅니다. 압력 설정값은 R-22 기준입니다.</p>
+    <div class="quiz-box" id="quiz-r2">
+      <span class="quiz-badge">QUIZ</span>
+      <div class="quiz-question">펌프다운 방식 냉동기가 온도를 맞춘 뒤에도 압축기가 잠시 더 돕니다. 어떻게 판단하나요?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r2')"><span class="quiz-num">①</span>온도조절기 고장이니 바로 교체 보고한다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r2')"><span class="quiz-num">②</span>저압 쪽 냉매를 모은 뒤 저압스위치가 멈추는 정상 동작이다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r2')"><span class="quiz-num">③</span>응축기를 식히려고 도는 것이다</button>
+      </div>
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz-r2-pass">맞습니다. 그래프의 ①~③ 구간입니다. 단, 저압스위치가 끝내 끊지 못하고 계속 돈다면 그때는 이상입니다.</div>
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz-r2-fail">펌프다운은 전자변을 닫고 저압 쪽 냉매를 모은 뒤 저압스위치로 멈추는 방식입니다. 잠시 더 도는 것은 정상입니다.</div>
+    </div>
   </div>
 </section>
 
+<!-- 06 고압스위치 -->
 <section class="section" id="hps">
-  <h2>고압스위치(HPS) 제어</h2>
-  <div class="meta"><span>기초~심화</span><span>26쪽</span><span>약 35분</span><span>3주차</span></div>
-  <p class="file"><code>9. HPS 제어 회로.pdf</code> · 같은 강의 자료 (2017)</p>
-  <ul>
-    <li>수동복귀형 고압스위치: 고압으로 멈추면 리셋을 눌러야 다시 돈다</li>
-    <li>고압스위치로 응축기 팬을 켜고 끄는 제어(겨울철 과냉각 방지)</li>
-    <li>전자접촉기 구조와 열동형 계전기(과전류로 끊는 부품)</li>
-  </ul>
-  <p class="how">마지막 쪽의 과제 4문항을 사수와 같이 풀어 봅니다.</p>
-  <div class="quiz-box" id="quiz-r3">
-    <span class="quiz-badge">QUIZ</span>
-    <div class="quiz-question">워크인 냉동기가 고압 차단으로 멈췄습니다. 먼저 할 일은?</div>
-    <div class="quiz-options">
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r3')"><span class="quiz-num">①</span>리셋 버튼을 눌러 바로 다시 돌린다</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r3')"><span class="quiz-num">②</span>리셋 전에 응축기 먼지·팬처럼 고압이 오른 원인을 먼저 보고 알린다</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r3')"><span class="quiz-num">③</span>고압스위치를 떼어 낸다</button>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">06 · 3주차</div>
+      <h2>고압 차단은 리셋보다 원인이 먼저입니다</h2>
+      <div class="meta"><span class="prio rec">권장</span><span>원본 26쪽 · 약 35분</span></div>
+      <p class="gain">수동복귀형 고압스위치는 리셋 버튼을 눌러야 다시 돕니다. 원인을 그대로 두고 리셋하면 같은 자리로 돌아옵니다.</p>
     </div>
-    <div class="quiz-feedback quiz-feedback-pass" id="quiz-r3-pass">맞습니다. 원인을 그대로 두고 리셋하면 다시 멈추고, 그사이 압축기가 상합니다.</div>
-    <div class="quiz-feedback quiz-feedback-fail" id="quiz-r3-fail">고압 차단은 장비를 지키려고 멈춥니다. 원인(응축기 오염·팬 정지 등)을 먼저 봐야 합니다. 스위치를 떼는 것은 절대 하지 않습니다.</div>
+    <figure class="fig">
+      <svg class="wide" viewBox="0 0 1060 210" role="img" aria-labelledby="hpT">
+        <title id="hpT">고압이 오르는 원인, 고압스위치 차단, 원인 확인과 보고, 원인 해결 뒤 리셋의 순서</title>
+        <defs><marker id="ah4" viewBox="0 0 10 10" refX="6" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1a1a"/></marker></defs>
+        <text x="20" y="24" font-size="15.5" font-weight="700" fill="#c2500f">고압이 오르는 흔한 원인</text>
+        <g font-size="16" font-weight="700" fill="#1a1a1a">
+          <rect x="20" y="36" width="250" height="36" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="34" y="59">응축기 핀이 먼지로 막힘</text>
+          <rect x="20" y="82" width="250" height="36" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="34" y="105">응축기 팬이 안 돎</text>
+          <rect x="20" y="128" width="250" height="36" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="34" y="151">주변이 너무 덥거나 통풍이 막힘</text>
+        </g>
+        <line x1="270" y1="100" x2="330" y2="100" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah4)"/>
+        <rect x="336" y="72" width="190" height="56" rx="4" fill="#1C1917"/><text x="431" y="97" font-size="16.5" font-weight="800" text-anchor="middle" fill="#fff">고압스위치 차단</text><text x="431" y="116" font-size="14" text-anchor="middle" fill="#d6d3d1">압축기 정지 · 장비 보호</text>
+        <line x1="526" y1="100" x2="586" y2="100" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah4)"/>
+        <rect x="592" y="72" width="210" height="56" rx="4" fill="#fff" stroke="#1a1a1a" stroke-width="2"/><text x="697" y="97" font-size="16.5" font-weight="800" text-anchor="middle">원인 확인 · 사진으로 보고</text><text x="697" y="116" font-size="14" text-anchor="middle" fill="#6b7280">왼쪽 원인부터 눈으로 본다</text>
+        <line x1="802" y1="100" x2="862" y2="100" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah4)"/>
+        <rect x="868" y="72" width="172" height="56" rx="4" fill="#fff" stroke="#15803d" stroke-width="2"/><text x="954" y="97" font-size="16.5" font-weight="800" text-anchor="middle" fill="#15803d">원인 해결 뒤 리셋</text><text x="954" y="116" font-size="14" text-anchor="middle" fill="#6b7280">사수 확인 후</text>
+        <text x="431" y="170" font-size="15" text-anchor="middle" fill="#b91c1c">✕ 원인 확인 없이 바로 리셋</text>
+        <text x="431" y="190" font-size="14.5" text-anchor="middle" fill="#6b7280">→ 다시 멈추고, 그사이 압축기가 상한다</text>
+      </svg>
+      <figcaption>고압스위치는 응축기 팬을 켜고 끄는 데도 씁니다(겨울철 고압이 너무 낮아지는 것을 막음). 이 부분과 전자접촉기·열동계전기 구조는 원본에서 봅니다.</figcaption>
+    </figure>
+    <p class="file">원본: <code>9. HPS 제어 회로.pdf</code> · 같은 강의 자료 (2017). 마지막 쪽 과제 4문항은 사수와 같이 풉니다.</p>
+    <div class="quiz-box" id="quiz-r3">
+      <span class="quiz-badge">QUIZ</span>
+      <div class="quiz-question">워크인 냉동기가 고압 차단으로 멈췄습니다. 먼저 할 일은?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r3')"><span class="quiz-num">①</span>리셋 버튼을 눌러 바로 다시 돌린다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r3')"><span class="quiz-num">②</span>응축기 먼지·팬처럼 고압이 오른 원인을 먼저 보고 사진으로 알린다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r3')"><span class="quiz-num">③</span>고압스위치를 떼어 낸다</button>
+      </div>
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz-r3-pass">맞습니다. 그림의 세 번째 칸입니다. 원인을 그대로 두면 다시 멈추고 그사이 압축기가 상합니다.</div>
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz-r3-fail">고압 차단은 장비를 지키려고 멈춥니다. 원인을 먼저 봐야 합니다. 보호 스위치를 떼는 일은 절대 하지 않습니다.</div>
+    </div>
   </div>
 </section>
 
+<!-- 07 과열도 진단 -->
 <section class="section" id="diag">
-  <h2>냉동장비 고장진단 및 대처방법</h2>
-  <div class="meta"><span>기초~심화</span><span>28쪽</span><span>약 40분</span><span>3주차 · 고장진단 첫걸음과 함께 · 필수</span></div>
-  <p class="file"><code>201504_TNC_냉동장비 고장진단 및 대처방법.pdf</code> · 국제티엔씨 (2015). 같은 제목의 2013년 판은 이 판으로 바뀌었으니 보지 않아도 됩니다.</p>
-  <ul>
-    <li>정상 운전의 기준: 압축기 일상점검 값</li>
-    <li>응축기 점검과 불응축가스 확인</li>
-    <li><b>과열도 재는 법</b>과, 과열도·흡입압력 조합별로 의심할 원인</li>
-    <li>증발기·유분리기 점검, 압축기 손상 통계와 개선안</li>
-  </ul>
-  <p class="how">읽는 법: 과열도 다섯 쪽이 핵심입니다. 「과열도 높음 + 압력 낮음이면 무엇을 의심하나」를 표로 옮겨 적어 두면 현장에서 꺼내 볼 수 있습니다.</p>
-</section>
-
-<section class="section" id="comp">
-  <h2>압축기 교체 때 부품도 같이 바꾸는 이유</h2>
-  <div class="meta"><span>기초</span><span>14쪽</span><span>약 22분</span><span>4주차</span></div>
-  <p class="file"><code>201603_TNC_압축기 교체시 부품 교체의 필요성.pdf</code> · 국제티엔씨 (2016). 2014년 판은 이 판으로 바뀌었습니다.</p>
-  <ul>
-    <li>과열 운전과 수분 유입으로 압축기가 상하는 과정</li>
-    <li>압축기가 상하면 유분리기·필터가 어떻게 오염되나 (교체 전후 사진)</li>
-    <li>오일펌프·가스켓·밸브의 부분 교체 기준</li>
-  </ul>
-  <div class="quiz-box" id="quiz-r4">
-    <span class="quiz-badge">QUIZ</span>
-    <div class="quiz-question">압축기가 타서 새것으로 바꿉니다. 압축기만 바꾸면 어떻게 될 수 있나요?</div>
-    <div class="quiz-options">
-      <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r4')"><span class="quiz-num">①</span>오염된 필터·유분리기·오일이 남아 새 압축기도 다시 상할 수 있다</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r4')"><span class="quiz-num">②</span>아무 문제 없다</button>
-      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r4')"><span class="quiz-num">③</span>냉매가 저절로 깨끗해진다</button>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">07 · 3주차 · 고장진단 첫걸음과 함께</div>
+      <h2>과열도와 흡입압력, 두 숫자로 원인을 좁힙니다</h2>
+      <div class="meta"><span class="prio req">필수</span><span>원본 28쪽 · 약 40분</span></div>
+      <p class="gain">과열도는 증발기에서 나온 냉매가 다 끓고 나서 얼마나 더 데워졌는지입니다. 너무 크면 압축기가 과열되고, 너무 작으면 액이 압축기로 갑니다.</p>
     </div>
-    <div class="quiz-feedback quiz-feedback-pass" id="quiz-r4-pass">맞습니다. 그래서 견적에 필터·오일이 같이 들어갑니다. 고객이 물으면 이 이유로 설명합니다.</div>
-    <div class="quiz-feedback quiz-feedback-fail" id="quiz-r4-fail">상한 압축기에서 나온 오염물이 필터·유분리기·오일에 남습니다. 그대로 두면 새 압축기도 같은 길을 갑니다.</div>
+    <div class="grid2">
+      <figure class="fig">
+        <svg class="mid" viewBox="0 0 560 250" role="img" aria-labelledby="shT">
+          <title id="shT">감온통 위치 온도 영하 15도에서 압력 환산 포화온도 영하 20도를 빼면 과열도 5도</title>
+          <rect x="20" y="70" width="170" height="70" rx="4" fill="#f3f7fa" stroke="#385768"/><text x="105" y="102" font-size="15" font-weight="800" text-anchor="middle">증발기</text><text x="105" y="122" font-size="11.5" text-anchor="middle" fill="#6b7280">여기서 냉매가 끓는다</text>
+          <line x1="190" y1="105" x2="540" y2="105" stroke="#385768" stroke-width="6"/>
+          <circle cx="330" cy="105" r="11" fill="#fff" stroke="#1a1a1a" stroke-width="2"/><text x="330" y="80" font-size="12" text-anchor="middle" fill="#1a1a1a">감온통 자리</text>
+          <g font-size="13" font-variant-numeric="tabular-nums">
+            <rect x="230" y="150" width="200" height="40" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="244" y="175">① 이 자리 배관 온도</text><text x="420" y="175" text-anchor="end" font-weight="800">−15℃</text>
+            <rect x="230" y="196" width="200" height="40" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="244" y="221">② 압력 → 포화온도</text><text x="420" y="221" text-anchor="end" font-weight="800">−20℃</text>
+          </g>
+          <text x="450" y="196" font-size="13" fill="#4b5563">① − ②</text>
+          <text x="450" y="226" font-size="22" font-weight="800" fill="#c2500f">= +5℃</text>
+          <text x="20" y="40" font-size="13" font-weight="700" fill="#385768">과열도 재는 법 (원본의 예, R-22)</text>
+        </svg>
+        <figcaption>압력계 값을 그 냉매의 포화온도로 바꾸는 표는 냉매마다 다릅니다. 원본 자료의 설계 과열도는 +5℃입니다.</figcaption>
+      </figure>
+      <div>
+        <h3>왜 중요한가</h3>
+        <ul class="pts">
+          <li><b>과열도가 크다</b> — 증발기에 냉매가 모자라 차가운 일을 덜 하고, 압축기가 뜨겁게 돈다(오일이 상한다).</li>
+          <li><b>과열도가 작다</b> — 다 끓지 못한 액이 압축기로 넘어갈 수 있다(액압축 → 부품 파손).</li>
+        </ul>
+        <div class="callout"><b>신입의 몫</b> — 숫자를 재서 그대로 적고 알립니다. 팽창밸브를 직접 조절하는 일은 사수가 합니다.</div>
+      </div>
+    </div>
+    <h3>두 숫자의 조합으로 의심할 것 (원본 2-7 ~ 2-9)</h3>
+    <div class="mtx">
+      <div class="cell">
+        <div class="tag"><span class="pill up">과열도 높음</span><span class="pill dn">흡입압력 낮음</span></div>
+        <ol>
+          <li>냉매가 부족하다</li>
+          <li>수분·오염·왁스가 생겼다</li>
+          <li>드라이어가 막혔다 (액관에서 기포 발생)</li>
+          <li>팽창밸브 용량이 작거나 과열도가 높게 맞춰져 있다</li>
+          <li>감온통이 망가졌거나 균압관 위치가 잘못됐다</li>
+        </ol>
+      </div>
+      <div class="cell">
+        <div class="tag"><span class="pill dn">과열도 낮음</span><span class="pill up">흡입압력 높음</span></div>
+        <ol>
+          <li>팽창밸브 용량이 너무 크다</li>
+          <li>과열도가 낮게 맞춰져 있다</li>
+          <li>감온통이 배관에 잘 안 붙었거나 더운 곳에 있다</li>
+          <li>밸브 여닫힘이 불량하다 (막힘)</li>
+          <li>수분·오염·왁스가 생겼다</li>
+          <li>압축기 용량이 모자란다</li>
+        </ol>
+      </div>
+      <div class="cell">
+        <div class="tag"><span class="pill dn">과열도 낮음</span><span class="pill dn">흡입압력 낮음</span></div>
+        <ol>
+          <li>증발기로 가는 바람이 약하다 (팬 불량·먼지)</li>
+          <li>증발기 코일에 성에가 꼈다</li>
+          <li>물건을 막아 쌓아 바람길이 막혔다</li>
+          <li>증발기 안에 오일이 고였다</li>
+        </ol>
+      </div>
+      <div class="cell none">
+        <div class="tag"><span class="pill up">과열도 높음</span><span class="pill up">흡입압력 높음</span></div>
+        <p style="font-size:.9rem;margin:2px 0">원본 자료에 이 조합은 나오지 않습니다. 이 경우가 나오면 숫자를 적어 사수에게 묻고, 답을 헷갈림 기록에 남깁니다.</p>
+      </div>
+    </div>
+    <p class="file">원본: <code>201504_TNC_냉동장비 고장진단 및 대처방법.pdf</code> · 국제티엔씨 (2015). 같은 제목의 2013년 판은 이 판으로 바뀌었습니다. 응축기·증발기·유분리기 점검과 압축기 일상점검 값은 원본에서 봅니다.</p>
   </div>
 </section>
 
+<!-- 08 압축기 교체 -->
+<section class="section" id="comp">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">08 · 4주차</div>
+      <h2>압축기만 바꾸면 새 압축기도 같은 길을 갑니다</h2>
+      <div class="meta"><span class="prio rec">권장</span><span>원본 14쪽 · 약 22분</span></div>
+      <p class="gain">고객이 「압축기만 갈면 되지 않나요?」라고 물을 때 이 그림으로 설명합니다.</p>
+    </div>
+    <figure class="fig">
+      <svg class="wide" viewBox="0 0 1060 230" role="img" aria-labelledby="cpT">
+        <title id="cpT">공기와 수분 유입, 과열 운전이 냉매 산성화와 오일 탄화로 이어지고, 탄화물이 밸브와 유분리기와 필터에 남아 새 압축기를 다시 상하게 한다</title>
+        <defs><marker id="ah5" viewBox="0 0 10 10" refX="6" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1a1a"/></marker></defs>
+        <g font-size="14.5" font-weight="700" fill="#6b7280"><text x="20" y="22">시작</text><text x="290" y="22">변질</text><text x="560" y="22">퍼짐</text><text x="830" y="22">결과</text></g>
+        <g font-size="16" font-weight="700" fill="#1a1a1a">
+          <rect x="20" y="34" width="230" height="56" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="34" y="58">새는 곳으로 공기·수분 유입</text><text x="34" y="78" font-size="14" font-weight="400" fill="#6b7280">불응축가스 → 고압 상승</text>
+          <rect x="20" y="104" width="230" height="56" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="34" y="128">과열 운전</text><text x="34" y="148" font-size="14" font-weight="400" fill="#6b7280">토출 온도가 계속 높다</text>
+          <rect x="290" y="34" width="230" height="56" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="304" y="58">냉매가 산성으로 변한다</text><text x="304" y="78" font-size="14" font-weight="400" fill="#6b7280">수분 + 냉매</text>
+          <rect x="290" y="104" width="230" height="56" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="304" y="128">냉동오일이 타서 굳는다</text><text x="304" y="148" font-size="14" font-weight="400" fill="#6b7280">윤활·냉각이 떨어진다</text>
+          <rect x="560" y="68" width="230" height="56" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="574" y="92">탄화물이 붙는다</text><text x="574" y="112" font-size="14" font-weight="400" fill="#6b7280">밸브 · 유분리기 · 필터</text>
+          <rect x="830" y="68" width="210" height="56" rx="4" fill="#1C1917"/><text x="844" y="92" fill="#fff">압축기 손상</text><text x="844" y="112" font-size="14" font-weight="400" fill="#d6d3d1">베어링·밸브·모터 과열</text>
+        </g>
+        <line x1="250" y1="62" x2="286" y2="62" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah5)"/><line x1="250" y1="132" x2="286" y2="132" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah5)"/>
+        <line x1="520" y1="62" x2="556" y2="88" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah5)"/><line x1="520" y1="132" x2="556" y2="106" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah5)"/>
+        <line x1="790" y1="96" x2="826" y2="96" stroke="#1a1a1a" stroke-width="2" marker-end="url(#ah5)"/>
+        <path d="M935 124 L935 200 L675 200 L675 128" fill="none" stroke="#b91c1c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah5)"/>
+        <text x="805" y="218" font-size="15" text-anchor="middle" fill="#b91c1c">압축기만 바꾸면 → 남은 탄화물·산성 오일이 새 압축기를 다시 상하게 한다</text>
+      </svg>
+      <figcaption>그래서 압축기를 바꿀 때 필터·유분리기·냉동오일·냉매 상태도 같이 보고, 필요하면 함께 교체합니다.</figcaption>
+    </figure>
+    <p class="file">원본: <code>201603_TNC_압축기 교체시 부품 교체의 필요성.pdf</code> · 국제티엔씨 (2016). 교체 전후 사진 비교와 오일펌프·가스켓·밸브 부분 교체 기준은 원본에서 봅니다. 2014년 판은 이 판으로 바뀌었습니다.</p>
+    <div class="quiz-box" id="quiz-r4">
+      <span class="quiz-badge">QUIZ</span>
+      <div class="quiz-question">압축기가 타서 새것으로 바꿉니다. 압축기만 바꾸면 어떻게 될 수 있나요?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-r4')"><span class="quiz-num">①</span>오염된 필터·유분리기·오일이 남아 새 압축기도 다시 상할 수 있다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r4')"><span class="quiz-num">②</span>아무 문제 없다</button>
+        <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-r4')"><span class="quiz-num">③</span>냉매가 저절로 깨끗해진다</button>
+      </div>
+      <div class="quiz-feedback quiz-feedback-pass" id="quiz-r4-pass">맞습니다. 그림의 빨간 점선입니다. 고객이 물으면 이 순서로 설명합니다.</div>
+      <div class="quiz-feedback quiz-feedback-fail" id="quiz-r4-fail">상한 압축기에서 나온 탄화물과 산성 오일이 필터·유분리기·오일에 남습니다. 그대로 두면 새 압축기도 같은 길을 갑니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 교체 주기 -->
 <section class="section" id="maint">
-  <h2>압축기 관리와 부품 교체 주기</h2>
-  <div class="meta"><span>기초</span><span>15쪽</span><span>약 20분</span><span>4주차</span></div>
-  <p class="file"><code>201608_TNC_압축기 관리 개선사항.pdf</code> · 국제티엔씨 (2016). 큰 발표 자료에서 일부 쪽만 뽑은 사본이라 쪽 번호가 건너뜁니다.</p>
-  <ul>
-    <li>코일 손상의 원인과 예방, 유압 보호장치·흡입압력 조정변</li>
-    <li>부품 교체 주기: 냉동오일 · 저압·액관 필터 · 전자접촉기 · 수냉식 응축기 세관</li>
-  </ul>
-  <p class="how">읽는 법: 교체 주기 쪽을 정기 점검 체크표로 옮겨 봅니다. 자료에 적힌 설치 비용은 다른 회사 값이라 고객에게 말하지 않습니다.</p>
-</section>
-
-<section class="section" id="drawing">
-  <h2>워크인 냉동고 제어반 회로도 — 실물 도면</h2>
-  <div class="meta"><span>심화</span><span>1쪽</span><span>약 10분</span><span>4주차</span></div>
-  <p class="file"><code>시스트로닉스 컨트롤러 회로도(워크인 냉장고).pdf</code> · 실제 제어반 도면 스캔 (파일 이름과 도면 표제란의 제작사가 다릅니다)</p>
-  <ul>
-    <li>메인 누전차단기, 부하 네 가지: 압축기 · 제상 히터 · 응축기 팬 · 유니트쿨러 팬</li>
-    <li>컨트롤러 입력(고압·저압 스위치 등)과 출력, 부하마다 전자접촉기·열동계전기 용량표</li>
-  </ul>
-  <p class="how">읽는 법: 자료 가운데 우리 현장 장비에 가장 가깝습니다. 앞에서 배운 스위치·릴레이를 이 도면에서 하나씩 찾아 표시해 봅니다.</p>
-</section>
-
-<section class="section" id="ctrl">
-  <h2>냉동 장치 제어 회로 — 종합 (심화)</h2>
-  <div class="meta"><span>심화</span><span>20쪽</span><span>약 35분</span><span>9주차</span></div>
-  <p class="file"><code>11. 냉동 장치 제어 회로.pdf</code> · 같은 강의 자료 (2017)</p>
-  <ul>
-    <li>펌프다운 방식 제어회로의 요구사항과 회로도 작성</li>
-    <li>포화온도·압력 환산표, P-h 선도</li>
-  </ul>
-  <p class="how">읽는 법: 직접 설계·배선하는 실습 자료입니다. 신입 단계에서는 회로를 읽고 「언제 켜지고 꺼지나」를 말하는 데까지만 합니다. P-h 선도와 재료표는 건너뛰어도 됩니다.</p>
-</section>
-
-<section class="section" id="compin">
-  <h2>압축기 분해 조립과 이상 사례 (심화)</h2>
-  <div class="meta"><span>심화</span><span>13쪽</span><span>약 20분</span><span>9주차</span></div>
-  <p class="file"><code>201606_TNC_압축기 분해 조립 및 이상발생시 조치사항.pdf</code> · 국제티엔씨 (2016)</p>
-  <ul>
-    <li>압축기 명판 읽는 법, 단면도와 내부 부품 사진</li>
-    <li>기계 부품 손상·전기 손상 사진과 개선 방법</li>
-    <li>실제 이상 사례 두 건의 점검 순서</li>
-  </ul>
-  <p class="how">읽는 법: 특정 제조사의 반밀폐 압축기 기준입니다. 사례의 압력값은 장비가 다르면 그대로 쓰지 않습니다.</p>
-</section>
-
-<section class="section" id="load">
-  <h2>냉장·냉동실 부하계산 엑셀 (심화)</h2>
-  <div class="meta"><span>심화</span><span>엑셀 2개</span><span>약 45분</span><span>10주차</span></div>
-  <p class="file"><code>(연습용) 냉장,냉동,동결실 부하계산v6.xlsm</code> · <code>냉장,냉동,동결실 부하계산v6.xlsm</code> · 외부 개인 제작 도구</p>
-  <ul>
-    <li>창고 크기·단열재·보관 물건·온도를 넣으면 벽체 침입열·환기·물건 냉각·사람·동력 열을 합쳐 필요한 냉동 능력을 계산합니다</li>
-    <li>두 파일은 구조가 같고 예제 입력만 다릅니다 (하나는 냉동, 하나는 냉장 예제)</li>
-  </ul>
-  <div class="rule"><b>쓰기 전에</b>
-    <p>윈도우용 엑셀에서 매크로를 허용해야 동작합니다. 외부에서 만든 도구라 결과를 견적이나 설계 근거로 그대로 쓰지 않습니다. 「창고가 커지거나 문을 자주 열면 왜 큰 장비가 필요한가」를 숫자로 이해하는 용도입니다.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">09 · 4주차</div>
+      <h2>정기 점검 때 보는 네 가지와 교체 기준</h2>
+      <div class="meta"><span class="prio rec">권장</span><span>원본 15쪽 · 약 20분</span></div>
+      <p class="gain">언제 바꾸는지 기준이 있으면 점검이 「감」이 아니라 체크표가 됩니다.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>부품</th><th>교체하는 때 (원본 기준)</th><th>왜</th></tr></thead>
+      <tbody>
+        <tr><td>냉동오일</td><td>오일 상태 검사에서 품질이 80% 아래로 떨어졌을 때. 정상이어도 1년에 한 번</td><td>오일이 상하면 압축기 윤활·냉각이 떨어진다</td></tr>
+        <tr><td>저압·액관 필터</td><td>필터 앞뒤 압력 차이가 1kg/㎠ 이상일 때. 1년에 한 번 이상</td><td>막히면 냉매가 덜 흘러 냉각이 약해진다</td></tr>
+        <tr><td>전자접촉기</td><td>접점이 변색되거나 변형됐을 때</td><td>접점이 녹아 붙으면 압축기가 안 멈추거나 안 돈다</td></tr>
+        <tr><td>수냉식 응축기 세관</td><td>2~3년에 한 번 (수냉식일 때만)</td><td>물때가 끼면 열을 못 버려 고압이 오른다</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><b>고객에게 말할 때</b> — 원본에는 다른 회사의 설치 비용이 적혀 있습니다. 그 숫자는 고객에게 말하지 않습니다.</div>
+    <p class="file">원본: <code>201608_TNC_압축기 관리 개선사항.pdf</code> · 국제티엔씨 (2016). 큰 발표 자료에서 일부 쪽만 뽑은 사본이라 쪽 번호가 건너뜁니다. 유압 보호장치·흡입압력 조정변 설명도 원본에 있습니다.</p>
   </div>
 </section>
 
-<p class="src">이 페이지의 내용은 원드라이브 교육자료 폴더의 각 파일을 쪽마다 열어 확인한 것입니다 (2026-10-11). 같은 폴더의 건물 냉난방용 칠러 카탈로그와, 개정판이 있는 옛 판 두 개는 넣지 않았습니다.</p>
+<!-- 10 실물 회로도 -->
+<section class="section" id="drawing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">10 · 4주차</div>
+      <h2>실제 워크인 제어반 도면을 앞의 그림과 맞춰 봅니다</h2>
+      <div class="meta"><span class="prio rec">권장</span><span>원본 1쪽 · 약 10분</span></div>
+      <p class="gain">자료 가운데 우리 현장 장비에 가장 가까운 실제 도면입니다. 03의 「신호 → 접촉기 → 부하」 구조가 부하 네 개로 늘어난 모습입니다.</p>
+    </div>
+    <figure class="fig">
+      <svg class="wide" viewBox="0 0 1060 250" role="img" aria-labelledby="dwT">
+        <title id="dwT">누전차단기 아래 컨트롤러가 압축기, 제상 히터, 응축기 팬, 유니트쿨러 팬을 각각의 접촉기로 켜고 끈다</title>
+        <rect x="20" y="20" width="160" height="50" rx="4" fill="#fff7f2" stroke="#EA5E18"/><text x="100" y="51" font-size="16.5" font-weight="800" text-anchor="middle">메인 누전차단기</text>
+        <rect x="20" y="110" width="200" height="110" rx="4" fill="#f3f7fa" stroke="#385768"/>
+        <text x="120" y="136" font-size="16.5" font-weight="800" text-anchor="middle">컨트롤러</text>
+        <text x="36" y="162" font-size="14.5" fill="#385768">입력: 고압·저압 스위치,</text><text x="36" y="180" font-size="14.5" fill="#385768">온도 센서</text>
+        <text x="36" y="204" font-size="14.5" fill="#c2500f">출력: 각 부하의 접촉기</text>
+        <line x1="180" y1="45" x2="1000" y2="45" stroke="#EA5E18" stroke-width="3"/>
+        <g font-size="16" font-weight="800" text-anchor="middle">
+          <rect x="290" y="90" width="150" height="40" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="365" y="115">접촉기 · 계전기</text>
+          <rect x="470" y="90" width="150" height="40" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="545" y="115">접촉기 · 계전기</text>
+          <rect x="650" y="90" width="150" height="40" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="725" y="115">접촉기 · 계전기</text>
+          <rect x="830" y="90" width="150" height="40" rx="4" fill="#fff" stroke="#1a1a1a"/><text x="905" y="115">접촉기 · 계전기</text>
+          <rect x="290" y="176" width="150" height="44" rx="4" fill="#1C1917"/><text x="365" y="203" fill="#fff">압축기</text>
+          <rect x="470" y="176" width="150" height="44" rx="4" fill="#1C1917"/><text x="545" y="203" fill="#fff">제상 히터</text>
+          <rect x="650" y="176" width="150" height="44" rx="4" fill="#1C1917"/><text x="725" y="203" fill="#fff">응축기 팬</text>
+          <rect x="830" y="176" width="150" height="44" rx="4" fill="#1C1917"/><text x="905" y="203" fill="#fff">유니트쿨러 팬</text>
+        </g>
+        <g stroke="#EA5E18" stroke-width="2"><line x1="365" y1="45" x2="365" y2="90"/><line x1="545" y1="45" x2="545" y2="90"/><line x1="725" y1="45" x2="725" y2="90"/><line x1="905" y1="45" x2="905" y2="90"/></g>
+        <g stroke="#1a1a1a" stroke-width="2"><line x1="365" y1="130" x2="365" y2="176"/><line x1="545" y1="130" x2="545" y2="176"/><line x1="725" y1="130" x2="725" y2="176"/><line x1="905" y1="130" x2="905" y2="176"/></g>
+        <path d="M220 160 L260 160 L260 150 L290 110" fill="none" stroke="#385768" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="640" y="244" font-size="14.5" text-anchor="middle" fill="#6b7280">점선 = 컨트롤러가 보내는 신호. 도면에서는 부하마다 접촉기·계전기 용량표가 붙어 있다</text>
+      </svg>
+      <figcaption>원본 도면(7.5마력 제어반)을 구조만 옮긴 그림입니다. 실제 도면의 단자 번호와 용량은 원본에서 봅니다.</figcaption>
+    </figure>
+    <div class="callout"><b>실습</b> — 원본 도면을 출력해 압축기 줄을 형광펜으로 따라가고, 고압·저압 스위치가 컨트롤러 어디에 들어가는지 표시해 사수에게 확인받습니다.</div>
+    <p class="file">원본: <code>시스트로닉스 컨트롤러 회로도(워크인 냉장고).pdf</code> · 실제 제어반 도면 스캔. 파일 이름과 도면 표제란의 제작사가 다릅니다.</p>
+  </div>
+</section>
+
+<!-- 11 제어 회로 종합 -->
+<section class="section" id="ctrl">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">11 · 9주차 · 심화</div>
+      <h2>펌프다운 제어 회로를 처음부터 끝까지 읽습니다</h2>
+      <div class="meta"><span class="prio adv">심화</span><span>원본 20쪽 · 약 35분</span></div>
+      <p class="gain">03·04·05·06에서 본 부품이 한 회로에 다 모입니다. 「무엇이 붙으면 무엇이 켜지나」를 말로 설명할 수 있으면 됩니다.</p>
+    </div>
+    <ul class="pts">
+      <li>회로 요구사항: 누전차단기, 접촉기, 펌프다운, 온도 편차, 열동계전기, 고압·저압 스위치, 응축기 팬 압력 제어</li>
+      <li>포화온도·압력 환산표와 P-h 선도 — 신입 단계에서는 건너뛰어도 됩니다</li>
+      <li>콘트롤 박스 재료표 — 직접 제작하는 실습용이라 참고만 합니다</li>
+    </ul>
+    <p class="file">원본: <code>11. 냉동 장치 제어 회로.pdf</code> · 같은 강의 자료 (2017)</p>
+  </div>
+</section>
+
+<!-- 12 압축기 분해 -->
+<section class="section" id="compin">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">12 · 9주차 · 심화</div>
+      <h2>압축기 안을 열어 보면 무엇이 상하나</h2>
+      <div class="meta"><span class="prio adv">심화</span><span>원본 13쪽 · 약 20분</span></div>
+      <p class="gain">08의 손상 경로가 실제 부품에 어떤 모양으로 남는지 사진으로 봅니다.</p>
+    </div>
+    <ul class="pts">
+      <li>압축기 명판 읽는 법, 단면도와 내부 부품 12종</li>
+      <li>기계 부품 손상·전기 손상 사진과 개선 방법</li>
+      <li>실제 이상 사례 두 건의 점검 순서 (분전반 차단기, 접촉기 결상)</li>
+    </ul>
+    <div class="callout"><b>주의</b> — 특정 제조사의 반밀폐 압축기 기준입니다. 사례의 압력값은 장비가 다르면 그대로 쓰지 않습니다.</div>
+    <p class="file">원본: <code>201606_TNC_압축기 분해 조립 및 이상발생시 조치사항.pdf</code> · 국제티엔씨 (2016)</p>
+  </div>
+</section>
+
+<!-- 13 부하계산 -->
+<section class="section" id="load">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">13 · 10주차 · 심화</div>
+      <h2>창고에 들어오는 열을 더하면 냉동기 크기가 나옵니다</h2>
+      <div class="meta"><span class="prio adv">심화</span><span>엑셀 2개 · 약 45분</span></div>
+      <p class="gain">같은 크기 창고라도 단열·물건·문 여는 횟수에 따라 필요한 냉동기가 다른 이유를 숫자로 봅니다.</p>
+    </div>
+    <div class="grid2">
+      <figure class="fig">
+        <svg class="mid" viewBox="0 0 560 250" role="img" aria-labelledby="ldT">
+          <title id="ldT">벽체 침입열, 환기열, 물건 냉각열, 호흡열, 작업자 발열, 전등과 모터 열을 더하고 안전율을 붙이면 필요한 냉동 능력</title>
+          <g font-size="13" font-weight="700">
+            <rect x="20" y="20" width="250" height="30" rx="3" fill="#fff7f2" stroke="#EA5E18"/><text x="32" y="40">① 벽·천장·바닥으로 스며드는 열</text>
+            <rect x="20" y="56" width="250" height="30" rx="3" fill="#fff7f2" stroke="#EA5E18"/><text x="32" y="76">② 문을 열 때 들어오는 공기</text>
+            <rect x="20" y="92" width="250" height="30" rx="3" fill="#fff7f2" stroke="#EA5E18"/><text x="32" y="112">③ 넣은 물건을 식히는 열</text>
+            <rect x="20" y="128" width="250" height="30" rx="3" fill="#fff7f2" stroke="#EA5E18"/><text x="32" y="148">④ 채소·과일이 내는 호흡열</text>
+            <rect x="20" y="164" width="250" height="30" rx="3" fill="#fff7f2" stroke="#EA5E18"/><text x="32" y="184">⑤ 안에서 일하는 사람의 열</text>
+            <rect x="20" y="200" width="250" height="30" rx="3" fill="#fff7f2" stroke="#EA5E18"/><text x="32" y="220">⑥ 전등·모터·히터의 열</text>
+          </g>
+          <path d="M282 30 Q320 30 320 125 Q320 220 282 220" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+          <text x="334" y="120" font-size="13" fill="#4b5563">합계 + 안전율</text>
+          <rect x="334" y="132" width="206" height="54" rx="4" fill="#1C1917"/><text x="437" y="157" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">필요한 냉동 능력</text><text x="437" y="175" font-size="11.5" text-anchor="middle" fill="#d6d3d1">kcal/h · RT · kW</text>
+        </svg>
+        <figcaption>엑셀은 이 여섯 가지를 각각 계산해 더하고 안전율을 붙입니다.</figcaption>
+      </figure>
+      <div>
+        <ul class="pts">
+          <li>두 파일은 구조가 같고 예제 입력만 다릅니다. 하나는 냉동 예제, 하나는 냉장 예제입니다.</li>
+          <li>창고 크기·단열재 두께·물건·입고량을 바꿔 가며 결과가 어떻게 변하는지 봅니다.</li>
+        </ul>
+        <div class="callout"><b>쓰기 전에</b> — 윈도우용 엑셀에서 매크로를 허용해야 동작합니다. 외부에서 만든 도구라 결과를 견적이나 설계 근거로 그대로 쓰지 않습니다.</div>
+      </div>
+    </div>
+    <p class="file">원본: <code>(연습용) 냉장,냉동,동결실 부하계산v6.xlsm</code> · <code>냉장,냉동,동결실 부하계산v6.xlsm</code></p>
+  </div>
+</section>
+
+</main>
+
+<div class="wrap foot">
+  <p>원본 파일은 회사 원드라이브 「부성티케이 › 장준영 › 교육자료」에 있습니다. 처음 받을 때 사수에게 요청합니다. 다른 회사 이름·가격·연락처가 들어 있어 밖으로 옮기지 않습니다.</p>
+  <p>이 페이지의 그림은 원본 자료의 내용을 확인해 새로 그린 것입니다 (2026-10-11). 건물 냉난방용 칠러 카탈로그와, 개정판이 있는 옛 판 두 개는 넣지 않았습니다.</p>
 </div>
 
 <script>
@@ -286,6 +775,34 @@
     var el = document.getElementById(qid + (correct ? '-pass' : '-fail'));
     if (el) el.classList.add('show');
   }
+  // 4대 부품 — 고르면 그림이 강조되고 설명이 바뀐다
+  (function () {
+    var P = {
+      comp: { t: '압축기', d: '증발기에서 온 저압 가스를 눌러 고온·고압 가스로 만들어 보낸다. 사이클의 심장이다.', i: '저압 가스 (차갑다)', o: '고온·고압 가스 (뜨겁다)', s: '실외기·기계실 안의 무겁고 소리 나는 덩어리', f: '안 돌거나, 돌아도 차가워지지 않는다. 08에서 상하는 경로를 본다' },
+      cond: { t: '응축기', d: '뜨거운 가스의 열을 바깥으로 버리면서 가스를 액으로 바꾼다. 공냉식은 팬 바람으로, 수냉식은 물로 식힌다.', i: '고온·고압 가스', o: '고압 액', s: '실외기 앞뒤의 얇은 핀 뭉치와 팬', f: '먼지로 막히거나 팬이 서면 고압이 오른다 → 06 고압 차단' },
+      exp: { t: '팽창밸브', d: '좁은 구멍으로 고압 액을 통과시켜 압력을 확 떨어뜨린다. 압력이 떨어지면 냉매가 아주 차가워진다.', i: '고압 액', o: '저온·저압 액과 가스가 섞인 상태', s: '증발기 들어가기 직전 배관. 감온통이 흡입관에 붙어 있다', f: '너무 많이 열리거나 덜 열리면 과열도가 틀어진다 → 07' },
+      evap: { t: '증발기', d: '차가운 냉매가 고내 공기의 열을 빨아들이며 끓어 가스가 된다. 여기서 실제로 차가워진다.', i: '저온·저압 액+가스', o: '저압 가스', s: '냉장고 안쪽의 핀 뭉치와 팬 (유니트쿨러)', f: '성에가 끼거나 팬이 서면 열을 못 받는다 → 07 과열도·압력 둘 다 낮음' }
+    };
+    var detail = document.getElementById('partDetail');
+    var btns = document.querySelectorAll('#basic .seg button');
+    var parts = document.querySelectorAll('#basic .cyc .part');
+    function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+    function show(k) {
+      var p = P[k]; if (!p) return;
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.k === k ? 'true' : 'false'); });
+      parts.forEach(function (g) { g.classList.toggle('on', g.dataset.k === k); });
+      detail.innerHTML = '<h4>' + esc(p.t) + '</h4><p style="margin:6px 0 0">' + esc(p.d) + '</p><dl>' +
+        '<dt>들어가는 냉매</dt><dd>' + esc(p.i) + '</dd><dt>나오는 냉매</dt><dd>' + esc(p.o) + '</dd>' +
+        '<dt>현장에서</dt><dd>' + esc(p.s) + '</dd><dt>탈 나면</dt><dd>' + esc(p.f) + '</dd></dl>';
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.k); }); });
+    parts.forEach(function (g) {
+      g.style.cursor = 'pointer';
+      g.addEventListener('click', function () { show(g.dataset.k); });
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(g.dataset.k); } });
+    });
+    show('comp');
+  })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="curriculum.js"></script>

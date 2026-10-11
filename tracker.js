@@ -430,7 +430,7 @@
   // ───────── 스타일 ─────────
   function injectCss() {
     var css = [
-      '.bt-box,.bt-top,.bt-fab,.bt-sheet,.bt-modal,.bt-toast{--bt-accent:var(--accent,#38bdf8);--bt-surface:var(--surface,#111827);--bt-surface2:var(--surface2,#1a2332);--bt-border:var(--border,#1e2d3d);--bt-text:var(--text,#e2e8f0);--bt-dim:var(--text-dim,#94a3b8);--bt-bright:var(--text-bright,#f8fafc);font-family:inherit;line-height:1.6}',
+      '.bt-box,.bt-top,.bt-fab,.bt-sheet,.bt-modal,.bt-toast{--bt-accent:var(--accent,#38bdf8);--bt-surface:var(--surface,#111827);--bt-surface2:var(--surface2,#1a2332);--bt-border:var(--border,#1e2d3d);--bt-text:var(--text,#e2e8f0);--bt-dim:var(--text-dim,#94a3b8);--bt-bright:var(--text-bright,#f8fafc);--bt-on:var(--on-accent,#0a0e17);--bt-topbg:var(--top-bg,rgba(17,24,39,.92));--bt-inbg:var(--input-bg,#0a0e17);font-family:inherit;line-height:1.6}',
       '.bt-box *,.bt-top *,.bt-fab,.bt-sheet *,.bt-modal *,.bt-box,.bt-top,.bt-sheet,.bt-modal{box-sizing:border-box}',
       '.bt-box{margin:20px 0;padding:16px 18px;background:var(--bt-surface2);border:1px solid var(--bt-border);border-left:3px solid var(--bt-accent);border-radius:12px;color:var(--bt-text);font-size:.92rem;text-align:left}',
       '.bt-box h4{margin:0 0 8px;font-size:.95rem;color:var(--bt-bright);display:flex;flex-wrap:wrap;gap:8px;align-items:center}',
@@ -447,21 +447,22 @@
       '.bt-cases a:hover{text-decoration:underline}',
       '.bt-btn{appearance:none;font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;padding:7px 14px;border-radius:9px;border:1px solid var(--bt-border);background:var(--bt-surface);color:var(--bt-text);min-height:36px}',
       '.bt-btn:hover{border-color:var(--bt-accent);color:var(--bt-accent)}',
-      '.bt-btn.main{background:var(--bt-accent);border-color:var(--bt-accent);color:#0a0e17}',
-      '.bt-btn.main:hover{filter:brightness(1.08);color:#0a0e17}',
+      '.bt-btn.main{background:var(--bt-accent);border-color:var(--bt-accent);color:var(--bt-on)}',
+      '.bt-btn.main:hover{filter:brightness(1.08);color:var(--bt-on)}',
       '.bt-btn.on{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.55);color:#6ee7b7}',
       '.bt-btn.small{padding:3px 10px;font-size:.78rem;min-height:28px;font-weight:500}',
       '.bt-btn:focus-visible,.bt-fab:focus-visible,.bt-chip:focus-visible,.bt-x:focus-visible,.bt-in:focus-visible,.bt-radio input:focus-visible+span,.bt-cases a:focus-visible,.bt-sheet a:focus-visible{outline:3px solid var(--bt-accent);outline-offset:2px}',
       '.bt-redo-wrap{margin:6px 0 14px;text-align:right}',
-      '.bt-top{position:fixed;top:12px;right:12px;z-index:9000;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 150px);background:rgba(17,24,39,.92);border:1px solid var(--bt-border);border-radius:99px;padding:5px 6px 5px 12px;color:var(--bt-dim);font-size:.8rem;backdrop-filter:blur(8px)}',
-      '.bt-top.need{border-color:rgba(251,191,36,.6)}',
+      '.bt-top{position:fixed;top:12px;right:12px;z-index:9000;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 150px);background:var(--bt-topbg);border:1px solid var(--bt-border);border-radius:99px;padding:5px 6px 5px 12px;color:var(--bt-dim);font-size:.8rem;backdrop-filter:blur(8px)}',
+      '.bt-top.need{border-color:var(--bt-accent)}',
       '.bt-chip{appearance:none;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--bt-bright);background:transparent;border:0;padding:2px 6px;border-radius:99px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
-      '.bt-top.need .bt-chip{background:#fbbf24;color:#1f1300;padding:5px 12px}',
+      '.bt-top.need .bt-chip{background:var(--bt-accent);color:var(--bt-on);padding:5px 12px}',
       '.bt-dot{width:9px;height:9px;border-radius:50%;background:#64748b;flex:none}',
       '.bt-dot.ok{background:#10b981}.bt-dot.busy{background:#fbbf24}.bt-dot.local{background:#ef4444}',
       '.bt-today{white-space:nowrap;padding-right:6px}',
+      '.bt-plan{white-space:nowrap;font-size:.78rem;font-weight:700;color:var(--bt-accent);text-decoration:none;border-left:1px solid var(--bt-border);padding:0 4px 0 8px}.bt-plan:hover{text-decoration:underline}.bt-plan:focus-visible{outline:2px solid var(--bt-accent);outline-offset:2px}',
       '.bt-need-msg{white-space:nowrap}',
-      '.bt-fab{position:fixed;right:16px;bottom:84px;z-index:8999;appearance:none;font:inherit;font-size:.86rem;font-weight:700;cursor:pointer;color:#0a0e17;background:var(--bt-accent);border:0;border-radius:99px;padding:10px 16px;box-shadow:0 6px 20px rgba(0,0,0,.4)}',
+      '.bt-fab{position:fixed;right:16px;bottom:84px;z-index:8999;appearance:none;font:inherit;font-size:.86rem;font-weight:700;cursor:pointer;color:var(--bt-on);background:var(--bt-accent);border:0;border-radius:99px;padding:10px 16px;box-shadow:0 6px 20px rgba(0,0,0,.4)}',
       '.bt-fab:hover{filter:brightness(1.1)}',
       '.bt-over{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9500;background:rgba(2,6,15,.6);display:none}',
       '.bt-over.open{display:block}',
@@ -472,7 +473,7 @@
       '.bt-sheet h3,.bt-modal h3{margin:0 0 10px;font-size:1.02rem;color:var(--bt-bright);display:flex;justify-content:space-between;align-items:center;gap:8px}',
       '.bt-x{appearance:none;background:transparent;border:0;color:var(--bt-dim);font-size:1.3rem;cursor:pointer;padding:2px 8px;border-radius:8px;line-height:1}',
       '.bt-lbl{display:block;margin:12px 0 5px;color:var(--bt-dim);font-size:.8rem;font-weight:600}',
-      '.bt-in{width:100%;font:inherit;font-size:.92rem;color:var(--bt-text);background:#0a0e17;border:1px solid var(--bt-border);border-radius:9px;padding:8px 10px}',
+      '.bt-in{width:100%;font:inherit;font-size:.92rem;color:var(--bt-text);background:var(--bt-inbg);border:1px solid var(--bt-border);border-radius:9px;padding:8px 10px}',
       'textarea.bt-in{resize:vertical;min-height:84px}',
       'textarea.bt-quote{min-height:44px;color:var(--bt-dim);font-size:.85rem}',
       '.bt-kinds{display:flex;flex-wrap:wrap;gap:6px}',
@@ -524,6 +525,7 @@
     t.appendChild(h('button', { class: 'bt-chip', type: 'button', title: '학습자 바꾸기', 'aria-label': '학습자 ' + who + ' (눌러서 바꾸기)', text: who, onclick: openPicker }));
     t.appendChild(h('span', { class: 'bt-dot ' + status, role: 'img', 'aria-label': STATUS_TITLE[status] || '', title: STATUS_TITLE[status] || '' }));
     t.appendChild(h('span', { class: 'bt-today', text: '오늘 ' + todayMin() + '분' }));
+    if (PAGE !== 'my.html') t.appendChild(h('a', { class: 'bt-plan', href: 'my.html', title: '편성한 주별 계획 보기', text: '내 계획' }));
   }
 
   // ───────── 열고 닫기 ─────────

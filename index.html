@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>부성티케이 · 신입사원 교육 프로그램</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
 <style>
   :root {
-    --bg: #0a0e17;
-    --surface: #111827;
-    --surface2: #1a2332;
-    --border: #1e2d3d;
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --text-bright: #f8fafc;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --surface: #ffffff;
+    --surface2: #fafafa;
+    --border: #e5e5e5;
+    --line: #e5e5e5;
+    --text: #1a1a1a;
+    --text-dim: #6b7280;
+    --text-bright: #111111;
+    --accent: #EA5E18;
+    --accent-text: #c2500f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,19 +28,21 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     line-height: 1.7;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
+    word-break: keep-all;
   }
+
+  /* 머리 띠 — 페이지 맨 위 한 곳만 짙게 */
+  .mast { background: #1C1917; color: #f5f5f4; }
+  .mast .in { max-width: 720px; margin: 0 auto; padding: 44px 20px 40px; text-align: center; }
 
   .container {
     max-width: 720px;
     width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
     text-align: center;
   }
 
@@ -42,30 +50,30 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(56,189,248,0.1);
-    border: 1px solid rgba(56,189,248,0.25);
-    border-radius: 99px;
-    padding: 6px 18px;
+    background: transparent;
+    border: 1px solid #57534e;
+    border-radius: 4px;
+    padding: 5px 14px;
     font-size: 13px;
-    font-weight: 600;
-    color: #38bdf8;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 28px;
+    font-weight: 700;
+    color: #fb923c;
+    letter-spacing: 0.08em;
+    margin-bottom: 22px;
   }
 
   h1 {
     font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 800;
-    color: var(--text-bright);
+    color: #fff;
     margin-bottom: 12px;
     letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-wrap: balance;
   }
 
   .subtitle {
     font-size: 1.1rem;
-    color: var(--text-dim);
-    margin-bottom: 48px;
+    color: #d6d3d1;
     line-height: 1.6;
   }
 
@@ -77,29 +85,19 @@
   }
 
   .phase-card {
-    background: var(--surface);
+    display: block;
+    background: #fff;
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px 20px;
+    border-radius: 6px;
+    padding: 24px 20px;
     text-decoration: none;
     color: var(--text);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .phase-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    transition: opacity 0.3s;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
 
   .phase-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255,255,255,0.15);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+    border-color: var(--accent);
   }
 
   .track-label {
@@ -107,11 +105,10 @@
     align-items: center;
     gap: 12px;
     margin: 0 0 16px;
-    font-size: 0.78rem;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
   }
   .track-label::after {
     content: '';
@@ -121,47 +118,20 @@
   }
   .track-label:not(:first-of-type) { margin-top: 40px; }
 
-  .phase-card.p0a::before { background: linear-gradient(90deg, #f472b6, #fb7185); }
-  .phase-card.p0b::before { background: linear-gradient(90deg, #34d399, #10b981); }
-  .phase-card:hover.p0a { border-color: rgba(244,114,182,0.4); }
-  .phase-card:hover.p0b { border-color: rgba(52,211,153,0.4); }
-  .p0a .phase-num { color: #f472b6; }
-  .p0b .phase-num { color: #34d399; }
-  .phase-card.p0c::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
-  .phase-card:hover.p0c { border-color: rgba(251,191,36,0.4); }
-  .p0c .phase-num { color: #fbbf24; }
-
-  .phase-card.p1::before { background: linear-gradient(90deg, #38bdf8, #818cf8); }
-  .phase-card.p2::before { background: linear-gradient(90deg, #10b981, #34d399); }
-  .phase-card.p3::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
-  .phase-card.p4::before { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
-
-  .phase-card.p5::before { background: linear-gradient(90deg, #f87171, #fbbf24); }
-  .phase-card:hover.p5 { border-color: rgba(248,113,113,0.4); }
-  .p5 .phase-num { color: #f87171; }
-  .phase-card:hover.p1 { border-color: rgba(56,189,248,0.4); }
-  .phase-card:hover.p2 { border-color: rgba(16,185,129,0.4); }
-  .phase-card:hover.p3 { border-color: rgba(245,158,11,0.4); }
-  .phase-card:hover.p4 { border-color: rgba(167,139,250,0.4); }
-
   .phase-num {
     font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
     margin-bottom: 8px;
   }
-
-  .p1 .phase-num { color: #38bdf8; }
-  .p2 .phase-num { color: #10b981; }
-  .p3 .phase-num { color: #f59e0b; }
-  .p4 .phase-num { color: #a78bfa; }
 
   .phase-title {
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-bright);
     margin-bottom: 6px;
+    letter-spacing: -0.02em;
   }
 
   .phase-desc {
@@ -191,10 +161,15 @@
 </head>
 <body>
 
-<div class="container">
+<header class="mast">
+<div class="in">
   <div class="badge">부성티케이 · 현장지원팀</div>
   <h1>신입사원 교육 프로그램</h1>
   <p class="subtitle">지원부터 첫 주 세팅, 그리고 12주 교육까지<br>비전공자도 현장 전문가로 성장할 수 있습니다.</p>
+</div>
+</header>
+
+<div class="container">
 
   <div class="track-label">입사 전 · 첫 주</div>
   <div class="phases">
@@ -284,8 +259,8 @@
         <span>기록 저장</span>
       </div>
     </a>
-    <a class="phase-card" href="progress.html" style="grid-column: 1 / -1; background: var(--surface2); border-color: rgba(56,189,248,0.2);">
-      <div class="phase-num" style="color: #38bdf8;">Progress Check</div>
+    <a class="phase-card" href="progress.html" style="grid-column: 1 / -1; background: var(--surface2);">
+      <div class="phase-num">Progress Check</div>
       <div class="phase-title">학습 진행률 체크</div>
       <div class="phase-desc">각 Phase별 학습·실습 완료 여부를 체크하고 진행률을 확인하세요</div>
     </a>

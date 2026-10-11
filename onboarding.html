@@ -6,19 +6,25 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
 <title>신규 입사자 온보딩 A-Z | 부성티케이</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
 <style>
   :root {
-    --bg: #0a0e17;
-    --surface: #111827;
-    --surface2: #1a2332;
-    --border: #1e2d3d;
-    --accent: #34d399;
-    --accent2: #10b981;
-    --danger: #ef4444;
-    --success: #10b981;
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --text-bright: #f8fafc;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --surface: #ffffff;
+    --surface2: #fafafa;
+    --border: #e5e5e5;
+    --line: #e5e5e5;
+    --line-2: #f0f0f0;
+    --accent: #EA5E18;
+    --accent-text: #c2500f;
+    --accent2: #c2500f;
+    --danger: #b91c1c;
+    --success: #15803d;
+    --text: #1a1a1a;
+    --text-dim: #6b7280;
+    --text-bright: #111111;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,9 +33,10 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     line-height: 1.7;
     overflow-x: hidden;
+    word-break: keep-all;
   }
 
   .back-to-main {
@@ -39,38 +46,36 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(17,24,39,0.9);
+    background: #fff;
     border: 1px solid var(--border);
-    border-radius: 99px;
-    padding: 8px 16px 8px 12px;
-    color: var(--text-dim);
+    border-radius: 4px;
+    padding: 7px 14px 7px 10px;
+    color: var(--text);
     text-decoration: none;
     font-size: 0.84rem;
-    backdrop-filter: blur(8px);
-    transition: all 0.2s;
+    font-weight: 600;
+    transition: border-color 0.2s;
   }
-  .back-to-main:hover { color: var(--text-bright); border-color: rgba(255,255,255,0.2); }
+  .back-to-main:hover { color: var(--accent-text); border-color: var(--accent); }
   .back-to-main svg { width: 15px; height: 15px; }
 
-  /* ── HERO ── */
+  /* ── HERO (머리 띠) ── */
   .hero {
-    padding: 120px 24px 64px;
+    padding: 120px 24px 56px;
     text-align: center;
-    background:
-      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(52,211,153,0.12), transparent 70%),
-      var(--bg);
-    border-bottom: 1px solid var(--border);
+    background: #1C1917;
+    color: #f5f5f4;
   }
 
   .hero-badge {
     display: inline-block;
-    background: rgba(52,211,153,0.1);
-    border: 1px solid rgba(52,211,153,0.3);
-    border-radius: 99px;
-    padding: 6px 18px;
+    background: transparent;
+    border: 1px solid #57534e;
+    border-radius: 4px;
+    padding: 5px 14px;
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--accent);
+    color: #fb923c;
     letter-spacing: 0.08em;
     margin-bottom: 24px;
   }
@@ -78,19 +83,26 @@
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem);
     font-weight: 800;
-    color: var(--text-bright);
+    color: #fff;
     letter-spacing: -0.02em;
+    line-height: 1.2;
     margin-bottom: 14px;
+    text-wrap: balance;
   }
 
-  .hero-desc { max-width: 640px; margin: 0 auto; color: var(--text-dim); font-size: 1rem; }
+  .hero-desc {
+    max-width: 640px;
+    margin: 0 auto;
+    color: #d6d3d1;
+    font-size: 1rem;
+  }
 
   .mission {
     max-width: 720px;
     margin: 36px auto 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
+    background: transparent;
+    border: 1px solid #44403c;
+    border-radius: 6px;
     padding: 22px 26px;
     text-align: left;
     display: grid;
@@ -102,28 +114,27 @@
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.12em;
-    color: var(--accent);
+    color: #fb923c;
     margin-bottom: 4px;
   }
 
-  .mission-text { font-size: 0.94rem; color: var(--text); }
+  .mission-text { font-size: 0.94rem; color: #e7e5e4; }
 
   /* ── NAV ── */
   .sticky-nav {
     position: sticky;
     top: 0;
     z-index: 90;
-    background: rgba(10,14,23,0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.97);
     border-bottom: 1px solid var(--border);
   }
 
   .nav-inner {
     max-width: 900px;
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 10px 24px;
     display: flex;
-    gap: 8px;
+    gap: 6px;
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -131,28 +142,36 @@
 
   .nav-btn {
     flex-shrink: 0;
-    background: var(--surface);
+    background: #fff;
     border: 1px solid var(--border);
-    border-radius: 99px;
-    padding: 7px 15px;
-    color: var(--text-dim);
+    border-radius: 4px;
+    padding: 6px 13px;
+    color: #4b5563;
     font-size: 0.84rem;
+    font-weight: 600;
     font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: border-color 0.2s, color 0.2s;
   }
-  .nav-btn:hover { color: var(--text-bright); border-color: rgba(52,211,153,0.4); }
+  .nav-btn:hover { color: var(--accent-text); border-color: var(--accent); }
 
-  /* ── LAYOUT ── */
-  .main { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; }
-  .section { margin-bottom: 64px; scroll-margin-top: 76px; }
+  /* ── LAYOUT: 섹션이 가로 전체 띠, 흰/회색 교대 ── */
+  .main { max-width: none; margin: 0; padding: 0; }
+
+  .section {
+    margin-bottom: 0;
+    scroll-margin-top: 76px;
+    padding: clamp(40px, 6vw, 64px) max(24px, calc((100% - 900px) / 2));
+    border-bottom: 1px solid var(--border);
+  }
+  .section:nth-of-type(even) { background: var(--bg-alt); }
 
   .section-tag {
     display: inline-block;
-    font-size: 0.72rem;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--accent);
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
     margin-bottom: 8px;
   }
 
@@ -160,17 +179,19 @@
     font-size: clamp(1.4rem, 3.5vw, 1.9rem);
     font-weight: 800;
     color: var(--text-bright);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
     margin-bottom: 8px;
+    text-wrap: balance;
   }
 
   .section-desc { color: var(--text-dim); font-size: 0.94rem; margin-bottom: 28px; }
 
   /* ── CHECKLIST ── */
   .check-card {
-    background: var(--surface);
+    background: #fff;
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: 6px;
     padding: 22px 24px;
     margin-bottom: 14px;
   }
@@ -196,7 +217,7 @@
 
   .check-list li::before {
     content: '☐';
-    color: var(--accent);
+    color: var(--accent-text);
     flex-shrink: 0;
     font-size: 15px;
     line-height: 1.6;
@@ -204,16 +225,16 @@
 
   .plain-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
   .plain-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.93rem; }
-  .plain-list li::before { content: '·'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+  .plain-list li::before { content: '·'; color: var(--accent-text); flex-shrink: 0; font-weight: 700; }
   .plain-list strong { color: var(--text-bright); }
 
   /* ── ACCORDION ── */
   .acc-group { display: flex; flex-direction: column; gap: 10px; }
 
   .acc {
-    background: var(--surface);
+    background: #fff;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -225,7 +246,7 @@
     cursor: pointer;
     user-select: none;
   }
-  .acc-head:hover { background: rgba(255,255,255,0.02); }
+  .acc-head:hover { background: var(--bg-alt); }
 
   .acc-title { flex: 1; font-weight: 700; color: var(--text-bright); font-size: 0.98rem; }
   .acc-sub { display: block; font-weight: 400; color: var(--text-dim); font-size: 0.84rem; margin-top: 2px; }
@@ -246,24 +267,25 @@
   .acc-inner p { margin-bottom: 10px; }
   .acc-inner p:last-child { margin-bottom: 0; }
   .acc-inner strong { color: var(--text-bright); }
+
   .acc-inner ul { margin: 10px 0 0 18px; }
   .acc-inner li { margin-bottom: 5px; }
   .acc-inner h4 { color: var(--text-bright); font-size: 0.94rem; margin: 16px 0 8px; }
 
   code {
-    background: var(--surface2);
+    background: var(--line-2, #f0f0f0);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 4px;
     padding: 2px 7px;
     font-size: 0.88em;
     font-family: 'Consolas', 'Menlo', monospace;
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   .code-block {
-    background: var(--surface2);
+    background: var(--bg-alt);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 14px 18px;
     margin: 12px 0;
     font-family: 'Consolas', 'Menlo', monospace;
@@ -274,60 +296,61 @@
   }
 
   .note {
-    border-radius: 10px;
+    border-radius: 0 6px 6px 0;
     padding: 14px 18px;
     margin-top: 14px;
-    border-left: 4px solid;
+    border-left: 3px solid;
     font-size: 0.88rem;
     line-height: 1.65;
   }
   .note-head { font-weight: 700; font-size: 0.82rem; margin-bottom: 5px; }
 
-  .note-tip { background: rgba(16,185,129,0.08); border-color: var(--success); }
+  .note-tip { background: #f0fdf4; border-color: var(--success); }
   .note-tip .note-head { color: var(--success); }
 
-  .note-warn { background: rgba(245,158,11,0.08); border-color: #f59e0b; }
-  .note-warn .note-head { color: #f59e0b; }
+  .note-warn { background: #fffbeb; border-color: #b45309; }
+  .note-warn .note-head { color: #b45309; }
 
-  .note-danger { background: rgba(239,68,68,0.08); border-color: var(--danger); }
+  .note-danger { background: #fef2f2; border-color: var(--danger); }
   .note-danger .note-head { color: var(--danger); }
 
   .ext-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--accent);
+    color: var(--accent-text);
     text-decoration: none;
-    border-bottom: 1px solid rgba(52,211,153,0.35);
+    border-bottom: 1px solid rgba(194,80,15,0.4);
   }
   .ext-link:hover { color: var(--text-bright); border-color: var(--text-bright); }
 
   /* ── FOOTER ── */
   .footer {
-    border-top: 1px solid var(--border);
     padding: 48px 24px 64px;
     text-align: center;
-    background: var(--surface);
+    background: var(--bg-alt);
   }
-  .footer-title { font-size: 1.1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+  .footer-title { font-size: 1.1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; letter-spacing: -0.02em; }
   .footer-desc { color: var(--text-dim); font-size: 0.9rem; max-width: 520px; margin: 0 auto 22px; }
 
   .footer-btn {
     display: inline-block;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #0a0e17;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #fff;
     font-weight: 700;
     text-decoration: none;
-    border-radius: 99px;
-    padding: 12px 28px;
+    border-radius: 4px;
+    padding: 11px 24px;
     font-size: 0.94rem;
+    transition: background 0.2s, border-color 0.2s;
   }
+  .footer-btn:hover { background: #c2500f; border-color: #c2500f; }
 
   .footer-copy { margin-top: 28px; font-size: 0.78rem; color: var(--text-dim); }
 
   @media (max-width: 560px) {
     .hero { padding: 100px 20px 48px; }
-    .main { padding: 40px 20px 64px; }
   }
 </style>
 </head>

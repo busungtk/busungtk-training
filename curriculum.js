@@ -158,6 +158,25 @@
   R({ id: 'ref:load', anchor: 'load', week: 10, prio: '심화', studyMin: 45, prereq: ['ref:cycle'], title: '참고 · 냉장·냉동실 부하계산 엑셀',
     why: '창고 크기·단열·물건에 따라 냉동기 용량이 왜 달라지는지 숫자로 봅니다. 장비 크기를 고르는 이유를 이해하는 심화 자료입니다.' });
 
+  // ── 시공·제품 (products.html) — 단가 라이브러리 제품군·치수·등급·급배수 규칙 + 기술 교재 7장. 가격은 넣지 않는다
+  var P = function (o) { add(Object.assign({ page: 'products.html', roles: ['tech', 'office'], topics: ['open'] }, o)); };
+  P({ id: 'prod:map', anchor: 'map', week: 2, prio: '필수', ko: 438, title: '시공·제품 · 제품군 지도',
+    why: '제품 이름보다 그 제품이 음식이 지나가는 길의 어디에 있는지를 먼저 알면, 처음 보는 제품도 무엇을 하는지 짐작이 갑니다.' });
+  P({ id: 'prod:size', anchor: 'size', week: 2, prio: '필수', ko: 451, q: 1, prereq: ['prod:map'], title: '시공·제품 · 치수 읽기와 살 수 있는 치수',
+    why: '목록에 없는 치수는 기성품으로 살 수 없습니다. 도면에 아무 치수나 넣으면 시공 때 안 맞습니다.' });
+  P({ id: 'prod:grade', anchor: 'grade', week: 3, prio: '필수', ko: 427, q: 1, prereq: ['prod:map'], topics: ['steel', 'cold'], title: '시공·제품 · 등급이 갈리는 기준',
+    why: '고객이 「왜 이건 비싸요?」라고 물을 때 가격이 아니라 재질·두께·냉각 방식의 차이로 설명해야 고객이 고를 수 있습니다.' });
+  P({ id: 'prod:mep', anchor: 'mep', week: 4, prio: '필수', ko: 587, q: 1, prereq: ['prod:size'], topics: ['water', 'elec'], title: '시공·제품 · 설치 전 확인 (전기·급수·배수·가스·배기)',
+    why: '「다 하고 보니 전기 용량 부족」, 「급배수 협의 누락」이 실제 시공 단계에서 생겼습니다. 제품마다 필요한 것을 미리 알면 막을 수 있습니다.' });
+  P({ id: 'con:order', anchor: 'order', week: 4, prio: '필수', ko: 461, q: 1, prereq: ['prod:mep'], roles: ['tech'], title: '시공·제품 · 시공 순서와 이유',
+    why: '순서를 외우는 것보다 「옮기기 어려운 것부터」라는 이유를 알아야 현장이 다를 때 스스로 맞춥니다.' });
+  P({ id: 'con:scope', anchor: 'scope', week: 4, prio: '필수', ko: 286, title: '시공·제품 · 우리가 직접 하는 것과 협력사',
+    why: '설치·용접은 우리가, 후드·바닥·가스·인테리어는 협력사가 합니다. 범위를 부풀리면 고객 담당자의 걱정이 현실이 됩니다.' });
+  P({ id: 'con:site', anchor: 'site', week: 5, prio: '권장', ko: 297, prereq: ['con:order'], roles: ['tech'], title: '시공·제품 · 현장마다 다른 것',
+    why: '반입로·방열판·인덕션 전기·제빙기 배수처럼, 실제 기록에서 반복해서 나온 실수와 해결을 미리 봅니다.' });
+  P({ id: 'con:mine', anchor: 'mine', week: 4, prio: '필수', ko: 202, roles: ['tech'], title: '시공·제품 · 시공 현장에서 신입이 맡는 것',
+    why: '주차마다 맡는 일이 정해져 있습니다. 지금 내가 무엇을 해야 하는지 알면 현장에서 서성이지 않습니다.' });
+
   // ── 주차별 학습 목표 — 주간 보고의 「이번 주 목표」 기준. goal = 주말에 할 수 있어야 하는 것, check = 사수가 확인하는 방법
   const WEEKS = {
     tech: [
@@ -245,6 +264,17 @@
     { id: 'g:install', area: '시공·납품', week: 12, target: 3, roles: ['tech'], title: '시공 현장에서 한 파트(급배수 또는 세척기)를 맡고 고객에게 인계할 수 있다',
       check: '맡은 파트를 끝까지 하고, 물·불 확인을 거쳐 고객에게 사용·청소 방법을 설명한다',
       why: '교재가 정한 11~12주 목표다. 설치는 관계의 시작이라 인계 설명까지가 일이다.', units: ['tech:c7', 'p3:sec3'], kw: ['시공', '설치'] },
+    // 시공·제품 (직군 공통 포함)
+    { id: 'g:prod-know', area: '시공·제품', week: 2, target: 1, roles: ['tech', 'office'], title: '제품을 다섯 묶음으로 나누고 음식 흐름의 어디에 놓이는지 설명할 수 있다',
+      check: '실제 주방 사진이나 도면 한 장에서 제품마다 묶음과 역할을 말한다', why: '처음 보는 제품도 무엇을 하는지 짐작할 수 있어야 고객 말을 알아듣는다.', units: ['prod:map'], kw: [] },
+    { id: 'g:size', area: '시공·제품', week: 3, target: 3, roles: ['tech', 'office'], title: '치수 표기를 읽고 살 수 있는 치수인지 확인할 수 있다',
+      check: '견적서나 도면 한 건의 치수 다섯 개를 폭×깊이×높이로 읽고, 단가 라이브러리 목록에 있는지 확인한다', why: '목록에 없는 치수를 넣으면 시공 때 안 맞는다.', units: ['prod:size'], kw: [] },
+    { id: 'g:mep', area: '시공·제품', week: 5, target: 3, roles: ['tech', 'office'], title: '설치 전 확인표(전기·급수·배수·가스·배기)를 채울 수 있다',
+      check: '장비 다섯 대의 명판 사진으로 소비전력·전압·상과 급수·온수·배수·가스·배기 필요 여부를 채워 사수 확인을 받는다', why: '전기 용량 부족·급배수 협의 누락을 시공 전에 막는다.', units: ['prod:mep', 'tech:c8'], kw: [] },
+    { id: 'g:order', area: '시공·제품', week: 4, target: 1, roles: ['tech'], title: '시공 순서를 이유와 함께 설명할 수 있다',
+      check: '자리 그리기부터 인계까지 열 단계를 「왜 그 순서인지」와 함께 말한다', why: '이유를 알아야 현장이 다를 때 순서를 스스로 맞춘다.', units: ['con:order', 'tech:c7'], kw: [] },
+    { id: 'g:scope', area: '시공·제품', week: 4, target: 1, roles: ['tech', 'office'], title: '우리 범위와 협력사 범위를 고객에게 정확히 말할 수 있다',
+      check: '「설치·용접은 직접, 후드·바닥·가스·인테리어는 협력사, 견적 통합 여부는 고객 선택」을 고객 말투로 설명한다', why: '범위를 부풀리면 나중에 고객 담당자가 곤란해진다.', units: ['con:scope'], kw: [] },
     // 사무직
     { id: 'g:office-flow', area: '업무 흐름', week: 1, target: 1, roles: ['office'], title: 'A/S·시공 한 건이 어떤 앱을 거쳐 가는지 설명할 수 있다',
       check: '접수부터 계산서까지 앱 순서를 말로 설명한다', why: '앞 칸을 비우면 뒤 칸이 막힌다. 흐름을 알아야 빠진 칸이 보인다.', units: ['app:portal', 'app:asms'], kw: [] },

@@ -6,19 +6,24 @@
 <title>학습 진행률 체크 | 부성티케이 신입사원 교육</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
 <style>
   :root {
-    --bg: #0a0e17;
-    --surface: #111827;
-    --surface2: #1a2332;
-    --border: #1e2d3d;
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --text-bright: #f8fafc;
-    --p1: #38bdf8;
-    --p2: #10b981;
-    --p3: #f59e0b;
-    --p4: #a78bfa;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface2: #fafafa;
+    --border: #e5e5e5;
+    --text: #1a1a1a;
+    --text-dim: #6b7280;
+    --text-bright: #111111;
+    --p1: #EA5E18;
+    --accent: #EA5E18;
+    --accent-text: #c2500f;
+    --success: #15803d;
+    --danger: #b91c1c;
+    --warn: #b45309;
+    --on-accent: #ffffff; --top-bg: rgba(255,255,255,.96); --input-bg: #ffffff;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +32,8 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    word-break: keep-all;
     line-height: 1.7;
     min-height: 100vh;
     padding: 0 0 60px;
@@ -40,8 +46,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(12px);
-    background: rgba(17,24,39,0.92);
+    background: rgba(255,255,255,0.97);
   }
 
   .header-inner {
@@ -70,7 +75,7 @@
     cursor: pointer;
   }
 
-  .back-link:hover { color: var(--p1); }
+  .back-link:hover { color: var(--accent-text); }
 
   .header-title {
     font-size: 1.1rem;
@@ -80,11 +85,11 @@
 
   .header-trainee {
     font-size: 0.85rem;
-    color: var(--p1);
+    color: var(--accent-text);
     font-weight: 600;
-    background: rgba(56,189,248,0.1);
+    background: var(--accent-tint);
     padding: 4px 12px;
-    border-radius: 99px;
+    border-radius: 4px;
   }
 
   .header-actions {
@@ -94,7 +99,7 @@
 
   .btn {
     padding: 6px 14px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -104,30 +109,31 @@
   }
 
   .btn-reset {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.3);
-    color: #ef4444;
+    background: #fff;
+    border-color: #fca5a5;
+    color: var(--danger);
   }
 
   .btn-reset:hover {
-    background: rgba(239,68,68,0.2);
-    border-color: rgba(239,68,68,0.5);
+    background: #fef2f2;
+    border-color: var(--danger);
   }
 
   .btn-primary {
-    background: rgba(56,189,248,0.15);
-    border-color: rgba(56,189,248,0.4);
-    color: var(--p1);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
   }
 
   .btn-primary:hover {
-    background: rgba(56,189,248,0.25);
+    background: #c2500f;
+    border-color: #c2500f;
   }
 
   .btn-danger-text {
     background: none;
     border-color: transparent;
-    color: #ef4444;
+    color: var(--danger);
     font-size: 12px;
     padding: 4px 8px;
     opacity: 0.6;
@@ -156,13 +162,13 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(56,189,248,0.1);
-    border: 1px solid rgba(56,189,248,0.25);
-    border-radius: 99px;
+    background: var(--accent-tint);
+    border: 1px solid #fdba74;
+    border-radius: 4px;
     padding: 6px 18px;
     font-size: 13px;
-    font-weight: 600;
-    color: var(--p1);
+    font-weight: 700;
+    color: var(--accent-text);
     letter-spacing: 0.06em;
     margin-bottom: 20px;
   }
@@ -170,6 +176,7 @@
   .select-title {
     font-size: clamp(1.6rem, 4vw, 2.4rem);
     font-weight: 800;
+    letter-spacing: -0.02em;
     color: var(--text-bright);
     margin-bottom: 8px;
   }
@@ -189,7 +196,7 @@
   .trainee-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 16px 20px;
     margin-bottom: 10px;
     display: flex;
@@ -201,9 +208,8 @@
   }
 
   .trainee-card:hover {
-    border-color: rgba(56,189,248,0.4);
+    border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   }
 
   .trainee-info { flex: 1; }
@@ -223,7 +229,8 @@
   .trainee-pct {
     font-size: 1.3rem;
     font-weight: 800;
-    color: var(--p1);
+    color: var(--accent-text);
+    font-variant-numeric: tabular-nums;
   }
 
   .new-trainee-form {
@@ -231,7 +238,7 @@
     max-width: 480px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 20px;
     display: flex;
     gap: 10px;
@@ -239,9 +246,9 @@
 
   .new-trainee-input {
     flex: 1;
-    background: var(--surface2);
+    background: var(--input-bg);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px 14px;
     color: var(--text-bright);
     font-size: 15px;
@@ -250,14 +257,14 @@
     transition: border-color 0.2s;
   }
 
-  .new-trainee-input:focus { border-color: var(--p1); }
+  .new-trainee-input:focus { border-color: var(--accent); }
   .new-trainee-input::placeholder { color: var(--text-dim); opacity: 0.6; }
 
   .new-trainee-btn {
-    background: var(--p1);
-    color: #0a0e17;
+    background: var(--accent);
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 700;
@@ -290,7 +297,7 @@
   .dashboard {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 6px;
     padding: 24px;
     margin-bottom: 24px;
   }
@@ -312,11 +319,12 @@
     font-size: 2rem;
     font-weight: 800;
     color: var(--text-bright);
+    font-variant-numeric: tabular-nums;
   }
 
   .progress-bar-wrap {
-    background: var(--surface2);
-    border-radius: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
     height: 12px;
     overflow: hidden;
     margin-bottom: 20px;
@@ -324,8 +332,8 @@
 
   .progress-bar-fill {
     height: 100%;
-    border-radius: 8px;
-    background: linear-gradient(90deg, var(--p1), var(--p2));
+    border-radius: 4px;
+    background: var(--accent);
     transition: width 0.4s ease;
     min-width: 0;
   }
@@ -339,7 +347,8 @@
 
   .stat-card {
     background: var(--surface2);
-    border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     padding: 14px 16px;
     text-align: center;
   }
@@ -348,6 +357,7 @@
     font-size: 1.4rem;
     font-weight: 800;
     color: var(--text-bright);
+    font-variant-numeric: tabular-nums;
   }
 
   .stat-label {
@@ -372,15 +382,15 @@
   }
 
   .phase-bar-track {
-    background: var(--surface2);
-    border-radius: 6px;
+    background: #f0f0f0;
+    border-radius: 3px;
     height: 8px;
     overflow: hidden;
   }
 
   .phase-bar-track .fill {
     height: 100%;
-    border-radius: 6px;
+    border-radius: 3px;
     transition: width 0.4s ease;
   }
 
@@ -389,6 +399,7 @@
     font-weight: 600;
     margin-top: 4px;
     color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
   }
 
   /* ── PHASE SECTIONS ── */
@@ -398,7 +409,7 @@
     width: 100%;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 16px 20px;
     display: flex;
     align-items: center;
@@ -410,7 +421,7 @@
     transition: all 0.2s;
   }
 
-  .phase-toggle:hover { border-color: rgba(255,255,255,0.15); }
+  .phase-toggle:hover { border-color: var(--accent); }
 
   .phase-toggle-left {
     display: flex;
@@ -442,7 +453,7 @@
   .phase-section.open .phase-toggle-arrow { transform: rotate(180deg); }
 
   .phase-section.open .phase-toggle {
-    border-radius: 12px 12px 0 0;
+    border-radius: 6px 6px 0 0;
     border-bottom-color: transparent;
   }
 
@@ -451,7 +462,7 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-top: none;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 6px 6px;
     padding: 8px 0;
   }
 
@@ -461,7 +472,7 @@
     font-size: 0.78rem;
     font-weight: 700;
     color: var(--text-dim);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 12px 20px 6px;
     border-top: 1px solid var(--border);
@@ -477,7 +488,7 @@
     transition: background 0.15s;
   }
 
-  .check-item:hover { background: rgba(255,255,255,0.02); }
+  .check-item:hover { background: var(--surface2); }
 
   .check-item-name {
     flex: 1;
@@ -489,7 +500,7 @@
   .check-item.all-done .check-item-name {
     color: var(--text-dim);
     text-decoration: line-through;
-    text-decoration-color: rgba(148,163,184,0.3);
+    text-decoration-color: #9ca3af;
   }
 
   .check-group {
@@ -503,9 +514,9 @@
     align-items: center;
     gap: 4px;
     padding: 4px 10px;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid var(--border);
-    background: transparent;
+    background: #fff;
     color: var(--text-dim);
     font-size: 0.75rem;
     font-family: inherit;
@@ -516,14 +527,15 @@
   }
 
   .check-btn:hover {
-    border-color: rgba(255,255,255,0.2);
+    border-color: var(--accent);
     color: var(--text);
   }
 
   .check-btn.checked {
-    border-color: rgba(16,185,129,0.5);
-    background: rgba(16,185,129,0.1);
-    color: #34d399;
+    border-color: #86efac;
+    background: #f0fdf4;
+    color: var(--success);
+    font-weight: 700;
   }
 
   .check-btn .icon { font-size: 0.85rem; }
@@ -543,7 +555,7 @@
   }
 
   .save-indicator.show { opacity: 1; }
-  .save-indicator.fail { color: #f87171; font-weight: 700; }
+  .save-indicator.fail { color: var(--danger); font-weight: 700; }
 
   @media (max-width: 520px) {
     .header-inner { flex-wrap: wrap; }
@@ -561,7 +573,7 @@
     transform: translateX(-50%) translateY(80px);
     background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 10px 20px;
     font-size: 0.85rem;
     color: var(--text-bright);
@@ -653,7 +665,7 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 // ── DATA ──
 const PHASES = [
   {
-    id: 'p1', title: 'Phase 1 \xB7 입문교육', color: '#38bdf8',
+    id: 'p1', title: 'Phase 1 \xB7 입문교육', color: 'var(--accent-text)',
     sections: [
       { name: 'Day 1 \u2014 회사와 업무 이해', items: ['회사 소개 (부성티케이 역사\xB7사업 영역)', '팀 소개 (현장지원팀 역할\xB7조직도)', 'A/S 업무 흐름 (접수\u2192배정\u2192출동\u2192완료\u2192정산)'] },
       { name: 'Day 2 \u2014 안전교육', items: ['산업안전보건법 핵심 (법적 의무\xB7과태료)', 'PPE 착용 (안전모\xB7안전화\xB7보호장갑 등)', '위험요소 인식 (감전\xB7추락\xB7화상\xB7가스누출)'] },
@@ -664,7 +676,7 @@ const PHASES = [
     ]
   },
   {
-    id: 'p2', title: 'Phase 2 \xB7 기본기술교육', color: '#10b981',
+    id: 'p2', title: 'Phase 2 \xB7 기본기술교육', color: 'var(--accent-text)',
     sections: [
       { name: 'Sec 1 \u2014 냉동설비', items: ['워크인 냉동\xB7냉장고\xB7패널 구조', '냉동기\xB7배관 시스템', '진공 작업\xB7냉매 충전'] },
       { name: 'Sec 2 \u2014 조리/가열설비', items: ['가스 조리기구 (면렌지\xB7가스레인지 구조\xB7점화 원리\xB7안전장치)', '전기 조리기구 & 오븐 (인덕션\xB7컨벡션\xB7튀김기\xB7스팀기\xB7그릴)'] },
@@ -677,7 +689,7 @@ const PHASES = [
     ]
   },
   {
-    id: 'p3', title: 'Phase 3 \xB7 현장 OJT', color: '#f59e0b',
+    id: 'p3', title: 'Phase 3 \xB7 현장 OJT', color: 'var(--accent-text)',
     sections: [
       { name: '4주차 \u2014 선배 동행\xB7관찰', items: ['현장 도착 절차\xB7안전 확인', '선배 작업 관찰 (조리\xB7냉동\xB7환기 등 다양한 설비)', '대형 현장 동행 (호텔 주방\xB7급식소 대형 조리\xB7냉동설비)', '고객 응대\xB7커뮤니케이션', '도면 읽기 (평면도\xB7설비 배치도)'] },
       { name: '5~6주차 \u2014 보조 시공', items: ['냉동기 설치 보조', '조리설비 설치 보조 (면렌지\xB7오븐\xB7튀김기 배치\xB7연결)', '배관 작업 보조 (가스\xB7급수\xB7배수)', '전기 결선 보조 (조리\xB7냉동 설비 전원 연결)', '후드\xB7덕트 설치 보조', 'A/S 수리 보조 (냉동\xB7조리\xB7세척설비)'] },
@@ -685,7 +697,7 @@ const PHASES = [
     ]
   },
   {
-    id: 'p4', title: 'Phase 4 \xB7 심화 + 수료', color: '#a78bfa',
+    id: 'p4', title: 'Phase 4 \xB7 심화 + 수료', color: 'var(--accent-text)',
     sections: [
       { name: 'Sec 1 \u2014 주방설비 고장의 원리', items: ['냉동 사이클 심화 (P-h 선도\xB7과열도\xB7과냉도)', '압축기 고장 5가지 (액백\xB7오일부족\xB7밸브파손\xB7모터소손\xB7베어링마모)', '조리설비 예방점검 (버너 청소\xB7점화플러그\xB7오븐 캘리브레이션)', '세척\xB7전처리설비 예방점검 (필터\xB7워시암\xB7칼날\xB7모터)', '설비 유형별 정기점검 체크리스트'] },
       { name: 'Sec 2 \u2014 업무 역량', items: ['프로젝트 관리 (주방 전체 설비 설치\xB7공정표\xB7자재)', '커뮤니케이션 (보고\xB7협의\xB7민원 대응)', '비용 감각 (설비별 공임 단가\xB7자재비\xB7견적 산출)'] },

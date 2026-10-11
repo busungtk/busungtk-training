@@ -6,68 +6,72 @@
 <title>주간 보고 · 헷갈림 노트 | 부성티케이 신입사원 교육</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
 <style>
   :root {
-    --bg: #0a0e17; --surface: #111827; --surface2: #1a2332; --border: #1e2d3d;
-    --accent: #38bdf8; --accent2: #818cf8; --danger: #ef4444; --warn: #fbbf24; --success: #10b981;
-    --text: #e2e8f0; --text-dim: #94a3b8; --text-bright: #f8fafc;
+    --bg: #ffffff; --surface: #ffffff; --surface2: #fafafa; --border: #e5e5e5;
+    --accent: #EA5E18; --accent-text: #c2500f; --accent2: #6b7280; --danger: #b91c1c; --warn: #b45309; --success: #15803d;
+    --text: #1a1a1a; --text-dim: #6b7280; --text-bright: #111111;
+    --on-accent: #ffffff; --top-bg: rgba(255,255,255,.96); --input-bg: #ffffff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; line-height: 1.7; padding: 24px 16px 80px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; word-break: keep-all; line-height: 1.7; padding: 0 16px 80px; }
   .wrap { max-width: 900px; margin: 0 auto; }
-  a { color: var(--accent); }
-  .back { display: inline-block; margin-bottom: 14px; color: var(--text-dim); text-decoration: none; font-size: .86rem; }
-  .back:hover { color: var(--accent); }
-  h1 { font-size: 1.7rem; color: var(--text-bright); margin-bottom: 6px; }
-  h2 { font-size: 1.02rem; color: var(--text-bright); margin: 0 0 8px; }
-  .sub { color: var(--text-dim); font-size: .92rem; margin-bottom: 16px; }
+  a { color: var(--accent-text); }
+  /* 머리 띠 - 짙은 한 곳. 세 요소를 이어 붙이고 좌우로 clip-path 로 번지게 한다 (인쇄에서는 끈다) */
+  .back { display: block; margin: 0; padding: 28px 0 14px; color: #a8a29e; text-decoration: none; font-size: .86rem; }
+  .back:hover { color: #fff; }
+  h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin: 0; padding-bottom: 6px; }
+  h2 { font-size: 1.02rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-bright); margin: 0 0 8px; }
+  .sub { color: #d6d3d1; font-size: .92rem; margin: 0 0 20px; padding-bottom: 24px; }
   .bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 14px; }
   .bar > div { min-width: 150px; }
   label.f, .f { display: block; font-size: .78rem; font-weight: 600; color: var(--text-dim); margin-bottom: 4px; }
-  select, input[type=text], input[type=search], textarea { width: 100%; font: inherit; font-size: .92rem; color: var(--text); background: #0a0e17; border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; min-height: 40px; }
+  select, input[type=text], input[type=search], textarea { width: 100%; font: inherit; font-size: .92rem; color: var(--text); background: var(--input-bg); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; min-height: 40px; }
   textarea { resize: vertical; min-height: 84px; line-height: 1.6; }
   select:focus-visible, input:focus-visible, textarea:focus-visible, button:focus-visible, [role=tab]:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .tabs { display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 1px solid var(--border); }
   [role=tab] { appearance: none; font: inherit; font-weight: 700; font-size: .94rem; cursor: pointer; background: transparent; color: var(--text-dim); border: 0; border-bottom: 3px solid transparent; padding: 10px 16px; min-height: 44px; }
-  [role=tab][aria-selected=true] { color: var(--text-bright); border-bottom-color: var(--accent); }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
-  .goalbox { border-left: 4px solid var(--accent); background: var(--surface2); }
+  [role=tab][aria-selected=true] { color: var(--accent-text); border-bottom-color: var(--accent); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px; margin-bottom: 14px; }
+  .goalbox { border-left: 3px solid var(--accent); background: var(--accent-tint); border-radius: 0 6px 6px 0; }
   .goalbox .g { font-size: 1.02rem; color: var(--text-bright); font-weight: 600; }
   .goalbox .c { color: var(--text-dim); font-size: .88rem; margin-top: 6px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .note { color: var(--text-dim); font-size: .82rem; }
-  .btn { appearance: none; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); min-height: 40px; }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.main { background: var(--accent); border-color: var(--accent); color: #0a0e17; }
-  .btn.main:hover { filter: brightness(1.08); color: #0a0e17; }
+  .btn { appearance: none; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; padding: 8px 16px; border-radius: 4px; border: 1px solid var(--border); background: #fff; color: var(--text); min-height: 40px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent-text); }
+  .btn.main { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.main:hover { background: #c2500f; border-color: #c2500f; color: #fff; }
   .btn.small { padding: 3px 12px; min-height: 32px; font-size: .8rem; font-weight: 600; }
   .btn:disabled { opacity: .5; cursor: default; }
   .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
   ul.clean { list-style: none; }
   ul.clean li { padding: 5px 0; border-top: 1px solid var(--border); font-size: .88rem; }
   ul.clean li:first-child { border-top: 0; }
-  .ok { color: #6ee7b7; font-weight: 700; } .no { color: var(--text-dim); }
+  .ok { color: var(--success); font-weight: 700; } .no { color: var(--text-dim); }
   .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: end; height: 120px; }
   .bars div.d { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; font-size: .72rem; color: var(--text-dim); }
-  .bars .col { width: 100%; background: var(--accent); border-radius: 5px 5px 0 0; min-height: 2px; opacity: .85; }
+  .bars .col { width: 100%; background: var(--accent); border-radius: 3px 3px 0 0; min-height: 2px; }
   .bars .col.zero { background: var(--border); }
   .bars b { color: var(--text-bright); font-size: .76rem; font-weight: 600; }
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-  .stats div { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; }
-  .stats b { display: block; font-size: 1.2rem; color: var(--text-bright); }
+  .stats div { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; }
+  .stats b { display: block; font-size: 1.2rem; color: var(--text-bright); font-variant-numeric: tabular-nums; }
   .stats small { color: var(--text-dim); font-size: .78rem; }
   .pv { display: none; white-space: pre-wrap; border: 1px solid #999; padding: 4px 6px; min-height: 2.2em; font-size: 10pt; }
   .stat { font-size: .86rem; margin-top: 8px; min-height: 1.4em; }
   /* 헷갈림 노트 */
   .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
-  .nt { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
-  .nt.resolved { border-left: 4px solid var(--success); }
-  .nt.open { border-left: 4px solid var(--warn); }
+  .nt { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 10px; }
+  .nt.resolved { border-left: 3px solid var(--success); }
+  .nt.open { border-left: 3px solid var(--warn); }
   .nt .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px; font-size: .8rem; color: var(--text-dim); }
-  .tag { display: inline-block; padding: 0 9px; border-radius: 99px; border: 1px solid var(--border); font-size: .74rem; font-weight: 700; color: var(--accent); }
+  .tag { display: inline-block; padding: 0 9px; border-radius: 3px; border: 1px solid var(--border); font-size: .74rem; font-weight: 700; color: var(--accent-text); }
   .nt blockquote { border-left: 3px solid var(--border); padding: 2px 10px; margin: 6px 0; color: var(--text-dim); font-size: .86rem; }
   .nt .tx { white-space: pre-wrap; }
-  .nt .ans { margin-top: 8px; background: var(--surface2); border-radius: 10px; padding: 8px 12px; font-size: .88rem; }
+  .nt .ans { margin-top: 8px; background: var(--surface2); border-radius: 4px; padding: 8px 12px; font-size: .88rem; }
   .nt .ans small { color: var(--text-dim); }
   .ansform { margin-top: 8px; display: grid; gap: 8px; }
   .empty { color: var(--text-dim); padding: 20px 0; text-align: center; }
@@ -77,6 +81,8 @@
   @media print {
     @page { size: A4; margin: 10mm; }
     body { background: #fff; color: #000; padding: 0; font-size: 10pt; line-height: 1.4; }
+    /* 인쇄는 흰 바탕 검정 글자 - 화면용 머리 띠를 끈다 */
+    .back, h1, .sub { background: #fff !important; box-shadow: none !important; clip-path: none !important; padding: 0 !important; margin: 0 0 4px !important; }
     .back, .tabs, .bar, .row, .noprint, #panelNotes, .stat { display: none !important; }
     #panelWeekly { display: block !important; }
     h1 { font-size: 15pt; color: #000; margin-bottom: 4px; } h2 { color: #000; font-size: 10.5pt; margin-bottom: 3px; }
@@ -92,13 +98,23 @@
     .grid2 { gap: 6px; }
     .noscreen { display: block !important; }
   }
+
+  /* 머리 띠: body 좌우 여백을 넘어 화면 끝까지, 안쪽 요소 여백은 띠가 맡는다 */
+  header.b-mast { margin: 0 -16px 22px; }
+  header.b-mast .b-in { max-width: 900px; padding: 24px 16px 28px; }
+  header.b-mast .back { padding: 0; color: #a8a29e; }
+  header.b-mast h1 { margin: 12px 0 6px; padding: 0; font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+  header.b-mast .sub { margin: 0; padding: 0; }
+  @media print { header.b-mast { margin: 0 0 12px; } header.b-mast .b-in { padding: 0; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← 처음으로</a>
+<header class="b-mast"><div class="b-in">
+  <a class="back b-back" href="index.html">← 처음으로</a>
   <h1>주간 보고 · 헷갈림 노트</h1>
   <p class="sub">기록에서 자동으로 채워지는 칸과 직접 쓰는 칸으로 한 주를 정리합니다.</p>
+</div></header>
+<div class="wrap">
 
   <div class="tabs noprint" role="tablist" aria-label="보기 선택">
     <button role="tab" id="tabWeekly" aria-controls="panelWeekly" aria-selected="true" type="button">주간 보고</button>
@@ -191,7 +207,7 @@
     return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
   }
   function dayLabel(s) { var p = s.split('-'); return (+p[1]) + '/' + (+p[2]); }
-  function setStat(t, bad) { var s = $('stat'); s.textContent = t; s.style.color = bad ? '#fca5a5' : 'var(--text-dim)'; }
+  function setStat(t, bad) { var s = $('stat'); s.textContent = t; s.style.color = bad ? '#b91c1c' : 'var(--text-dim)'; }
 
   var ALL = '__all__';
   var trainees = [];     // { name, learn }

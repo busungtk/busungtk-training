@@ -6,75 +6,81 @@
 <title>학습 편성기 | 부성티케이 신입사원 교육</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
 <style>
   :root {
-    --bg: #0a0e17; --surface: #111827; --surface2: #1a2332; --border: #1e2d3d;
-    --accent: #38bdf8; --accent2: #818cf8; --danger: #ef4444; --warn: #fbbf24; --success: #10b981;
-    --text: #e2e8f0; --text-dim: #94a3b8; --text-bright: #f8fafc;
+    --bg: #ffffff; --surface: #ffffff; --surface2: #fafafa; --border: #e5e5e5;
+    --accent: #EA5E18; --accent-text: #c2500f; --accent2: #6b7280; --danger: #b91c1c; --warn: #b45309; --success: #15803d;
+    --text: #1a1a1a; --text-dim: #6b7280; --text-bright: #111111;
+    --on-accent: #ffffff; --top-bg: rgba(255,255,255,.96); --input-bg: #ffffff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; line-height: 1.7; padding: 24px 16px 80px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; word-break: keep-all; line-height: 1.7; padding: 0 16px 80px; }
   .wrap { max-width: 980px; margin: 0 auto; }
-  a { color: var(--accent); }
-  .back { display: inline-block; margin-bottom: 14px; color: var(--text-dim); text-decoration: none; font-size: .86rem; }
-  .back:hover { color: var(--accent); }
-  h1 { font-size: 1.7rem; color: var(--text-bright); margin-bottom: 6px; }
-  h2 { font-size: 1.1rem; color: var(--text-bright); margin: 28px 0 10px; }
-  .sub { color: var(--text-dim); font-size: .92rem; margin-bottom: 18px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+  a { color: var(--accent-text); }
+  /* 머리 띠 - 짙은 한 곳. 세 요소를 이어 붙이고 좌우로 clip-path 로 번지게 한다 (인쇄에서는 끈다) */
+  .back { display: block; margin: 0; padding: 28px 0 14px; color: #a8a29e; text-decoration: none; font-size: .86rem; }
+  .back:hover { color: #fff; }
+  h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin: 0; padding-bottom: 6px; }
+  h2 { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-bright); margin: 28px 0 10px; }
+  .sub { color: #d6d3d1; font-size: .92rem; margin: 0 0 22px; padding-bottom: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px; margin-bottom: 14px; }
   .card p { margin-bottom: 6px; font-size: .9rem; }
-  .card code { background: var(--surface2); padding: 1px 6px; border-radius: 6px; font-size: .84rem; color: var(--accent); }
+  .card code { background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: .84rem; color: var(--text); }
   .form { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
   label.f { display: block; font-size: .8rem; font-weight: 600; color: var(--text-dim); margin-bottom: 5px; }
-  select, input[type=number], input[type=date] { width: 100%; font: inherit; font-size: .92rem; color: var(--text); background: #0a0e17; border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; min-height: 40px; }
+  select, input[type=number], input[type=date] { width: 100%; font: inherit; font-size: .92rem; color: var(--text); background: var(--input-bg); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; min-height: 40px; }
   .seg { display: flex; flex-wrap: wrap; gap: 6px; }
   .seg label { position: relative; display: inline-block; }
   .seg input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-  .seg span { display: inline-block; padding: 8px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: .86rem; color: var(--text-dim); font-weight: 600; }
-  .seg input:checked + span { border-color: var(--accent); background: rgba(56,189,248,.14); color: var(--text-bright); }
+  .seg span { display: inline-block; padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: .86rem; color: var(--text-dim); font-weight: 600; }
+  .seg input:checked + span { border-color: var(--accent); background: var(--accent-tint); color: var(--accent-text); }
   .seg input:focus-visible + span, select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .modes label { position: relative; display: block; }
   .modes input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-  .modes .m { display: block; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; height: 100%; }
+  .modes .m { display: block; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; height: 100%; }
   .modes .m b { display: block; color: var(--text-bright); font-size: .94rem; }
   .modes .m small { color: var(--text-dim); font-size: .8rem; }
-  .modes input:checked + .m { border-color: var(--accent); background: rgba(56,189,248,.1); }
+  .modes input:checked + .m { border-color: var(--accent); background: var(--accent-tint); }
   .modes input:focus-visible + .m { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .btn { appearance: none; font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); min-height: 40px; }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.main { background: var(--accent); border-color: var(--accent); color: #0a0e17; }
-  .btn.main:hover { filter: brightness(1.08); color: #0a0e17; }
+  .btn { appearance: none; font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; padding: 9px 18px; border-radius: 4px; border: 1px solid var(--border); background: #fff; color: var(--text); min-height: 40px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent-text); }
+  .btn.main { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.main:hover { background: #c2500f; border-color: #c2500f; color: #fff; }
   .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
   .note { color: var(--text-dim); font-size: .82rem; }
-  .warn { background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.5); color: #fde68a; border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; font-size: .92rem; }
-  .ok { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.45); color: #6ee7b7; border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; font-size: .92rem; }
+  .warn { background: #fffbeb; border: 1px solid #fcd34d; border-left: 3px solid var(--warn); color: #78350f; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; font-size: .92rem; }
+  .ok { background: #f0fdf4; border: 1px solid #86efac; border-left: 3px solid var(--success); color: #14532d; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; font-size: .92rem; }
   .sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-  .sum div { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; }
-  .sum b { display: block; font-size: 1.3rem; color: var(--text-bright); }
+  .sum div { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; }
+  .sum b { display: block; font-size: 1.3rem; color: var(--text-bright); font-variant-numeric: tabular-nums; }
   .sum small { color: var(--text-dim); font-size: .78rem; }
-  .sum .neg b { color: #fca5a5; }
+  .sum .neg b { color: var(--danger); }
   table { width: 100%; border-collapse: collapse; font-size: .86rem; }
-  th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--border); vertical-align: top; }
+  th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--border); vertical-align: top; font-variant-numeric: tabular-nums; }
   th { color: var(--text-dim); font-weight: 600; font-size: .78rem; background: var(--surface2); border-top: 0; }
-  .tw { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+  .tw { overflow-x: auto; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
   tr.wkhead td { background: var(--surface2); border-top: 2px solid var(--border); }
   tr.wkhead .wk { color: var(--text-bright); font-weight: 800; }
   tr.wkhead .goal { color: var(--text-dim); font-size: .82rem; margin-top: 2px; }
-  tr.over td.tot { color: #fca5a5; font-weight: 700; }
-  .b { display: inline-block; padding: 0 8px; border-radius: 99px; font-size: .72rem; font-weight: 700; border: 1px solid; margin-left: 6px; white-space: nowrap; }
-  .b.req { color: #fca5a5; border-color: rgba(248,113,113,.5); }
-  .b.rec { color: #7dd3fc; border-color: rgba(56,189,248,.5); }
-  .b.adv { color: #c4b5fd; border-color: rgba(167,139,250,.5); }
-  .b.meas { color: #6ee7b7; border-color: rgba(16,185,129,.5); }
-  .b.cont { color: var(--warn); border-color: rgba(251,191,36,.5); }
-  .b.over { color: #fca5a5; border-color: rgba(248,113,113,.6); }
+  tr.over td.tot { color: var(--danger); font-weight: 700; }
+  .b { display: inline-block; padding: 0 8px; border-radius: 3px; font-size: .74rem; font-weight: 700; border: 1px solid; margin-left: 6px; white-space: nowrap; }
+  .b.req { color: var(--accent-text); border-color: #fdba74; background: #fff7f2; }
+  .b.rec { color: #385768; border-color: #b6cddb; background: #f3f7fa; }
+  .b.adv { color: #6d28d9; border-color: #c4b5fd; background: #f5f3ff; }
+  .b.meas { color: var(--success); border-color: #86efac; background: #f0fdf4; }
+  .b.cont { color: var(--warn); border-color: #fcd34d; background: #fffbeb; }
+  .b.over { color: var(--danger); border-color: #fca5a5; background: #fef2f2; }
   td.num { white-space: nowrap; text-align: right; }
   .hidden { display: none; }
   #msg { margin-top: 10px; font-size: .88rem; min-height: 1.4em; }
   @media (max-width: 560px) { .modes { grid-template-columns: 1fr; } h1 { font-size: 1.4rem; } th, td { padding: 7px 8px; } }
   @media print {
     body { background: #fff; color: #000; padding: 0; font-size: 11pt; }
+    /* 인쇄는 흰 바탕 검정 글자 - 화면용 머리 띠를 끈다 */
+    .back, h1, .sub { background: #fff !important; box-shadow: none !important; clip-path: none !important; padding: 0 !important; margin: 0 0 6px !important; }
     .back, .form-card, .row, #msg, .noprint { display: none !important; }
     .card, .tw, .sum div { background: #fff !important; border-color: #999 !important; color: #000 !important; }
     h1, h2, .sum b, tr.wkhead .wk { color: #000 !important; }
@@ -84,13 +90,23 @@
     .warn, .ok { background: #fff !important; color: #000 !important; border-color: #000 !important; }
     tr { break-inside: avoid; }
   }
+
+  /* 머리 띠: body 좌우 여백을 넘어 화면 끝까지, 안쪽 요소 여백은 띠가 맡는다 */
+  header.b-mast { margin: 0 -16px 22px; }
+  header.b-mast .b-in { max-width: 980px; padding: 24px 16px 28px; }
+  header.b-mast .back { padding: 0; color: #a8a29e; }
+  header.b-mast h1 { margin: 12px 0 6px; padding: 0; font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+  header.b-mast .sub { margin: 0; padding: 0; }
+  @media print { header.b-mast { margin: 0 0 12px; } header.b-mast .b-in { padding: 0; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← 처음으로</a>
+<header class="b-mast"><div class="b-in">
+  <a class="back b-back" href="index.html">← 처음으로</a>
   <h1>학습 편성기</h1>
   <p class="sub">내가 쓸 수 있는 시간에 맞춰 12주 교육을 어떻게 나눌지 짜 줍니다.</p>
+</div></header>
+<div class="wrap">
 
   <div class="card" id="explain">
     <p><b>숙지 시간은 이렇게 계산합니다.</b></p>
@@ -163,7 +179,7 @@
 
   function selectedRole() { return document.querySelector('input[name=role]:checked').value; }
   function selectedMode() { return document.querySelector('input[name=mode]:checked').value; }
-  function setMsg(t, bad) { var m = $('msg'); m.textContent = t; m.style.color = bad ? '#fca5a5' : 'var(--text-dim)'; }
+  function setMsg(t, bad) { var m = $('msg'); m.textContent = t; m.style.color = bad ? '#b91c1c' : 'var(--text-dim)'; }
 
   // ── 학습자 · 실측 ──
   async function loadTrainees() {

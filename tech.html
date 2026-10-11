@@ -331,6 +331,7 @@ function setSync(s) {
 async function loadWho(name) {
   who = name;
   lsSet('bt_tech:who', name);
+  if (name !== GUEST) lsSet('bt_learner', name);
   const local = normalize(JSON.parse(lsGet(LKEY(name)) || 'null'));
   S = local;
   if (name === GUEST || !sb) { setSync('local'); return; }
@@ -361,13 +362,23 @@ function save() {
 async function push() {
   if (!who || who === GUEST || !sb) return;
   try {
-    const { data, error } = await sb.from(TABLE).select('progress').eq('trainee_name', who).maybeSingle();
-    if (error) throw error;
-    if (!data) { setSync('local'); return; }
-    const merged = Object.assign({}, data.progress || {}, { tech: S });
-    const { error: e2 } = await sb.from(TABLE).update({ progress: merged, updated_at: new Date().toISOString() }).eq('trainee_name', who);
-    if (e2) throw e2;
-    setSync('ok');
+    // 읽은 updated_at 이 그대로일 때만 쓴다. 그 사이 다른 화면이 먼저 썼으면(0행) 다시 읽고 병합해 최대 3번 시도한다.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const { data, error } = await sb.from(TABLE).select('progress, updated_at').eq('trainee_name', who).maybeSingle();
+      if (error) throw error;
+      if (!data) { setSync('local'); return; }
+      const stamp = data.updated_at;
+      const merged = Object.assign({}, data.progress || {}, { tech: S });
+      let q = sb.from(TABLE).update({ progress: merged, updated_at: new Date().toISOString() }).eq('trainee_name', who);
+      q = (stamp == null) ? q.is('updated_at', null) : q.eq('updated_at', stamp);
+      const { data: rows, error: e2 } = await q.select('trainee_name');
+      if (e2) throw e2;
+      if (rows && rows.length) { setSync('ok'); return; }
+      const chk = await sb.from(TABLE).select('updated_at').eq('trainee_name', who).maybeSingle();
+      if (chk.error) throw chk.error;
+      if (!chk.data || chk.data.updated_at === stamp) { setSync('local'); return; }   // 행이 없거나 권한이 막음
+    }
+    setSync('local');
   } catch (e) {
     console.error(e); setSync('local');
   }

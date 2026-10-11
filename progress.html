@@ -543,6 +543,7 @@
   }
 
   .save-indicator.show { opacity: 1; }
+  .save-indicator.fail { color: #f87171; font-weight: 700; }
 
   @media (max-width: 520px) {
     .header-inner { flex-wrap: wrap; }
@@ -714,15 +715,46 @@ async function loadTraineeData(name) {
   return data;
 }
 
+// 진행률 키(p1_0_0 모양)만 이 화면의 것이고, tech·learn 등 다른 키는 다른 화면이 쓴다.
+// 저장 직전에 최신 행을 읽어 진행률 키만 바꾸고 나머지는 그대로 둔다.
+const isProgressKey = k => /^p\d+_\d+_\d+$/.test(k);
+
+// 읽은 updated_at 이 그대로일 때만 쓴다. 그 사이 다른 화면이 먼저 썼으면(0행) 다시 읽고 다시 만들어 최대 3번 시도한다.
+async function writeProgress(name, build) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const { data, error } = await sb.from('training_progress').select('progress, updated_at').eq('trainee_name', name).maybeSingle();
+    if (error || !data) { console.error('Save error:', error || 'no row'); return false; }
+    const stamp = data.updated_at;
+    let q = sb.from('training_progress')
+      .update({ progress: build(data.progress || {}), updated_at: new Date().toISOString() })
+      .eq('trainee_name', name);
+    q = (stamp == null) ? q.is('updated_at', null) : q.eq('updated_at', stamp);
+    const { data: rows, error: e2 } = await q.select('trainee_name');
+    if (e2) { console.error('Save error:', e2); return false; }
+    if (rows && rows.length) return true;
+    // 0행: 그 사이 바뀐 것이면 다시 시도, 그대로면 권한이 막은 것
+    const chk = await sb.from('training_progress').select('updated_at').eq('trainee_name', name).maybeSingle();
+    if (chk.error || !chk.data) { console.error('Save error:', chk.error || 'no row'); return false; }
+    if (chk.data.updated_at === stamp) { console.error('Save blocked (0 rows)'); return false; }
+  }
+  console.error('Save conflict: gave up after 3 tries');
+  return false;
+}
+
 async function saveToDB() {
   if (!currentTrainee) return;
-  const { error } = await sb.from('training_progress')
-    .update({ progress: state, updated_at: new Date().toISOString() })
-    .eq('trainee_name', currentTrainee);
-  if (error) console.error('Save error:', error);
+  const ok = await writeProgress(currentTrainee, latest => {
+    const merged = Object.assign({}, latest);
+    Object.keys(state).forEach(k => { if (isProgressKey(k)) merged[k] = state[k]; });
+    return merged;
+  });
   const ind = document.getElementById('saveIndicator');
+  ind.textContent = ok ? '저장됨' : '저장 실패 — 다시 눌러 주세요';
+  ind.classList.toggle('fail', !ok);
   ind.classList.add('show');
-  setTimeout(() => ind.classList.remove('show'), 1500);
+  clearTimeout(ind._t);
+  ind._t = setTimeout(() => ind.classList.remove('show'), ok ? 1500 : 5000);
+  if (!ok) showToast('저장하지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 주세요');
 }
 
 function debounceSave() {
@@ -782,18 +814,34 @@ async function renderSelectView() {
     return;
   }
 
-  list.innerHTML = trainees.map(t => {
-    const progress = t.progress || {};
-    const stats = calcStatsFrom(progress);
-    return '<div class="trainee-card" onclick="selectTrainee(\'' + t.trainee_name.replace(/'/g, "\\'") + '\')">' +
-      '<div class="trainee-info">' +
-        '<div class="trainee-name">' + t.trainee_name + '</div>' +
-        '<div class="trainee-meta">최근 수정: ' + new Date(t.updated_at).toLocaleDateString('ko-KR') + '</div>' +
-      '</div>' +
-      '<div class="trainee-pct">' + stats.totalPct + '%</div>' +
-      '<button class="btn btn-danger-text" onclick="deleteTrainee(\'' + t.trainee_name.replace(/'/g, "\\'") + '\', event)">삭제</button>' +
-    '</div>';
-  }).join('');
+  // 이름은 사람이 입력한 값이라 HTML·onclick 문자열에 끼우지 않고 DOM 으로 만든다
+  list.textContent = '';
+  trainees.forEach(t => {
+    const stats = calcStatsFrom(t.progress || {});
+    const card = document.createElement('div');
+    card.className = 'trainee-card';
+    card.dataset.name = t.trainee_name;
+    card.addEventListener('click', () => selectTrainee(t.trainee_name));
+    const info = document.createElement('div');
+    info.className = 'trainee-info';
+    const nm = document.createElement('div');
+    nm.className = 'trainee-name';
+    nm.textContent = t.trainee_name;
+    const meta = document.createElement('div');
+    meta.className = 'trainee-meta';
+    meta.textContent = '최근 수정: ' + new Date(t.updated_at).toLocaleDateString('ko-KR');
+    info.appendChild(nm); info.appendChild(meta);
+    const pct = document.createElement('div');
+    pct.className = 'trainee-pct';
+    pct.textContent = stats.totalPct + '%';
+    const del = document.createElement('button');
+    del.className = 'btn btn-danger-text';
+    del.type = 'button';
+    del.textContent = '삭제';
+    del.addEventListener('click', (e) => deleteTrainee(t.trainee_name, e));
+    card.appendChild(info); card.appendChild(pct); card.appendChild(del);
+    list.appendChild(card);
+  });
 }
 
 async function selectTrainee(name) {
@@ -801,7 +849,8 @@ async function selectTrainee(name) {
   if (!data) { showToast('수료자를 찾을 수 없습니다'); return; }
 
   currentTrainee = name;
-  state = data.progress || {};
+  state = {};
+  Object.keys(data.progress || {}).forEach(k => { if (isProgressKey(k)) state[k] = data.progress[k]; });
 
   document.getElementById('selectView').style.display = 'none';
   document.getElementById('progressView').style.display = 'block';
@@ -948,14 +997,16 @@ function togglePhase(id) {
 
 async function resetProgress() {
   if (!currentTrainee) return;
-  if (!confirm(currentTrainee + '의 모든 진행 데이터를 초기화하시겠습니까?\n이 작업은 되돌릴 수 없습니다.')) return;
+  if (!confirm(currentTrainee + '의 진행률 체크만 초기화하시겠습니까?\n(기술 교재 기록·학습 기록은 그대로 남습니다. 이 작업은 되돌릴 수 없습니다.)')) return;
   state = {};
-  await sb.from('training_progress')
-    .update({ progress: {}, updated_at: new Date().toISOString() })
-    .eq('trainee_name', currentTrainee);
+  const okReset = await writeProgress(currentTrainee, latest => {
+    const kept = {};
+    Object.keys(latest).forEach(k => { if (!isProgressKey(k)) kept[k] = latest[k]; });
+    return kept;
+  });
   renderPhases();
   updateUI();
-  showToast('초기화 완료');
+  showToast(okReset ? '초기화 완료' : '초기화 저장 실패 — 다시 눌러 주세요');
 }
 
 function showToast(msg) {

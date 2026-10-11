@@ -151,7 +151,7 @@
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function hr(min) { return (Math.round(min / 6) / 10).toFixed(1) + '시간'; }
   var PRIO_CLS = { '필수': 'req', '권장': 'rec', '심화': 'adv' };
-  var PAGE_NAME = { 'recruiting.html': '리쿠르팅', 'onboarding.html': '온보딩', 'apps.html': '사내 앱·업무 도구', 'phase1_training.html': 'Phase 1', 'phase2_training.html': 'Phase 2', 'phase3_training.html': 'Phase 3', 'phase4_training.html': 'Phase 4', 'tech.html': '기술 교재' };
+  var PAGE_NAME = { 'refs.html': '냉동 참고 자료', 'recruiting.html': '리쿠르팅', 'onboarding.html': '온보딩', 'apps.html': '사내 앱·업무 도구', 'phase1_training.html': 'Phase 1', 'phase2_training.html': 'Phase 2', 'phase3_training.html': 'Phase 3', 'phase4_training.html': 'Phase 4', 'tech.html': '기술 교재' };
 
   var R = C.RULE;
   $('ruleLine').innerHTML = '교재 글자 수 ÷ <code>' + R.readCpm + '</code>(분당 글자) × <code>' + R.digest + '</code>(「왜」를 생각하는 시간 포함) + 문제 수 × (<code>' + R.perQuiz + '</code>분 풀이 + <code>' + R.reviewPerQuiz + '</code>분 복습)';

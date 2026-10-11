@@ -128,6 +128,36 @@
   add({ id: 'p4:section3', page: 'phase4_training.html', anchor: 'section3', week: 12, prio: '필수', ko: 1447, q: 1, practiceH: 24, title: '종합 평가 + 수료', prereq: ['p3:sec3'], roles: ['tech'],
     why: '12주 동안 쌓은 것을 확인하고, 남은 빈 곳을 다음 분기 목표로 넘깁니다.' });
 
+  // ── 냉동 참고 자료 (refs.html) — 회사 원드라이브 「교육자료」 폴더의 슬라이드 PDF·엑셀. 2026-10-11 전 쪽 확인
+  // studyMin = 쪽마다 그림·회로 밀도를 보고 정한 공부 시간(분). 개정판이 있는 옛 판 2개·건물 공조 카탈로그 1개는 넣지 않았다
+  var R = function (o) { add(Object.assign({ page: 'refs.html', ko: 0, roles: ['tech'], topics: ['cold'] }, o)); };
+  R({ id: 'ref:basic', anchor: 'basic', week: 2, prio: '필수', studyMin: 15, q: 1, prereq: ['p1:day5'], title: '참고 · 냉동 장비 기초 교육',
+    why: '압축기·응축기·팽창밸브·증발기 네 부품과 냉매가 도는 순서를 처음으로 한 장에 정리하는 자료입니다. 이 순서를 모르면 뒤의 모든 냉동 자료가 읽히지 않습니다.' });
+  R({ id: 'ref:cycle', anchor: 'cycle', week: 2, prio: '필수', studyMin: 40, prereq: ['ref:basic'], title: '참고 · 표준냉동장치 구성',
+    why: '수액기·필터드라이어·사이트글라스·팽창밸브가 사이클의 어디에 붙는지 그림으로 봅니다. 현장에서 배관을 따라가며 「이게 왜 여기 있나」를 설명할 수 있게 됩니다.' });
+  R({ id: 'ref:panel', anchor: 'panel', week: 3, prio: '권장', studyMin: 30, prereq: ['p1:day2'], topics: ['elec'], title: '참고 · 제어반 전기부품 (차단기·릴레이·스위치)',
+    why: '제어반을 열었을 때 차단기·릴레이·표시등을 알아봐야, 고장을 「보고 알릴」 때 무엇이 어떻게 됐는지 정확히 말할 수 있습니다.' });
+  R({ id: 'ref:tc', anchor: 'tc', week: 3, prio: '필수', studyMin: 45, prereq: ['ref:cycle'], title: '참고 · 온도조절기',
+    why: '「안 시원해요」·「너무 얼어요」 신고의 상당수가 설정·편차·보정값 문제입니다. 자료 가운데 A/S 현장과 가장 가깝습니다.' });
+  R({ id: 'ref:lps', anchor: 'lps', week: 3, prio: '권장', studyMin: 35, q: 1, prereq: ['ref:tc'], title: '참고 · 저압스위치(LPS) 제어',
+    why: '온도가 맞았는데 압축기가 잠시 더 도는 이유, 저압이 낮아 멈추는 이유를 알면 정상 동작을 고장으로 오해하지 않습니다.' });
+  R({ id: 'ref:hps', anchor: 'hps', week: 3, prio: '권장', studyMin: 35, q: 1, prereq: ['ref:tc'], title: '참고 · 고압스위치(HPS) 제어',
+    why: '고압 정지가 걸렸을 때 리셋부터 누르면 같은 고장이 반복됩니다. 리셋 전에 원인을 먼저 보는 순서를 배웁니다.' });
+  R({ id: 'ref:diag', anchor: 'diag', week: 3, prio: '필수', studyMin: 40, prereq: ['ref:cycle'], title: '참고 · 냉동장비 고장진단 및 대처방법',
+    why: '고압·저압·과열도 숫자를 보고 원인 후보를 좁히는 법이 들어 있습니다. 고장진단 첫걸음 단원과 같은 주에 붙여 읽습니다.' });
+  R({ id: 'ref:comp', anchor: 'comp', week: 4, prio: '권장', studyMin: 22, q: 1, prereq: ['ref:diag'], title: '참고 · 압축기 교체 때 부품도 같이 바꾸는 이유',
+    why: '「압축기만 갈면 또 고장 난다」를 그림으로 설명합니다. 고객에게 필터·오일까지 왜 필요한지 설명할 근거가 됩니다.' });
+  R({ id: 'ref:maint', anchor: 'maint', week: 4, prio: '권장', studyMin: 20, prereq: ['ref:diag'], title: '참고 · 압축기 관리와 부품 교체 주기',
+    why: '오일·필터·전자접촉기를 언제 바꾸는지 기준이 있습니다. 정기 점검 때 무엇을 볼지 체크표를 만들 수 있습니다.' });
+  R({ id: 'ref:drawing', anchor: 'drawing', week: 4, prio: '권장', studyMin: 10, prereq: ['ref:tc'], topics: ['cold', 'elec'], title: '참고 · 워크인 냉동고 제어반 회로도 (실물 도면)',
+    why: '자료 가운데 우리 현장 장비에 가장 가까운 실제 도면입니다. 앞에서 배운 스위치·릴레이를 실물 도면에서 찾아봅니다.' });
+  R({ id: 'ref:ctrl', anchor: 'ctrl', week: 9, prio: '심화', studyMin: 35, prereq: ['ref:lps', 'ref:hps'], topics: ['cold', 'elec'], title: '참고 · 냉동 장치 제어 회로 (종합)',
+    why: '펌프다운 방식 제어회로 전체를 읽습니다. 고장 원리를 스스로 설명하는 심화 단계에서 봅니다.' });
+  R({ id: 'ref:compin', anchor: 'compin', week: 9, prio: '심화', studyMin: 20, prereq: ['ref:comp'], title: '참고 · 압축기 분해 조립과 이상 사례',
+    why: '압축기 안쪽 부품 이름과 손상 모양, 실제 이상 사례의 점검 순서를 봅니다.' });
+  R({ id: 'ref:load', anchor: 'load', week: 10, prio: '심화', studyMin: 45, prereq: ['ref:cycle'], title: '참고 · 냉장·냉동실 부하계산 엑셀',
+    why: '창고 크기·단열·물건에 따라 냉동기 용량이 왜 달라지는지 숫자로 봅니다. 장비 크기를 고르는 이유를 이해하는 심화 자료입니다.' });
+
   // ── 주차별 학습 목표 — 주간 보고의 「이번 주 목표」 기준. goal = 주말에 할 수 있어야 하는 것, check = 사수가 확인하는 방법
   const WEEKS = {
     tech: [
@@ -151,7 +181,9 @@
     ],
   };
 
+  // studyMin 이 있으면(슬라이드 PDF·엑셀처럼 글자 수로 못 재는 자료) 쪽마다 보고 정한 추정값을 쓴다
   function theoryMin(u) {
+    if (u.studyMin) return Math.round(u.studyMin + u.q * (RULE.perQuiz + RULE.reviewPerQuiz));
     return Math.round((u.ko / RULE.readCpm) * RULE.digest + u.q * (RULE.perQuiz + RULE.reviewPerQuiz));
   }
   function totalMin(u) { return theoryMin(u) + Math.round(u.practiceH * 60); }

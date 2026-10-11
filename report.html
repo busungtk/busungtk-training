@@ -244,6 +244,9 @@
     // 상단 항목 채우기
     var uSel = $('fUnit');
     C.UNITS.forEach(function (u) { var op = document.createElement('option'); op.value = u.id; op.textContent = u.title; uSel.appendChild(op); });
+    // 「내 학습 계획」에서 report.html#week-3 처럼 들어오면 그 주차를 바로 연다
+    var wm = /^#week-(\d+)$/.exec(location.hash);
+    if (wm) { WK = +wm[1]; $('wk').dataset.touched = '1'; }
     showTab(location.hash === '#notes' ? 'notes' : 'weekly');
   }
   async function onWhoChange() {

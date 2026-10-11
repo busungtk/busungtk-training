@@ -133,6 +133,7 @@
       <button class="btn main" id="go" type="button">편성하기</button>
       <button class="btn" id="save" type="button" disabled>이 편성으로 저장</button>
       <button class="btn" id="print" type="button" disabled>인쇄</button>
+      <a class="btn" href="my.html">내 학습 계획 보기 →</a>
     </div>
     <p id="msg" role="status"></p>
   </div>
@@ -403,7 +404,7 @@
     };
     var r = await BT.update(name, function (l) { l.start = P.start; l.startSetAt = plan.generatedAt; l.role = P.role; l.plan = plan; });
     $('save').disabled = false;
-    if (r.ok) setMsg(name + ' 님의 편성을 저장했습니다. 주간 보고에서 이 계획이 보입니다.');
+    if (r.ok) setMsg(name + ' 님의 편성을 저장했습니다. 「내 학습 계획」에서 주별로 보고 단원으로 바로 들어갈 수 있습니다.');
     else setMsg('서버에 저장하지 못해 이 기기에만 저장했습니다. 인터넷이 연결되면 다시 저장해 주세요.', true);
   });
 

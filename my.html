@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko" data-bt-lib>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>내 학습 계획 | 부성티케이 신입사원 교육</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗓️</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0e17; --surface: #111827; --surface2: #1a2332; --border: #1e2d3d;
+    --accent: #38bdf8; --success: #10b981; --warn: #fbbf24; --danger: #f87171;
+    --text: #e2e8f0; --text-dim: #94a3b8; --text-bright: #f8fafc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', sans-serif; line-height: 1.65; }
+  a { color: var(--accent); }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 16px 80px; }
+  header { padding: 36px 0 18px; }
+  .back { color: var(--text-dim); text-decoration: none; font-size: .85rem; }
+  h1 { font-size: 1.6rem; color: var(--text-bright); margin: 10px 0 6px; }
+  .lead { color: var(--text-dim); font-size: .92rem; max-width: 62ch; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin: 18px 0 8px; }
+  label.f { display: block; font-size: .78rem; color: var(--text-dim); font-weight: 600; margin-bottom: 4px; }
+  select { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font: inherit; min-width: 180px; }
+  select:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .msg { color: var(--text-dim); font-size: .9rem; margin: 14px 0; }
+  .msg.bad { color: var(--danger); }
+  .sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 16px 0 6px; }
+  .sum div { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+  .sum b { display: block; color: var(--text-bright); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+  .sum small { color: var(--text-dim); font-size: .76rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+  .btn { display: inline-block; text-decoration: none; font-size: .84rem; font-weight: 600; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.pri { background: var(--accent); color: #06111c; border-color: var(--accent); }
+  details.wk { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; }
+  details.wk.now { border-color: var(--accent); }
+  details.wk > summary { list-style: none; cursor: pointer; padding: 12px 14px; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
+  details.wk > summary::-webkit-details-marker { display: none; }
+  .wkno { font-weight: 700; color: var(--text-bright); }
+  .chip { font-size: .72rem; font-weight: 700; border-radius: 99px; padding: 1px 8px; border: 1px solid var(--border); color: var(--text-dim); }
+  .chip.now { color: #06111c; background: var(--accent); border-color: var(--accent); }
+  .chip.late { color: #1f1300; background: var(--warn); border-color: var(--warn); }
+  .chip.ok { color: #032016; background: var(--success); border-color: var(--success); }
+  .wkmeta { color: var(--text-dim); font-size: .82rem; margin-left: auto; font-variant-numeric: tabular-nums; }
+  .bar { flex-basis: 100%; height: 5px; border-radius: 99px; background: var(--surface2); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--success); }
+  .wkbody { padding: 0 14px 12px; }
+  .goal { font-size: .86rem; color: var(--text-dim); border-left: 3px solid var(--accent); padding: 4px 10px; margin: 2px 0 10px; }
+  .goal b { color: var(--text); }
+  ul.units { list-style: none; display: grid; gap: 6px; }
+  ul.units li { display: flex; gap: 10px; align-items: flex-start; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+  .st { flex: none; width: 1.4em; text-align: center; font-weight: 700; }
+  .st.done { color: var(--success); } .st.doing { color: var(--warn); } .st.todo { color: var(--text-dim); }
+  .ut { flex: 1; min-width: 0; }
+  .ut a { color: var(--text-bright); text-decoration: none; font-weight: 600; }
+  .ut a:hover { color: var(--accent); text-decoration: underline; }
+  .ut small { display: block; color: var(--text-dim); font-size: .76rem; }
+  .pr { font-size: .7rem; font-weight: 700; border-radius: 4px; padding: 0 6px; margin-left: 4px; vertical-align: 1px; }
+  .pr.req { background: rgba(248,113,113,.15); color: #fca5a5; } .pr.rec { background: rgba(56,189,248,.15); color: #7dd3fc; } .pr.adv { background: rgba(167,139,250,.15); color: #c4b5fd; }
+  .cont { font-size: .7rem; color: var(--text-dim); border: 1px dashed var(--border); border-radius: 4px; padding: 0 5px; margin-left: 4px; }
+  .tm { flex: none; color: var(--text-dim); font-size: .78rem; font-variant-numeric: tabular-nums; text-align: right; }
+  .hidden { display: none !important; }
+  @media (max-width: 520px) { .wkmeta { margin-left: 0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← 교육 홈</a>
+    <h1>내 학습 계획</h1>
+    <p class="lead">학습 편성기에서 저장한 계획을 주별로 봅니다. 이번 주가 맨 위에 펼쳐지고, 단원을 누르면 그 교재 위치로 바로 들어갑니다.</p>
+    <div class="controls">
+      <div><label class="f" for="who">학습자</label><select id="who"></select></div>
+    </div>
+  </header>
+
+  <p class="msg" id="msg">불러오는 중…</p>
+
+  <div id="body" class="hidden">
+    <div class="sum" id="sum"></div>
+    <div class="actions" id="actions"></div>
+    <div id="weeks"></div>
+  </div>
+</div>
+
+<script src="curriculum.js"></script>
+<script src="cases-data.js"></script>
+<script src="tech-data.js"></script>
+<script src="tracker.js"></script>
+<script>
+(function () {
+  var C = window.CURRICULUM, BT = window.BTTrack;
+  var $ = function (id) { return document.getElementById(id); };
+  var PRIO = { '필수': 'req', '권장': 'rec', '심화': 'adv' };
+  var reqSeq = 0;
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function hr(min) { if (!min) return '0분'; if (min < 60) return Math.round(min) + '분'; return (Math.round(min / 6) / 10) + '시간'; }
+  function href(u) {
+    if (!u.page) return '#';
+    if (!u.anchor) return u.page;
+    return u.page + (u.anchor.charAt(0) === '#' ? u.anchor : '#' + u.anchor);
+  }
+  // 편성 방식에 맞춘 단위 예상 시간 (편성기와 같은 규칙)
+  function unitMin(u, mode) {
+    var t = C.theoryMin(u);
+    if (mode === 'A') return t + Math.round((u.practiceH || 0) * 60);
+    return u.page === 'apps.html' ? t + Math.round((u.practiceH || 0) * 60) : t;
+  }
+  function goalsFor(role, ids, wk) {
+    var arr = (C.WEEKS && C.WEEKS[role]) || [], wks = [];
+    ids.forEach(function (id) { var u = C.byId[id]; if (u && u.week >= 1 && wks.indexOf(u.week) < 0) wks.push(u.week); });
+    if (!wks.length) wks = [wk];
+    wks.sort(function (a, b) { return a - b; });
+    return wks.map(function (w) { return arr.filter(function (x) { return x.wk === w; })[0]; }).filter(Boolean);
+  }
+
+  function render(name, learn, tech) {
+    var plan = learn && learn.plan;
+    if (!plan || !plan.weeksPlan || !plan.weeksPlan.length) {
+      $('body').classList.add('hidden');
+      $('msg').classList.remove('bad');
+      $('msg').innerHTML = esc(name) + ' 님은 아직 저장한 편성이 없습니다. <a href="planner.html">학습 편성기</a>에서 편성하고 「이 편성으로 저장」을 누르면 여기에 주별로 나옵니다.';
+      return;
+    }
+    $('msg').textContent = '';
+    $('body').classList.remove('hidden');
+    var role = plan.role || learn.role || 'tech', mode = plan.mode || 'A';
+    var nowWk = BT.weekNo(learn, BT.today());
+    var units = learn.units || {};
+    var seen = {}, totalU = 0, doneU = 0, lateU = 0;
+    var rows = plan.weeksPlan.map(function (ids, i) {
+      var wk = i + 1, items = [], wDone = 0, wMin = 0;
+      ids.forEach(function (id) {
+        var u = C.byId[id]; if (!u) return;
+        var cont = !!seen[id]; seen[id] = true;
+        var done = BT.isDone(learn, tech, id);
+        var sec = (units[id] && units[id].sec) || 0;
+        var m = cont ? 0 : unitMin(u, mode);
+        if (!cont) { totalU++; if (done) doneU++; else if (wk < nowWk) lateU++; }
+        if (done) wDone++;
+        wMin += m;
+        items.push({ u: u, cont: cont, done: done, sec: sec, min: m });
+      });
+      return { wk: wk, items: items, done: wDone, min: wMin, goals: goalsFor(role, ids, wk) };
+    });
+    var studied = 0; Object.keys(units).forEach(function (k) { studied += units[k].sec || 0; });
+    var openNotes = (learn.notes || []).filter(function (n) { return n.status !== 'resolved'; }).length;
+
+    $('sum').innerHTML =
+      '<div><b>' + (nowWk > 0 ? nowWk + '주차' : '시작 전') + '</b><small>지금 (시작일 ' + esc(learn.start || '미정') + ')</small></div>' +
+      '<div><b>' + doneU + ' / ' + totalU + '</b><small>계획 단원 완료</small></div>' +
+      '<div><b>' + hr(studied / 60) + '</b><small>지금까지 공부한 시간</small></div>' +
+      '<div><b>' + lateU + '개</b><small>지난 주에 못 끝낸 단원</small></div>' +
+      '<div><b>' + openNotes + '개</b><small>답 못 받은 헷갈림</small></div>';
+    var wkForReport = Math.max(1, Math.min(nowWk || 1, plan.weeksPlan.length));
+    $('actions').innerHTML =
+      '<a class="btn pri" href="report.html#week-' + wkForReport + '">이번 주 보고 쓰기</a>' +
+      '<a class="btn" href="report.html#notes">헷갈림 노트</a>' +
+      '<a class="btn" href="planner.html">편성 바꾸기</a>';
+
+    var out = [];
+    rows.forEach(function (r) {
+      var isNow = r.wk === nowWk, isPast = r.wk < nowWk;
+      var cnt = r.items.length, pct = cnt ? Math.round(r.done / cnt * 100) : 0;
+      var lateHere = isPast && r.items.some(function (it) { return !it.done; });
+      var chip = isNow ? '<span class="chip now">이번 주</span>' : (cnt && r.done === cnt ? '<span class="chip ok">끝</span>' : (lateHere ? '<span class="chip late">밀린 단원 있음</span>' : ''));
+      out.push('<details class="wk' + (isNow ? ' now' : '') + '"' + ((isNow || lateHere || (nowWk < 1 && r.wk === 1)) ? ' open' : '') + '>' +
+        '<summary><span class="wkno">' + r.wk + '주차</span>' + chip +
+        '<span class="wkmeta">' + r.done + ' / ' + cnt + ' 완료 · 약 ' + hr(r.min) + '</span>' +
+        '<span class="bar"><i style="width:' + pct + '%"></i></span></summary><div class="wkbody">' +
+        r.goals.map(function (g) { return '<div class="goal"><b>' + (r.goals.length > 1 || g.wk !== r.wk ? '원래 ' + g.wk + '주차 목표 · ' : '이 주 목표 · ') + '</b>' + esc(g.goal) + '</div>'; }).join('') +
+        '<ul class="units">' + r.items.map(function (it) {
+          var st = it.done ? '<span class="st done" aria-label="완료">✓</span>' : (it.sec > 0 ? '<span class="st doing" aria-label="공부 중">●</span>' : '<span class="st todo" aria-label="아직">○</span>');
+          var sub = it.done ? '완료' : (it.sec > 0 ? '공부 중 · ' + hr(it.sec / 60) + ' 봄' : (isPast ? '밀림 — 먼저 끝내세요' : '아직'));
+          return '<li>' + st + '<div class="ut"><a href="' + esc(href(it.u)) + '">' + esc(it.u.title) + '</a>' +
+            '<span class="pr ' + (PRIO[it.u.prio] || 'rec') + '">' + esc(it.u.prio) + '</span>' + (it.cont ? '<span class="cont">이어서</span>' : '') +
+            '<small>' + sub + '</small></div><span class="tm">' + (it.cont ? '—' : '약 ' + hr(it.min)) + '</span></li>';
+        }).join('') + '</ul></div></details>');
+    });
+    $('weeks').innerHTML = out.join('');
+  }
+
+  async function onWho() {
+    var seq = ++reqSeq, v = $('who').value;
+    if (!v) { $('body').classList.add('hidden'); $('msg').textContent = '학습자를 고르세요.'; return; }
+    $('msg').textContent = '불러오는 중…'; $('body').classList.add('hidden');
+    var r = await BT.fetchLearn(v);
+    if (seq !== reqSeq || $('who').value !== v) return;   // 그 사이 다른 학습자로 바뀜
+    render(v, BT.norm(r.learn), r.tech);
+    if (!r.server) { $('msg').classList.add('bad'); $('msg').textContent = '서버에 연결하지 못해 이 기기에 저장된 기록만 보입니다.'; }
+  }
+
+  async function init() {
+    var r = await BT.listTrainees();
+    var sel = $('who'), w = BT.getWho();
+    var names = (r.rows || []).map(function (x) { return x.name; });
+    if (w && names.indexOf(w) < 0) names.unshift(w);
+    var o0 = document.createElement('option'); o0.value = ''; o0.textContent = '학습자 선택'; sel.appendChild(o0);
+    names.forEach(function (n) { var o = document.createElement('option'); o.value = n; o.textContent = n; sel.appendChild(o); });
+    sel.value = w && names.indexOf(w) >= 0 ? w : '';
+    sel.addEventListener('change', function () { if (sel.value) BT.setWho(sel.value); onWho(); });
+    onWho();
+  }
+  init();
+})();
+</script>
+</body>
+</html>

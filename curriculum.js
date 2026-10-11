@@ -24,7 +24,7 @@
     why: '수습 기간·근무시간·임금 방식을 첫날 정확히 알아야 연장근무 신청이나 휴가를 쓸 때 헷갈리지 않습니다. 나중의 「몰랐다」가 가장 큰 오해의 씨앗입니다.' });
   add({ id: 'rec:culture', page: 'recruiting.html', anchor: 'welfare', week: 0, prio: '권장', ko: 633, title: '복지·사내문화',
     why: '어떤 지원을 받을 수 있는지 알아야 필요할 때 요청합니다.' });
-  add({ id: 'on:week1', page: 'onboarding.html', anchor: 'week1', week: 1, prio: '필수', ko: 694, title: '첫 주에 이것부터',
+  add({ id: 'on:week1', page: 'onboarding.html', anchor: 'week1', week: 1, prio: '필수', ko: 816, title: '첫 주에 이것부터',
     why: '첫 주에 계정·도구·인사를 끝내 두지 않으면 둘째 주부터 현장에 따라가도 기록을 남길 수가 없습니다.' });
   add({ id: 'on:company', page: 'onboarding.html', anchor: 'company', week: 1, prio: '필수', ko: 387, title: '부성티케이는 어떤 회사인가',
     why: '고객에게 「어느 회사에서 왔어요?」를 들었을 때 한 문장으로 설명할 수 있어야 합니다. 우리는 설비를 파는 회사가 아니라 고객 주방을 같이 운영하는 회사입니다.' });
@@ -34,8 +34,8 @@
     why: '경비·서류가 정해진 길로 들어오지 않으면 정산이 늦어지고 내 돈도 늦게 돌아옵니다.' });
   add({ id: 'on:method', page: 'onboarding.html', anchor: 'method', week: 2, prio: '권장', ko: 1122, title: '일하는 방법 (기획 직군)', roles: ['office'],
     why: '사무직의 일은 눈에 안 보이기 쉽습니다. 정해진 방식으로 일을 쪼개고 남겨야 다른 사람이 이어받을 수 있습니다.' });
-  add({ id: 'on:notion', page: 'onboarding.html', anchor: 'notion', week: 1, prio: '필수', ko: 368, title: '노션에서 확인할 것',
-    why: '일정표·출입신청·자료가 노션에 모여 있습니다. 어디에 무엇이 있는지 모르면 매번 선배에게 물어야 합니다.' });
+  add({ id: 'on:notion', page: 'onboarding.html', anchor: 'notion', week: 1, prio: '필수', ko: 327, title: '담당자에게 받을 자료',
+    why: '회사 서류와 거래처 연락처는 이 사이트에 없습니다. 무엇을 누구에게 받고 어느 앱에서 보는지 알아야 매번 헤매지 않습니다.' });
 
   // ── 사내 앱·업무 도구 (apps.html) — ko 는 apps.html 단원별 실측. 포털 단원은 맨 앞 「일의 흐름」 절(321자)을 합친 값 ──
   add({ id: 'app:portal', page: 'apps.html', anchor: 'portal', week: 1, prio: '필수', ko: 595, practiceH: 0.2, title: '업무 포털 — 모든 앱의 입구',
@@ -48,7 +48,7 @@
     why: '현장 일은 끝나면 사라집니다. 그날 적어 두지 않으면 견적·세금계산서·A/S 이력 어디에도 남지 않습니다.' });
   add({ id: 'app:report', page: 'apps.html', anchor: 'report', week: 1, prio: '필수', ko: 728, q: 1, practiceH: 0.3, title: '채널톡 완료보고 — 내 사진이 홈페이지 사례가 된다', roles: ['tech'], topics: ['open'],
     why: '현장에서 올린 완료보고 사진과 내용이 그대로 홈페이지 사례가 됩니다. 사진이 흔들리거나 내용이 빠지면 사례로 쓸 수 없고 다음 고객이 볼 증거도 사라집니다.' });
-  add({ id: 'app:visit', page: 'apps.html', anchor: 'visit', week: 2, prio: '필수', ko: 474, q: 0, practiceH: 0.3, title: '출입·내방 신청 — 보안 사업장에 들어가는 법',
+  add({ id: 'app:visit', page: 'apps.html', anchor: 'visit', week: 2, prio: '필수', ko: 611, q: 0, practiceH: 0.3, title: '출입·내방 신청 — 보안 사업장에 들어가는 법',
     why: '대기업 사업장은 미리 신청하지 않으면 정문에서 못 들어갑니다. 신청이 늦으면 일정 전체가 밀리고 고객 앞에서 신뢰를 잃습니다.' });
   add({ id: 'app:asms', page: 'apps.html', anchor: 'asms', week: 2, prio: '필수', ko: 908, q: 2, practiceH: 1, title: 'ASMS — A/S 접수부터 세금계산서까지', topics: ['cold', 'heat'],
     why: '홈페이지 A/S 사례만 수백 건입니다. 접수·견적·방문·완료·세금계산서가 한 줄로 이어져야 빠진 수금이나 잊힌 고객이 생기지 않습니다.' });

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko" data-bt-lib>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학습 편성기 | 부성티케이 신입사원 교육</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0e17; --surface: #111827; --surface2: #1a2332; --border: #1e2d3d;
+    --accent: #38bdf8; --accent2: #818cf8; --danger: #ef4444; --warn: #fbbf24; --success: #10b981;
+    --text: #e2e8f0; --text-dim: #94a3b8; --text-bright: #f8fafc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; line-height: 1.7; padding: 24px 16px 80px; }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  a { color: var(--accent); }
+  .back { display: inline-block; margin-bottom: 14px; color: var(--text-dim); text-decoration: none; font-size: .86rem; }
+  .back:hover { color: var(--accent); }
+  h1 { font-size: 1.7rem; color: var(--text-bright); margin-bottom: 6px; }
+  h2 { font-size: 1.1rem; color: var(--text-bright); margin: 28px 0 10px; }
+  .sub { color: var(--text-dim); font-size: .92rem; margin-bottom: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+  .card p { margin-bottom: 6px; font-size: .9rem; }
+  .card code { background: var(--surface2); padding: 1px 6px; border-radius: 6px; font-size: .84rem; color: var(--accent); }
+  .form { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  label.f { display: block; font-size: .8rem; font-weight: 600; color: var(--text-dim); margin-bottom: 5px; }
+  select, input[type=number], input[type=date] { width: 100%; font: inherit; font-size: .92rem; color: var(--text); background: #0a0e17; border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; min-height: 40px; }
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seg label { position: relative; display: inline-block; }
+  .seg input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .seg span { display: inline-block; padding: 8px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: .86rem; color: var(--text-dim); font-weight: 600; }
+  .seg input:checked + span { border-color: var(--accent); background: rgba(56,189,248,.14); color: var(--text-bright); }
+  .seg input:focus-visible + span, select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .modes label { position: relative; display: block; }
+  .modes input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .modes .m { display: block; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; height: 100%; }
+  .modes .m b { display: block; color: var(--text-bright); font-size: .94rem; }
+  .modes .m small { color: var(--text-dim); font-size: .8rem; }
+  .modes input:checked + .m { border-color: var(--accent); background: rgba(56,189,248,.1); }
+  .modes input:focus-visible + .m { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .btn { appearance: none; font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); min-height: 40px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.main { background: var(--accent); border-color: var(--accent); color: #0a0e17; }
+  .btn.main:hover { filter: brightness(1.08); color: #0a0e17; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+  .note { color: var(--text-dim); font-size: .82rem; }
+  .warn { background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.5); color: #fde68a; border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; font-size: .92rem; }
+  .ok { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.45); color: #6ee7b7; border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; font-size: .92rem; }
+  .sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .sum div { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; }
+  .sum b { display: block; font-size: 1.3rem; color: var(--text-bright); }
+  .sum small { color: var(--text-dim); font-size: .78rem; }
+  .sum .neg b { color: #fca5a5; }
+  table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+  th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-dim); font-weight: 600; font-size: .78rem; background: var(--surface2); border-top: 0; }
+  .tw { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+  tr.wkhead td { background: var(--surface2); border-top: 2px solid var(--border); }
+  tr.wkhead .wk { color: var(--text-bright); font-weight: 800; }
+  tr.wkhead .goal { color: var(--text-dim); font-size: .82rem; margin-top: 2px; }
+  tr.over td.tot { color: #fca5a5; font-weight: 700; }
+  .b { display: inline-block; padding: 0 8px; border-radius: 99px; font-size: .72rem; font-weight: 700; border: 1px solid; margin-left: 6px; white-space: nowrap; }
+  .b.req { color: #fca5a5; border-color: rgba(248,113,113,.5); }
+  .b.rec { color: #7dd3fc; border-color: rgba(56,189,248,.5); }
+  .b.adv { color: #c4b5fd; border-color: rgba(167,139,250,.5); }
+  .b.meas { color: #6ee7b7; border-color: rgba(16,185,129,.5); }
+  .b.cont { color: var(--warn); border-color: rgba(251,191,36,.5); }
+  .b.over { color: #fca5a5; border-color: rgba(248,113,113,.6); }
+  td.num { white-space: nowrap; text-align: right; }
+  .hidden { display: none; }
+  #msg { margin-top: 10px; font-size: .88rem; min-height: 1.4em; }
+  @media (max-width: 560px) { .modes { grid-template-columns: 1fr; } h1 { font-size: 1.4rem; } th, td { padding: 7px 8px; } }
+  @media print {
+    body { background: #fff; color: #000; padding: 0; font-size: 11pt; }
+    .back, .form-card, .row, #msg, .noprint { display: none !important; }
+    .card, .tw, .sum div { background: #fff !important; border-color: #999 !important; color: #000 !important; }
+    h1, h2, .sum b, tr.wkhead .wk { color: #000 !important; }
+    th, tr.wkhead td { background: #eee !important; color: #000 !important; }
+    .sub, .note, .sum small, tr.wkhead .goal { color: #333 !important; }
+    .b { color: #000 !important; border-color: #666 !important; }
+    .warn, .ok { background: #fff !important; color: #000 !important; border-color: #000 !important; }
+    tr { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← 처음으로</a>
+  <h1>학습 편성기</h1>
+  <p class="sub">내가 쓸 수 있는 시간에 맞춰 12주 교육을 어떻게 나눌지 짜 줍니다.</p>
+
+  <div class="card" id="explain">
+    <p><b>숙지 시간은 이렇게 계산합니다.</b></p>
+    <p id="ruleLine"></p>
+    <p class="note">실제 기록이 쌓이면 단위별 실측 평균으로 바뀝니다. 같은 단위를 끝낸 학습자가 2명 이상이면 계산값 대신 실측 평균을 쓰고 표에 「실측」 표시가 붙습니다.</p>
+    <p class="note" id="measNote"></p>
+  </div>
+
+  <div class="card form-card">
+    <div class="form">
+      <div>
+        <label class="f" for="who">학습자 (고르면 이미 끝낸 단위는 빼 줍니다)</label>
+        <select id="who"><option value="">선택 안 함</option></select>
+      </div>
+      <div>
+        <span class="f" style="display:block;font-size:.8rem;font-weight:600;color:var(--text-dim);margin-bottom:5px">직군</span>
+        <div class="seg" role="radiogroup" aria-label="직군">
+          <label><input type="radio" name="role" value="tech" checked><span>현장 기술직</span></label>
+          <label><input type="radio" name="role" value="office"><span>사무직</span></label>
+        </div>
+      </div>
+      <div>
+        <label class="f" for="hpw">주당 교육 가능 시간</label>
+        <input type="number" id="hpw" min="1" max="80" step="1" value="40">
+      </div>
+      <div>
+        <label class="f" for="wks">남은 주 수</label>
+        <input type="number" id="wks" min="1" max="52" step="1" value="12">
+      </div>
+      <div>
+        <label class="f" for="startDate">학습 시작일 (저장하면 주차 계산의 기준이 됩니다)</label>
+        <input type="date" id="startDate">
+      </div>
+    </div>
+    <div class="modes" style="margin-top:14px" role="radiogroup" aria-label="편성 방식">
+      <label><input type="radio" name="mode" value="A" checked><span class="m"><b>교재 실습 포함</b><small>단위 시간 = 숙지 시간 + 교재에 적힌 실습 시간</small></span></label>
+      <label><input type="radio" name="mode" value="B"><span class="m"><b>공부 시간만 (실습은 현장 업무로 대체)</b><small>숙지 시간만 편성. 앱 단원은 직접 눌러 보는 실습 시간 포함</small></span></label>
+    </div>
+    <div class="row">
+      <button class="btn main" id="go" type="button">편성하기</button>
+      <button class="btn" id="save" type="button" disabled>이 편성으로 저장</button>
+      <button class="btn" id="print" type="button" disabled>인쇄</button>
+    </div>
+    <p id="msg" role="status"></p>
+  </div>
+
+  <div id="out"></div>
+</div>
+
+<script src="curriculum.js"></script>
+<script src="cases-data.js"></script>
+<script src="tech-data.js"></script>
+<script src="tracker.js"></script>
+<script>
+(function () {
+  var C = window.CURRICULUM, BT = window.BTTrack;
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function hr(min) { return (Math.round(min / 6) / 10).toFixed(1) + '시간'; }
+  var PRIO_CLS = { '필수': 'req', '권장': 'rec', '심화': 'adv' };
+  var PAGE_NAME = { 'recruiting.html': '리쿠르팅', 'onboarding.html': '온보딩', 'apps.html': '사내 앱·업무 도구', 'phase1_training.html': 'Phase 1', 'phase2_training.html': 'Phase 2', 'phase3_training.html': 'Phase 3', 'phase4_training.html': 'Phase 4', 'tech.html': '기술 교재' };
+
+  var R = C.RULE;
+  $('ruleLine').innerHTML = '교재 글자 수 ÷ <code>' + R.readCpm + '</code>(분당 글자) × <code>' + R.digest + '</code>(「왜」를 생각하는 시간 포함) + 문제 수 × (<code>' + R.perQuiz + '</code>분 풀이 + <code>' + R.reviewPerQuiz + '</code>분 복습)';
+
+  var trainees = [];       // { name, learn }
+  var measured = {};       // unitId -> { avg(분), n }
+  var current = null;      // 마지막 편성 결과
+
+  function selectedRole() { return document.querySelector('input[name=role]:checked').value; }
+  function selectedMode() { return document.querySelector('input[name=mode]:checked').value; }
+  function setMsg(t, bad) { var m = $('msg'); m.textContent = t; m.style.color = bad ? '#fca5a5' : 'var(--text-dim)'; }
+
+  // ── 학습자 · 실측 ──
+  async function loadTrainees() {
+    var r = await BT.listTrainees();
+    trainees = r.rows.map(function (x) { return { name: x.name, learn: x.learn, tech: x.tech }; });
+    var sel = $('who');
+    trainees.forEach(function (t) { var o = document.createElement('option'); o.value = t.name; o.textContent = t.name; sel.appendChild(o); });
+    var w = BT.getWho();
+    if (w && trainees.some(function (t) { return t.name === w; })) sel.value = w;
+    onLearner();
+    if (!r.ok) setMsg('학습자 명단을 불러오지 못했습니다. 학습자 없이 편성만 볼 수 있습니다.', true);
+    // 단위별 실측 평균 (끝낸 사람이 2명 이상일 때만)
+    var acc = {};
+    trainees.forEach(function (t) {
+      var us = t.learn.units || {};
+      Object.keys(us).forEach(function (id) {
+        var u = us[id];
+        if (u && u.done && u.sec > 0) (acc[id] = acc[id] || []).push(u.sec / 60);
+      });
+    });
+    measured = {};
+    Object.keys(acc).forEach(function (id) {
+      if (acc[id].length >= 2) measured[id] = { avg: Math.round(acc[id].reduce(function (a, b) { return a + b; }, 0) / acc[id].length), n: acc[id].length };
+    });
+    var cnt = Object.keys(measured).length;
+    $('measNote').textContent = cnt ? '지금 실측 평균을 쓰는 단위: ' + cnt + '개' : '아직 실측 평균을 쓰는 단위가 없습니다 (기록이 쌓이는 중).';
+  }
+  function entryOf(name) { return trainees.filter(function (x) { return x.name === name; })[0] || null; }
+  function learnerOf(name) { var t = entryOf(name); return t ? t.learn : null; }
+  function techOf(name) { var t = entryOf(name); return t ? t.tech : null; }
+  // 학습자를 고르면 이 기기 기록과 서버 기록을 합친 최신 값을 읽는다 (빨리 바꾸면 늦게 온 응답은 버린다)
+  var loadSeq = 0, loading = Promise.resolve();
+  function onLearner() {
+    var my = ++loadSeq, name = $('who').value;
+    delete $('startDate').dataset.touched;
+    if (!name) { syncFromLearner(); return; }
+    loading = (async function () {
+      var r = await BT.fetchLearn(name);
+      if (my !== loadSeq || $('who').value !== name) return;
+      var t = entryOf(name);
+      if (t) { t.learn = r.learn; t.tech = r.tech; } else trainees.push({ name: name, learn: r.learn, tech: r.tech });
+      syncFromLearner();
+    })();
+  }
+  function syncFromLearner() {
+    var l = learnerOf($('who').value);
+    if (!$('startDate').dataset.touched) $('startDate').value = (l && l.start) || BT.today();   // 사람이 직접 고른 날짜는 덮지 않는다
+    if (l && l.role) document.querySelector('input[name=role][value=' + l.role + ']').checked = true;
+    if (l && l.plan) {
+      if (l.plan.hoursPerWeek) $('hpw').value = l.plan.hoursPerWeek;
+    }
+  }
+
+  // ── 편성 ──
+  function theoryOf(u) { return measured[u.id] ? measured[u.id].avg : C.theoryMin(u); }
+  function practiceOf(u, mode) {
+    if (mode === 'A') return Math.round(u.practiceH * 60);
+    return u.page === 'apps.html' ? Math.round(u.practiceH * 60) : 0;
+  }
+
+  function orderUnits(list) {
+    var idx = {}; C.UNITS.forEach(function (u, i) { idx[u.id] = i; });
+    var sorted = list.slice().sort(function (a, b) { return a.week - b.week || idx[a.id] - idx[b.id]; });
+    var inSet = {}; sorted.forEach(function (u) { inSet[u.id] = u; });
+    var seen = {}, out = [];
+    function visit(u) {
+      if (seen[u.id]) return;
+      seen[u.id] = true;
+      (u.prereq || []).forEach(function (p) { if (inSet[p]) visit(inSet[p]); });
+      out.push(u);
+    }
+    sorted.forEach(visit);
+    return out;
+  }
+
+  function build() {
+    var role = selectedRole(), mode = selectedMode();
+    var hpw = Math.max(1, Math.min(80, +$('hpw').value || 40));
+    var weeksN = Math.max(1, Math.min(52, +$('wks').value || 12));
+    var cap = hpw * 60, avail = cap * weeksN;
+    var learner = $('who').value, l = learner ? learnerOf(learner) : null;
+    var done = {}, tech = learner ? techOf(learner) : null;
+    if (l) C.UNITS.forEach(function (u) { if (BT.isDone(l, tech, u.id)) done[u.id] = true; });   // tech 장은 tech.html 기록도 인정
+    var sd = $('startDate').value;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(sd)) sd = BT.today();
+
+    var base = C.UNITS.filter(function (u) { return u.roles.indexOf(role) >= 0; });
+    var doneList = base.filter(function (u) { return done[u.id]; });
+    var pool = base.filter(function (u) { return !done[u.id]; });
+    function info(u) {
+      var t = theoryOf(u), p = practiceOf(u, mode);
+      return { u: u, t: t, p: p, tot: t + p };
+    }
+    var inf = {}; pool.forEach(function (u) { inf[u.id] = info(u); });
+
+    // 넣을 것 고르기: 필수 전부 → 권장 → 심화
+    var chosen = {}, skipped = [];
+    var used = 0;
+    pool.filter(function (u) { return u.prio === '필수'; }).forEach(function (u) { chosen[u.id] = true; used += inf[u.id].tot; });
+    var reqTotal = used;
+    ['권장', '심화'].forEach(function (pr) {
+      pool.filter(function (u) { return u.prio === pr; }).forEach(function (u) {
+        var need = inf[u.id].tot;
+        if (reqTotal > avail) { skipped.push({ u: u, why: '우선순위 — 필수만으로도 가용 시간이 모자라 권장·심화는 넣지 않았습니다' }); return; }
+        if (used + need <= avail) { chosen[u.id] = true; used += need; }
+        else skipped.push({ u: u, why: '시간 부족 — 남은 여유 ' + hr(Math.max(0, avail - used)) + ', 필요 ' + hr(need) });
+      });
+    });
+
+    var ordered = orderUnits(pool.filter(function (u) { return chosen[u.id]; }));
+    // 주에 배치
+    var weeks = [];        // { items:[{u,min,cont,measured}], used }
+    function wk(i) { while (weeks.length <= i) weeks.push({ items: [], used: 0 }); return weeks[i]; }
+    var w = 0, rem = cap;
+    ordered.forEach(function (u) {
+      var x = inf[u.id];
+      // 「공부 시간만」 방식은 실습 시간이 빠지므로 여러 주에 나눠 놓을 이유가 없다 — 한 덩어리로 놓는다
+      var sp = mode === 'A' ? (u.span || 1) : 1;
+      if (sp > 1) {
+        // 여러 주에 걸친 단원: 시간을 주 수만큼 고르게 나눠 매주 같은 몫을 놓는다 (첫 주 몫이 들어갈 만한 주에서 시작)
+        var part = Math.round(x.tot / sp), chunks = [];
+        for (var i = 0; i < sp; i++) chunks.push(i === sp - 1 ? x.tot - part * (sp - 1) : part);
+        while (rem < chunks[0] && rem < cap) { w++; rem = cap; }
+        chunks.forEach(function (m, i) {
+          var ww = wk(w + i);
+          ww.items.push({ u: u, min: m, cont: i > 0 });
+          ww.used += m;
+          if (i === sp - 1) rem = cap - ww.used;
+        });
+        w += sp - 1;
+        if (rem <= 0) { w++; rem = cap; }
+      } else {
+        var left = x.tot, first = true;
+        if (left <= 0) { wk(w).items.push({ u: u, min: 0, cont: false }); return; }
+        while (left > 0) {
+          if (rem <= 0) { w++; rem = cap; }
+          var chunk = Math.min(left, rem);
+          var cw = wk(w);
+          cw.items.push({ u: u, min: chunk, cont: !first });
+          cw.used += chunk; left -= chunk; rem -= chunk; first = false;
+          if (left > 0) { w++; rem = cap; }
+        }
+      }
+    });
+    if (!weeks.length) wk(0);
+
+    var sum = { theory: 0, practice: 0 };
+    ordered.forEach(function (u) { sum.theory += inf[u.id].t; sum.practice += inf[u.id].p; });
+    return { start: sd, role: role, mode: mode, hpw: hpw, weeksN: weeksN, cap: cap, avail: avail, reqTotal: reqTotal, learner: learner,
+      ordered: ordered, inf: inf, weeks: weeks, skipped: skipped, doneList: doneList, sum: sum };
+  }
+
+  function render(P) {
+    var out = [];
+    var total = P.sum.theory + P.sum.practice;
+    if (P.reqTotal > P.avail) {
+      out.push('<div class="warn"><b>필수만 ' + hr(P.reqTotal) + ' 필요 — 가용 ' + hr(P.avail) + '.</b> 주당 시간을 늘리거나 주 수를 늘려야 합니다. 그래도 순서대로 넣었고, 넘치는 주는 표에 표시했습니다.</div>');
+    } else {
+      out.push('<div class="ok">필수 ' + hr(P.reqTotal) + '이 가용 ' + hr(P.avail) + ' 안에 들어갑니다.</div>');
+    }
+    var diff = P.avail - total;
+    out.push('<h2>전체 요약</h2><div class="sum">' +
+      '<div><b>' + hr(P.sum.theory) + '</b><small>숙지(공부) 시간</small></div>' +
+      '<div><b>' + hr(P.sum.practice) + '</b><small>실습 시간</small></div>' +
+      '<div><b>' + hr(total) + '</b><small>편성 총합</small></div>' +
+      '<div><b>' + hr(P.avail) + '</b><small>가용 (' + P.hpw + '시간 × ' + P.weeksN + '주)</small></div>' +
+      '<div class="' + (diff < 0 ? 'neg' : '') + '"><b>' + (diff < 0 ? '−' : '') + hr(Math.abs(diff)) + '</b><small>' + (diff < 0 ? '부족' : '여유') + '</small></div></div>');
+
+    var goals = (C.WEEKS && C.WEEKS[P.role]) || [];
+    out.push('<h2>주별 편성</h2><div class="tw"><table><thead><tr><th>단위</th><th>우선순위</th><th class="num">시간</th></tr></thead><tbody>');
+    P.weeks.forEach(function (wk, i) {
+      var overWk = i >= P.weeksN || wk.used > P.cap;
+      // 압축·확장 편성에서는 편성 주차와 원래 주차가 다르다 — 그 주에 들어간 단원의 원래 주차 목표를 보여 준다
+      var origWks = []; wk.items.forEach(function (it) { var ow = it.u.week || 0; if (ow >= 1 && origWks.indexOf(ow) < 0) origWks.push(ow); });
+      origWks.sort(function (a, b) { return a - b; });
+      var gl = origWks.map(function (ow) { var gg = goals.filter(function (x) { return x.wk === ow; })[0]; return gg ? { wk: ow, goal: gg.goal } : null; }).filter(Boolean);
+      var g = gl.length === 1 && gl[0].wk === i + 1 ? gl[0].goal : '';
+      out.push('<tr class="wkhead' + (overWk ? ' over' : '') + '"><td colspan="2"><div class="wk">' + (i + 1) + '주차' +
+        (i >= P.weeksN ? ' <span class="b over">남은 주 수 밖</span>' : '') +
+        (wk.used > P.cap ? ' <span class="b over">가용 초과</span>' : '') + '</div>' +
+        (g ? '<div class="goal">이 주 목표: ' + esc(g) + '</div>' : gl.map(function (x) { return '<div class="goal">원래 ' + x.wk + '주차 목표: ' + esc(x.goal) + '</div>'; }).join('')) + '</td>' +
+        '<td class="num tot">' + hr(wk.used) + ' / ' + hr(P.cap) + '</td></tr>');
+      wk.items.forEach(function (it) {
+        var u = it.u;
+        out.push('<tr><td>' + esc(u.title) + (it.cont ? '<span class="b cont">이어서</span>' : '') +
+          (measured[u.id] && !it.cont ? '<span class="b meas" title="끝낸 ' + measured[u.id].n + '명 평균">실측</span>' : '') +
+          '</td><td><span class="b ' + PRIO_CLS[u.prio] + '" style="margin-left:0">' + u.prio + '</span></td><td class="num">' + hr(it.min) + '</td></tr>');
+      });
+    });
+    out.push('</tbody></table></div>');
+
+    out.push('<h2>이번 편성에서 뺀 것</h2>');
+    if (!P.skipped.length && !P.doneList.length) out.push('<p class="note">뺀 단위가 없습니다.</p>');
+    else {
+      out.push('<div class="tw"><table><thead><tr><th>단위</th><th>우선순위</th><th>이유</th></tr></thead><tbody>');
+      P.skipped.forEach(function (s) {
+        out.push('<tr><td>' + esc(s.u.title) + '</td><td><span class="b ' + PRIO_CLS[s.u.prio] + '" style="margin-left:0">' + s.u.prio + '</span></td><td>' + esc(s.why) + '</td></tr>');
+      });
+      P.doneList.forEach(function (u) {
+        out.push('<tr><td>' + esc(u.title) + '</td><td><span class="b ' + PRIO_CLS[u.prio] + '" style="margin-left:0">' + u.prio + '</span></td><td>이미 끝냄 (' + esc(P.learner) + ')</td></tr>');
+      });
+      out.push('</tbody></table></div>');
+    }
+
+    // 교재 표기 vs 숙지 예상 (페이지별, 직군 전체 단위 기준)
+    var pages = {};
+    C.UNITS.filter(function (u) { return u.roles.indexOf(P.role) >= 0; }).forEach(function (u) {
+      var p = pages[u.page] || (pages[u.page] = { practice: 0, theory: 0, meas: 0 });
+      p.practice += u.practiceH; p.theory += theoryOf(u); if (measured[u.id]) p.meas++;
+    });
+    out.push('<h2>교재 표기 시간과 숙지 예상 시간 비교</h2><div class="tw"><table><thead><tr><th>페이지</th><th class="num">교재 표기 실습</th><th class="num">숙지 예상</th><th>비고</th></tr></thead><tbody>');
+    Object.keys(pages).forEach(function (pg) {
+      var p = pages[pg];
+      out.push('<tr><td>' + esc(PAGE_NAME[pg] || pg) + '</td><td class="num">' + (p.practice ? p.practice + '시간' : '—') + '</td><td class="num">' + hr(p.theory) + '</td><td>' + (p.meas ? '<span class="b meas" style="margin-left:0">실측 ' + p.meas + '개 단위 반영</span>' : '') + '</td></tr>');
+    });
+    out.push('</tbody></table></div><p class="note" style="margin-top:8px">교재에 적힌 실습·수업 시간은 현장에서 일하는 시간까지 섞여 있어, 책을 읽고 이해하는 시간(숙지)과 따로 봐야 합니다.</p>');
+    $('out').innerHTML = out.join('');
+  }
+
+  $('go').addEventListener('click', async function () {
+    await loading;
+    current = build();
+    render(current);
+    $('save').disabled = !current.learner;
+    $('print').disabled = false;
+    setMsg(current.learner ? '' : '학습자를 고르면 이 편성을 저장할 수 있습니다.');
+  });
+  $('print').addEventListener('click', function () { window.print(); });
+  $('who').addEventListener('change', onLearner);
+  $('startDate').addEventListener('input', function () { this.dataset.touched = '1'; });
+  $('save').addEventListener('click', async function () {
+    if (!current || !current.learner) return;
+    var P = current, name = P.learner;
+    $('save').disabled = true; setMsg('저장 중…');
+    var plan = {
+      hoursPerWeek: P.hpw, weeks: P.weeksN, role: P.role, mode: P.mode, generatedAt: new Date().toISOString(),
+      weeksPlan: P.weeks.map(function (wk) { var ids = []; wk.items.forEach(function (it) { if (ids.indexOf(it.u.id) < 0) ids.push(it.u.id); }); return ids; })
+    };
+    var r = await BT.update(name, function (l) { l.start = P.start; l.startSetAt = plan.generatedAt; l.role = P.role; l.plan = plan; });
+    $('save').disabled = false;
+    if (r.ok) setMsg(name + ' 님의 편성을 저장했습니다. 주간 보고에서 이 계획이 보입니다.');
+    else setMsg('서버에 저장하지 못해 이 기기에만 저장했습니다. 인터넷이 연결되면 다시 저장해 주세요.', true);
+  });
+
+  loadTrainees().then(function () { $('go').click(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko" data-bt-lib>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주간 보고 · 헷갈림 노트 | 부성티케이 신입사원 교육</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0e17; --surface: #111827; --surface2: #1a2332; --border: #1e2d3d;
+    --accent: #38bdf8; --accent2: #818cf8; --danger: #ef4444; --warn: #fbbf24; --success: #10b981;
+    --text: #e2e8f0; --text-dim: #94a3b8; --text-bright: #f8fafc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; line-height: 1.7; padding: 24px 16px 80px; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  a { color: var(--accent); }
+  .back { display: inline-block; margin-bottom: 14px; color: var(--text-dim); text-decoration: none; font-size: .86rem; }
+  .back:hover { color: var(--accent); }
+  h1 { font-size: 1.7rem; color: var(--text-bright); margin-bottom: 6px; }
+  h2 { font-size: 1.02rem; color: var(--text-bright); margin: 0 0 8px; }
+  .sub { color: var(--text-dim); font-size: .92rem; margin-bottom: 16px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 14px; }
+  .bar > div { min-width: 150px; }
+  label.f, .f { display: block; font-size: .78rem; font-weight: 600; color: var(--text-dim); margin-bottom: 4px; }
+  select, input[type=text], input[type=search], textarea { width: 100%; font: inherit; font-size: .92rem; color: var(--text); background: #0a0e17; border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; min-height: 40px; }
+  textarea { resize: vertical; min-height: 84px; line-height: 1.6; }
+  select:focus-visible, input:focus-visible, textarea:focus-visible, button:focus-visible, [role=tab]:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 1px solid var(--border); }
+  [role=tab] { appearance: none; font: inherit; font-weight: 700; font-size: .94rem; cursor: pointer; background: transparent; color: var(--text-dim); border: 0; border-bottom: 3px solid transparent; padding: 10px 16px; min-height: 44px; }
+  [role=tab][aria-selected=true] { color: var(--text-bright); border-bottom-color: var(--accent); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+  .goalbox { border-left: 4px solid var(--accent); background: var(--surface2); }
+  .goalbox .g { font-size: 1.02rem; color: var(--text-bright); font-weight: 600; }
+  .goalbox .c { color: var(--text-dim); font-size: .88rem; margin-top: 6px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .note { color: var(--text-dim); font-size: .82rem; }
+  .btn { appearance: none; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); min-height: 40px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.main { background: var(--accent); border-color: var(--accent); color: #0a0e17; }
+  .btn.main:hover { filter: brightness(1.08); color: #0a0e17; }
+  .btn.small { padding: 3px 12px; min-height: 32px; font-size: .8rem; font-weight: 600; }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+  ul.clean { list-style: none; }
+  ul.clean li { padding: 5px 0; border-top: 1px solid var(--border); font-size: .88rem; }
+  ul.clean li:first-child { border-top: 0; }
+  .ok { color: #6ee7b7; font-weight: 700; } .no { color: var(--text-dim); }
+  .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: end; height: 120px; }
+  .bars div.d { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; font-size: .72rem; color: var(--text-dim); }
+  .bars .col { width: 100%; background: var(--accent); border-radius: 5px 5px 0 0; min-height: 2px; opacity: .85; }
+  .bars .col.zero { background: var(--border); }
+  .bars b { color: var(--text-bright); font-size: .76rem; font-weight: 600; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .stats div { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; }
+  .stats b { display: block; font-size: 1.2rem; color: var(--text-bright); }
+  .stats small { color: var(--text-dim); font-size: .78rem; }
+  .pv { display: none; white-space: pre-wrap; border: 1px solid #999; padding: 4px 6px; min-height: 2.2em; font-size: 10pt; }
+  .stat { font-size: .86rem; margin-top: 8px; min-height: 1.4em; }
+  /* 헷갈림 노트 */
+  .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .nt { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+  .nt.resolved { border-left: 4px solid var(--success); }
+  .nt.open { border-left: 4px solid var(--warn); }
+  .nt .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px; font-size: .8rem; color: var(--text-dim); }
+  .tag { display: inline-block; padding: 0 9px; border-radius: 99px; border: 1px solid var(--border); font-size: .74rem; font-weight: 700; color: var(--accent); }
+  .nt blockquote { border-left: 3px solid var(--border); padding: 2px 10px; margin: 6px 0; color: var(--text-dim); font-size: .86rem; }
+  .nt .tx { white-space: pre-wrap; }
+  .nt .ans { margin-top: 8px; background: var(--surface2); border-radius: 10px; padding: 8px 12px; font-size: .88rem; }
+  .nt .ans small { color: var(--text-dim); }
+  .ansform { margin-top: 8px; display: grid; gap: 8px; }
+  .empty { color: var(--text-dim); padding: 20px 0; text-align: center; }
+  .hidden { display: none !important; }
+  .noscreen { display: none; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } h1 { font-size: 1.4rem; } .bar > div { min-width: 100%; } }
+  @media print {
+    @page { size: A4; margin: 10mm; }
+    body { background: #fff; color: #000; padding: 0; font-size: 10pt; line-height: 1.4; }
+    .back, .tabs, .bar, .row, .noprint, #panelNotes, .stat { display: none !important; }
+    #panelWeekly { display: block !important; }
+    h1 { font-size: 15pt; color: #000; margin-bottom: 4px; } h2 { color: #000; font-size: 10.5pt; margin-bottom: 3px; }
+    .sub { color: #333; margin-bottom: 6px; font-size: 9pt; }
+    .card { background: #fff !important; border: 1px solid #888 !important; color: #000 !important; padding: 6px 9px; margin-bottom: 6px; break-inside: avoid; }
+    .goalbox { border-left: 3px solid #000 !important; }
+    .goalbox .g, .goalbox .c, .note, .stats small, .bars div.d { color: #222 !important; }
+    .stats div { background: #fff !important; border-color: #aaa !important; padding: 3px 8px; }
+    .stats b { color: #000; font-size: 10.5pt; }
+    .bars { height: 60px; } .bars .col { background: #555 !important; } .bars b { color: #000; }
+    ul.clean li { border-color: #ccc; padding: 2px 0; font-size: 9pt; }
+    .ok { color: #000; } textarea { display: none !important; } .pv { display: block; }
+    .grid2 { gap: 6px; }
+    .noscreen { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← 처음으로</a>
+  <h1>주간 보고 · 헷갈림 노트</h1>
+  <p class="sub">기록에서 자동으로 채워지는 칸과 직접 쓰는 칸으로 한 주를 정리합니다.</p>
+
+  <div class="tabs noprint" role="tablist" aria-label="보기 선택">
+    <button role="tab" id="tabWeekly" aria-controls="panelWeekly" aria-selected="true" type="button">주간 보고</button>
+    <button role="tab" id="tabNotes" aria-controls="panelNotes" aria-selected="false" type="button">헷갈림 노트</button>
+  </div>
+
+  <div class="bar">
+    <div><label class="f" for="who">학습자</label><select id="who"></select></div>
+    <div id="wkBox"><label class="f" for="wk">주차</label><select id="wk"></select></div>
+  </div>
+  <p class="stat" id="stat" role="status"></p>
+
+  <!-- ───── 주간 보고 ───── -->
+  <section id="panelWeekly" role="tabpanel" aria-labelledby="tabWeekly">
+    <div id="wkEmpty" class="empty hidden">학습자를 골라 주세요.</div>
+    <div id="wkBody" class="hidden">
+      <div class="card noscreen" id="printHead"></div>
+      <div class="card goalbox" id="goalBox"></div>
+
+      <div class="card">
+        <h2>이번 주 기록에서 자동으로 채운 칸</h2>
+        <p class="note" id="rangeNote" style="margin-bottom:8px"></p>
+        <div class="grid2">
+          <div><p class="f">계획한 단위와 완료 여부</p><ul class="clean" id="planList"></ul></div>
+          <div><p class="f">날짜별 공부 시간</p><div class="bars" id="bars" aria-label="날짜별 공부 시간 막대"></div></div>
+        </div>
+        <div class="stats" id="stats" style="margin-top:12px"></div>
+        <div style="margin-top:10px"><p class="f">계획에 없는데 공부한 단위</p><ul class="clean" id="extraList"></ul></div>
+      </div>
+
+      <div class="card">
+        <h2>학습자가 쓰는 칸</h2>
+        <label class="f" for="fGoal" style="margin-top:6px">이번 주 목표 (주 시작할 때)</label>
+        <textarea id="fGoal" rows="3"></textarea><div class="pv" data-for="fGoal"></div>
+        <div class="row" style="margin-top:6px"><button class="btn small noprint" id="draft" type="button">계획에서 가져오기</button><span class="note noprint">비어 있는 칸에 계획 단위 제목과 주차 학습 목표로 초안을 채웁니다.</span></div>
+        <label class="f" for="fLearned" style="margin-top:12px">배운 것 3가지 — 각각 왜 그렇게 하는지 한 줄씩</label>
+        <textarea id="fLearned" rows="5" placeholder="1. 배운 것 — 왜냐하면 …&#10;2. …&#10;3. …"></textarea><div class="pv" data-for="fLearned"></div>
+        <label class="f" for="fApplied" style="margin-top:12px">현장에서 써 본 것</label>
+        <textarea id="fApplied" rows="3"></textarea><div class="pv" data-for="fApplied"></div>
+        <label class="f" for="fNext" style="margin-top:12px">다음 주 목표</label>
+        <textarea id="fNext" rows="3"></textarea><div class="pv" data-for="fNext"></div>
+      </div>
+
+      <div class="card">
+        <h2>사수가 쓰는 칸</h2>
+        <label class="f" for="fFeedback">피드백</label>
+        <textarea id="fFeedback" rows="3"></textarea><div class="pv" data-for="fFeedback"></div>
+        <label class="f" for="fRating" style="margin-top:12px">평가 — 위의 「주차 학습 목표」를 얼마나 달성했는지</label>
+        <select id="fRating" style="max-width:220px"><option value="">(평가 전)</option><option>달성</option><option>일부</option><option>미달</option></select>
+        <div class="pv" data-for="fRating"></div>
+      </div>
+
+      <div class="row noprint">
+        <button class="btn main" id="saveW" type="button">저장</button>
+        <button class="btn" id="submitW" type="button">제출</button>
+        <button class="btn" id="printW" type="button">인쇄 / PDF 저장</button>
+        <span class="note" id="subNote"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── 헷갈림 노트 ───── -->
+  <section id="panelNotes" role="tabpanel" aria-labelledby="tabNotes" class="hidden">
+    <div class="filters">
+      <div><label class="f" for="fStatusSel">상태</label><select id="fStatusSel"><option value="open">미해결</option><option value="resolved">해결</option><option value="all">전체</option></select></div>
+      <div><label class="f" for="fKind">종류</label><select id="fKind"><option value="">전체</option><option>헷갈림</option><option>질문</option><option>찾아볼 것</option></select></div>
+      <div><label class="f" for="fUnit">단원</label><select id="fUnit"><option value="">전체</option></select></div>
+      <div><label class="f" for="fQ">검색어</label><input type="search" id="fQ" placeholder="내용·인용에서 찾기"></div>
+    </div>
+    <p class="note" id="noteCount" style="margin-bottom:8px"></p>
+    <div id="noteList"></div>
+  </section>
+</div>
+
+<script src="curriculum.js"></script>
+<script src="cases-data.js"></script>
+<script src="tech-data.js"></script>
+<script src="tracker.js"></script>
+<script>
+(function () {
+  var C = window.CURRICULUM, BT = window.BTTrack;
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function localDate(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
+  function dayLabel(s) { var p = s.split('-'); return (+p[1]) + '/' + (+p[2]); }
+  function setStat(t, bad) { var s = $('stat'); s.textContent = t; s.style.color = bad ? '#fca5a5' : 'var(--text-dim)'; }
+
+  var ALL = '__all__';
+  var trainees = [];     // { name, learn }
+  var tab = 'weekly';
+  var cur = null;        // 지금 보고 있는 학습자의 learn
+  var curTech = null;    // tech.html 기록 (읽기 전용)
+  var curName = null;
+  var loadedW = {};      // 화면을 그릴 때 읽은 주간 보고 값 — 저장할 때 실제로 바뀐 칸만 보내려고 기억한다
+  var reqSeq = 0;        // 학습자를 빨리 바꿔도 늦게 도착한 응답이 화면을 덮지 않게 한다
+
+  function find(name) { return trainees.filter(function (t) { return t.name === name; })[0]; }
+  function setLearn(name, learn, tech) {
+    var t = find(name);
+    if (t) { t.learn = learn; if (tech !== undefined) t.tech = tech; }
+    else trainees.push({ name: name, learn: learn, tech: tech || null });
+    if (name === curName) { cur = learn; if (tech !== undefined) curTech = tech; }
+  }
+
+  // ───────── 탭 ─────────
+  function showTab(t) {
+    tab = t;
+    $('tabWeekly').setAttribute('aria-selected', t === 'weekly');
+    $('tabNotes').setAttribute('aria-selected', t === 'notes');
+    $('panelWeekly').classList.toggle('hidden', t !== 'weekly');
+    $('panelNotes').classList.toggle('hidden', t !== 'notes');
+    $('wkBox').classList.toggle('hidden', t !== 'weekly');
+    var allOpt = $('who').querySelector('option[value="' + ALL + '"]');
+    if (allOpt) allOpt.hidden = (t === 'weekly');
+    if (t === 'weekly' && $('who').value === ALL) $('who').value = BT.getWho() && find(BT.getWho()) ? BT.getWho() : (trainees[0] ? trainees[0].name : '');
+    history.replaceState(null, '', t === 'notes' ? '#notes' : '#');
+    onWhoChange();
+  }
+  $('tabWeekly').addEventListener('click', function () { showTab('weekly'); });
+  $('tabNotes').addEventListener('click', function () { showTab('notes'); });
+  document.querySelector('.tabs').addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var to = tab === 'weekly' ? 'notes' : 'weekly'; showTab(to); $(to === 'notes' ? 'tabNotes' : 'tabWeekly').focus(); }
+  });
+
+  // ───────── 불러오기 ─────────
+  async function init() {
+    var r = await BT.listTrainees();
+    trainees = r.rows.map(function (x) { return { name: x.name, learn: x.learn, tech: x.tech }; });
+    var sel = $('who');
+    var w = BT.getWho();
+    if (w && !find(w)) trainees.unshift({ name: w, learn: BT.norm(null) });
+    var o = document.createElement('option'); o.value = ALL; o.textContent = '전체 학습자 (사수 보기)'; sel.appendChild(o);
+    trainees.forEach(function (t) { var op = document.createElement('option'); op.value = t.name; op.textContent = t.name; sel.appendChild(op); });
+    sel.value = w && find(w) ? w : (trainees[0] ? trainees[0].name : ALL);
+    if (!r.ok) setStat('명단을 불러오지 못했습니다. 이 기기에 저장된 기록만 보입니다.', true);
+    // 상단 항목 채우기
+    var uSel = $('fUnit');
+    C.UNITS.forEach(function (u) { var op = document.createElement('option'); op.value = u.id; op.textContent = u.title; uSel.appendChild(op); });
+    showTab(location.hash === '#notes' ? 'notes' : 'weekly');
+  }
+  async function onWhoChange() {
+    var seq = ++reqSeq, v = $('who').value;
+    if (tab === 'weekly' || v !== ALL) {
+      cur = null; curTech = null;
+      if (v === ALL || !v) { curName = null; renderWeekly(); return; }
+      curName = v;
+      if (tab === 'weekly') { $('wkEmpty').textContent = '불러오는 중…'; renderWeekly(); }
+      var r = await BT.fetchLearn(v);   // 이 기기와 서버를 합친 최신 기록
+      if (seq !== reqSeq || $('who').value !== v || curName !== v) return;   // 그 사이 다른 학습자로 바뀜
+      setLearn(v, r.learn, r.tech);
+      if (!r.server) setStat('서버에 연결하지 못해 이 기기 기록만 보입니다.', true); else setStat('');
+    } else { curName = null; cur = null; curTech = null; }
+    if (tab === 'weekly') { fillWeekSelect(); renderWeekly(); } else renderNotes();
+  }
+  $('who').addEventListener('change', function () { delete $('wk').dataset.touched; onWhoChange(); });
+
+  // ───────── 주간 보고 ─────────
+  var WK = 1;
+  function fillWeekSelect() {
+    var sel = $('wk');
+    if (!cur) { sel.textContent = ''; return; }
+    var now = BT.weekNo(cur, BT.today());
+    var max = Math.max(now, 12, (cur.plan && cur.plan.weeksPlan ? cur.plan.weeksPlan.length : 0));
+    Object.keys(cur.weekly || {}).forEach(function (k) { max = Math.max(max, +k || 0); });
+    sel.textContent = '';
+    for (var i = 1; i <= max; i++) {
+      var o = document.createElement('option');
+      o.value = i;
+      var rg = BT.weekRange(cur, i);
+      o.textContent = i + '주차 (' + dayLabel(rg[0]) + '~' + dayLabel(rg[1]) + ')' + (i === now ? ' · 이번 주' : '');
+      sel.appendChild(o);
+    }
+    WK = Math.min(Math.max(1, WK), max);
+    if (!sel.dataset.touched) WK = now;
+    sel.value = WK;
+  }
+  $('wk').addEventListener('change', function () { WK = +$('wk').value; $('wk').dataset.touched = '1'; renderWeekly(); });
+
+  // 편성을 저장했으면 그 주에 들어간 단원들의 「원래 주차」 목표를, 없으면 그 주차 번호의 목표를 돌려준다.
+  // 압축 편성(예: 하루 2시간·4주)에서는 편성 3주차에 원래 10~12주차 단원이 들어가기 때문이다.
+  function weekGoals(role, wk) {
+    var arr = (C.WEEKS && C.WEEKS[role]) || [];
+    var ids = planIds(), wks = [];
+    if (ids && ids.length) ids.forEach(function (id) { var u = C.byId[id]; if (u && u.week >= 1 && wks.indexOf(u.week) < 0) wks.push(u.week); });
+    if (!wks.length) wks = [wk];
+    wks.sort(function (a, b) { return a - b; });
+    return wks.map(function (w) { return arr.filter(function (x) { return x.wk === w; })[0]; }).filter(Boolean);
+  }
+  function planIds() { return (cur && cur.plan && cur.plan.weeksPlan && cur.plan.weeksPlan[WK - 1]) || null; }
+
+  function renderWeekly() {
+    var empty = !cur;
+    if (!empty) $('wkEmpty').textContent = '학습자를 골라 주세요.';
+    $('wkEmpty').classList.toggle('hidden', !empty);
+    $('wkBody').classList.toggle('hidden', empty);
+    if (empty) return;
+    var rg = BT.weekRange(cur, WK), from = rg[0], to = rg[1];
+    var role = cur.role || 'tech';
+    $('rangeNote').textContent = WK + '주차 · ' + from + ' ~ ' + to + (cur.start ? ' (시작일 ' + cur.start + ')' : ' (아직 학습 시작일이 없어 오늘 기준으로 계산했습니다)');
+
+    // 주차 학습 목표
+    var gs = weekGoals(role, WK);
+    var multi = gs.length > 1 || (gs[0] && gs[0].wk !== WK);
+    $('goalBox').innerHTML = '<p class="f">주차 학습 목표 (' + (role === 'office' ? '사무직' : '현장 기술직') + ')</p>' +
+      (gs.length ? gs.map(function (g) { return (multi ? '<p class="f">원래 ' + g.wk + '주차</p>' : '') + '<div class="g">' + esc(g.goal) + '</div><div class="c"><b>확인 방법</b> · ' + esc(g.check) + '</div>'; }).join('') : '<div class="c">이 주차에는 정해진 학습 목표가 없습니다.</div>');
+    $('printHead').innerHTML = '<b>' + esc(curName) + '</b> · ' + WK + '주차 (' + from + ' ~ ' + to + ')';
+
+    // 계획 vs 완료
+    var ids = planIds(), pl = $('planList');
+    pl.innerHTML = '';
+    if (!cur.plan) pl.innerHTML = '<li class="no">저장된 편성이 없습니다. <a href="planner.html">학습 편성기</a>에서 먼저 편성해 주세요.</li>';
+    else if (!ids || !ids.length) pl.innerHTML = '<li class="no">이 주차에 편성된 단위가 없습니다.</li>';
+    else ids.forEach(function (id) {
+      var u = C.byId[id], st = cur.units[id];
+      var done = BT.isDone(cur, curTech, id);
+      pl.insertAdjacentHTML('beforeend', '<li>' + (done ? '<span class="ok">✓ 완료</span>' : '<span class="no">… 아직</span>') + ' ' + esc(u ? u.title : id) +
+        (st && st.sec ? ' <span class="note">· ' + BT.fmtMin(Math.round(st.sec / 60)) + ' 공부</span>' : '') + '</li>');
+    });
+
+    // 날짜별 막대
+    var days = [], max = 0;
+    for (var i = 0; i < 7; i++) { var d = BT.addDays(from, i); var s = (cur.days || {})[d] || 0; days.push({ d: d, s: s }); max = Math.max(max, s); }
+    $('bars').innerHTML = days.map(function (x) {
+      var hgt = max ? Math.max(2, Math.round(x.s / max * 80)) : 2;
+      return '<div class="d"><b>' + (x.s ? BT.fmtMin(Math.round(x.s / 60)) : '') + '</b><div class="col' + (x.s ? '' : ' zero') + '" style="height:' + hgt + 'px"></div>' + dayLabel(x.d) + '</div>';
+    }).join('');
+    var totalSec = days.reduce(function (a, x) { return a + x.s; }, 0);
+
+    // 문제·헷갈림
+    var qs = Object.keys(cur.quiz || {}).map(function (k) { return cur.quiz[k]; }).filter(function (q) { var d = localDate(q.last); return d >= from && d <= to; });
+    var okN = qs.filter(function (q) { return q.ok; }).length;
+    var ns = (cur.notes || []).filter(function (n) { var d = localDate(n.at); return d >= from && d <= to; });
+    var resN = ns.filter(function (n) { return n.status === 'resolved'; }).length;
+    $('stats').innerHTML =
+      '<div><b>' + BT.fmtMin(Math.round(totalSec / 60)) + '</b><small>이번 주 공부 시간</small></div>' +
+      '<div><b>' + qs.length + '문제</b><small>푼 문제 (마지막 풀이 기준)</small></div>' +
+      '<div><b>' + (qs.length ? Math.round(okN / qs.length * 100) + '%' : '—') + '</b><small>정답률 (' + okN + '/' + qs.length + ')</small></div>' +
+      '<div><b>' + ns.length + '개</b><small>남긴 헷갈림 · 해결 ' + resN + ' / 미해결 ' + (ns.length - resN) + '</small></div>';
+
+    // 계획에 없는데 공부한 단위
+    var ex = $('extraList');
+    ex.innerHTML = '';
+    var planned = {}; (ids || []).forEach(function (id) { planned[id] = true; });
+    var extra = Object.keys(cur.units || {}).filter(function (id) {
+      var st = cur.units[id], d = localDate(st.last);
+      return st.sec > 0 && d >= from && d <= to && !planned[id];
+    });
+    if (!cur.plan) ex.innerHTML = '<li class="no">편성이 없어 비교하지 않았습니다.</li>';
+    else if (!extra.length) ex.innerHTML = '<li class="no">없음</li>';
+    else extra.forEach(function (id) { var u = C.byId[id]; ex.insertAdjacentHTML('beforeend', '<li>' + esc(u ? u.title : id) + ' <span class="note">· ' + BT.fmtMin(Math.round(cur.units[id].sec / 60)) + '</span></li>'); });
+
+    // 쓰는 칸
+    var w = (cur.weekly || {})[WK] || {};
+    loadedW = { goal: w.goal || '', learned: w.learned || '', applied: w.applied || '', nextGoal: w.nextGoal || '',
+      mentorFeedback: w.mentorFeedback || '', mentorRating: w.mentorRating || '' };
+    $('fGoal').value = w.goal || ''; $('fLearned').value = w.learned || ''; $('fApplied').value = w.applied || '';
+    $('fNext').value = w.nextGoal || ''; $('fFeedback').value = w.mentorFeedback || ''; $('fRating').value = w.mentorRating || '';
+    syncPrint();
+    $('subNote').textContent = (w.submittedAt ? '제출됨 ' + localDate(w.submittedAt) : '아직 제출 전') + ((w.mentorAt && (w.mentorFeedback || w.mentorRating)) ? ' · 사수 평가 ' + localDate(w.mentorAt) : '');
+  }
+
+  function syncPrint() {
+    document.querySelectorAll('.pv').forEach(function (p) { var f = $(p.getAttribute('data-for')); p.textContent = f ? f.value : ''; });
+  }
+  window.addEventListener('beforeprint', syncPrint);
+  document.querySelectorAll('textarea, #fRating').forEach(function (e) { e.addEventListener('input', syncPrint); e.addEventListener('change', syncPrint); });
+
+  $('draft').addEventListener('click', function () {
+    if (!cur) return;
+    var f = $('fGoal');
+    if (f.value.trim() && !confirm('이미 적은 내용이 있습니다. 초안으로 바꿀까요?')) return;
+    var ids = planIds() || [], lines = [];
+    if (ids.length) lines.push('이번 주 할 것: ' + ids.map(function (id) { return C.byId[id] ? C.byId[id].title : id; }).join(' / '));
+    weekGoals(cur.role || 'tech', WK).forEach(function (g) { lines.push('주차 학습 목표(원래 ' + g.wk + '주차): ' + g.goal); });
+    if (!lines.length) { setStat('가져올 계획이 없습니다. 학습 편성기에서 편성을 저장하면 단위 제목이 들어옵니다.', true); return; }
+    f.value = lines.join('\n');
+    syncPrint(); setStat('');
+  });
+
+  var LF = ['goal', 'learned', 'applied', 'nextGoal'], MF = ['mentorFeedback', 'mentorRating'];
+  // 화면을 그릴 때 읽은 값과 비교해 실제로 바뀐 칸만 보낸다. 다른 기기에서 저장된 칸은 그대로 둔다.
+  // 학습자 칸 묶음은 learnerAt, 사수 칸 묶음은 mentorAt 으로 따로 시각을 남긴다.
+  async function saveWeekly(submit) {
+    if (!cur || !curName) return;
+    var name = curName, wk = WK;
+    var vals = { goal: $('fGoal').value.trim(), learned: $('fLearned').value.trim(), applied: $('fApplied').value.trim(),
+      nextGoal: $('fNext').value.trim(), mentorFeedback: $('fFeedback').value.trim(), mentorRating: $('fRating').value };
+    var base = loadedW;
+    var chL = LF.filter(function (k) { return vals[k] !== (base[k] || ''); });
+    var chM = MF.filter(function (k) { return vals[k] !== (base[k] || ''); });
+    if (!chL.length && !chM.length && !submit) { setStat('바뀐 내용이 없습니다.'); return; }
+    $('saveW').disabled = $('submitW').disabled = true;
+    setStat('저장 중…');
+    var now = new Date().toISOString();
+    var r = await BT.update(name, function (l) {
+      var w = Object.assign({}, l.weekly[wk] || {});
+      // 옛 형식(묶음 시각 없이 updatedAt 만): 저장 전에 그 시각을 각 묶음 시각으로 옮겨 둔다 — 안 그러면 이번 저장 시각이 손대지 않은 묶음의 시각이 된다
+      if (w.updatedAt) {
+        if (!w.mentorAt && (w.mentorFeedback || w.mentorRating)) w.mentorAt = w.updatedAt;
+        if (!w.learnerAt && (w.goal || w.learned || w.applied || w.nextGoal || w.submittedAt)) w.learnerAt = w.updatedAt;
+      }
+      chL.forEach(function (k) { w[k] = vals[k]; });
+      chM.forEach(function (k) { w[k] = vals[k]; });
+      if (chL.length || submit) w.learnerAt = now;
+      if (chM.length) w.mentorAt = now;
+      if (submit) w.submittedAt = now;
+      w.updatedAt = now;
+      if (!l.start) l.start = BT.today();
+      l.weekly[wk] = w;
+    });
+    $('saveW').disabled = $('submitW').disabled = false;
+    if (name !== curName) return;
+    setLearn(name, r.learn);
+    renderWeekly();
+    if (r.ok) setStat(submit ? '제출했습니다.' : '저장했습니다.');
+    else setStat('서버에 저장하지 못해 이 기기에만 저장했습니다. 인터넷이 연결되면 다시 저장해 주세요.', true);
+  }
+  $('saveW').addEventListener('click', function () { saveWeekly(false); });
+  $('submitW').addEventListener('click', function () {
+    if (!$('fGoal').value.trim() && !$('fLearned').value.trim() && !confirm('아직 쓴 내용이 거의 없습니다. 그래도 제출할까요?')) return;
+    saveWeekly(true);
+  });
+  $('printW').addEventListener('click', function () { syncPrint(); window.print(); });
+
+  // ───────── 헷갈림 노트 ─────────
+  function unitHref(n) {
+    var u = n.unit && C.byId[n.unit];
+    if (u) return u.page + (u.anchor.charAt(0) === '#' ? u.anchor : '#' + u.anchor);
+    return /^[a-z0-9_]+\.html$/.test(n.page || '') ? n.page : null;
+  }
+  function allNotes() {
+    var v = $('who').value, out = [];
+    var src = v === ALL ? trainees : trainees.filter(function (t) { return t.name === v; });
+    src.forEach(function (t) { (t.learn.notes || []).forEach(function (n) { out.push({ n: n, who: t.name }); }); });
+    return out.sort(function (a, b) { return (a.n.at || '') < (b.n.at || '') ? 1 : -1; });
+  }
+  function renderNotes() {
+    var v = $('who').value, st = $('fStatusSel').value, kind = $('fKind').value, unit = $('fUnit').value, q = $('fQ').value.trim().toLowerCase();
+    var list = allNotes().filter(function (x) {
+      var n = x.n;
+      if (st !== 'all' && n.status !== st) return false;
+      if (kind && n.kind !== kind) return false;
+      if (unit && n.unit !== unit) return false;
+      if (q && ((n.text || '') + ' ' + (n.quote || '') + ' ' + (n.answer || '')).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+    $('noteCount').textContent = (v === ALL ? '전체 학습자' : v) + ' · ' + list.length + '개';
+    var box = $('noteList');
+    box.innerHTML = '';
+    if (!list.length) { box.innerHTML = '<div class="empty">조건에 맞는 기록이 없습니다.</div>'; return; }
+    list.forEach(function (x) {
+      var n = x.n, u = n.unit && C.byId[n.unit];
+      var el = document.createElement('div');
+      el.className = 'nt ' + (n.status === 'resolved' ? 'resolved' : 'open');
+      el.innerHTML = '<div class="top"><span class="tag">' + esc(n.kind) + '</span>' +
+        '<span>' + (n.status === 'resolved' ? '해결됨' : '미해결') + '</span>' +
+        (v === ALL ? '<span><b>' + esc(x.who) + '</b></span>' : '') +
+        '<span>' + esc(localDate(n.at)) + '</span>' +
+        (unitHref(n) ? '<a href="' + esc(unitHref(n)) + '">' + esc(u ? u.title : n.page) + ' 열기</a>' : '') + '</div>' +
+        (n.quote ? '<blockquote>' + esc(n.quote) + '</blockquote>' : '') +
+        '<div class="tx">' + esc(n.text) + '</div>' +
+        (n.answer ? '<div class="ans">' + esc(n.answer) + '<br><small>답한 사람 ' + esc(n.answeredBy || '—') + '</small></div>' : '') +
+        '<div class="row"></div>';
+      var row = el.querySelector('.row');
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn small';
+      if (n.status === 'resolved') {
+        b.textContent = '다시 열기';
+        b.addEventListener('click', function () { patchNote(x.who, n.id, { status: 'open' }); });
+      } else {
+        b.textContent = '답 달기';
+        b.addEventListener('click', function () { openAnswer(el, x.who, n); });
+      }
+      row.appendChild(b);
+      box.appendChild(el);
+    });
+  }
+  function openAnswer(el, who, n) {
+    if (el.querySelector('.ansform')) return;
+    var f = document.createElement('div');
+    f.className = 'ansform';
+    f.innerHTML = '<label class="f">답</label><textarea rows="3"></textarea><label class="f">답한 사람 이름</label><input type="text" maxlength="30">' +
+      '<div class="row" style="margin-top:0"><button type="button" class="btn main small">답 저장 (해결로 표시)</button><button type="button" class="btn small">취소</button></div>';
+    var ta = f.querySelector('textarea'), nm = f.querySelector('input[type=text]'), bs = f.querySelectorAll('button');
+    nm.value = lsGet('bt_answerer') || '';
+    ta.value = n.answer || '';
+    bs[1].addEventListener('click', function () { f.remove(); });
+    bs[0].addEventListener('click', function () {
+      if (!ta.value.trim()) { ta.focus(); return; }
+      if (!nm.value.trim()) { nm.focus(); return; }
+      lsSet('bt_answerer', nm.value.trim());
+      patchNote(who, n.id, { answer: ta.value.trim(), answeredBy: nm.value.trim(), status: 'resolved' });
+    });
+    el.appendChild(f);
+    ta.focus();
+  }
+  async function patchNote(who, id, patch) {
+    setStat('저장 중…');
+    var r = await BT.update(who, function (l) {
+      var n = l.notes.filter(function (z) { return z.id === id; })[0];
+      if (!n) return;
+      Object.assign(n, patch, { updatedAt: new Date().toISOString() });
+    });
+    setLearn(who, r.learn);
+    renderNotes();
+    if (r.ok) setStat('저장했습니다.'); else setStat('서버에 저장하지 못해 이 기기에만 저장했습니다.', true);
+  }
+  ['fStatusSel', 'fKind', 'fUnit'].forEach(function (id) { $(id).addEventListener('change', renderNotes); });
+  $('fQ').addEventListener('input', renderNotes);
+  window.addEventListener('hashchange', function () { showTab(location.hash === '#notes' ? 'notes' : 'weekly'); });
+
+  init();
+})();
+</script>
+</body>
+</html>

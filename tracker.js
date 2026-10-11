@@ -637,8 +637,10 @@
         h('h4', null, '왜 배우나', h('span', { class: 'bt-badge ' + (PRIO_CLASS[u.prio] || 'rec'), text: u.prio })),
         h('p', { text: u.why }),
         h('div', { class: 'bt-meta' }, timeTxt + ' · ', info.spent));
-      var head = el.querySelector(':scope > .section-header') || el.querySelector(':scope > .section-desc') || el.querySelector(':scope > h2, :scope > h3');
-      if (head) el.insertBefore(why, head.nextSibling); else el.insertBefore(why, el.firstChild);
+      // 단원 칸 안에 폭을 잡는 .wrap 이 있으면 그 안에 넣는다 (refs·products — 밖에 넣으면 화면 끝에 붙는다)
+      var box = el.querySelector(':scope > .wrap') || el;
+      var head = box.querySelector(':scope > .sec-head') || box.querySelector(':scope > .section-header') || box.querySelector(':scope > .section-desc') || box.querySelector(':scope > h2, :scope > h3');
+      if (head) box.insertBefore(why, head.nextSibling); else box.insertBefore(why, box.firstChild);
       info.why = why;
       // 2) 현장 사례 + 다 봤어요
       var end = h('div', { class: 'bt-box', 'data-bt': 'end', 'data-unit': u.id });
@@ -657,7 +659,8 @@
       }
       info.doneBtn = h('button', { class: 'bt-btn', type: 'button', onclick: function () { toggleDone(u.id); } });
       end.appendChild(h('div', { class: 'bt-actions' }, info.doneBtn));
-      if (el.children.length >= 2) el.appendChild(end);
+      if (box !== el) box.appendChild(end);
+      else if (el.children.length >= 2) el.appendChild(end);
       else {
         // 제목 하나뿐인 앵커: 같은 부모 안에서 다음 단원 앞에 넣는다
         var nx = null;

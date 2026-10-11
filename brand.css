@@ -98,3 +98,9 @@ a { color: var(--accent-text); }
 
 /* 넓은 화면: 학습자 표시(오른쪽 위)와 위에 붙는 목차가 겹치지 않게 오른쪽도 비운다. 좁은 화면은 학습자 표시가 왼쪽 아래로 간다 */
 @media (min-width: 521px) { .sticky-nav .nav-inner { padding-right: 320px !important; } }
+
+/* 학습 기록 상자 — 회색 줄무늬 칸(--bg-alt) 위에서 묻히지 않게 (2026-10-11) */
+body .bt-box { background: #fff; border-radius: var(--radius-box); }
+.bt-box[data-bt="why"] { background: #fff7f2; border-color: #f5cdb4; border-left: 4px solid var(--accent); max-width: 760px; }
+.bt-box[data-bt="why"] h4 { font-size: 1rem; color: var(--accent-text); }
+.bt-box[data-bt="why"] p { font-size: .98rem; color: var(--ink); }

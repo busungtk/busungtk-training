@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>이용 가이드 | 부성티케이 신입사원 교육</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="brand.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .b-mast .who2 { margin-top: 22px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 820px; }
+  .b-mast .who2 a { display: block; text-decoration: none; border: 1px solid rgba(251,146,60,.45); border-radius: 6px; padding: 14px 16px; color: #e7e5e4; }
+  .b-mast .who2 a:hover { border-color: #fb923c; }
+  .b-mast .who2 b { display: block; color: #fff; font-size: 1.05rem; margin-bottom: 2px; }
+  .b-mast .who2 small { font-size: .85rem; }
+  .toc { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+  .toc .in { max-width: 1120px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; overflow-x: auto; }
+  .toc a { flex: none; font-size: .82rem; font-weight: 600; color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; background: #fff; }
+  .toc a:hover { border-color: var(--accent); color: var(--accent-text); }
+  .toc .sep { flex: none; width: 1px; background: var(--line); margin: 2px 4px; }
+  section.part { padding: clamp(36px, 5vw, 60px) 0; border-bottom: 1px solid var(--line); scroll-margin-top: 56px; }
+  section.part.alt { background: var(--bg-alt); }
+  .part-head { max-width: 760px; margin-bottom: 26px; display: grid; gap: 6px; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; text-wrap: balance; }
+  .lead { font-size: clamp(1rem, 1.6vw, 1.1rem); color: var(--ink-2); }
+  .steps { display: grid; gap: 18px; }
+  .step { display: grid; grid-template-columns: 52px minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 18px; scroll-margin-top: 64px; }
+  .step .no { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); color: var(--accent-text); font-weight: 800; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+  .step.mentor .no { border-color: var(--cold); color: var(--cold); }
+  .step h3 { font-size: 1.12rem; font-weight: 800; line-height: 1.35; margin-bottom: 4px; text-wrap: balance; }
+  .step .when { font-size: .8rem; font-weight: 700; color: var(--muted); letter-spacing: .02em; margin-bottom: 8px; }
+  .step ol, .step ul { margin: 6px 0 6px 20px; } .step li { margin: 4px 0; max-width: 62ch; }
+  .step p { max-width: 64ch; margin: 6px 0; }
+  .step .go { display: inline-block; margin-top: 10px; font-size: .88rem; font-weight: 700; color: var(--accent-text); text-decoration: none; border: 1px solid var(--accent); border-radius: 4px; padding: 6px 12px; }
+  .step.mentor .go { color: var(--cold); border-color: var(--cold); }
+  .step .go:hover { background: var(--accent-tint); }
+  .k { display: inline-block; font-size: .86em; font-weight: 700; border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; background: var(--bg-alt); white-space: nowrap; }
+  .tip { border-left: 3px solid var(--accent); background: var(--accent-tint); border-radius: 0 6px 6px 0; padding: 8px 12px; margin-top: 10px; font-size: .9rem; max-width: 64ch; }
+  .tip.cold { border-left-color: var(--cold); background: #f3f7fa; }
+  @media (max-width: 880px) { .step { grid-template-columns: 44px minmax(0, 1fr); } .step .mock { grid-column: 1 / -1; } }
+
+  /* 화면 모형 — 실제 화면을 줄여 그린 것 */
+  .mock { border: 1px solid var(--line); border-radius: 6px; background: var(--bg-alt); padding: 14px; font-size: .86rem; position: relative; overflow: hidden; }
+  .mock .cap { font-size: .75rem; color: var(--muted); margin-top: 10px; }
+  .mock .scr { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 12px; }
+  .mock .dark { background: var(--dark); color: var(--dark-ink); border-radius: 4px; padding: 14px; }
+  .m-btn { display: inline-block; font-weight: 700; border-radius: 4px; padding: 6px 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: .84rem; }
+  .m-btn.main { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .m-btn.cold { background: var(--cold); border-color: var(--cold); color: #fff; }
+  .m-pill { display: inline-flex; gap: 8px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 6px 12px; font-size: .8rem; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .m-pill b { font-weight: 800; } .m-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .m-pill .lnk { color: var(--accent-text); font-weight: 700; }
+  .m-fab { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; border-radius: 99px; padding: 8px 14px; font-size: .82rem; box-shadow: 0 4px 12px rgba(0,0,0,.18); }
+  .m-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .m-in { border: 1px solid var(--line); border-radius: 4px; background: #fff; padding: 6px 9px; color: var(--muted); flex: 1; min-width: 0; }
+  .m-lbl { font-size: .75rem; font-weight: 700; color: var(--muted); margin: 8px 0 3px; }
+  .m-box { border: 1px solid var(--line); border-radius: 4px; background: #fff; padding: 10px; margin-top: 8px; }
+  .m-box.why { border-left: 3px solid var(--accent); }
+  .m-box h5 { font-size: .8rem; font-weight: 800; margin-bottom: 2px; }
+  .m-line { height: 7px; border-radius: 99px; background: var(--line); margin: 6px 0; }
+  .m-line.s { width: 60%; } .m-line.m { width: 82%; }
+  .m-wk { display: grid; grid-template-columns: 54px 1fr auto; gap: 8px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line-2); }
+  .m-wk:first-child { border-top: 0; }
+  .m-wk .w { font-weight: 800; font-variant-numeric: tabular-nums; }
+  .chip { font-size: .72rem; font-weight: 700; border-radius: 4px; padding: 1px 7px; white-space: nowrap; }
+  .chip.ok { color: var(--ok); background: var(--ok-tint); } .chip.late { color: var(--bad); background: var(--bad-tint); } .chip.now { color: var(--accent-text); background: var(--accent-tint); }
+  .m-lv { display: flex; gap: 4px; flex-wrap: wrap; }
+  .m-lv span { border: 1px solid var(--line); border-radius: 4px; padding: 3px 8px; font-size: .78rem; background: #fff; }
+  .m-lv span.on { border-color: var(--accent); color: var(--accent-text); font-weight: 700; background: var(--accent-tint); }
+  .m-sel { background: #ffe8d6; border-radius: 2px; padding: 0 2px; }
+  .m-q .opt { border: 1px solid var(--line); border-radius: 4px; padding: 5px 9px; margin-top: 5px; background: #fff; }
+  .m-q .opt.bad { border-color: var(--bad); background: var(--bad-tint); }
+  .arrow { color: var(--accent-text); font-weight: 800; }
+
+  .map { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .map a { display: block; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  .map a:hover { border-color: var(--accent); }
+  .map b { display: block; font-weight: 800; margin-bottom: 2px; }
+  .map small { color: var(--muted); font-size: .84rem; }
+  .map .grp { font-size: .75rem; font-weight: 700; color: var(--accent-text); letter-spacing: .04em; margin-bottom: 4px; }
+
+  .faq { display: grid; gap: 10px; max-width: 820px; }
+  .faq details { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 12px 16px; }
+  .faq summary { font-weight: 700; cursor: pointer; }
+  .faq details p, .faq details ul { margin-top: 8px; color: var(--ink-2); max-width: 70ch; }
+  .faq details ul { margin-left: 20px; }
+  .faq summary:focus-visible, .step .go:focus-visible, .map a:focus-visible, .toc a:focus-visible, .who2 a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .foot { padding: 32px 0 80px; color: var(--muted); font-size: .85rem; }
+  @media (max-width: 520px) { .wrap { padding: 0 16px; } .toc .in { padding: 10px 16px; } .step { padding: 14px; gap: 12px; } }
+</style>
+</head>
+<body>
+
+<header class="b-mast"><div class="b-in">
+  <a class="b-back" href="index.html">← 교육 홈</a>
+  <div class="b-eyebrow">현장지원팀 신입 교육 · 처음 오신 분께</div>
+  <h1>이용 가이드 — 첫날 10분이면 됩니다</h1>
+  <p>이 사이트는 읽는 교재이면서 <b>공부 기록장</b>입니다. 이름을 고르고 단원을 보면 시간·퀴즈·「다 봤음」·헷갈림이 저절로 쌓이고, 사수는 그 기록을 보고 주마다 피드백합니다. 아래 순서대로 한 번만 따라 하면 됩니다.</p>
+  <div class="who2">
+    <a href="#learner"><b>신입이에요 →</b><small>이름 고르기부터 금요일 주간 보고까지 7단계</small></a>
+    <a href="#mentor"><b>사수예요 →</b><small>주 1회 15분 — 보고 피드백·헷갈림 답·역량 확인</small></a>
+  </div>
+</div></header>
+
+<nav class="toc" aria-label="가이드 목차"><div class="in">
+  <a href="#l1">1 이름 고르기</a><a href="#l2">2 계획 짜기</a><a href="#l3">3 이번 주 단원</a><a href="#l4">4 단원 공부법</a><a href="#l5">5 헷갈림</a><a href="#l6">6 주간 보고</a><a href="#l7">7 역량 목표</a>
+  <span class="sep" aria-hidden="true"></span>
+  <a href="#mentor">사수 4단계</a><a href="#map">페이지 지도</a><a href="#faq">자주 묻는 것</a>
+</div></nav>
+
+<main>
+
+<!-- ───── 신입 ───── -->
+<section class="part" id="learner"><div class="wrap">
+  <div class="part-head">
+    <div class="b-eyebrow">신입 · 첫날 한 번</div>
+    <h2>신입: 이름 고르기부터 금요일 보고까지</h2>
+    <p class="lead">1~2번은 첫날 한 번만 합니다. 3~5번은 매일, 6번은 금요일, 7번은 현장에서 해 본 날 합니다.</p>
+  </div>
+
+  <div class="steps">
+
+    <article class="step" id="l1">
+      <div class="no">1</div>
+      <div>
+        <h3>교육 홈에서 내 이름을 고릅니다</h3>
+        <div class="when">첫날 한 번 · 기기를 바꾸면 그 기기에서 한 번 더</div>
+        <ol>
+          <li>교육 홈 맨 위 상자에서 내 이름을 누릅니다.</li>
+          <li>이름이 없으면 칸에 이름을 적고 <span class="k">시작</span>을 누릅니다. 명단에 올라가고, 다음부터는 목록에 보입니다.</li>
+          <li>오른쪽 위에 <b>내 이름</b>이 보이면 준비 끝입니다. 이름을 고르기 전에는 카드가 흐리게 잠겨 있습니다.</li>
+        </ol>
+        <div class="tip"><b>「이름 없이 둘러보기」</b>는 구경용입니다. 시간·퀴즈·다 봤음이 남지 않으니, 공부할 때는 꼭 이름을 고르세요.</div>
+        <a class="go" href="index.html">교육 홈 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="dark">
+          <div style="font-weight:800;margin-bottom:8px">신입사원 교육 프로그램</div>
+          <div class="scr" style="color:var(--ink)">
+            <div style="font-weight:800">누구로 학습하나요?</div>
+            <div class="m-row" style="margin:8px 0"><span class="m-btn">김현장</span><span class="m-btn" style="border-color:var(--accent);color:var(--accent-text)">이신입</span></div>
+            <div class="m-row"><span class="m-in">처음이면 이름을 적고 시작</span><span class="m-btn main">시작</span></div>
+            <div style="font-size:.75rem;color:var(--muted);text-decoration:underline;margin-top:6px">이름 없이 둘러보기</div>
+          </div>
+        </div>
+        <div class="cap">교육 홈 맨 위. 처음이면 이름을 적고 「시작」</div>
+      </div>
+    </article>
+
+    <article class="step" id="l2">
+      <div class="no">2</div>
+      <div>
+        <h3>학습 편성기로 12주 계획을 짭니다</h3>
+        <div class="when">첫날 한 번 · 사수와 같이 · 5분</div>
+        <ol>
+          <li><b>학습 편성기</b>를 열고 학습자에서 내 이름을 고릅니다.</li>
+          <li><b>직군</b>(현장 기술직 / 사무직), <b>주당 교육 가능 시간</b>, <b>남은 주 수</b>, <b>학습 시작일</b>(입사일)을 넣습니다.</li>
+          <li><span class="k">편성하기</span>를 누르면 주별 계획이 나옵니다. 시간이 모자라 빠진 단원은 「이번 편성에서 뺀 것」에 따로 보입니다.</li>
+          <li>괜찮으면 <span class="k">이 편성으로 저장</span>. 저장해야 「내 학습 계획」과 주간 보고에 계획이 이어집니다.</li>
+        </ol>
+        <div class="tip">시간은 넉넉히 잡지 말고 <b>실제로 낼 수 있는 시간</b>을 넣습니다. 현장이 바쁜 주가 있으면 나중에 다시 편성해도 됩니다. 이미 끝낸 단원은 알아서 빼 줍니다.</div>
+        <a class="go" href="planner.html">학습 편성기 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div style="font-weight:800;margin-bottom:4px">학습 편성기</div>
+          <div class="m-lbl">직군</div>
+          <div class="m-row"><span class="m-btn main">현장 기술직</span><span class="m-btn">사무직</span></div>
+          <div class="m-row" style="gap:10px">
+            <div style="flex:1"><div class="m-lbl">주당 교육 가능 시간</div><div class="m-in" style="color:var(--ink)">6시간</div></div>
+            <div style="flex:1"><div class="m-lbl">남은 주 수</div><div class="m-in" style="color:var(--ink)">12주</div></div>
+          </div>
+          <div class="m-lbl">학습 시작일</div><div class="m-in" style="color:var(--ink)">입사일</div>
+          <div class="m-row" style="margin-top:10px"><span class="m-btn main">편성하기</span><span class="arrow">→</span><span class="m-btn">이 편성으로 저장</span></div>
+        </div>
+        <div class="cap">값은 예시입니다. 내 사정에 맞게 넣습니다</div>
+      </div>
+    </article>
+
+    <article class="step" id="l3">
+      <div class="no">3</div>
+      <div>
+        <h3>매일: 「내 학습 계획」에서 이번 주 단원을 엽니다</h3>
+        <div class="when">매일 시작할 때</div>
+        <ul>
+          <li>주별로 단원이 줄지어 있고, 이번 주가 맨 먼저 보입니다. 단원 이름을 누르면 그 자리로 바로 갑니다.</li>
+          <li>지난 주에 못 끝낸 단원은 <span class="chip late">밀림 — 먼저 끝내세요</span>로 빨갛게 표시됩니다. 이것부터 합니다.</li>
+          <li>위쪽 숫자 칸에서 지금까지 공부한 시간, 계획 단원 완료 수, 답 못 받은 헷갈림 수를 한눈에 봅니다.</li>
+        </ul>
+        <div class="tip">어느 페이지에서든 오른쪽 위 이름 옆 <span class="k">내 계획</span>을 누르면 여기로 옵니다.</div>
+        <a class="go" href="my.html">내 학습 계획 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div style="font-weight:800;margin-bottom:6px">내 학습 계획</div>
+          <div class="m-wk"><span class="w">2주차</span><span>제품군 지도</span><span class="chip late">밀림</span></div>
+          <div class="m-wk"><span class="w">3주차</span><span>치수 읽기</span><span class="chip now">공부 중</span></div>
+          <div class="m-wk"><span class="w">3주차</span><span>근태관리 앱</span><span class="chip ok">완료</span></div>
+          <div class="m-wk"><span class="w">4주차</span><span>설치 전 확인</span><span class="chip" style="color:var(--muted)">시작 전</span></div>
+        </div>
+        <div class="cap">빨간 「밀림」부터, 그다음 이번 주</div>
+      </div>
+    </article>
+
+    <article class="step" id="l4">
+      <div class="no">4</div>
+      <div>
+        <h3>단원 하나는 이렇게 봅니다</h3>
+        <div class="when">단원마다 · 순서대로</div>
+        <ol>
+          <li><b>「왜 배우나」</b> 상자부터 읽습니다. 이 단원이 현장의 어떤 일과 이어지는지 한두 줄로 적혀 있습니다.</li>
+          <li>본문과 그림을 봅니다. 시간은 <b>이 화면을 보고 있을 때만</b> 저절로 쌓입니다. 오른쪽 위에 「오늘 ○분」으로 보입니다.</li>
+          <li><b>퀴즈</b>를 풉니다. 틀려도 괜찮습니다. 해설을 읽고 <span class="k">다시 풀기</span>로 한 번 더 풉니다. 처음 답과 다시 푼 답이 모두 남습니다.</li>
+          <li><b>「실제 현장 사례」</b>를 한 건 열어 봅니다. 우리 회사가 실제로 한 시공·A/S·납품입니다.</li>
+          <li>끝까지 봤으면 맨 아래 <span class="k">이 단원 다 봤어요</span>를 누릅니다. 계획과 교육 홈 카드에 「다 봄」이 찍힙니다. 잘못 눌렀으면 한 번 더 눌러 취소합니다.</li>
+        </ol>
+        <div class="tip">「다 봤어요」는 <b>읽었다</b>는 뜻입니다. 할 줄 알게 됐는지는 7번 역량 목표에서 따로 확인합니다.</div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div style="text-align:right;margin-bottom:8px"><span class="m-pill">학습자 <b>이신입</b><span class="dot"></span>오늘 24분<span class="lnk">내 계획</span></span></div>
+        <div class="scr">
+          <div class="m-box why"><h5>왜 배우나</h5><div class="m-line m"></div><div class="m-line s"></div></div>
+          <div class="m-line m" style="margin-top:10px"></div><div class="m-line"></div><div class="m-line s"></div>
+          <div class="m-q m-box"><h5>QUIZ</h5><div class="opt bad">① 틀린 답</div><div class="opt">② …</div><div style="text-align:right;margin-top:6px"><span class="m-btn">다시 풀기</span></div></div>
+          <div class="m-box"><h5>실제 현장 사례</h5><div style="color:var(--accent-text);font-weight:600">구내식당 ○○ 설치 →</div></div>
+          <div style="margin-top:10px"><span class="m-btn main">이 단원 다 봤어요</span></div>
+        </div>
+        <div class="cap">위에서 아래로: 왜 → 본문 → 퀴즈 → 사례 → 다 봤어요</div>
+      </div>
+    </article>
+
+    <article class="step" id="l5">
+      <div class="no">5</div>
+      <div>
+        <h3>헷갈리면 그 자리에서 「헷갈림 기록」</h3>
+        <div class="when">공부하다 막힐 때마다</div>
+        <ol>
+          <li>헷갈린 문장을 마우스로 <b>끌어서 선택</b>합니다(휴대폰은 길게 눌러 선택).</li>
+          <li>오른쪽 아래 주황 버튼 <span class="k">❓ 헷갈림 기록</span>을 누릅니다. 선택한 글자가 「인용」 칸에 자동으로 들어갑니다.</li>
+          <li>종류(헷갈림·질문·찾아볼 것)를 고르고 무엇이 헷갈렸는지 한두 줄 적은 뒤 <span class="k">저장</span>.</li>
+        </ol>
+        <div class="tip">물어볼 것을 머릿속에 두지 말고 바로 적어 두세요. 사수가 주간 보고 때 모아서 답하고, 답이 달리면 「해결됨」으로 바뀝니다. 답은 주간 보고 페이지의 「헷갈림 노트」에서 봅니다.</div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div>간냉식은 팬으로 찬 바람을 돌려 <span class="m-sel">성에가 덜 낀다</span>.</div>
+          <div class="m-box" style="margin-top:12px">
+            <h5>헷갈림 기록</h5>
+            <div class="m-lbl">인용 (선택한 글자)</div><div class="m-in" style="color:var(--ink)">성에가 덜 낀다</div>
+            <div class="m-lbl">내용</div><div class="m-in">왜 덜 끼는지 원리가 궁금함</div>
+            <div style="text-align:right;margin-top:8px"><span class="m-btn main">저장</span></div>
+          </div>
+        </div>
+        <div style="text-align:right;margin-top:10px"><span class="m-fab">❓ 헷갈림 기록</span></div>
+        <div class="cap">글자 선택 → 주황 버튼 → 한두 줄 → 저장</div>
+      </div>
+    </article>
+
+    <article class="step" id="l6">
+      <div class="no">6</div>
+      <div>
+        <h3>금요일: 주간 보고를 씁니다</h3>
+        <div class="when">매주 금요일 · 10분</div>
+        <ol>
+          <li><b>주간 보고</b>를 열고 학습자·주차를 고릅니다. 이번 주 공부 시간·푼 문제·정답률·남긴 헷갈림은 <b>자동으로 채워져</b> 있습니다.</li>
+          <li><b>이번 주 목표</b>: <span class="k">계획에서 가져오기</span>를 누르면 편성표의 그 주 목표가 들어옵니다(주 시작할 때 미리 적어 두면 더 좋습니다).</li>
+          <li><b>배운 것 3가지</b>를 쓰되, 각각 <b>왜 그렇게 하는지</b> 한 줄씩 붙입니다.</li>
+          <li><b>현장에서 써 본 것</b>, <b>다음 주 목표</b>를 적고 <span class="k">제출</span>. 다 못 썼으면 <span class="k">저장</span>만 해 두고 이어 씁니다.</li>
+        </ol>
+        <div class="tip">「배운 것」을 내용만 적으면 외운 것이고, 「왜」까지 적을 수 있으면 이해한 것입니다. 사수는 이 칸을 가장 먼저 봅니다.</div>
+        <a class="go" href="report.html">주간 보고 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div style="font-weight:800;margin-bottom:4px">주간 보고 · 3주차</div>
+          <div class="m-box" style="background:var(--bg-alt)"><h5>이번 주 기록에서 자동으로 채운 칸</h5><div style="font-size:.8rem;color:var(--ink-2)">공부 4시간 10분 · 푼 문제 9 · 정답률 7/9 · 헷갈림 2</div></div>
+          <div class="m-lbl">이번 주 목표 <span class="m-btn" style="padding:1px 7px;font-size:.72rem">계획에서 가져오기</span></div><div class="m-in">…</div>
+          <div class="m-lbl">배운 것 3가지 — 각각 왜 그렇게 하는지 한 줄씩</div><div class="m-in">1. 배운 것 — 왜냐하면 …</div>
+          <div class="m-row" style="margin-top:10px;justify-content:flex-end"><span class="m-btn">저장</span><span class="m-btn main">제출</span></div>
+        </div>
+        <div class="cap">자동 칸은 손대지 않아도 됩니다. 나머지 네 칸만 씁니다</div>
+      </div>
+    </article>
+
+    <article class="step" id="l7">
+      <div class="no">7</div>
+      <div>
+        <h3>현장에서 해 본 날: 역량 목표에 내 단계를 매깁니다</h3>
+        <div class="when">해 본 날 · 1분</div>
+        <ul>
+          <li><b>역량 목표</b>에는 도어 패킹 교체·냉장고 점검·수전 교체처럼 <b>12주 안에 할 수 있게 될 일</b>이 몇 주차까지 어느 단계까지인지 적혀 있습니다.</li>
+          <li>해 본 목표에서 지금 내 단계를 누릅니다: <b>설명할 수 있다 → 선배 앞에서 한다 → 혼자 한다</b>. 메모 칸에 어느 현장에서 했는지 적습니다.</li>
+          <li>사수가 확인하면 그 카드에 「사수 확인」이 붙고, 목표 단계에 닿으면 <span class="chip ok">✓ 달성</span>이 됩니다. 기한이 지났는데 못 닿았으면 <span class="chip late">! 기한 지남</span>.</li>
+        </ul>
+        <div class="tip">「12주 안에 신입이 손대지 않는 것 — 선배 몫」도 같은 페이지에 있습니다. 거기 적힌 일은 혼자 하지 않습니다.</div>
+        <a class="go" href="goals.html">역량 목표 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:start"><b>냉장고 도어 패킹을 교체할 수 있다</b><span class="chip now">5주차까지 · 혼자 한다</span></div>
+          <div class="m-lbl">내 생각</div>
+          <div class="m-lv"><span>설명할 수 있다</span><span class="on">선배 앞에서 한다</span><span>혼자 한다</span></div>
+          <div class="m-lbl">사수 확인</div>
+          <div style="font-size:.8rem;color:var(--muted)">사수 확인 전</div>
+        </div>
+        <div class="cap">내가 매긴 단계와 사수가 확인한 단계는 따로 저장됩니다</div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<!-- ───── 사수 ───── -->
+<section class="part alt" id="mentor"><div class="wrap">
+  <div class="part-head">
+    <div class="b-eyebrow">사수 · 매주 금요일 15분</div>
+    <h2>사수: 기록을 보고 피드백만 하면 됩니다</h2>
+    <p class="lead">신입이 쓴 것을 확인하고 답하는 일입니다. 새로 만들 것은 없습니다. 이름을 고를 때는 <b>신입의 이름</b>을 고릅니다.</p>
+  </div>
+
+  <div class="steps">
+
+    <article class="step mentor" id="m1">
+      <div class="no">1</div>
+      <div>
+        <h3>주간 보고에 피드백과 평가를 남깁니다</h3>
+        <div class="when">금요일 · 신입이 제출한 뒤</div>
+        <ol>
+          <li><b>주간 보고</b>에서 신입 이름과 주차를 고릅니다.</li>
+          <li>아래 <b>「사수가 쓰는 칸」</b>에 피드백을 적고, 「주차 학습 목표」를 얼마나 달성했는지 평가(달성·일부·미달)를 고릅니다.</li>
+          <li><span class="k">저장</span>. 인쇄·PDF가 필요하면 <span class="k">인쇄 / PDF 저장</span>.</li>
+        </ol>
+        <div class="tip cold">「배운 것 3가지」에 <b>왜</b>가 빠져 있으면 그것부터 되물어 주세요. 신입 칸과 사수 칸은 따로 저장돼서, 서로 덮어쓰지 않습니다.</div>
+        <a class="go" href="report.html">주간 보고 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div class="m-lbl" style="margin-top:0">학습자가 쓰는 칸</div><div class="m-line m"></div><div class="m-line s"></div>
+          <div class="m-box" style="border-left:3px solid var(--cold)">
+            <h5>사수가 쓰는 칸</h5>
+            <div class="m-lbl">피드백</div><div class="m-in">두 번째 항목 「왜」를 다음 주에 같이 보자</div>
+            <div class="m-lbl">평가</div><div class="m-in" style="color:var(--ink);max-width:140px">일부 ▾</div>
+            <div style="text-align:right;margin-top:8px"><span class="m-btn cold">저장</span></div>
+          </div>
+        </div>
+        <div class="cap">평가는 달성 · 일부 · 미달 중에서 고릅니다</div>
+      </div>
+    </article>
+
+    <article class="step mentor" id="m2">
+      <div class="no">2</div>
+      <div>
+        <h3>헷갈림 노트에 답을 답니다</h3>
+        <div class="when">금요일 · 미해결부터</div>
+        <ol>
+          <li>주간 보고 페이지 위쪽에서 <b>「헷갈림 노트」</b>로 바꿉니다.</li>
+          <li>상태를 <b>미해결</b>로 거르면 답 못 받은 것만 보입니다. 인용 글자로 어느 대목에서 막혔는지 바로 보입니다.</li>
+          <li>답과 <b>답한 사람 이름</b>을 적고 <span class="k">답 저장 (해결로 표시)</span>.</li>
+        </ol>
+        <div class="tip cold">말로 답했더라도 한 줄은 적어 주세요. 같은 질문이 다음 신입에게도 나옵니다.</div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div class="m-row" style="margin-bottom:8px"><span class="m-btn">주간 보고</span><span class="m-btn cold">헷갈림 노트</span></div>
+          <div class="m-box">
+            <div style="display:flex;justify-content:space-between"><b style="font-size:.8rem">등급 기준 · 질문</b><span class="chip late">미해결</span></div>
+            <div style="font-size:.8rem;color:var(--muted);margin:4px 0">「성에가 덜 낀다」 — 왜 덜 끼는지 원리가 궁금함</div>
+            <div class="m-lbl">답</div><div class="m-in">…</div>
+            <div class="m-lbl">답한 사람 이름</div><div class="m-in">…</div>
+            <div style="text-align:right;margin-top:8px"><span class="m-btn cold">답 저장 (해결로 표시)</span></div>
+          </div>
+        </div>
+        <div class="cap">답을 저장하면 신입 쪽에 「해결됨」으로 보입니다</div>
+      </div>
+    </article>
+
+    <article class="step mentor" id="m3">
+      <div class="no">3</div>
+      <div>
+        <h3>현장에서 본 것을 역량 목표에 확인합니다</h3>
+        <div class="when">신입이 해 본 걸 직접 본 날</div>
+        <ol>
+          <li><b>역량 목표</b>에서 신입 이름을 고르고, 그 목표 카드의 <span class="k">사수 확인</span> 버튼을 눌러 확인 칸을 엽니다.</li>
+          <li><b>확인한 단계</b>, <b>확인한 사람</b>, 메모(어느 현장에서 봤는지)를 적고 <span class="k">확인 저장</span>.</li>
+          <li>목표 단계에 닿으면 <span class="chip ok">✓ 달성</span>. 잘못 저장했으면 <span class="k">확인 고치기</span>·<span class="k">확인 취소</span>.</li>
+        </ol>
+        <div class="tip cold">신입이 매긴 단계보다 <b>낮게</b> 확인해도 됩니다. 두 값이 나란히 보여서, 차이 자체가 다음 주 대화거리가 됩니다.</div>
+        <a class="go" href="goals.html">역량 목표 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <b>냉장고 도어 패킹을 교체할 수 있다</b>
+          <div class="m-lbl">내 생각 (신입)</div><div class="m-lv"><span class="on">선배 앞에서 한다</span></div>
+          <div class="m-box" style="border-left:3px solid var(--cold)">
+            <h5>사수 확인</h5>
+            <div class="m-lbl">확인한 단계</div><div class="m-lv"><span>설명할 수 있다</span><span class="on" style="border-color:var(--cold);color:var(--cold);background:#f3f7fa">선배 앞에서 한다</span><span>혼자 한다</span></div>
+            <div class="m-row" style="margin-top:8px"><span class="m-in">확인한 사람</span><span class="m-btn cold">확인 저장</span></div>
+          </div>
+        </div>
+        <div class="cap">직접 본 것만 확인합니다</div>
+      </div>
+    </article>
+
+    <article class="step mentor" id="m4">
+      <div class="no">4</div>
+      <div>
+        <h3>밀린 단원이 있는지 봅니다</h3>
+        <div class="when">금요일 · 1분</div>
+        <ul>
+          <li><b>내 학습 계획</b>에서 신입 이름을 고르면 빨간 「밀림」 단원과 지금까지 공부한 시간이 보입니다.</li>
+          <li>계속 밀리면 계획이 무리한 것일 수 있습니다. <b>학습 편성기</b>에서 주당 시간이나 남은 주 수를 고쳐 다시 편성합니다.</li>
+        </ul>
+        <a class="go" href="my.html">내 학습 계획 열기</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="scr">
+          <div class="m-row" style="gap:12px;margin-bottom:8px">
+            <div><b style="font-size:1.1rem">5시간 40분</b><div style="font-size:.72rem;color:var(--muted)">지금까지 공부한 시간</div></div>
+            <div><b style="font-size:1.1rem;color:var(--bad)">2개</b><div style="font-size:.72rem;color:var(--muted)">지난 주에 못 끝낸 단원</div></div>
+          </div>
+          <div class="m-wk"><span class="w">2주차</span><span>제품군 지도</span><span class="chip late">밀림</span></div>
+          <div class="m-wk"><span class="w">2주차</span><span>치수 읽기</span><span class="chip late">밀림</span></div>
+        </div>
+        <div class="cap">두 주 넘게 밀리면 학습 편성기에서 다시 편성합니다</div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<!-- ───── 페이지 지도 ───── -->
+<section class="part" id="map"><div class="wrap">
+  <div class="part-head">
+    <div class="b-eyebrow">어디에 무엇이 있나</div>
+    <h2>페이지 지도</h2>
+    <p class="lead">교육 홈의 카드는 세 줄로 나뉩니다. 공부하는 곳과 기록을 보는 곳을 나눠 두면 헷갈리지 않습니다.</p>
+  </div>
+  <div class="map">
+    <a href="onboarding.html"><div class="grp">입사 전 · 첫 주</div><b>신규 입사자 온보딩</b><small>첫 주 체크리스트, 계정·도구 세팅</small></a>
+    <a href="phase1_training.html"><div class="grp">공부하는 곳</div><b>12주 기술 교육 Phase 1~4</b><small>입문 → 기본기술 → 현장 동행 → 심화·수료</small></a>
+    <a href="tech.html"><div class="grp">공부하는 곳</div><b>현장 기술·노하우</b><small>장비별 교재 · 문제 · 오답노트</small></a>
+    <a href="apps.html"><div class="grp">공부하는 곳</div><b>사내 앱·업무 도구</b><small>근태관리, 일정·배차, 일일보고, ASMS, CRM 등</small></a>
+    <a href="products.html"><div class="grp">공부하는 곳</div><b>시공·제품</b><small>제품군·치수·등급·설치 전 확인·시공 순서</small></a>
+    <a href="refs.html"><div class="grp">공부하는 곳</div><b>냉동 참고 자료</b><small>냉동 원리를 그림으로 13개 단원</small></a>
+    <a href="planner.html"><div class="grp">계획·기록</div><b>학습 편성기</b><small>시간에 맞춰 주별 계획을 짠다</small></a>
+    <a href="my.html"><div class="grp">계획·기록</div><b>내 학습 계획</b><small>이번 주 단원·밀린 단원</small></a>
+    <a href="report.html"><div class="grp">계획·기록</div><b>주간 보고 · 헷갈림 노트</b><small>금요일 보고, 질문과 답</small></a>
+    <a href="goals.html"><div class="grp">계획·기록</div><b>역량 목표</b><small>할 수 있게 된 일, 사수 확인</small></a>
+    <a href="progress.html"><div class="grp">계획·기록</div><b>학습 진행률 체크</b><small>Phase별 학습·실습 완료 체크</small></a>
+  </div>
+</div></section>
+
+<!-- ───── 자주 묻는 것 ───── -->
+<section class="part alt" id="faq"><div class="wrap">
+  <div class="part-head">
+    <div class="b-eyebrow">막힐 때</div>
+    <h2>자주 묻는 것</h2>
+  </div>
+  <div class="faq">
+    <details>
+      <summary>기록은 어디에 저장되나요? 휴대폰과 회사 PC에서 이어서 볼 수 있나요?</summary>
+      <p>명단에 있는 이름으로 고르면 회사 서버에 저장돼서, 어느 기기에서 같은 이름을 고르든 이어집니다. 기기를 바꾸면 그 기기에서 이름만 한 번 다시 고르면 됩니다.</p>
+    </details>
+    <details>
+      <summary>「이 기기에만 저장됨」이라고 나와요.</summary>
+      <p>인터넷이 끊겼거나 서버에 잠깐 닿지 못한 것입니다. 기록은 지금 기기에 남아 있고, 연결되면 다음 저장 때 서버로 올라갑니다. 오래 계속되면 사수에게 알려 주세요.</p>
+    </details>
+    <details>
+      <summary>공부 시간이 생각보다 적게 찍혀요.</summary>
+      <p>다른 창을 보거나 한동안 화면을 건드리지 않으면 시간을 세지 않습니다. 켜 놓기만 한 시간이 쌓이지 않도록 일부러 그렇게 만들었습니다.</p>
+    </details>
+    <details>
+      <summary>이름을 잘못 골랐어요.</summary>
+      <p>오른쪽 위 이름을 누르면 <b>학습자 바꾸기</b>가 열립니다. 교육 홈에서는 오른쪽 위 <b>바꾸기</b>를 누릅니다. 잘못 고른 이름으로 이미 「다 봤어요」를 눌렀다면, 그 이름으로 들어가 한 번 더 눌러 취소합니다.</p>
+    </details>
+    <details>
+      <summary>현장 기술·노하우 페이지는 이름을 따로 물어봐요.</summary>
+      <p>그 페이지는 문제·오답노트를 따로 관리해서 「누구의 기록인가요?」를 한 번 더 묻습니다. <b>같은 이름</b>을 고르면 됩니다. 기록은 같은 사람 아래에 함께 쌓입니다.</p>
+    </details>
+    <details>
+      <summary>교재에 가격이 없어요.</summary>
+      <p>원가·판매가·마진은 고객에게 말하지 않기 때문에 교재에 일부러 넣지 않았습니다. 견적이 필요한 일은 사수와 함께 단가 라이브러리를 봅니다.</p>
+    </details>
+    <details>
+      <summary>교재 내용이 현장과 달라요.</summary>
+      <p>그 문장을 선택하고 <b>❓ 헷갈림 기록</b>으로 남겨 주세요. 종류는 「질문」으로 두고 「현장에서는 이렇게 했다」를 적으면, 사수가 확인해서 교재를 고칩니다.</p>
+    </details>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="foot"><div class="wrap">부성티케이 현장지원팀 · 신입 교육 이용 가이드 · <a href="index.html" style="color:var(--accent-text)">교육 홈으로</a></div></footer>
+
+</body>
+</html>

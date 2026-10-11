@@ -73,15 +73,15 @@
     why: '원리를 알면 처음 보는 장비도 「열을 만드는 곳·식히는 곳·제어하는 곳」으로 나눠 볼 수 있습니다. 고장 진단은 여기서 시작합니다.' });
   add({ id: 'p1:day6', page: 'phase1_training.html', anchor: 'day6', week: 1, prio: '필수', ko: 984, q: 1, practiceH: 8, title: 'Day 6 · 공구 사용법', prereq: ['p1:day2'], roles: ['tech'], topics: ['steel'],
     why: '공구를 잘못 쓰면 장비가 망가지고 사람이 다칩니다. 선배가 「그거 줘」 할 때 바로 건넬 수 있어야 현장에 따라갈 수 있습니다.' });
-  add({ id: 'tech:c0', page: 'tech.html', anchor: '#/read/0', week: 1, prio: '필수', ko: 892, q: 8, title: '기술 교재 0장 · 모든 현장에 공통인 원칙',
+  add({ id: 'tech:c0', page: 'tech.html', anchor: '#/ch/0', week: 1, prio: '필수', ko: 892, q: 8, title: '기술 교재 0장 · 모든 현장에 공통인 원칙',
     why: '어느 현장이든 지키는 원칙이 있습니다. 첫 현장 동행 전에 읽어 두면 선배가 왜 그렇게 하는지 보입니다.' });
-  add({ id: 'tech:c9', page: 'tech.html', anchor: '#/read/9', week: 1, prio: '권장', ko: 724, q: 10, title: '부록 · 현장 용어집',
+  add({ id: 'tech:c9', page: 'tech.html', anchor: '#/ch/9', week: 1, prio: '권장', ko: 724, q: 10, title: '부록 · 현장 용어집',
     why: '선배·고객·협력사가 쓰는 말을 못 알아들으면 지시를 놓칩니다. 처음 일주일 동안 틈틈이 봅니다.' });
 
   // ── Phase 2 설비 기초 (2~3주차) — 같은 주제의 기술 교재 장을 바로 붙여 읽는다 ──
   add({ id: 'p2:sec1', page: 'phase2_training.html', anchor: 'sec1', week: 2, prio: '필수', ko: 1532, q: 1, practiceH: 11, title: '냉동설비 설치 기초', prereq: ['p1:day5'], roles: ['tech'], topics: ['cold'],
     why: '홈페이지 사례에서 가장 많은 주제가 냉장·냉동입니다. 우리 일에서 가장 자주 만나는 장비라 가장 먼저 배웁니다.' });
-  add({ id: 'tech:c1', page: 'tech.html', anchor: '#/read/1', week: 2, prio: '필수', ko: 2199, q: 15, title: '기술 교재 1장 · 냉장·냉동', prereq: ['p2:sec1'], roles: ['tech'], topics: ['cold'],
+  add({ id: 'tech:c1', page: 'tech.html', anchor: '#/ch/1', week: 2, prio: '필수', ko: 2199, q: 15, title: '기술 교재 1장 · 냉장·냉동', prereq: ['p2:sec1'], roles: ['tech'], topics: ['cold'],
     why: '설치 기초 다음에 실제 A/S 견적과 사례에서 뽑은 고장 패턴을 붙여 읽습니다. 원리 다음에 실제 고장을 보면 오래 기억에 남습니다.' });
   add({ id: 'p2:sec7', page: 'phase2_training.html', anchor: 'sec7', week: 2, prio: '필수', ko: 834, practiceH: 6, title: '가스 작업 안전', prereq: ['p1:day2'], roles: ['tech'], topics: ['heat'],
     why: '가열설비를 만지기 전에 가스부터 배웁니다. 가스는 실수 한 번이 사고입니다. 그래서 원래 마지막에 있던 이 단원을 가열설비 앞으로 당겼습니다.' });
@@ -89,7 +89,7 @@
     why: '구내식당은 솥·렌지·오븐이 멈추면 점심 배식이 멈춥니다. 냉장 다음으로 사례가 많은 주제입니다.' });
   add({ id: 'p2:sec6', page: 'phase2_training.html', anchor: 'sec6', week: 3, prio: '필수', ko: 786, practiceH: 6, title: '급수·배수 기초', prereq: ['p1:day3'], roles: ['tech'], topics: ['water'],
     why: '세척기·싱크·제빙기 고장의 상당수는 장비가 아니라 물 길이 원인입니다. 물이 어디서 와서 어디로 가는지 알아야 헛수리를 막습니다.' });
-  add({ id: 'tech:c2', page: 'tech.html', anchor: '#/read/2', week: 3, prio: '권장', ko: 1024, q: 9, title: '기술 교재 2장 · 배관·수전·배수', prereq: ['p2:sec6'], roles: ['tech'], topics: ['water'],
+  add({ id: 'tech:c2', page: 'tech.html', anchor: '#/ch/2', week: 3, prio: '권장', ko: 1024, q: 9, title: '기술 교재 2장 · 배관·수전·배수', prereq: ['p2:sec6'], roles: ['tech'], topics: ['water'],
     why: '급배수 기초를 실제 견적에 나온 부품·작업과 연결합니다.' });
   add({ id: 'p2:sec3', page: 'phase2_training.html', anchor: 'sec3', week: 3, prio: '필수', ko: 1184, practiceH: 6, title: '전처리·세척설비', prereq: ['p2:sec6'], roles: ['tech'], topics: ['wash', 'prep'],
     why: '세척기는 물·전기·세제·열이 한꺼번에 얽힌 장비입니다. 급배수를 먼저 배운 뒤에 보면 훨씬 쉽게 이해됩니다.' });
@@ -103,25 +103,25 @@
   // ── Phase 3 현장 OJT (4~8주차) ───────────────────────────────
   add({ id: 'p3:sec1', page: 'phase3_training.html', anchor: 'sec1', week: 4, prio: '필수', ko: 1781, practiceH: 28, title: '4주차 · 선배와 함께하는 첫 현장', prereq: ['p2:sec8'], roles: ['tech'], topics: ['cold', 'heat'],
     why: '책으로 배운 것을 실제 고객 앞에서 확인하는 첫 주입니다. 보는 것이 일이지만, 본 것을 그날 적어야 내 것이 됩니다.' });
-  add({ id: 'tech:c7', page: 'tech.html', anchor: '#/read/7', week: 5, prio: '필수', ko: 1104, q: 12, title: '기술 교재 7장 · 시공·납품 설치', prereq: ['p3:sec1'], roles: ['tech'], topics: ['open'],
+  add({ id: 'tech:c7', page: 'tech.html', anchor: '#/ch/7', week: 5, prio: '필수', ko: 1104, q: 12, title: '기술 교재 7장 · 시공·납품 설치', prereq: ['p3:sec1'], roles: ['tech'], topics: ['open'],
     why: '시공·납품은 한 번 설치하면 몇 년을 갑니다. 처음 잘못 놓으면 그 몇 년 내내 A/S로 돌아옵니다.' });
   add({ id: 'p3:sec2', page: 'phase3_training.html', anchor: 'sec2', week: 5, span: 2, prio: '필수', ko: 1882, practiceH: 56, title: '5~6주차 · 직접 해보는 보조 시공', prereq: ['p3:sec1'], roles: ['tech'], topics: ['open', 'steel'],
     why: '선배 옆에서 손을 보태며 순서를 몸에 익히는 단계입니다. 여기서 실수한 것을 헷갈림 기록에 남겨야 독립 단계에서 반복하지 않습니다.' });
-  add({ id: 'tech:c3', page: 'tech.html', anchor: '#/read/3', week: 6, prio: '권장', ko: 893, q: 8, title: '기술 교재 3장 · 세척기·퇴식 컨베이어', prereq: ['p2:sec3'], roles: ['tech'], topics: ['wash'],
+  add({ id: 'tech:c3', page: 'tech.html', anchor: '#/ch/3', week: 6, prio: '권장', ko: 893, q: 8, title: '기술 교재 3장 · 세척기·퇴식 컨베이어', prereq: ['p2:sec3'], roles: ['tech'], topics: ['wash'],
     why: '구내식당 세척 라인은 멈추면 식기가 쌓여 배식이 멈춥니다.' });
-  add({ id: 'tech:c6', page: 'tech.html', anchor: '#/read/6', week: 7, prio: '권장', ko: 958, q: 8, title: '기술 교재 6장 · 기물·용접·바퀴', prereq: ['p1:day6'], roles: ['tech'], topics: ['steel'],
+  add({ id: 'tech:c6', page: 'tech.html', anchor: '#/ch/6', week: 7, prio: '권장', ko: 958, q: 8, title: '기술 교재 6장 · 기물·용접·바퀴', prereq: ['p1:day6'], roles: ['tech'], topics: ['steel'],
     why: '작업대·선반·바퀴는 사소해 보여도 사례 수가 많습니다. 가장 자주 손대는 일입니다.' });
   add({ id: 'p3:sec3', page: 'phase3_training.html', anchor: 'sec3', week: 7, span: 2, prio: '필수', ko: 2185, q: 1, practiceH: 61, title: '7~8주차 · 독립 시공 도전', prereq: ['p3:sec2'], roles: ['tech'], topics: ['open'],
     why: '혼자 맡아 보며 무엇이 아직 비어 있는지 확인하는 단계입니다. 부족한 것을 찾는 것이 이 단계의 목표입니다.' });
 
   // ── Phase 4 심화·수료 (9~12주차) ─────────────────────────────
-  add({ id: 'tech:c5', page: 'tech.html', anchor: '#/read/5', week: 9, prio: '권장', ko: 1072, q: 9, title: '기술 교재 5장 · 가스 화구·스팀솥', prereq: ['p2:sec7'], roles: ['tech'], topics: ['heat'],
+  add({ id: 'tech:c5', page: 'tech.html', anchor: '#/ch/5', week: 9, prio: '권장', ko: 1072, q: 9, title: '기술 교재 5장 · 가스 화구·스팀솥', prereq: ['p2:sec7'], roles: ['tech'], topics: ['heat'],
     why: '가스 안전을 배운 뒤 실제 가스 장비 고장을 봅니다.' });
-  add({ id: 'tech:c8', page: 'tech.html', anchor: '#/read/8', week: 9, prio: '권장', ko: 514, q: 6, title: '기술 교재 8장 · 전기', prereq: ['p2:sec5'], roles: ['tech'], topics: ['elec'],
+  add({ id: 'tech:c8', page: 'tech.html', anchor: '#/ch/8', week: 9, prio: '권장', ko: 514, q: 6, title: '기술 교재 8장 · 전기', prereq: ['p2:sec5'], roles: ['tech'], topics: ['elec'],
     why: '전기 고장은 「보고 알리는」 것이 신입의 일입니다. 무엇을 보고 무엇을 알릴지 정리합니다.' });
   add({ id: 'p4:section1', page: 'phase4_training.html', anchor: 'section1', week: 9, span: 2, prio: '심화', ko: 2796, q: 2, practiceH: 64, title: '주방설비 고장의 원리', prereq: ['p3:sec3'], roles: ['tech'], topics: ['cold', 'heat', 'elec'],
     why: '여기서부터는 「시킨 대로」가 아니라 「왜 고장 났는지」를 스스로 설명하는 단계입니다.' });
-  add({ id: 'tech:c4', page: 'tech.html', anchor: '#/read/4', week: 10, prio: '심화', ko: 1061, q: 9, title: '기술 교재 4장 · 온장·보온·소독', prereq: ['p2:sec2'], roles: ['tech'], topics: ['warm'],
+  add({ id: 'tech:c4', page: 'tech.html', anchor: '#/ch/4', week: 10, prio: '심화', ko: 1061, q: 9, title: '기술 교재 4장 · 온장·보온·소독', prereq: ['p2:sec2'], roles: ['tech'], topics: ['warm'],
     why: '배식대·온장고는 급식 현장의 기본 장비입니다.' });
   add({ id: 'p4:section2', page: 'phase4_training.html', anchor: 'section2', week: 11, prio: '심화', ko: 1266, practiceH: 48, title: '현장을 이끄는 기술', prereq: ['p4:section1'], roles: ['tech'],
     why: '고객과 협력사 사이에서 현장을 정리하는 사람이 되는 단계입니다.' });

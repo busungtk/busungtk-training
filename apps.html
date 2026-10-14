@@ -111,7 +111,7 @@
   <p class="lead">회사의 일은 앱 몇 개를 거쳐 흘러갑니다. 이 단원은 버튼 위치보다 <b>「이 앱에 왜 적어야 하나」</b>를 먼저 설명합니다. 이유를 알면 처음 보는 화면도 어디를 눌러야 할지 보입니다.</p>
   <nav class="toc" aria-label="단원 목록">
     <a href="#flow">일의 흐름</a><a href="#portal">업무 포털</a><a href="#overtime">근태관리</a><a href="#dispatch">일정·배차</a>
-    <a href="#daily">일일보고</a><a href="#report">완료보고</a><a href="#visit">출입·내방 신청</a><a href="#asms">ASMS</a>
+    <a href="#daily">일일보고</a><a href="#report">완료보고</a><a href="#visit">출입·내방 신청</a><a href="#asms">ASMS</a><a href="#design">주방 설계</a>
     <a href="#order">발주 추적</a><a href="#vehicle">차량</a><a href="#crm">CRM</a>
   </nav>
 </header>
@@ -136,7 +136,7 @@
 <section class="section" id="portal">
   <h2>업무 포털 — 모든 앱의 입구</h2>
   <div class="meta"><span>누가: 전 직원</span><span>휴대폰 홈 화면에 추가</span></div>
-  <p>포털에는 앱 카드가 세 묶음으로 있습니다. <b>핵심 업무</b>(근태관리·ASMS·일정·배차·CRM·일일보고 등), <b>현장·설비</b>(현장 진단·장비 관리·HVAC 멘토·발주 추적·차량 점검), <b>마케팅·교육</b>(이 교육 사이트 포함).</p>
+  <p>포털에는 앱 카드가 세 묶음으로 있습니다. <b>핵심 업무</b>(근태관리·ASMS·일정·배차·CRM·일일보고 등), <b>현장·설비</b>(현장 진단·장비 관리·주방 설계 툴·HVAC 멘토·발주 추적·차량 점검), <b>마케팅·교육</b>(이 교육 사이트 포함).</p>
   <p>앱마다 들어가는 방법이 다릅니다. 근태관리는 사번과 비밀번호, ASMS·일일보고·CRM·발주 추적은 회사에서 받는 접속 코드나 비밀번호를 씁니다. <b>코드는 사수에게 직접 받고, 메신저 단체방이나 메모 앱에 적어 두지 않습니다.</b></p>
   <p class="why-inline">왜 코드를 아무 데나 적지 않나: 앱 안에는 고객 이름·연락처·단가가 들어 있습니다. 코드가 새면 고객 정보가 샙니다.</p>
   <div class="task"><h4>실습 과제</h4>
@@ -450,6 +450,73 @@
     </div>
     <div class="quiz-feedback quiz-feedback-pass" id="quiz-as2-pass">맞습니다. 연결이 없으면 상태만 바뀌고 계산서가 만들어지지 않습니다.</div>
     <div class="quiz-feedback quiz-feedback-fail" id="quiz-as2-fail">견적서와 접수의 연결이 먼저입니다. 연결이 없으면 계산서가 0건이 되는 사고가 납니다.</div>
+  </div>
+</section>
+
+<!-- ───────── 주방 설계 툴 ───────── -->
+<section class="section" id="design">
+  <h2>주방 설계 툴 — 현장에서 그리는 매장 도면</h2>
+  <div class="meta"><span>누가: 현장 직원 (상담·실측)</span><span>사파리·크롬에서 <code>busungtk.website/consulting/design</code> (고객 화면 <code>/consulting</code>과 다름)</span><span>접속: CRM과 같은 직원 공용 비밀번호 — 탭을 닫으면 다시 묻지만 도면은 남음</span></div>
+
+  <h3>보는 법</h3>
+  <p>화면은 아래 순서로 따라가면 됩니다. 앞 단계를 건너뛰어도 열립니다. 다만 뒤 단계는 앞 단계 위에 쌓입니다.</p>
+  <ol>
+    <li><b>2D 편집</b>: 표준 셀 67장 중 하나를 열거나 새 방을 그립니다. DXF 파일을 가져와도 됩니다.</li>
+    <li><b>장비 넣기</b>: 장비를 넣고 끌고 돌립니다. 각도를 숫자로 넣을 수 있고, 「벽에 맞춤」을 누르면 가까운 벽에 나란히 섭니다.</li>
+    <li><b>설비 조건</b>: 급배수·전기·가스 포인트, 트렌치·그리스트랩·단차·턱·단, 배관·배선 경로를 적습니다.</li>
+    <li><b>검사 탭</b>: 오류 / 주의 / 참고로 나뉘어 나옵니다.</li>
+    <li><b>3D</b>: 켜면 입체로 봅니다. 「사실감」과 「도면 색」을 오갈 수 있습니다.</li>
+    <li><b>내보내기</b>: 도면 PNG · 도면 PDF · DXF · 견적 PDF.</li>
+    <li><b>저장함</b>: 「n차로 저장」한 도면과 서버에 올린 도면이 모여 있습니다.</li>
+    <li><b>ASMS로 견적 넘기기</b>: 도면의 장비가 ASMS 견적서로 넘어갑니다. 새 탭이 열리고, 도면 탭은 그대로 남습니다.</li>
+  </ol>
+
+  <h3>저장은 세 층</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>저장</th><th>어디에</th><th>언제</th></tr></thead>
+    <tbody>
+      <tr><td>자동 저장</td><td>이 기기</td><td>첫 수정 뒤 2초마다</td></tr>
+      <tr><td>n차 저장</td><td>이 기기</td><td>「n차로 저장」을 누를 때</td></tr>
+      <tr><td>서버에 저장</td><td>회사 서버 — 다른 기기에서 열림</td><td>「서버에 저장」을 누를 때만</td></tr>
+    </tbody>
+  </table></div>
+  <p>오른쪽 위에 「저장됨 · 시각」이 보이는지 가끔 봅니다. 빨간 「저장 실패」가 보이면 바로 「내보내기 → 도면 PNG」와 「서버에 저장」을 합니다.</p>
+  <p class="why-inline">왜 이 기기와 서버를 나눠 두나: 현장은 통신이 끊기는 곳이 많습니다. 통신이 없어도 작업은 이어지게 기기에 먼저 담고, 동료가 봐야 할 것만 서버에 올립니다.</p>
+
+  <div class="rule"><b>헷갈리기 쉬운 것</b>
+    <p>① <b>견적 PDF는 직원용</b>입니다. 금액이 들어 있습니다. 고객에게는 금액이 없는 도면 PNG나 도면 PDF를 보냅니다.</p>
+    <p>② <b>「서버에 저장」을 눌러야 다른 기기와 동료가 봅니다.</b> 자동 저장은 그 아이패드 안에만 있습니다. 기기를 잃어버리거나 사파리가 정리하면 같이 사라집니다. 철수 전에 통신 되는 곳에서 한 번 누르고 완료 문구를 확인합니다.</p>
+    <p>③ 시작 화면의 <b>「로그아웃」은 현장에서 누르지 않습니다.</b> 기기에 받아 둔 데이터가 지워집니다.</p>
+    <p>④ 반입 경로 검토는 치수만 보는 참고입니다. 「눕히면 통과」라고 나와도 눕혀도 되는 기물인지는 현장에서 확인합니다. 분해해야 하는지는 판정하지 않습니다.</p>
+  </div>
+
+  <div class="task"><h4>실습 과제</h4>
+    <label><input type="checkbox" data-task="ds-1"> 표준 셀 하나를 열어 장비 하나를 옮기고 「서버에 저장」까지 눌렀다</label>
+    <label><input type="checkbox" data-task="ds-2"> 「내보내기 → 도면 PNG」를 내 폰으로 보내 열어 봤다</label>
+    <label><input type="checkbox" data-task="ds-3"> 3D를 켜고 「사실감」과 「도면 색」을 왕복해 봤다</label>
+  </div>
+
+  <div class="quiz-box" id="quiz-ds1">
+    <div class="quiz-header"><span class="quiz-badge">QUIZ</span></div>
+    <div class="quiz-question">고객에게 도면을 보낼 때 무엇을 보내나요?</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-ds1')"><span class="quiz-num">①</span>견적 PDF</button>
+      <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-ds1')"><span class="quiz-num">②</span>도면 PNG 또는 도면 PDF</button>
+      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-ds1')"><span class="quiz-num">③</span>화면을 캡처해서 보낸다</button>
+    </div>
+    <div class="quiz-feedback quiz-feedback-pass" id="quiz-ds1-pass">맞습니다. 도면 PNG·PDF에는 금액이 없습니다. 견적 PDF는 직원용입니다.</div>
+    <div class="quiz-feedback quiz-feedback-fail" id="quiz-ds1-fail">견적 PDF에는 금액이 들어 있어 직원용입니다. 고객에게는 「내보내기」의 도면 PNG나 도면 PDF를 보냅니다.</div>
+  </div>
+  <div class="quiz-box" id="quiz-ds2">
+    <div class="quiz-header"><span class="quiz-badge">QUIZ</span></div>
+    <div class="quiz-question">사무실 동료가 내가 현장에서 그린 도면을 보려면 무엇을 해야 하나요?</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-ds2')"><span class="quiz-num">①</span>자동 저장이 되니 아무것도 안 해도 된다</button>
+      <button class="quiz-opt" onclick="checkQuiz(this, true, 'quiz-ds2')"><span class="quiz-num">②</span>「서버에 저장」을 누른다</button>
+      <button class="quiz-opt" onclick="checkQuiz(this, false, 'quiz-ds2')"><span class="quiz-num">③</span>「n차로 저장」을 누른다</button>
+    </div>
+    <div class="quiz-feedback quiz-feedback-pass" id="quiz-ds2-pass">맞습니다. 서버에 저장한 도면만 다른 기기에서 열립니다.</div>
+    <div class="quiz-feedback quiz-feedback-fail" id="quiz-ds2-fail">자동 저장과 n차 저장은 그 아이패드 안에만 남습니다. 동료가 보려면 「서버에 저장」을 눌러야 합니다.</div>
   </div>
 </section>
 

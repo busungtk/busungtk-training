@@ -7,8 +7,8 @@
   'use strict';
   if (window.BTTrack) return;
 
-  var SB_URL = 'https://xvtixgncxzhqgjtcyngb.supabase.co';
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dGl4Z25jeHpocWdqdGN5bmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA3NDgwNjIsImV4cCI6MjA4NjMyNDA2Mn0.UFb0h6XkTiFVVrBLEsX3Etl-j_7x5uWIqFWrXZ76h6A';
+  var SB_URL = 'https://fgnkrhgbvohmxaetejyx.supabase.co';
+  var SB_KEY = 'sb_publishable_Kp6fcVuy6qd8b-IRnRv7Lg_yjYY5t3E';
   var TABLE = 'training_progress';
   var CDN = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
   var LIB_ONLY = document.documentElement.hasAttribute('data-bt-lib');
